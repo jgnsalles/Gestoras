@@ -192,7 +192,7 @@ html,body{margin:0;background:var(--color-bg);color:var(--color-fg);font-family:
     </article>
     <article class="rx-card" id="evolucao">
       <h2>Como o portfólio evoluiu</h2>
-      <p class="rx-note">Peso das 15 maiores posições médias do período, em % do PL. No empilhado, "Outras" soma o restante das ações. Toque no gráfico para ver as posições do mês, da maior para a menor. Nas linhas, passe perto de uma linha ou toque no nome da ação na legenda para destacá-la.</p>
+      <p class="rx-note">Peso das 15 maiores posições médias do período, em % do PL. No empilhado, "Outras" soma o restante das ações. Toque no gráfico para ver as posições do mês, da maior para a menor. Nas linhas, passe perto de uma linha ou toque no nome da ação na legenda para destacá-la. Clique numa linha ou numa faixa para ver as compras e vendas daquela ação.</p>
       <nav class="rx-subtabs" role="tablist" aria-label="Tipo de gráfico">
         <button type="button" role="tab" class="rx-subtab rx-graftab" data-graf="stack" aria-selected="true">Empilhado</button>
         <button type="button" role="tab" class="rx-subtab rx-graftab" data-graf="linha" aria-selected="false">Linhas</button>
@@ -182010,9 +182010,13 @@ window.dash = (() => {
     }
     const rule = svg.append('line').attr('y1', 10).attr('y2', h - 28).attr('stroke', 'var(--cds-chart-axis)').style('display', 'none');
     const bis = d3.bisector((r) => r.d).center;
-    svg.append('rect').attr('x', ml).attr('y', 0).attr('width', Math.max(0, w - ml - 8)).attr('height', h).attr('fill', 'transparent')
+    const pick = (ev) => { const [px, py] = d3.pointer(ev, el); const k = w / el.clientWidth; const r = rows[bis(rows, x.invert(px * k))]; if (!r) return null; const sy = py * k;
+      if (linha) { let best = null, bd = 1e9; top.forEach((st) => { const d = Math.abs(y(r[st.tk]) - sy); if (d < bd) { bd = d; best = st.tk; } }); return bd < 22 ? best : null; }
+      const band = series.find((sr) => { const d = sr[rows.indexOf(r)]; return d && sy <= y(d[0]) && sy >= y(d[1]); }); return band && band.key !== 'Outras' ? band.key : null; };
+    svg.append('rect').attr('x', ml).attr('y', 0).attr('width', Math.max(0, w - ml - 8)).attr('height', h).attr('fill', 'transparent').style('cursor', 'pointer')
+      .on('click', (ev) => { const tk = pick(ev) || (linha ? stickyHL : null); if (!tk) return; dash.setParams({ acao: tk }); requestAnimationFrame(() => document.getElementById('compras-vendas')?.scrollIntoView({ behavior: 'smooth', block: 'start' })); })
       .on('pointermove', (ev) => { const [px, py] = d3.pointer(ev, el); const sx = px * (w / el.clientWidth); const r = rows[bis(rows, x.invert(sx))]; if (!r) return; rule.style('display', null).attr('x1', x(r.d)).attr('x2', x(r.d));
-        if (linha) { const sy = py * (w / el.clientWidth); let best = null, bd = 1e9; top.forEach((st) => { const d = Math.abs(y(r[st.tk]) - sy); if (d < bd) { bd = d; best = st.tk; } }); el._hl(bd < 22 ? best : stickyHL); }
+        if (linha) el._hl(pick(ev) || stickyHL);
         const lines = top.map((st, i) => [col(i), st.tk, r[st.tk]]).filter((l) => l[2] >= 0.0005).sort((a, b) => b[2] - a[2]).map((l) => [l[0], l[1], fPct0(l[2])]);
         if (!linha && r.Outras >= 0.0005) lines.push(['var(--cds-chart-muted)', 'Outras', fPct0(r.Outras)]);
         showTip(el, t, x(r.d) * el.clientWidth / w, py, ymLabel(r.ym) + ' · ações ' + fPct0(expL.get(r.ym) || 0), lines); })
