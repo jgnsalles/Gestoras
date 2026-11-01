@@ -100,7 +100,7 @@
   <section class="rx-page" id="pg-resumo" data-pg="resumo">
     <article class="rx-card" id="resumo-tabela">
       <div class="rx-cardhead">
-        <h2>Resumo dos 30 fundos</h2>
+        <h2>Resumo dos 28 fundos</h2>
         <nav class="rx-subtabs" role="tablist" aria-label="Visão">
           <button type="button" role="tab" class="rx-subtab" data-aba="perf" aria-selected="true">Performance</button>
           <button type="button" role="tab" class="rx-subtab" data-aba="pl" aria-selected="false">Patrimônio</button>
@@ -213,6 +213,7 @@
     <div class="rx-method">
       <p>Carteiras: Composição de Carteira (CDA) da CVM, mensal, de 2012 a 2023. Para cada fundo usamos o master que concentra as ações em cada mês, juntando os feeders. Peso = valor da posição ÷ PL do master. Posições vendidas (aluguel tomado) entram com peso negativo.</p>
       <p>Filtro de concentração: ficaram fora fundos cuja maior posição passou de 30% da carteira de ações na média de 2014 a 2018, ou em mais de um terço dos meses (Neo Future, Tarpon, Guepardo Master, Guepardo Institucional e Safari). A ideia é comparar fundos long only com algo como 10 a 20 posições relevantes.</p>
+      <p>No máximo dois fundos por gestora: saíram JGP Equity (multimercado, para ficar com os fundos de ações da JGP) e Oceana Valor (o menor dos três da Oceana em 2018).</p>
       <p>Retorno do fundo: variação da cota do master no Informe Diário da CVM, de fim de mês a fim de mês. Fica acima do retorno dos feeders porque o master não cobra a taxa de administração e performance cobrada no feeder.</p>
       <p>Retorno das ações: retorno total com dividendos do Yahoo Finance quando o ticker ainda existe, e cotação de fechamento da B3 (COTAHIST, ajustada por desdobramentos) para ações que saíram da bolsa ou mudaram de ticker. Nessas, o dividendo não entra.</p>
       <p>Attribution: contribuição = peso no fim do mês anterior × retorno da ação no mês, encadeada pelo crescimento da cota para somar ao retorno do período. O resto (diferença entre o retorno do fundo e a soma das ações) vem de caixa, derivativos, ativos no exterior, operações dentro do mês e custos.</p>
