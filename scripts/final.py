@@ -2,7 +2,7 @@ import pandas as pd, re, sys
 from openpyxl import load_workbook
 W,OUT=sys.argv[1],sys.argv[2]
 P=pd.read_pickle(W+'/pairs.pkl')
-EXC=r'ITA[UÚ]|OPPORTUNITY|\bXP\b|BRADESCO|BRAM|SANTANDER|AZ QUEST|BTG|SAFRA|\bBB\b|CAIXA|VERDE|RPS|ARX'
+EXC=r'ITA[UÚ]|OPPORTUNITY|\bXP\b|BRADESCO|BRAM|SANTANDER|AZ QUEST|BTG|SAFRA|\bBB\b|CAIXA|VERDE|RPS|ARX|PAC[IÍ]FICO|VINCI|GENIAL|PLURAL'
 def sn(n):
     n=re.sub(r'(-\s*)?FUNDO DE INVESTIMENTO(S)? EM COTAS DE FUNDOS DE INVESTIMENTO( EM| DE)?( A[CÇ][OÕ]ES)?|(-\s*)?FUNDO DE INVESTIMENTO(S)?( EM| DE)?( A[CÇ][OÕ]ES| MULTIMERCADO)?|BDR N[IÍ]VEL\s+I|INVESTIMENTO NO EXTERIOR','',str(n))
     return re.sub(r'\s+',' ',n).strip(' -').title()
