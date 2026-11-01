@@ -1,0 +1,469 @@
+<meta name="dash-one-writer">
+<style>
+#dash-root { --rx-up: var(--color-ok); --rx-down: var(--color-bad); }
+.rx { display: grid; gap: var(--cds-gap-lg); font-family: var(--font-anthropic-sans); font-variant-numeric: tabular-nums; }
+.rx-head { display: grid; gap: var(--cds-gap-sm); }
+.rx-title { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: 0; text-wrap: balance; }
+.rx-lead { margin: 0; color: var(--color-fg-muted); max-width: 70ch; }
+.rx-lead b { color: var(--color-fg); font-weight: 600; }
+.rx-controls { display: flex; flex-wrap: wrap; gap: var(--cds-gap-md); align-items: end; }
+.rx-controls label { display: grid; gap: var(--cds-gap-xs); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.rx-controls select { font: inherit; font-size: var(--cds-font-size-body); color: var(--color-fg); background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-xs) var(--cds-pad-sm); max-width: 100%; }
+.rx-fund select { min-width: min(100%, 18rem); }
+.rx-btn { font: inherit; font-size: var(--cds-font-size-caption); color: var(--color-fg); background: transparent; border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-xs) var(--cds-pad-sm); cursor: pointer; }
+.rx-btn:hover { background: var(--color-panel); }
+.rx-btn:focus-visible, .rx-controls select:focus-visible { outline: 2px solid var(--color-fg); outline-offset: 2px; }
+.rx-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 9.5rem), 1fr)); gap: var(--cds-gap-md); }
+.rx-tile { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-md); display: grid; gap: var(--cds-gap-xs); align-content: start; }
+.rx-tile-label { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.rx-tile-value { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); line-height: 1.1; }
+.rx-tile-note { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.rx-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 26rem), 1fr)); gap: var(--cds-gap-md); }
+.rx-card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); display: grid; gap: var(--cds-gap-sm); min-width: 0; align-content: start; }
+.rx-card h2 { margin: 0; font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); }
+.rx-note { margin: 0; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); max-width: 75ch; }
+.rx-sec { margin: var(--cds-gap-md) 0 0; font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); }
+.rx-chart { position: relative; min-height: 300px; }
+.rx-chart.tall { min-height: 360px; }
+.rx-chart svg { display: block; overflow: visible; }
+.rx-tip { position: absolute; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); border-radius: var(--cds-radius); box-shadow: var(--cds-shadow-popover); padding: var(--cds-pad-xs) var(--cds-pad-sm); font-size: var(--cds-font-size-caption); white-space: nowrap; z-index: 2; }
+.rx-tip .d { color: var(--cds-text-secondary); margin-bottom: 2px; }
+.rx-tip .r { display: flex; gap: 6px; align-items: center; }
+.rx-tip .s { width: 8px; height: 8px; border-radius: 2px; flex: none; }
+.rx-legend { display: flex; flex-wrap: wrap; gap: var(--cds-gap-xs) var(--cds-gap-md); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); min-height: 1.2em; }
+.rx-legend span { display: inline-flex; align-items: center; gap: 5px; }
+.rx-legend i { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+.rx-tablebox { max-height: 30rem; overflow: auto; border-top: 1px solid var(--color-border-line); }
+.rx-table { width: 100%; border-collapse: collapse; font-size: var(--cds-font-size-caption); }
+.rx-table th { position: sticky; top: 0; background: var(--color-panel); text-align: right; font-weight: var(--cds-font-weight-medium); color: var(--color-fg-muted); padding: var(--cds-pad-xs) var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); white-space: nowrap; }
+.rx-table th:first-child, .rx-table td:first-child { text-align: left; }
+.rx-table th button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+.rx-table td { text-align: right; padding: var(--cds-pad-xs) var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); white-space: nowrap; }
+.rx-table tbody tr { cursor: pointer; }
+.rx-table tbody tr:hover td { background: var(--color-bg); }
+.rx-table tr.sel td { background: var(--color-bg); font-weight: 600; }
+.rx-table .tk { font-weight: 600; }
+.rx-table .co { color: var(--color-fg-muted); margin-left: 6px; }
+.rx-pos { color: var(--rx-up); }
+.rx-neg { color: var(--rx-down); }
+.rx-bar { display: inline-block; height: 8px; border-radius: 2px; vertical-align: middle; margin-left: 6px; background: var(--cds-chart-muted); }
+.rx-split { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr)); gap: var(--cds-gap-md); }
+.rx-kv { display: grid; gap: 2px; }
+.rx-kv span:first-child { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.rx-kv span:last-child { font-family: var(--font-anthropic-serif); font-size: var(--cds-font-size-heading); }
+.rx-method { display: grid; gap: var(--cds-gap-xs); }
+.rx-method p { margin: 0; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); max-width: 90ch; }
+[data-dash-source-state=empty] { color: transparent; }
+[data-dash-source-state=refreshing] { opacity: .5; transition: opacity var(--cds-dur-slow); }
+.rx-fail { display: flex; align-items: center; justify-content: center; gap: 6px; min-height: inherit; color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+.rx-fail::before { content: ""; width: .375rem; height: .375rem; border-radius: 50%; background: var(--color-bad); }
+</style>
+
+<div class="rx">
+  <header class="rx-head" id="topo">
+    <h1 class="rx-title">Raio-X Gestoras de Ações</h1>
+    <p class="rx-lead"><b data-draw="lead-fundo" data-source="fundos">—</b> rendeu <b data-draw="lead-ret" data-source="serie_mensal">—</b> contra <b data-draw="lead-ibov" data-source="serie_mensal">—</b> do Ibovespa entre <b data-draw="lead-ini">—</b> e <b data-draw="lead-fim">—</b>. A ação que mais contribuiu foi <b data-draw="lead-best" data-source="posicoes_1 posicoes_2">—</b>, e a que mais tirou foi <b data-draw="lead-worst" data-source="posicoes_1 posicoes_2">—</b>.</p>
+    <div class="rx-controls">
+      <label class="rx-fund">Fundo
+        <select id="rx-fundo" data-draw="sel-fundo" data-source="fundos" aria-label="Fundo"></select>
+      </label>
+      <label>Início (base)
+        <select id="rx-ini" data-draw="sel-ini" data-source="serie_mensal" aria-label="Mês inicial"></select>
+      </label>
+      <label>Fim
+        <select id="rx-fim" data-draw="sel-fim" data-source="serie_mensal" aria-label="Mês final"></select>
+      </label>
+      <button class="rx-btn rx-reset" type="button">Voltar para dez/2013 – dez/2018</button>
+    </div>
+  </header>
+
+  <section class="rx-tiles" id="resumo">
+    <div class="rx-tile"><span class="rx-tile-label">Retorno do fundo</span><span class="rx-tile-value" data-draw="t-ret" data-source="serie_mensal">—</span><span class="rx-tile-note">cota do master, no período</span></div>
+    <div class="rx-tile"><span class="rx-tile-label">Ibovespa</span><span class="rx-tile-value" data-draw="t-ibov" data-source="serie_mensal">—</span><span class="rx-tile-note">mesmo período</span></div>
+    <div class="rx-tile"><span class="rx-tile-label">Diferença vs Ibovespa</span><span class="rx-tile-value" data-draw="t-alfa" data-source="serie_mensal">—</span><span class="rx-tile-note">pontos percentuais</span></div>
+    <div class="rx-tile"><span class="rx-tile-label">PL no fim (R$ mi)</span><span class="rx-tile-value" data-draw="t-pl" data-source="serie_mensal">—</span><span class="rx-tile-note">no início: <span data-draw="t-pl0" data-source="serie_mensal">—</span></span></div>
+    <div class="rx-tile"><span class="rx-tile-label">Exposição média em ações</span><span class="rx-tile-value" data-draw="t-exp" data-source="serie_mensal">—</span><span class="rx-tile-note">% do PL, ações à vista</span></div>
+    <div class="rx-tile"><span class="rx-tile-label">Nº médio de ações</span><span class="rx-tile-value" data-draw="t-n" data-source="serie_mensal">—</span><span class="rx-tile-note">posições acima de 0,1% do PL</span></div>
+  </section>
+
+  <div class="rx-grid">
+    <article class="rx-card" id="performance">
+      <h2>Performance acumulada</h2>
+      <p class="rx-note">Retorno da cota do fundo master contra o Ibovespa, base 0% no mês inicial.</p>
+      <div class="rx-legend"><span><i style="background:var(--rx-c0)"></i>Fundo</span><span><i style="background:var(--cds-chart-muted)"></i>Ibovespa</span></div>
+      <div class="rx-chart" data-draw="ch-perf" data-source="serie_mensal"></div>
+    </article>
+    <article class="rx-card" id="evolucao">
+      <h2>Como o portfólio evoluiu</h2>
+      <p class="rx-note">Peso das 10 maiores posições médias do período, em % do PL. "Outras" soma o restante das ações.</p>
+      <div class="rx-legend" data-draw="lg-stack" data-source="posicoes_1 posicoes_2 acoes"></div>
+      <div class="rx-chart tall" data-draw="ch-stack" data-source="posicoes_1 posicoes_2 serie_mensal acoes"></div>
+    </article>
+  </div>
+
+  <h2 class="rx-sec" id="posicoes">Posições e attribution por ação</h2>
+  <div class="rx-grid">
+    <article class="rx-card" id="attribution">
+      <h2>Attribution: quem fez o resultado</h2>
+      <p class="rx-note">Contribuição de cada ação para o retorno do fundo no período (peso do mês anterior × retorno da ação, encadeado). Verde soma, vermelho tira.</p>
+      <div class="rx-chart tall" data-draw="ch-attr" data-source="posicoes_1 posicoes_2 serie_mensal acoes"></div>
+      <div class="rx-split">
+        <div class="rx-kv"><span>Retorno do fundo</span><span data-draw="a-fundo" data-source="serie_mensal">—</span></div>
+        <div class="rx-kv"><span>Explicado pelas ações</span><span data-draw="a-acoes" data-source="posicoes_1 posicoes_2 serie_mensal">—</span></div>
+        <div class="rx-kv"><span>Resto (caixa, derivativos, exterior, taxas)</span><span data-draw="a-resto" data-source="posicoes_1 posicoes_2 serie_mensal">—</span></div>
+      </div>
+    </article>
+    <article class="rx-card" id="tabela">
+      <h2>Todas as ações do período</h2>
+      <p class="rx-note">Toque numa linha para ver as compras e vendas dessa ação no gráfico abaixo. Toque no título de uma coluna para ordenar.</p>
+      <div class="rx-tablebox" data-source="posicoes_1 posicoes_2 precos acoes">
+        <table class="rx-table">
+          <thead><tr>
+            <th><button type="button" data-sort="tk">Ação</button></th>
+            <th><button type="button" data-sort="contrib">Contribuição</button></th>
+            <th><button type="button" data-sort="ret">Retorno ação</button></th>
+            <th><button type="button" data-sort="wmed">Peso médio</button></th>
+            <th><button type="button" data-sort="w0">Peso início</button></th>
+            <th><button type="button" data-sort="w1">Peso fim</button></th>
+            <th><button type="button" data-sort="wmax">Peso máx.</button></th>
+          </tr></thead>
+          <tbody data-draw="tb-pos"></tbody>
+        </table>
+      </div>
+    </article>
+  </div>
+
+  <article class="rx-card" id="compras-vendas">
+    <h2>Compras e vendas contra o preço</h2>
+    <p class="rx-note">Linha: retorno total da ação (com dividendos), base 100 no mês inicial. Barras: compras (verde) e vendas (vermelho) no mês, em % do PL do fundo. Faixa de baixo: peso da ação no fundo.</p>
+    <div class="rx-controls">
+      <label>Ação
+        <select id="rx-acao" data-draw="sel-acao" data-source="posicoes_1 posicoes_2 acoes" aria-label="Ação"></select>
+      </label>
+    </div>
+    <div class="rx-split">
+      <div class="rx-kv"><span>Retorno da ação no período</span><span data-draw="c-ret" data-source="precos">—</span></div>
+      <div class="rx-kv"><span>Contribuição para o fundo</span><span data-draw="c-contrib" data-source="posicoes_1 posicoes_2">—</span></div>
+      <div class="rx-kv"><span>Comprou (soma, % do PL)</span><span data-draw="c-buy" data-source="posicoes_1 posicoes_2">—</span></div>
+      <div class="rx-kv"><span>Vendeu (soma, % do PL)</span><span data-draw="c-sell" data-source="posicoes_1 posicoes_2">—</span></div>
+    </div>
+    <div class="rx-chart tall" data-draw="ch-trade" data-source="precos posicoes_1 posicoes_2"></div>
+  </article>
+
+  <article class="rx-card" id="anos">
+    <h2>Ano a ano: acertos e erros</h2>
+    <p class="rx-note">Por ano do período: retorno do fundo e do Ibovespa, e as ações que mais somaram e mais tiraram naquele ano.</p>
+    <div class="rx-tablebox" data-source="serie_mensal posicoes_1 posicoes_2 acoes">
+      <table class="rx-table">
+        <thead><tr><th>Ano</th><th>Fundo</th><th>Ibovespa</th><th>Diferença</th><th>Maiores acertos</th><th>Maiores erros</th></tr></thead>
+        <tbody data-draw="tb-ano"></tbody>
+      </table>
+    </div>
+  </article>
+
+  <article class="rx-card" id="metodologia">
+    <h2>Como os números foram feitos</h2>
+    <div class="rx-method">
+      <p>Carteiras: Composição de Carteira (CDA) da CVM, mensal, de 2012 a 2023. Para cada fundo usamos o master que concentra as ações em cada mês, juntando os feeders. Peso = valor da posição ÷ PL do master. Posições vendidas (aluguel tomado) entram com peso negativo.</p>
+      <p>Retorno do fundo: variação da cota do master no Informe Diário da CVM, de fim de mês a fim de mês. Fica acima do retorno dos feeders porque o master não cobra a taxa de administração e performance cobrada no feeder.</p>
+      <p>Retorno das ações: retorno total com dividendos do Yahoo Finance quando o ticker ainda existe, e cotação de fechamento da B3 (COTAHIST, ajustada por desdobramentos) para ações que saíram da bolsa ou mudaram de ticker. Nessas, o dividendo não entra.</p>
+      <p>Attribution: contribuição = peso no fim do mês anterior × retorno da ação no mês, encadeada pelo crescimento da cota para somar ao retorno do período. O resto (diferença entre o retorno do fundo e a soma das ações) vem de caixa, derivativos, ativos no exterior, operações dentro do mês e custos.</p>
+      <p>Compras e vendas: variação mensal da quantidade de ações, já corrigida por desdobramentos e grupamentos, vezes o preço do mês, em % do PL. Como a CVM só mostra a carteira no fim do mês, operações compradas e vendidas no mesmo mês não aparecem.</p>
+    </div>
+  </article>
+</div>
+
+<script>
+(() => {
+  const MES = ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+  const L = d3.formatLocale({ decimal: ',', thousands: '.', grouping: [3], currency: ['R$ ', ''] });
+  const fPct = L.format('+.1%'), fPct0 = L.format('.1%'), fPct2 = L.format('+.2%'), fNum = L.format(',.0f'), fPP = L.format('+.1f');
+  const ymLabel = (s) => s ? MES[+s.slice(5, 7) - 1] + '/' + s.slice(2, 4) : '';
+  const ymDate = (s) => new Date(Date.UTC(+s.slice(0, 4), +s.slice(5, 7) - 1, 1));
+  const DEF = { fundo: '1', inicio: '2013-12', fim: '2018-12' };
+  const IDS = ['fundos', 'serie_mensal', 'posicoes_1', 'posicoes_2', 'precos', 'acoes'];
+  const css = (v) => getComputedStyle(document.getElementById('dash-root')).getPropertyValue(v).trim();
+  document.getElementById('dash-root').style.setProperty('--rx-c0', dash.colors[0]);
+
+  let cache = null;
+  const build = () => {
+    const d = Object.fromEntries(IDS.map((i) => [i, dash.data(i).data]));
+    const key = IDS.map((i) => d[i]).join('|');
+    if (cache && cache.src.every((x, k) => x === d[IDS[k]])) return cache;
+    const num = (x) => (x === '' || x == null ? NaN : +x);
+    const fundos = d.fundos.map((r) => ({ ...r, id: String(r.id) }));
+    const serie = d3.group(d.serie_mensal.map((r) => ({ id: String(r.id), ym: r.ym, PL: num(r.PL_mi), rf: num(r.ret_fundo), ri: num(r.ret_ibov), el: num(r.exp_long), es: num(r.exp_short), n: num(r.n_acoes), rc: num(r.ret_acoes_contrib) })), (r) => r.id);
+    const pos = d3.group([...d.posicoes_1, ...d.posicoes_2].map((r) => ({ id: String(r.id), ym: r.ym, tk: r.tk, w: num(r.peso), c: num(r.contrib), t: num(r.compra_venda_pct_pl) })), (r) => r.id);
+    const precos = d3.group(d.precos.map((r) => ({ ym: r.ym, tk: r.tk, r: num(r.ret_total) })), (r) => r.tk);
+    const ret = new Map([...precos].map(([tk, rows]) => [tk, new Map(rows.map((r) => [r.ym, r.r]))]));
+    const nome = new Map(d.acoes.map((r) => [r.tk, r.empresa]));
+    cache = { src: IDS.map((i) => d[i]), fundos, serie, pos, ret, nome };
+    return cache;
+  };
+  const ready = () => IDS.every((i) => dash.data(i).status === 'ok');
+  const failed = () => IDS.some((i) => ['error', 'connect', 'declined', 'missing'].includes(dash.data(i).status));
+  const params = () => { const p = dash.params(); return { fundo: String(p.fundo ?? DEF.fundo), inicio: p.inicio || DEF.inicio, fim: p.fim || DEF.fim, acao: p.acao || null }; };
+
+  let mcache = null;
+  const model = () => {
+    if (!ready()) return null;
+    const C = build(); const p = params();
+    const mk = [C.src, p.fundo, p.inicio, p.fim].join('§');
+    if (mcache && mcache.k === mk) return mcache.m;
+    const fundo = C.fundos.find((f) => f.id === p.fundo) || C.fundos[0];
+    const all = (C.serie.get(fundo.id) || []).slice().sort((a, b) => d3.ascending(a.ym, b.ym));
+    let ini = p.inicio, fim = p.fim; if (fim < ini) [ini, fim] = [fim, ini];
+    const S = all.filter((r) => r.ym >= ini && r.ym <= fim);
+    // cumulative fund and ibov
+    let g = 1, gi = 1; const curve = [];
+    const G = new Map();
+    S.forEach((r, k) => {
+      if (k > 0) { const rf = Number.isFinite(r.rf) ? r.rf : (Number.isFinite(r.rc) ? r.rc : 0); g *= 1 + rf; gi *= 1 + (Number.isFinite(r.ri) ? r.ri : 0); }
+      G.set(r.ym, g); curve.push({ ym: r.ym, d: ymDate(r.ym), f: g - 1, i: gi - 1 });
+    });
+    const months = S.map((r) => r.ym);
+    const prev = new Map(months.map((m, k) => [m, k ? months[k - 1] : null]));
+    const P = (C.pos.get(fundo.id) || []).filter((r) => r.ym >= months[0] && r.ym <= months[months.length - 1]);
+    const by = d3.group(P, (r) => r.tk);
+    const t0 = months[0], t1 = months[months.length - 1];
+    const stocks = [...by].map(([tk, rows]) => {
+      const m = new Map(rows.map((r) => [r.ym, r]));
+      let c = 0, buy = 0, sell = 0, wsum = 0, wmax = 0;
+      months.forEach((ym) => {
+        const r = m.get(ym); if (!r) return;
+        if (ym !== t0) { const gp = G.get(prev.get(ym)) ?? 1; if (Number.isFinite(r.c)) c += r.c * gp; if (Number.isFinite(r.t)) { if (r.t > 0) buy += r.t; else sell += r.t; } }
+        if (Number.isFinite(r.w)) { wsum += r.w; wmax = Math.max(wmax, r.w); }
+      });
+      const rm = C.ret.get(tk); let rr = 1, has = false;
+      if (rm) months.slice(1).forEach((ym) => { const x = rm.get(ym); if (Number.isFinite(x)) { rr *= 1 + x; has = true; } });
+      return { tk, nome: C.nome.get(tk) || '', contrib: c, buy, sell, wmed: wsum / months.length, wmax, w0: m.get(t0)?.w ?? 0, w1: m.get(t1)?.w ?? 0, ret: has ? rr - 1 : NaN, rows: m };
+    }).filter((s) => s.wmax > 0.0005 || Math.abs(s.contrib) > 0.00005);
+    const totRet = g - 1, acoes = d3.sum(stocks, (s) => s.contrib);
+    const best = d3.greatest(stocks, (s) => s.contrib), worst = d3.least(stocks, (s) => s.contrib);
+    const m = { fundo, S, curve, months, stocks, totRet, ibov: gi - 1, acoes, resto: totRet - acoes, best, worst, ini, fim, G, prev, all };
+    mcache = { k: mk, m };
+    return m;
+  };
+
+  const status = (el) => { if (failed()) { el.replaceChildren(); el.classList.remove('dash-skeleton'); const f = document.createElement('div'); f.className = 'rx-fail'; f.textContent = 'Não carregou'; el.append(f); return false; } if (!ready()) { el.replaceChildren(); el.classList.add('dash-skeleton'); return false; } el.classList.remove('dash-skeleton'); return true; };
+  const text = (name, fn, cls) => dash.draw(name, (el) => {
+    const m = model(); if (!m) { el.textContent = '—'; return; }
+    const v = fn(m); el.textContent = v.t ?? v; el.classList.toggle('rx-pos', v.s > 0); el.classList.toggle('rx-neg', v.s < 0);
+  });
+  const sgn = (x) => (x > 0 ? 1 : x < 0 ? -1 : 0);
+  const lab = (s) => s ? s.tk + (s.nome ? ' (' + s.nome + ')' : '') + ' ' + fPct(s.contrib) : '—';
+
+  // header
+  text('lead-fundo', (m) => m.fundo.fundo + ' (' + m.fundo.gestora + ')');
+  text('lead-ret', (m) => ({ t: fPct(m.totRet), s: sgn(m.totRet) }));
+  text('lead-ibov', (m) => fPct(m.ibov));
+  text('lead-ini', (m) => ymLabel(m.ini));
+  text('lead-fim', (m) => ymLabel(m.fim));
+  text('lead-best', (m) => lab(m.best));
+  text('lead-worst', (m) => lab(m.worst));
+  text('t-ret', (m) => ({ t: fPct(m.totRet), s: sgn(m.totRet) }));
+  text('t-ibov', (m) => ({ t: fPct(m.ibov), s: sgn(m.ibov) }));
+  text('t-alfa', (m) => ({ t: fPP((m.totRet - m.ibov) * 100), s: sgn(m.totRet - m.ibov) }));
+  text('t-pl', (m) => fNum(m.S[m.S.length - 1]?.PL));
+  text('t-pl0', (m) => fNum(m.S[0]?.PL));
+  text('t-exp', (m) => fPct0(d3.mean(m.S, (r) => r.el)));
+  text('t-n', (m) => fNum(d3.mean(m.S, (r) => r.n)));
+  text('a-fundo', (m) => ({ t: fPct(m.totRet), s: sgn(m.totRet) }));
+  text('a-acoes', (m) => ({ t: fPct(m.acoes), s: sgn(m.acoes) }));
+  text('a-resto', (m) => ({ t: fPct(m.resto), s: sgn(m.resto) }));
+
+  // selects
+  const fill = (sel, opts, value) => { sel.replaceChildren(...opts.map(([v, t]) => new Option(t, v))); sel.value = value; };
+  dash.draw('sel-fundo', (sel) => {
+    if (!ready()) { sel.replaceChildren(); return; }
+    const C = build();
+    fill(sel, C.fundos.map((f) => [f.id, f.fundo + ' — ' + f.gestora]), params().fundo);
+    sel.onchange = () => dash.setParams({ fundo: sel.value, acao: null });
+  });
+  const monthOpts = () => { const m = model(); return m ? m.all.map((r) => [r.ym, ymLabel(r.ym)]) : []; };
+  dash.draw('sel-ini', (sel) => { if (!ready()) { sel.replaceChildren(); return; } fill(sel, monthOpts(), model().ini); sel.onchange = () => dash.setParams({ inicio: sel.value }); });
+  dash.draw('sel-fim', (sel) => { if (!ready()) { sel.replaceChildren(); return; } fill(sel, monthOpts(), model().fim); sel.onchange = () => dash.setParams({ fim: sel.value }); });
+  document.querySelectorAll('.rx-reset').forEach((b) => b.addEventListener('click', () => dash.setParams({ inicio: DEF.inicio, fim: DEF.fim })));
+
+  const curAcao = (m) => { const p = params(); const s = m.stocks.find((x) => x.tk === p.acao); if (s) return s; return d3.greatest(m.stocks, (x) => Math.abs(x.contrib)) || null; };
+  dash.draw('sel-acao', (sel) => {
+    const m = model(); if (!m) { sel.replaceChildren(); return; }
+    const list = m.stocks.slice().sort((a, b) => d3.descending(a.wmed, b.wmed));
+    fill(sel, list.map((s) => [s.tk, s.tk + (s.nome ? ' — ' + s.nome : '')]), curAcao(m)?.tk || '');
+    sel.onchange = () => dash.setParams({ acao: sel.value });
+  });
+
+  // tooltip helper
+  const tip = (box) => { let t = box.querySelector('.rx-tip'); if (!t) { t = document.createElement('div'); t.className = 'rx-tip'; t.hidden = true; box.append(t); } return t; };
+  const showTip = (box, t, x, y, head, lines) => {
+    t.replaceChildren(); const d = document.createElement('div'); d.className = 'd'; d.textContent = head; t.append(d);
+    lines.forEach(([c, n, v]) => { const r = document.createElement('div'); r.className = 'r'; if (c) { const s = document.createElement('span'); s.className = 's'; s.style.background = c; r.append(s); } const tx = document.createElement('span'); tx.textContent = n + ': ' + v; r.append(tx); t.append(r); });
+    t.hidden = false; const bw = box.clientWidth, tw = t.offsetWidth, th = t.offsetHeight;
+    t.style.left = Math.max(0, Math.min(bw - tw, x + 12)) + 'px'; t.style.top = Math.max(0, y - th - 8) + 'px';
+  };
+  const axisClean = (g) => { g.attr('font-size', null).attr('font-family', null); g.selectAll('text').attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)'); g.selectAll('.domain').attr('stroke', 'var(--cds-chart-axis)'); g.selectAll('.tick line').attr('stroke', 'var(--cds-chart-grid)'); };
+  const svgFor = (el, h) => { const w = Math.max(280, el.clientWidth); el.querySelectorAll('svg').forEach((s) => s.remove()); const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${w} ${h}`).attr('height', h); return { svg, w }; };
+  const xTicks = (w) => Math.max(3, Math.floor(w / 90));
+  const yearTickFmt = (d) => d.getUTCMonth() === 0 ? String(d.getUTCFullYear()) : MES[d.getUTCMonth()] + '/' + String(d.getUTCFullYear()).slice(2);
+
+  // performance chart
+  dash.draw('ch-perf', (el) => {
+    if (!status(el)) return; const m = model(); const h = 300;
+    const { svg, w } = svgFor(el, h); const t = tip(el);
+    const ext = d3.extent(m.curve.flatMap((r) => [r.f, r.i]));
+    const y = d3.scaleLinear([Math.min(0, ext[0]), Math.max(0, ext[1])], [h - 28, 12]).nice();
+    const yfmt = L.format('.0%');
+    const tmp = svg.append('g').selectAll('text').data(y.ticks(5)).join('text').style('font-size', 'var(--cds-font-size-caption)').text(yfmt);
+    const ml = d3.max(tmp.nodes(), (n) => n.getComputedTextLength()) + 10; tmp.remove();
+    const endW = 64;
+    const x = d3.scaleUtc(d3.extent(m.curve, (r) => r.d), [ml, w - endW]);
+    svg.append('g').attr('transform', `translate(0,${h - 28})`).call(d3.axisBottom(x).ticks(xTicks(w - ml - endW)).tickFormat(yearTickFmt).tickSizeOuter(0)).call(axisClean);
+    svg.append('g').attr('transform', `translate(${ml},0)`).call(d3.axisLeft(y).ticks(5).tickFormat(yfmt).tickSize(-(w - ml - endW))).call(axisClean).call((g) => g.select('.domain').remove());
+    svg.append('line').attr('x1', ml).attr('x2', w - endW).attr('y1', y(0)).attr('y2', y(0)).attr('stroke', 'var(--cds-chart-reference)');
+    const line = (k) => d3.line().x((r) => x(r.d)).y((r) => y(r[k]));
+    svg.append('path').datum(m.curve).attr('d', line('i')).attr('fill', 'none').attr('stroke', 'var(--cds-chart-muted)').attr('stroke-width', 2).attr('stroke-linejoin', 'round').attr('stroke-linecap', 'round');
+    svg.append('path').datum(m.curve).attr('d', line('f')).attr('fill', 'none').attr('stroke', dash.colors[0]).attr('stroke-width', 2).attr('stroke-linejoin', 'round').attr('stroke-linecap', 'round');
+    const last = m.curve[m.curve.length - 1];
+    if (last) {
+      let yf = y(last.f), yi = y(last.i); if (Math.abs(yf - yi) < 14) { const mid = (yf + yi) / 2; if (yf <= yi) { yf = mid - 7; yi = mid + 7; } else { yf = mid + 7; yi = mid - 7; } }
+      svg.append('text').attr('x', w - endW + 6).attr('y', yf).attr('dy', '0.35em').attr('fill', dash.colors[0]).style('font-size', 'var(--cds-font-size-caption)').text(fPct(last.f));
+      svg.append('text').attr('x', w - endW + 6).attr('y', yi).attr('dy', '0.35em').attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)').text(fPct(last.i));
+    }
+    const dot = svg.append('circle').attr('r', 4).attr('fill', dash.colors[0]).style('display', 'none');
+    const bis = d3.bisector((r) => r.d).center;
+    svg.append('rect').attr('x', ml).attr('y', 0).attr('width', Math.max(0, w - endW - ml)).attr('height', h).attr('fill', 'transparent')
+      .on('pointermove', (ev) => { const [px, py] = d3.pointer(ev, el); const sx = px * (w / el.clientWidth); const r = m.curve[bis(m.curve, x.invert(sx))]; if (!r) return; dot.style('display', null).attr('cx', x(r.d)).attr('cy', y(r.f)); showTip(el, t, x(r.d) * el.clientWidth / w, y(r.f) * el.clientWidth / w, ymLabel(r.ym), [[dash.colors[0], 'Fundo', fPct(r.f)], ['var(--cds-chart-muted)', 'Ibovespa', fPct(r.i)]]); })
+      .on('pointerleave', () => { dot.style('display', 'none'); t.hidden = true; });
+  });
+
+  // stacked composition
+  const topN = (m) => m.stocks.slice().sort((a, b) => d3.descending(a.wmed, b.wmed)).slice(0, 10);
+  const palette = () => { const base = dash.colors; return (k) => (k < base.length ? base[k] : d3.interpolateRgb(base[k % base.length], css('--color-panel') || '#fff')(0.45)); };
+  dash.draw('lg-stack', (el) => {
+    const m = model(); el.replaceChildren(); if (!m) return; const col = palette();
+    topN(m).forEach((s, k) => { const sp = document.createElement('span'); const i = document.createElement('i'); i.style.background = col(k); sp.append(i, document.createTextNode(s.tk)); el.append(sp); });
+    const sp = document.createElement('span'); const i = document.createElement('i'); i.style.background = 'var(--cds-chart-muted)'; sp.append(i, document.createTextNode('Outras')); el.append(sp);
+  });
+  dash.draw('ch-stack', (el) => {
+    if (!status(el)) return; const m = model(); const h = 360; const { svg, w } = svgFor(el, h); const t = tip(el); const col = palette();
+    const top = topN(m); const keys = top.map((s) => s.tk).concat(['Outras']);
+    const expL = new Map(m.S.map((r) => [r.ym, r.el]));
+    const rows = m.months.map((ym) => { const o = { ym, d: ymDate(ym) }; let s = 0; top.forEach((st) => { const v = Math.max(0, st.rows.get(ym)?.w || 0); o[st.tk] = v; s += v; }); o.Outras = Math.max(0, (expL.get(ym) || 0) - s); return o; });
+    const series = d3.stack().keys(keys)(rows);
+    const ymax = d3.max(series[series.length - 1] || [], (d) => d[1]) || 1;
+    const y = d3.scaleLinear([0, Math.max(ymax, 0.2)], [h - 28, 10]).nice(); const yfmt = L.format('.0%');
+    const ml = 40; const x = d3.scaleUtc(d3.extent(rows, (r) => r.d), [ml, w - 8]);
+    svg.append('g').attr('transform', `translate(0,${h - 28})`).call(d3.axisBottom(x).ticks(xTicks(w - ml)).tickFormat(yearTickFmt).tickSizeOuter(0)).call(axisClean);
+    svg.append('g').attr('transform', `translate(${ml},0)`).call(d3.axisLeft(y).ticks(5).tickFormat(yfmt).tickSize(-(w - ml - 8))).call(axisClean).call((g) => g.select('.domain').remove());
+    const area = d3.area().x((d) => x(d.data.d)).y0((d) => y(d[0])).y1((d) => y(d[1]));
+    svg.append('g').selectAll('path').data(series).join('path').attr('d', area).attr('fill', (s, k) => (s.key === 'Outras' ? 'var(--cds-chart-muted)' : col(k))).attr('fill-opacity', (s) => (s.key === 'Outras' ? 0.5 : 0.9));
+    const rule = svg.append('line').attr('y1', 10).attr('y2', h - 28).attr('stroke', 'var(--cds-chart-axis)').style('display', 'none');
+    const bis = d3.bisector((r) => r.d).center;
+    svg.append('rect').attr('x', ml).attr('y', 0).attr('width', Math.max(0, w - ml - 8)).attr('height', h).attr('fill', 'transparent')
+      .on('pointermove', (ev) => { const [px, py] = d3.pointer(ev, el); const sx = px * (w / el.clientWidth); const r = rows[bis(rows, x.invert(sx))]; if (!r) return; rule.style('display', null).attr('x1', x(r.d)).attr('x2', x(r.d));
+        const lines = keys.map((k, i) => [k === 'Outras' ? 'var(--cds-chart-muted)' : col(i), k, fPct0(r[k])]).filter((l) => l[2] !== '0,0%').reverse();
+        showTip(el, t, x(r.d) * el.clientWidth / w, py, ymLabel(r.ym) + ' · ações ' + fPct0(expL.get(r.ym) || 0), lines); })
+      .on('pointerleave', () => { rule.style('display', 'none'); t.hidden = true; });
+  });
+
+  // attribution bars
+  dash.draw('ch-attr', (el) => {
+    if (!status(el)) return; const m = model();
+    const sorted = m.stocks.slice().sort((a, b) => d3.descending(a.contrib, b.contrib));
+    const pos = sorted.filter((s) => s.contrib > 0).slice(0, 10), neg = sorted.filter((s) => s.contrib < 0).slice(-8);
+    const data = pos.concat(neg);
+    const bh = 22, h = Math.max(120, data.length * bh + 30); el.style.minHeight = h + 'px';
+    const { svg, w } = svgFor(el, h); const t = tip(el);
+    const labels = svg.append('g').selectAll('text').data(data).join('text').style('font-size', 'var(--cds-font-size-caption)').text((d) => d.tk);
+    const ml = (d3.max(labels.nodes(), (n) => n.getComputedTextLength()) || 40) + 12; labels.remove();
+    const vals = data.map((d) => fPct(d.contrib)); const tmpv = svg.append('g').selectAll('text').data(vals).join('text').style('font-size', 'var(--cds-font-size-caption)').text((d) => d);
+    const vw = (d3.max(tmpv.nodes(), (n) => n.getComputedTextLength()) || 40) + 8; tmpv.remove();
+    const ext = d3.extent(data, (d) => d.contrib); const lo = Math.min(0, ext[0] || 0), hi = Math.max(0, ext[1] || 0);
+    const x = d3.scaleLinear([lo, hi], [ml + (lo < 0 ? vw : 0), w - (hi > 0 ? vw : 0)]);
+    const y = d3.scaleBand(data.map((d) => d.tk), [8, h - 22]).padding(0.25);
+    svg.append('line').attr('x1', x(0)).attr('x2', x(0)).attr('y1', 4).attr('y2', h - 18).attr('stroke', 'var(--cds-chart-axis)');
+    const g = svg.append('g').selectAll('g').data(data).join('g').style('cursor', 'pointer').on('click', (ev, d) => dash.setParams({ acao: d.tk }));
+    g.append('rect').attr('x', (d) => Math.min(x(0), x(d.contrib))).attr('y', (d) => y(d.tk)).attr('width', (d) => Math.max(1, Math.abs(x(d.contrib) - x(0)))).attr('height', y.bandwidth()).attr('rx', 2)
+      .attr('fill', (d) => (d.contrib >= 0 ? 'var(--color-ok)' : 'var(--color-bad)')).attr('fill-opacity', 0.8);
+    g.append('text').attr('x', ml - 8).attr('y', (d) => y(d.tk) + y.bandwidth() / 2).attr('dy', '0.35em').attr('text-anchor', 'end').attr('fill', 'var(--color-fg)').style('font-size', 'var(--cds-font-size-caption)').text((d) => d.tk);
+    g.append('text').attr('x', (d) => (d.contrib >= 0 ? x(d.contrib) + 4 : x(d.contrib) - 4)).attr('text-anchor', (d) => (d.contrib >= 0 ? 'start' : 'end')).attr('y', (d) => y(d.tk) + y.bandwidth() / 2).attr('dy', '0.35em').attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)').text((d) => fPct(d.contrib));
+    g.on('pointermove', (ev, d) => { const [px, py] = d3.pointer(ev, el); showTip(el, t, px, py, d.tk + (d.nome ? ' · ' + d.nome : ''), [[null, 'Contribuição', fPct2(d.contrib)], [null, 'Retorno da ação', Number.isFinite(d.ret) ? fPct(d.ret) : 's/ dado'], [null, 'Peso médio', fPct0(d.wmed)]]); }).on('pointerleave', () => { t.hidden = true; });
+  });
+
+  // positions table
+  let sortKey = 'contrib', sortDir = -1;
+  document.querySelectorAll('.rx-table th button[data-sort]').forEach((b) => b.addEventListener('click', () => { const k = b.dataset.sort; if (k === sortKey) sortDir = -sortDir; else { sortKey = k; sortDir = k === 'tk' ? 1 : -1; } document.querySelectorAll('.rx-table th button[data-sort]').forEach((x) => x.closest('th').setAttribute('aria-sort', x.dataset.sort === sortKey ? (sortDir > 0 ? 'ascending' : 'descending') : 'none')); dash.draw('tb-pos'); }));
+  dash.draw('tb-pos', (tb) => {
+    tb.replaceChildren(); const m = model(); if (!m) return; const sel = curAcao(m)?.tk;
+    const rows = m.stocks.slice().sort((a, b) => { const va = a[sortKey], vb = b[sortKey]; if (sortKey === 'tk') return sortDir * d3.ascending(va, vb); return sortDir * ((Number.isFinite(va) ? va : -1e9) - (Number.isFinite(vb) ? vb : -1e9)); });
+    const wmax = d3.max(rows, (r) => r.wmed) || 1;
+    rows.forEach((s) => {
+      const tr = document.createElement('tr'); tr.dataset.key = s.tk; if (s.tk === sel) tr.className = 'sel';
+      const td0 = document.createElement('td'); const a = document.createElement('span'); a.className = 'tk'; a.textContent = s.tk; const b = document.createElement('span'); b.className = 'co'; b.textContent = s.nome; td0.append(a, b);
+      const cell = (v, f, signed) => { const td = document.createElement('td'); td.textContent = Number.isFinite(v) ? f(v) : '—'; if (signed && Number.isFinite(v)) td.className = v > 0 ? 'rx-pos' : v < 0 ? 'rx-neg' : ''; return td; };
+      const tdw = cell(s.wmed, fPct0); const bar = document.createElement('span'); bar.className = 'rx-bar'; bar.style.width = Math.round(36 * s.wmed / wmax) + 'px'; tdw.append(bar);
+      tr.append(td0, cell(s.contrib, fPct2, true), cell(s.ret, fPct, true), tdw, cell(s.w0, fPct0), cell(s.w1, fPct0), cell(s.wmax, fPct0));
+      tb.append(tr);
+    });
+    tb.onclick = (ev) => { const tr = ev.target.closest('tr[data-key]'); if (tr) { dash.setParams({ acao: tr.dataset.key }); document.getElementById('compras-vendas')?.scrollIntoView({ behavior: 'smooth', block: 'start' }); } };
+  });
+
+  // trades vs price
+  const tradeStats = (m) => { const s = curAcao(m); return s; };
+  text('c-ret', (m) => { const s = tradeStats(m); return s && Number.isFinite(s.ret) ? { t: fPct(s.ret), s: sgn(s.ret) } : '—'; });
+  text('c-contrib', (m) => { const s = tradeStats(m); return s ? { t: fPct2(s.contrib), s: sgn(s.contrib) } : '—'; });
+  text('c-buy', (m) => { const s = tradeStats(m); return s ? fPct0(s.buy) : '—'; });
+  text('c-sell', (m) => { const s = tradeStats(m); return s ? fPct0(-s.sell) : '—'; });
+  dash.draw('ch-trade', (el) => {
+    if (!status(el)) return; const m = model(); const s = curAcao(m); const C = build();
+    const h = 380; const { svg, w } = svgFor(el, h); const t = tip(el); if (!s) return;
+    const rm = C.ret.get(s.tk) || new Map();
+    let ix = 100; const rows = m.months.map((ym, k) => { if (k > 0) { const r = rm.get(ym); if (Number.isFinite(r)) ix *= 1 + r; } const p = s.rows.get(ym); return { ym, d: ymDate(ym), ix, w: p?.w || 0, t: k > 0 && Number.isFinite(p?.t) ? p.t : 0 }; });
+    const ml = 44, mr = 10, top = 10, priceH = 210, gap = 26, wH = 90;
+    const x = d3.scaleBand(rows.map((r) => r.ym), [ml, w - mr]).padding(0.2);
+    const xc = (ym) => x(ym) + x.bandwidth() / 2;
+    const yP = d3.scaleLinear(d3.extent(rows, (r) => r.ix), [top + priceH, top]).nice();
+    const tmax = d3.max(rows, (r) => Math.abs(r.t)) || 0.01;
+    const yT = d3.scaleLinear([-tmax, tmax], [top + priceH, top]);
+    const y0 = top + priceH + gap; const yW = d3.scaleLinear([0, Math.max(0.01, d3.max(rows, (r) => r.w))], [y0 + wH, y0]).nice();
+    const every = Math.max(1, Math.ceil(rows.length / xTicks(w - ml)));
+    const tickVals = rows.filter((r, k) => k % every === 0).map((r) => r.ym);
+    svg.append('g').attr('transform', `translate(${ml},0)`).call(d3.axisLeft(yP).ticks(5).tickSize(-(w - ml - mr))).call(axisClean).call((g) => g.select('.domain').remove());
+    svg.append('g').selectAll('rect').data(rows.filter((r) => r.t !== 0)).join('rect')
+      .attr('x', (r) => x(r.ym)).attr('width', x.bandwidth()).attr('y', (r) => Math.min(yT(0), yT(r.t))).attr('height', (r) => Math.max(1, Math.abs(yT(r.t) - yT(0)))).attr('rx', 1)
+      .attr('fill', (r) => (r.t > 0 ? 'var(--color-ok)' : 'var(--color-bad)')).attr('fill-opacity', 0.55);
+    svg.append('path').datum(rows).attr('d', d3.line().x((r) => xc(r.ym)).y((r) => yP(r.ix))).attr('fill', 'none').attr('stroke', dash.colors[0]).attr('stroke-width', 2).attr('stroke-linejoin', 'round').attr('stroke-linecap', 'round');
+    svg.append('text').attr('x', ml).attr('y', y0 - 6).attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)').text('Peso no fundo');
+    svg.append('g').attr('transform', `translate(${ml},0)`).call(d3.axisLeft(yW).ticks(3).tickFormat(L.format('.0%')).tickSize(-(w - ml - mr))).call(axisClean).call((g) => g.select('.domain').remove());
+    svg.append('g').selectAll('rect').data(rows).join('rect').attr('x', (r) => x(r.ym)).attr('width', x.bandwidth()).attr('y', (r) => yW(Math.max(0, r.w))).attr('height', (r) => Math.max(0, yW(0) - yW(Math.max(0, r.w)))).attr('rx', 1).attr('fill', 'var(--cds-chart-muted)');
+    svg.append('g').attr('transform', `translate(0,${y0 + wH})`).call(d3.axisBottom(x).tickValues(tickVals).tickFormat((ym) => (ym.slice(5) === '01' ? ym.slice(0, 4) : ymLabel(ym))).tickSizeOuter(0)).call(axisClean);
+    const rule = svg.append('line').attr('y1', top).attr('y2', y0 + wH).attr('stroke', 'var(--cds-chart-axis)').style('display', 'none');
+    svg.append('rect').attr('x', ml).attr('y', 0).attr('width', Math.max(0, w - ml - mr)).attr('height', h).attr('fill', 'transparent')
+      .on('pointermove', (ev) => { const [px, py] = d3.pointer(ev, el); const sx = px * (w / el.clientWidth); const k = Math.max(0, Math.min(rows.length - 1, Math.floor((sx - ml) / x.step()))); const r = rows[k]; if (!r) return; rule.style('display', null).attr('x1', xc(r.ym)).attr('x2', xc(r.ym));
+        showTip(el, t, xc(r.ym) * el.clientWidth / w, py, s.tk + ' · ' + ymLabel(r.ym), [[dash.colors[0], 'Ação (base 100)', L.format(',.1f')(r.ix)], [r.t >= 0 ? 'var(--color-ok)' : 'var(--color-bad)', r.t > 0 ? 'Comprou' : r.t < 0 ? 'Vendeu' : 'Sem operação', r.t ? fPct2(Math.abs(r.t)) + ' do PL' : '—'], ['var(--cds-chart-muted)', 'Peso', fPct0(r.w)]]); })
+      .on('pointerleave', () => { rule.style('display', 'none'); t.hidden = true; });
+  });
+
+  // year table
+  dash.draw('tb-ano', (tb) => {
+    tb.replaceChildren(); const m = model(); if (!m) return;
+    const years = d3.groups(m.S.slice(1), (r) => r.ym.slice(0, 4));
+    years.forEach(([yr, rows]) => {
+      let g = 1, gi = 1; rows.forEach((r) => { g *= 1 + (Number.isFinite(r.rf) ? r.rf : (Number.isFinite(r.rc) ? r.rc : 0)); gi *= 1 + (Number.isFinite(r.ri) ? r.ri : 0); });
+      const yms = new Set(rows.map((r) => r.ym));
+      const contrib = m.stocks.map((s) => ({ tk: s.tk, c: d3.sum([...s.rows.values()].filter((p) => yms.has(p.ym)), (p) => (Number.isFinite(p.c) ? p.c : 0)) })).sort((a, b) => d3.descending(a.c, b.c));
+      const best = contrib.filter((c) => c.c > 0).slice(0, 3).map((c) => c.tk + ' ' + fPct(c.c)).join(', ');
+      const worst = contrib.filter((c) => c.c < 0).slice(-3).reverse().map((c) => c.tk + ' ' + fPct(c.c)).join(', ');
+      const tr = document.createElement('tr'); tr.style.cursor = 'default';
+      const td = (v, cls) => { const e = document.createElement('td'); e.textContent = v; if (cls) e.className = cls; return e; };
+      const sc = (v) => (v > 0 ? 'rx-pos' : v < 0 ? 'rx-neg' : '');
+      const label = yr + (rows.length < 12 ? ' (' + rows.length + ' meses)' : '');
+      const eb = td(best || '—'), ew = td(worst || '—'); eb.style.textAlign = 'left'; ew.style.textAlign = 'left';
+      tr.append(td(label), td(fPct(g - 1), sc(g - 1)), td(fPct(gi - 1), sc(gi - 1)), td(fPP((g - gi) * 100) + ' p.p.', sc(g - gi)), eb, ew);
+      tb.append(tr);
+    });
+  });
+
+  dash.onData(() => {});
+})();
+</script>
