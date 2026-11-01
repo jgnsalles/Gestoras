@@ -168,7 +168,7 @@
     </article>
     <article class="rx-card" id="evolucao">
       <h2>Como o portfólio evoluiu</h2>
-      <p class="rx-note">Peso das 10 maiores posições médias do período, em % do PL. "Outras" soma o restante das ações.</p>
+      <p class="rx-note">Peso das 15 maiores posições médias do período, em % do PL. "Outras" soma o restante das ações.</p>
       <div class="rx-legend" data-draw="lg-stack" data-source="posicoes_1 posicoes_2 acoes"></div>
       <div class="rx-chart tall" data-draw="ch-stack" data-source="posicoes_1 posicoes_2 serie_mensal acoes"></div>
     </article>
@@ -628,7 +628,7 @@
   });
 
   // stacked composition
-  const topN = (m) => m.stocks.slice().sort((a, b) => d3.descending(a.wmed, b.wmed)).slice(0, 10);
+  const topN = (m) => m.stocks.slice().sort((a, b) => d3.descending(a.wmed, b.wmed)).slice(0, 15);
   const palette = () => { const base = dash.colors; return (k) => (k < base.length ? base[k] : d3.interpolateRgb(base[k % base.length], css('--color-panel') || '#fff')(0.45)); };
   dash.draw('lg-stack', (el) => {
     const m = model(); el.replaceChildren(); if (!m) return; const col = palette();
