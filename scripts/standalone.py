@@ -32,7 +32,7 @@ html,body{margin:0;background:var(--color-bg);color:var(--color-fg);font-family:
 shim = '''
 window.dash = (() => {
   const data = {}; ['%s'].forEach((id) => { data[id] = d3.csvParse(document.getElementById('csv-' + id).textContent.trim()); });
-  const DEF = { fundo: '1', inicio: '2013-12', fim: '2018-12', acao: null, pg: 'resumo', aba: 'perf', emp: 'ano', anoEmp: null };
+  const DEF = { fundo: '1', inicio: '2013-12', fim: '2018-12', acao: null, pg: 'resumo', aba: 'perf', emp: 'ano', anoEmp: null, graf: 'stack' };
   let P = { ...DEF }; const draws = new Map(); const hooks = [];
   const runOne = (name) => { const fn = draws.get(name); if (!fn) return; document.querySelectorAll('[data-draw="' + name + '"]').forEach((el) => { try { fn(el); } catch (e) { console.error(name, e); } }); };
   const runAll = () => { hooks.forEach((f) => { try { f(); } catch (e) { console.error(e); } }); for (const n of draws.keys()) runOne(n); };

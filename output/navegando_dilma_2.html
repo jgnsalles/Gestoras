@@ -192,7 +192,11 @@ html,body{margin:0;background:var(--color-bg);color:var(--color-fg);font-family:
     </article>
     <article class="rx-card" id="evolucao">
       <h2>Como o portfólio evoluiu</h2>
-      <p class="rx-note">Peso das 15 maiores posições médias do período, em % do PL. "Outras" soma o restante das ações.</p>
+      <p class="rx-note">Peso das 15 maiores posições médias do período, em % do PL. No empilhado, "Outras" soma o restante das ações. Toque no gráfico para ver as posições do mês, da maior para a menor.</p>
+      <nav class="rx-subtabs" role="tablist" aria-label="Tipo de gráfico">
+        <button type="button" role="tab" class="rx-subtab rx-graftab" data-graf="stack" aria-selected="true">Empilhado</button>
+        <button type="button" role="tab" class="rx-subtab rx-graftab" data-graf="linha" aria-selected="false">Linhas</button>
+      </nav>
       <div class="rx-legend" data-draw="lg-stack" data-source="posicoes_1 posicoes_2 acoes"></div>
       <div class="rx-chart tall" data-draw="ch-stack" data-source="posicoes_1 posicoes_2 serie_mensal acoes"></div>
     </article>
@@ -181570,7 +181574,7 @@ ym,pontos
 <script>
 window.dash = (() => {
   const data = {}; ['fundos','serie_mensal','posicoes_1','posicoes_2','precos','acoes','ibov'].forEach((id) => { data[id] = d3.csvParse(document.getElementById('csv-' + id).textContent.trim()); });
-  const DEF = { fundo: '1', inicio: '2013-12', fim: '2018-12', acao: null, pg: 'resumo', aba: 'perf', emp: 'ano', anoEmp: null };
+  const DEF = { fundo: '1', inicio: '2013-12', fim: '2018-12', acao: null, pg: 'resumo', aba: 'perf', emp: 'ano', anoEmp: null, graf: 'stack' };
   let P = { ...DEF }; const draws = new Map(); const hooks = [];
   const runOne = (name) => { const fn = draws.get(name); if (!fn) return; document.querySelectorAll('[data-draw="' + name + '"]').forEach((el) => { try { fn(el); } catch (e) { console.error(name, e); } }); };
   const runAll = () => { hooks.forEach((f) => { try { f(); } catch (e) { console.error(e); } }); for (const n of draws.keys()) runOne(n); };
@@ -181616,7 +181620,7 @@ window.dash = (() => {
   };
   const ready = () => IDS.every((i) => dash.data(i).status === 'ok');
   const failed = () => IDS.some((i) => ['error', 'connect', 'declined', 'missing'].includes(dash.data(i).status));
-  const params = () => { const p = dash.params(); return { fundo: String(p.fundo ?? DEF.fundo), inicio: p.inicio || DEF.inicio, fim: p.fim || DEF.fim, acao: p.acao || null, pg: p.pg || DEF.pg, aba: p.aba || DEF.aba, emp: p.emp || DEF.emp, anoEmp: p.anoEmp || null }; };
+  const params = () => { const p = dash.params(); return { fundo: String(p.fundo ?? DEF.fundo), inicio: p.inicio || DEF.inicio, fim: p.fim || DEF.fim, acao: p.acao || null, pg: p.pg || DEF.pg, aba: p.aba || DEF.aba, emp: p.emp || DEF.emp, anoEmp: p.anoEmp || null, graf: p.graf || 'stack' }; };
 
   let mcache = null;
   const model = () => {
@@ -181704,12 +181708,14 @@ window.dash = (() => {
   document.querySelectorAll('.rx-tab').forEach((b) => b.addEventListener('click', () => { dash.setParams({ pg: b.dataset.pg }); dash.setLink && dash.setLink('pg-' + b.dataset.pg); }));
   document.querySelectorAll('.rx-subtab[data-aba]').forEach((b) => b.addEventListener('click', () => dash.setParams({ aba: b.dataset.aba })));
   document.querySelectorAll('.rx-emptab').forEach((b) => b.addEventListener('click', () => dash.setParams({ emp: b.dataset.emp })));
+  document.querySelectorAll('.rx-graftab').forEach((b) => b.addEventListener('click', () => dash.setParams({ graf: b.dataset.graf })));
   dash.onData(() => {
     const p = params();
     document.querySelectorAll('section.rx-page[data-pg]').forEach((sec) => { sec.hidden = sec.dataset.pg !== p.pg; });
     document.querySelectorAll('.rx-tab').forEach((b) => b.setAttribute('aria-selected', String(b.dataset.pg === p.pg)));
     document.querySelectorAll('.rx-subtab[data-aba]').forEach((b) => b.setAttribute('aria-selected', String(b.dataset.aba === p.aba)));
     document.querySelectorAll('.rx-emptab').forEach((b) => b.setAttribute('aria-selected', String(b.dataset.emp === p.emp)));
+    document.querySelectorAll('.rx-graftab').forEach((b) => b.setAttribute('aria-selected', String(b.dataset.graf === (dash.params().graf || 'stack'))));
     document.querySelectorAll('[data-emp-note]').forEach((n) => { n.hidden = n.dataset.empNote !== p.emp; });
     document.querySelectorAll('.rx-chips').forEach((c) => { c.hidden = p.emp === 'periodo'; });
     document.querySelectorAll('[data-aba-note]').forEach((n) => { n.hidden = n.dataset.abaNote !== p.aba; });
@@ -181966,30 +181972,39 @@ window.dash = (() => {
 
   // stacked composition
   const topN = (m) => m.stocks.slice().sort((a, b) => d3.descending(a.wmed, b.wmed)).slice(0, 15);
-  const palette = () => { const base = dash.colors; return (k) => (k < base.length ? base[k] : d3.interpolateRgb(base[k % base.length], css('--color-panel') || '#fff')(0.45)); };
+  const PAL15 = ['#3b6fd8', '#e07b39', '#2a9d8f', '#e0a43a', '#d9679a', '#3f8f3a', '#6b57d6', '#d14f4f', '#4aa3c7', '#a3803a', '#8c6bb1', '#57a86b', '#c2577a', '#7f8c99', '#b5a33a'];
+  const palette = () => (k) => PAL15[k % PAL15.length];
   dash.draw('lg-stack', (el) => {
     const m = model(); el.replaceChildren(); if (!m) return; const col = palette();
     topN(m).forEach((s, k) => { const sp = document.createElement('span'); const i = document.createElement('i'); i.style.background = col(k); sp.append(i, document.createTextNode(s.tk)); el.append(sp); });
-    const sp = document.createElement('span'); const i = document.createElement('i'); i.style.background = 'var(--cds-chart-muted)'; sp.append(i, document.createTextNode('Outras')); el.append(sp);
+    if (params().graf !== 'linha') { const sp = document.createElement('span'); const i = document.createElement('i'); i.style.background = 'var(--cds-chart-muted)'; sp.append(i, document.createTextNode('Outras')); el.append(sp); }
   });
   dash.draw('ch-stack', (el) => {
     if (!status(el)) return; const m = model(); const h = 360; const { svg, w } = svgFor(el, h); const t = tip(el); const col = palette();
     const top = topN(m); const keys = top.map((s) => s.tk).concat(['Outras']);
     const expL = new Map(m.S.map((r) => [r.ym, r.el]));
     const rows = m.months.map((ym) => { const o = { ym, d: ymDate(ym) }; let s = 0; top.forEach((st) => { const v = Math.max(0, st.rows.get(ym)?.w || 0); o[st.tk] = v; s += v; }); o.Outras = Math.max(0, (expL.get(ym) || 0) - s); return o; });
+    const linha = params().graf === 'linha';
     const series = d3.stack().keys(keys)(rows);
-    const ymax = d3.max(series[series.length - 1] || [], (d) => d[1]) || 1;
-    const y = d3.scaleLinear([0, Math.max(ymax, 0.2)], [h - 28, 10]).nice(); const yfmt = L.format('.0%');
+    const ymax = linha ? d3.max(rows, (r) => d3.max(top, (st) => r[st.tk])) || 0.1 : d3.max(series[series.length - 1] || [], (d) => d[1]) || 1;
+    const y = d3.scaleLinear([0, linha ? ymax : Math.max(ymax, 0.2)], [h - 28, 10]).nice(); const yfmt = L.format('.0%');
     const ml = 40; const x = d3.scaleUtc(d3.extent(rows, (r) => r.d), [ml, w - 8]);
     svg.append('g').attr('transform', `translate(0,${h - 28})`).call(d3.axisBottom(x).ticks(xTicks(w - ml)).tickFormat(yearTickFmt).tickSizeOuter(0)).call(axisClean);
     svg.append('g').attr('transform', `translate(${ml},0)`).call(d3.axisLeft(y).ticks(5).tickFormat(yfmt).tickSize(-(w - ml - 8))).call(axisClean).call((g) => g.select('.domain').remove());
-    const area = d3.area().x((d) => x(d.data.d)).y0((d) => y(d[0])).y1((d) => y(d[1]));
-    svg.append('g').selectAll('path').data(series).join('path').attr('d', area).attr('fill', (s, k) => (s.key === 'Outras' ? 'var(--cds-chart-muted)' : col(k))).attr('fill-opacity', (s) => (s.key === 'Outras' ? 0.5 : 0.9));
+    let paths = null;
+    if (linha) {
+      const ln = (tk) => d3.line().x((r) => x(r.d)).y((r) => y(r[tk]));
+      paths = svg.append('g').selectAll('path').data(top).join('path').attr('d', (st) => ln(st.tk)(rows)).attr('fill', 'none').attr('stroke', (st, k) => col(k)).attr('stroke-width', 1.75).attr('stroke-linejoin', 'round').attr('stroke-linecap', 'round');
+    } else {
+      const area = d3.area().x((d) => x(d.data.d)).y0((d) => y(d[0])).y1((d) => y(d[1]));
+      svg.append('g').selectAll('path').data(series).join('path').attr('d', area).attr('fill', (sr, k) => (sr.key === 'Outras' ? 'var(--cds-chart-muted)' : col(k))).attr('fill-opacity', (sr) => (sr.key === 'Outras' ? 0.5 : 0.9));
+    }
     const rule = svg.append('line').attr('y1', 10).attr('y2', h - 28).attr('stroke', 'var(--cds-chart-axis)').style('display', 'none');
     const bis = d3.bisector((r) => r.d).center;
     svg.append('rect').attr('x', ml).attr('y', 0).attr('width', Math.max(0, w - ml - 8)).attr('height', h).attr('fill', 'transparent')
       .on('pointermove', (ev) => { const [px, py] = d3.pointer(ev, el); const sx = px * (w / el.clientWidth); const r = rows[bis(rows, x.invert(sx))]; if (!r) return; rule.style('display', null).attr('x1', x(r.d)).attr('x2', x(r.d));
-        const lines = keys.map((k, i) => [k === 'Outras' ? 'var(--cds-chart-muted)' : col(i), k, fPct0(r[k])]).filter((l) => l[2] !== '0,0%').reverse();
+        const lines = top.map((st, i) => [col(i), st.tk, r[st.tk]]).filter((l) => l[2] >= 0.0005).sort((a, b) => b[2] - a[2]).map((l) => [l[0], l[1], fPct0(l[2])]);
+        if (!linha && r.Outras >= 0.0005) lines.push(['var(--cds-chart-muted)', 'Outras', fPct0(r.Outras)]);
         showTip(el, t, x(r.d) * el.clientWidth / w, py, ymLabel(r.ym) + ' · ações ' + fPct0(expL.get(r.ym) || 0), lines); })
       .on('pointerleave', () => { rule.style('display', 'none'); t.hidden = true; });
   });
@@ -181998,9 +182013,9 @@ window.dash = (() => {
   dash.draw('ch-attr', (el) => {
     if (!status(el)) return; const m = model();
     const sorted = m.stocks.slice().sort((a, b) => d3.descending(a.contrib, b.contrib));
-    const pos = sorted.filter((s) => s.contrib > 0).slice(0, 10), neg = sorted.filter((s) => s.contrib < 0).slice(-8);
+    const pos = sorted.filter((s) => s.contrib > 0).slice(0, 20), neg = sorted.filter((s) => s.contrib < 0).slice(-16);
     const data = pos.concat(neg);
-    const bh = 22, h = Math.max(120, data.length * bh + 30); el.style.minHeight = h + 'px';
+    const bh = 20, h = Math.max(120, data.length * bh + 30); el.style.minHeight = h + 'px';
     const { svg, w } = svgFor(el, h); const t = tip(el);
     const labels = svg.append('g').selectAll('text').data(data).join('text').style('font-size', 'var(--cds-font-size-caption)').text((d) => d.tk);
     const ml = (d3.max(labels.nodes(), (n) => n.getComputedTextLength()) || 40) + 12; labels.remove();
