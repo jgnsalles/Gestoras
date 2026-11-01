@@ -53,6 +53,26 @@
 .rx-kv span:last-child { font-family: var(--font-anthropic-serif); font-size: var(--cds-font-size-heading); }
 .rx-method { display: grid; gap: var(--cds-gap-xs); }
 .rx-method p { margin: 0; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); max-width: 90ch; }
+.rx-tabs, .rx-subtabs { display: flex; flex-wrap: wrap; gap: var(--cds-gap-xs); }
+.rx-tabs { border-bottom: 1px solid var(--color-border-line); }
+.rx-tab { font: inherit; font-size: var(--cds-font-size-body); background: none; border: 0; border-bottom: 2px solid transparent; color: var(--color-fg-muted); padding: var(--cds-pad-sm) var(--cds-pad-md); cursor: pointer; margin-bottom: -1px; }
+.rx-tab[aria-selected="true"] { color: var(--color-fg); border-bottom-color: var(--color-fg); font-weight: 600; }
+.rx-subtab { font: inherit; font-size: var(--cds-font-size-caption); background: none; border: 1px solid var(--color-border-line); border-radius: 999px; color: var(--color-fg-muted); padding: 3px 12px; cursor: pointer; }
+.rx-subtab[aria-selected="true"] { background: var(--color-fg); color: var(--color-bg); border-color: var(--color-fg); }
+.rx-tab:focus-visible, .rx-subtab:focus-visible { outline: 2px solid var(--color-fg); outline-offset: 2px; }
+.rx-cardhead { display: flex; flex-wrap: wrap; gap: var(--cds-gap-md); align-items: center; justify-content: space-between; }
+[hidden] { display: none !important; }
+.rx-page { display: grid; gap: var(--cds-gap-lg); }
+.rx-sumbox { max-height: none; }
+.rx-sum th:nth-child(2), .rx-sum td:nth-child(2) { text-align: left; color: var(--color-fg-muted); }
+.rx-sum td:first-child { white-space: normal; min-width: 11rem; }
+.rx-sum td:first-child button { font: inherit; color: var(--color-fg); background: none; border: 0; padding: 0; cursor: pointer; text-align: left; text-decoration: underline; text-decoration-color: var(--color-border-line); text-underline-offset: 3px; }
+.rx-sum td.beat { font-weight: 700; }
+.rx-sum th.tot, .rx-sum td.tot { border-left: 1px solid var(--color-border-line); }
+.rx-sum tfoot td { position: sticky; bottom: 0; background: var(--color-bg); font-weight: 600; border-top: 1px solid var(--color-fg-muted); }
+.rx-sum tfoot tr + tr td { bottom: auto; }
+.rx-sum th[aria-sort="ascending"] button::after { content: " ↑"; }
+.rx-sum th[aria-sort="descending"] button::after { content: " ↓"; }
 [data-dash-source-state=empty] { color: transparent; }
 [data-dash-source-state=refreshing] { opacity: .5; transition: opacity var(--cds-dur-slow); }
 .rx-fail { display: flex; align-items: center; justify-content: center; gap: 6px; min-height: inherit; color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
@@ -62,11 +82,11 @@
 <div class="rx">
   <header class="rx-head" id="topo">
     <h1 class="rx-title">Raio-X Gestoras de Ações</h1>
-    <p class="rx-lead"><b data-draw="lead-fundo" data-source="fundos">—</b> rendeu <b data-draw="lead-ret" data-source="serie_mensal">—</b> contra <b data-draw="lead-ibov" data-source="serie_mensal">—</b> do Ibovespa entre <b data-draw="lead-ini">—</b> e <b data-draw="lead-fim">—</b>. A ação que mais contribuiu foi <b data-draw="lead-best" data-source="posicoes_1 posicoes_2">—</b>, e a que mais tirou foi <b data-draw="lead-worst" data-source="posicoes_1 posicoes_2">—</b>.</p>
+    <nav class="rx-tabs" role="tablist" aria-label="Páginas">
+      <button type="button" role="tab" class="rx-tab" data-pg="resumo" aria-selected="true">Resumo</button>
+      <button type="button" role="tab" class="rx-tab" data-pg="fundo" aria-selected="false">Fundo a fundo</button>
+    </nav>
     <div class="rx-controls">
-      <label class="rx-fund">Fundo
-        <select id="rx-fundo" data-draw="sel-fundo" data-source="fundos" aria-label="Fundo"></select>
-      </label>
       <label>Início (base)
         <select id="rx-ini" data-draw="sel-ini" data-source="serie_mensal" aria-label="Mês inicial"></select>
       </label>
@@ -77,7 +97,32 @@
     </div>
   </header>
 
-  <section class="rx-tiles" id="resumo">
+  <section class="rx-page" id="pg-resumo" data-pg="resumo">
+    <article class="rx-card" id="resumo-tabela">
+      <div class="rx-cardhead">
+        <h2>Resumo dos 35 fundos</h2>
+        <nav class="rx-subtabs" role="tablist" aria-label="Visão">
+          <button type="button" role="tab" class="rx-subtab" data-aba="perf" aria-selected="true">Performance</button>
+          <button type="button" role="tab" class="rx-subtab" data-aba="pl" aria-selected="false">Patrimônio</button>
+        </nav>
+      </div>
+      <p class="rx-note" data-aba-note="perf">Retorno da cota do master em cada ano do período escolhido e no total. Verde é positivo, vermelho é negativo, e <b>negrito</b> é quando o fundo bateu o Ibovespa nos mesmos meses. Toque no título de uma coluna para ordenar; o Ibovespa fica sempre na última linha. Toque no nome do fundo para abrir a página dele.</p>
+      <p class="rx-note" data-aba-note="pl" hidden>Patrimônio líquido do master no fim de cada ano do período (R$ milhões). A coluna Total mostra a variação do PL entre o início e o fim do período. A soma dos fundos e o Ibovespa (em pontos) ficam sempre nas últimas linhas.</p>
+      <div class="rx-tablebox rx-sumbox" data-draw="tb-sum" data-source="fundos serie_mensal ibov"></div>
+    </article>
+  </section>
+
+  <section class="rx-page" id="pg-fundo" data-pg="fundo" hidden>
+  <div class="rx-head">
+    <p class="rx-lead"><b data-draw="lead-fundo" data-source="fundos">—</b> rendeu <b data-draw="lead-ret" data-source="serie_mensal">—</b> contra <b data-draw="lead-ibov" data-source="serie_mensal">—</b> do Ibovespa entre <b data-draw="lead-ini">—</b> e <b data-draw="lead-fim">—</b>. A ação que mais contribuiu foi <b data-draw="lead-best" data-source="posicoes_1 posicoes_2">—</b>, e a que mais tirou foi <b data-draw="lead-worst" data-source="posicoes_1 posicoes_2">—</b>.</p>
+    <div class="rx-controls">
+      <label class="rx-fund">Fundo
+        <select id="rx-fundo" data-draw="sel-fundo" data-source="fundos" aria-label="Fundo"></select>
+      </label>
+    </div>
+  </div>
+
+  <section class="rx-tiles" id="indicadores">
     <div class="rx-tile"><span class="rx-tile-label">Retorno do fundo</span><span class="rx-tile-value" data-draw="t-ret" data-source="serie_mensal">—</span><span class="rx-tile-note">cota do master, no período</span></div>
     <div class="rx-tile"><span class="rx-tile-label">Ibovespa</span><span class="rx-tile-value" data-draw="t-ibov" data-source="serie_mensal">—</span><span class="rx-tile-note">mesmo período</span></div>
     <div class="rx-tile"><span class="rx-tile-label">Diferença vs Ibovespa</span><span class="rx-tile-value" data-draw="t-alfa" data-source="serie_mensal">—</span><span class="rx-tile-note">pontos percentuais</span></div>
@@ -161,6 +206,8 @@
     </div>
   </article>
 
+  </section>
+
   <article class="rx-card" id="metodologia">
     <h2>Como os números foram feitos</h2>
     <div class="rx-method">
@@ -180,7 +227,7 @@
   const fPct = L.format('+.1%'), fPct0 = L.format('.1%'), fPct2 = L.format('+.2%'), fNum = L.format(',.0f'), fPP = L.format('+.1f');
   const ymLabel = (s) => s ? MES[+s.slice(5, 7) - 1] + '/' + s.slice(2, 4) : '';
   const ymDate = (s) => new Date(Date.UTC(+s.slice(0, 4), +s.slice(5, 7) - 1, 1));
-  const DEF = { fundo: '1', inicio: '2013-12', fim: '2018-12' };
+  const DEF = { fundo: '1', inicio: '2013-12', fim: '2018-12', pg: 'resumo', aba: 'perf' };
   const IDS = ['fundos', 'serie_mensal', 'posicoes_1', 'posicoes_2', 'precos', 'acoes'];
   const css = (v) => getComputedStyle(document.getElementById('dash-root')).getPropertyValue(v).trim();
   document.getElementById('dash-root').style.setProperty('--rx-c0', dash.colors[0]);
@@ -202,7 +249,7 @@
   };
   const ready = () => IDS.every((i) => dash.data(i).status === 'ok');
   const failed = () => IDS.some((i) => ['error', 'connect', 'declined', 'missing'].includes(dash.data(i).status));
-  const params = () => { const p = dash.params(); return { fundo: String(p.fundo ?? DEF.fundo), inicio: p.inicio || DEF.inicio, fim: p.fim || DEF.fim, acao: p.acao || null }; };
+  const params = () => { const p = dash.params(); return { fundo: String(p.fundo ?? DEF.fundo), inicio: p.inicio || DEF.inicio, fim: p.fim || DEF.fim, acao: p.acao || null, pg: p.pg || DEF.pg, aba: p.aba || DEF.aba }; };
 
   let mcache = null;
   const model = () => {
@@ -280,9 +327,96 @@
     fill(sel, C.fundos.map((f) => [f.id, f.fundo + ' — ' + f.gestora]), params().fundo);
     sel.onchange = () => dash.setParams({ fundo: sel.value, acao: null });
   });
-  const monthOpts = () => { const m = model(); return m ? m.all.map((r) => [r.ym, ymLabel(r.ym)]) : []; };
-  dash.draw('sel-ini', (sel) => { if (!ready()) { sel.replaceChildren(); return; } fill(sel, monthOpts(), model().ini); sel.onchange = () => dash.setParams({ inicio: sel.value }); });
-  dash.draw('sel-fim', (sel) => { if (!ready()) { sel.replaceChildren(); return; } fill(sel, monthOpts(), model().fim); sel.onchange = () => dash.setParams({ fim: sel.value }); });
+  const SUM_IDS = ['fundos', 'serie_mensal', 'ibov'];
+  const sumReady = () => SUM_IDS.every((i) => dash.data(i).status === 'ok');
+  const allMonths = () => { const r = dash.data('serie_mensal'); return r.status === 'ok' ? [...new Set(r.data.map((x) => x.ym))].sort() : []; };
+  const window_ = () => { const p = params(); let a = p.inicio, b = p.fim; if (b < a) [a, b] = [b, a]; return [a, b]; };
+  dash.draw('sel-ini', (sel) => { const ms = allMonths(); if (!ms.length) { sel.replaceChildren(); return; } fill(sel, ms.map((m) => [m, ymLabel(m)]), params().inicio); sel.onchange = () => dash.setParams({ inicio: sel.value }); });
+  dash.draw('sel-fim', (sel) => { const ms = allMonths(); if (!ms.length) { sel.replaceChildren(); return; } fill(sel, ms.map((m) => [m, ymLabel(m)]), params().fim); sel.onchange = () => dash.setParams({ fim: sel.value }); });
+  // page tabs
+  document.querySelectorAll('.rx-tab').forEach((b) => b.addEventListener('click', () => { dash.setParams({ pg: b.dataset.pg }); dash.setLink && dash.setLink('pg-' + b.dataset.pg); }));
+  document.querySelectorAll('.rx-subtab').forEach((b) => b.addEventListener('click', () => dash.setParams({ aba: b.dataset.aba })));
+  dash.onData(() => {
+    const p = params();
+    document.querySelectorAll('section.rx-page[data-pg]').forEach((sec) => { sec.hidden = sec.dataset.pg !== p.pg; });
+    document.querySelectorAll('.rx-tab').forEach((b) => b.setAttribute('aria-selected', String(b.dataset.pg === p.pg)));
+    document.querySelectorAll('.rx-subtab').forEach((b) => b.setAttribute('aria-selected', String(b.dataset.aba === p.aba)));
+    document.querySelectorAll('[data-aba-note]').forEach((n) => { n.hidden = n.dataset.abaNote !== p.aba; });
+  });
+
+  // summary table
+  let sumSort = { perf: { k: 'total', d: -1 }, pl: { k: 'total', d: -1 } };
+  dash.draw('tb-sum', (box) => {
+    box.replaceChildren();
+    if (!sumReady()) { if (SUM_IDS.some((i) => ['error', 'connect', 'declined', 'missing'].includes(dash.data(i).status))) { const f = document.createElement('div'); f.className = 'rx-fail'; f.textContent = 'Não carregou'; box.append(f); } return; }
+    const p = params(); const aba = p.aba === 'pl' ? 'pl' : 'perf'; const [ini, fim] = window_();
+    const num = (x) => (x === '' || x == null ? NaN : +x);
+    const fundos = dash.data('fundos').data;
+    const ser = d3.group(dash.data('serie_mensal').data, (r) => String(r.id));
+    const ibovPts = new Map(dash.data('ibov').data.map((r) => [r.ym, num(r.pontos)]));
+    const months = allMonths().filter((m) => m >= ini && m <= fim);
+    const retMonths = months.slice(1);
+    const years = [...new Set(retMonths.map((m) => m.slice(0, 4)))];
+    const ibovRet = new Map(); (ser.get(String(fundos[0].id)) || []).forEach((r) => { if (Number.isFinite(num(r.ret_ibov))) ibovRet.set(r.ym, num(r.ret_ibov)); });
+    for (const rows of ser.values()) rows.forEach((r) => { if (!ibovRet.has(r.ym) && Number.isFinite(num(r.ret_ibov))) ibovRet.set(r.ym, num(r.ret_ibov)); });
+    const comp = (ms, f) => { let g = 1, n = 0; ms.forEach((m) => { const x = f(m); if (Number.isFinite(x)) { g *= 1 + x; n++; } }); return n ? g - 1 : NaN; };
+    const partial = new Set(years.filter((y) => retMonths.filter((m) => m.startsWith(y)).length < 12));
+    const rows = fundos.map((f) => {
+      const byM = new Map((ser.get(String(f.id)) || []).map((r) => [r.ym, r]));
+      const fr = (m) => { const r = byM.get(m); if (!r) return NaN; const a = num(r.ret_fundo); return Number.isFinite(a) ? a : num(r.ret_acoes_contrib); };
+      const o = { id: String(f.id), fundo: f.fundo, gestora: f.gestora, cells: {} };
+      if (aba === 'perf') {
+        years.forEach((y) => { const ms = retMonths.filter((m) => m.startsWith(y) && Number.isFinite(fr(m))); const v = comp(ms, fr); const ib = comp(ms, (m) => ibovRet.get(m)); o.cells[y] = { v, beat: Number.isFinite(v) && v > ib }; });
+        const ms = retMonths.filter((m) => Number.isFinite(fr(m))); const v = comp(ms, fr); const ib = comp(ms, (m) => ibovRet.get(m));
+        o.cells.total = { v, beat: Number.isFinite(v) && v > ib, short: ms.length < retMonths.length };
+      } else {
+        const plAt = (m) => num(byM.get(m)?.PL_mi);
+        years.forEach((y) => { const ms = months.filter((m) => m.startsWith(y)); const last = ms.reverse().find((m) => Number.isFinite(plAt(m))); o.cells[y] = { v: last ? plAt(last) : NaN }; });
+        const first = months.find((m) => Number.isFinite(plAt(m))), last = months.slice().reverse().find((m) => Number.isFinite(plAt(m)));
+        o.cells.total = { v: first && last ? plAt(last) / plAt(first) - 1 : NaN, short: first !== months[0] };
+      }
+      return o;
+    });
+    const st = sumSort[aba];
+    const val = (r) => (st.k === 'fundo' || st.k === 'gestora' ? r[st.k] : r.cells[st.k]?.v);
+    rows.sort((a, b) => { const va = val(a), vb = val(b); if (typeof va === 'string') return st.d * d3.ascending(va, vb); const na = Number.isFinite(va), nb = Number.isFinite(vb); if (!na && !nb) return 0; if (!na) return 1; if (!nb) return -1; return st.d * (va - vb); });
+    const fPL = L.format(',.0f');
+    const table = document.createElement('table'); table.className = 'rx-table rx-sum';
+    const thead = table.createTHead().insertRow();
+    const cols = [['fundo', 'Fundo'], ['gestora', 'Gestora'], ...years.map((y) => [y, y + (partial.has(y) ? '*' : '')]), ['total', aba === 'perf' ? 'Total' : 'Variação PL']];
+    cols.forEach(([k, t]) => { const th = document.createElement('th'); if (k === 'total') th.className = 'tot'; th.setAttribute('aria-sort', st.k === k ? (st.d > 0 ? 'ascending' : 'descending') : 'none'); const b = document.createElement('button'); b.type = 'button'; b.textContent = t; b.onclick = () => { sumSort[aba] = { k, d: st.k === k ? -st.d : (k === 'fundo' || k === 'gestora' ? 1 : -1) }; dash.draw('tb-sum'); }; th.append(b); thead.append(th); });
+    const cls = (v) => (v > 0 ? 'rx-pos' : v < 0 ? 'rx-neg' : '');
+    const tb = table.createTBody();
+    rows.forEach((r) => {
+      const tr = tb.insertRow(); tr.style.cursor = 'default';
+      const c0 = tr.insertCell(); const b = document.createElement('button'); b.type = 'button'; b.textContent = r.fundo; b.onclick = () => { dash.setParams({ fundo: r.id, acao: null, pg: 'fundo' }); document.getElementById('topo')?.scrollIntoView({ behavior: 'smooth' }); }; c0.append(b);
+      tr.insertCell().textContent = r.gestora;
+      [...years, 'total'].forEach((k) => { const c = r.cells[k]; const td = tr.insertCell(); if (k === 'total') td.classList.add('tot'); const v = c?.v;
+        if (!Number.isFinite(v)) { td.textContent = '—'; return; }
+        if (aba === 'perf' || k === 'total') { td.textContent = fPct(v) + (k === 'total' && c.short ? '¹' : ''); const cc = cls(v); if (cc) td.classList.add(cc); if (aba === 'perf' && c.beat) td.classList.add('beat'); }
+        else td.textContent = fPL(v); });
+    });
+    const tf = table.createTFoot();
+    if (aba === 'perf') {
+      const tr = tf.insertRow(); tr.insertCell().textContent = 'Ibovespa'; tr.insertCell().textContent = 'índice';
+      years.forEach((y) => { const v = comp(retMonths.filter((m) => m.startsWith(y)), (m) => ibovRet.get(m)); const td = tr.insertCell(); td.textContent = Number.isFinite(v) ? fPct(v) : '—'; const cc = cls(v); if (cc) td.classList.add(cc); });
+      const v = comp(retMonths, (m) => ibovRet.get(m)); const td = tr.insertCell(); td.className = 'tot'; td.textContent = fPct(v); const cc = cls(v); if (cc) td.classList.add(cc);
+    } else {
+      const tr = tf.insertRow(); tr.insertCell().textContent = 'Soma dos fundos'; tr.insertCell().textContent = 'R$ mi';
+      years.forEach((y) => { const td = tr.insertCell(); td.textContent = fPL(d3.sum(rows, (r) => (Number.isFinite(r.cells[y]?.v) ? r.cells[y].v : 0))); });
+      const firstSum = d3.sum(fundos, (f) => { const r = (ser.get(String(f.id)) || []).find((x) => x.ym === months[0]); return r ? num(r.PL_mi) || 0 : 0; });
+      const lastSum = d3.sum(rows, (r) => (Number.isFinite(r.cells[years[years.length - 1]]?.v) ? r.cells[years[years.length - 1]].v : 0));
+      const td = tr.insertCell(); td.className = 'tot'; const v = firstSum ? lastSum / firstSum - 1 : NaN; td.textContent = Number.isFinite(v) ? fPct(v) : '—'; const cc = cls(v); if (cc) td.classList.add(cc);
+      const tr2 = tf.insertRow(); tr2.insertCell().textContent = 'Ibovespa'; tr2.insertCell().textContent = 'pontos';
+      years.forEach((y) => { const ms = months.filter((m) => m.startsWith(y)); const v = ibovPts.get(ms[ms.length - 1]); tr2.insertCell().textContent = Number.isFinite(v) ? fPL(v) : '—'; });
+      const p0 = ibovPts.get(months[0]), p1 = ibovPts.get(months[months.length - 1]); const td2 = tr2.insertCell(); td2.className = 'tot'; const v2 = p0 && p1 ? p1 / p0 - 1 : NaN; td2.textContent = Number.isFinite(v2) ? fPct(v2) : '—'; const c2 = cls(v2); if (c2) td2.classList.add(c2);
+    }
+    box.append(table);
+    const notes = [];
+    if (partial.size) notes.push('* ano incompleto dentro do período escolhido.');
+    if (rows.some((r) => r.cells.total?.short)) notes.push(aba === 'perf' ? '¹ fundo sem cota em parte do período: total só dos meses com dado (o negrito compara com o Ibovespa nesses mesmos meses).' : 'Fundos que começaram depois do início têm a variação medida a partir do primeiro mês com PL.');
+    notes.forEach((t) => { const n = document.createElement('p'); n.className = 'rx-note'; n.style.marginTop = '8px'; n.textContent = t; box.append(n); });
+  });
   document.querySelectorAll('.rx-reset').forEach((b) => b.addEventListener('click', () => dash.setParams({ inicio: DEF.inicio, fim: DEF.fim })));
 
   const curAcao = (m) => { const p = params(); const s = m.stocks.find((x) => x.tk === p.acao); if (s) return s; return d3.greatest(m.stocks, (x) => Math.abs(x.contrib)) || null; };
@@ -464,6 +598,5 @@
     });
   });
 
-  dash.onData(() => {});
 })();
 </script>

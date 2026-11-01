@@ -5,7 +5,7 @@ style = re.search(r'<style>(.*?)</style>', page, re.S).group(1)
 script = re.search(r'<script>(.*?)</script>', page, re.S).group(1)
 body = re.sub(r'<style>.*?</style>|<script>.*?</script>', '', page, flags=re.S).strip()
 d3 = open(S+'/lib/d3.min.js').read()
-ids = ['fundos','serie_mensal','posicoes_1','posicoes_2','precos','acoes']
+ids = ['fundos','serie_mensal','posicoes_1','posicoes_2','precos','acoes','ibov']
 data = '\n'.join(f'<script type="text/csv" id="csv-{i}">\n{open(S+"/out/"+i+".csv").read()}</script>' for i in ids)
 tokens = '''
 :root{
@@ -32,10 +32,10 @@ html,body{margin:0;background:var(--color-bg);color:var(--color-fg);font-family:
 shim = '''
 window.dash = (() => {
   const data = {}; ['%s'].forEach((id) => { data[id] = d3.csvParse(document.getElementById('csv-' + id).textContent.trim()); });
-  const DEF = { fundo: '1', inicio: '2013-12', fim: '2018-12', acao: null };
-  let P = { ...DEF }; const draws = new Map();
+  const DEF = { fundo: '1', inicio: '2013-12', fim: '2018-12', acao: null, pg: 'resumo', aba: 'perf' };
+  let P = { ...DEF }; const draws = new Map(); const hooks = [];
   const runOne = (name) => { const fn = draws.get(name); if (!fn) return; document.querySelectorAll('[data-draw="' + name + '"]').forEach((el) => { try { fn(el); } catch (e) { console.error(name, e); } }); };
-  const runAll = () => { for (const n of draws.keys()) runOne(n); };
+  const runAll = () => { hooks.forEach((f) => { try { f(); } catch (e) { console.error(e); } }); for (const n of draws.keys()) runOne(n); };
   let t; window.addEventListener('resize', () => { clearTimeout(t); t = setTimeout(runAll, 150); });
   return {
     data: (id) => ({ status: 'ok', data: data[id] || [] }),
@@ -43,7 +43,7 @@ window.dash = (() => {
     setParams: (o) => { P = { ...P, ...o }; runAll(); },
     resetParams: () => { P = { ...DEF }; runAll(); },
     draw: (name, fn) => { if (fn) draws.set(name, fn); else runOne(name); },
-    onData: () => {}, refresh: () => {}, setLink: () => {},
+    onData: (f) => { hooks.push(f); }, refresh: () => {}, setLink: () => {},
     colors: ['#2f6fd0', '#d9822b', '#2a9d8f', '#c4467a', '#7a5cc4', '#8a9a2b', '#b5523b', '#4a90a4'],
     _run: runAll,
   };
