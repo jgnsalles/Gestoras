@@ -192,7 +192,7 @@ html,body{margin:0;background:var(--color-bg);color:var(--color-fg);font-family:
     </article>
     <article class="rx-card" id="evolucao">
       <h2>Como o portfólio evoluiu</h2>
-      <p class="rx-note">Peso das 15 maiores posições médias do período, em % do PL. No empilhado, "Outras" soma o restante das ações. Toque no gráfico para ver as posições do mês, da maior para a menor.</p>
+      <p class="rx-note">Peso das 15 maiores posições médias do período, em % do PL. No empilhado, "Outras" soma o restante das ações. Toque no gráfico para ver as posições do mês, da maior para a menor. Nas linhas, passe perto de uma linha ou toque no nome da ação na legenda para destacá-la.</p>
       <nav class="rx-subtabs" role="tablist" aria-label="Tipo de gráfico">
         <button type="button" role="tab" class="rx-subtab rx-graftab" data-graf="stack" aria-selected="true">Empilhado</button>
         <button type="button" role="tab" class="rx-subtab rx-graftab" data-graf="linha" aria-selected="false">Linhas</button>
@@ -181972,11 +181972,17 @@ window.dash = (() => {
 
   // stacked composition
   const topN = (m) => m.stocks.slice().sort((a, b) => d3.descending(a.wmed, b.wmed)).slice(0, 15);
+  let stickyHL = null;
   const PAL15 = ['#3b6fd8', '#e07b39', '#2a9d8f', '#e0a43a', '#d9679a', '#3f8f3a', '#6b57d6', '#d14f4f', '#4aa3c7', '#a3803a', '#8c6bb1', '#57a86b', '#c2577a', '#7f8c99', '#b5a33a'];
   const palette = () => (k) => PAL15[k % PAL15.length];
   dash.draw('lg-stack', (el) => {
     const m = model(); el.replaceChildren(); if (!m) return; const col = palette();
-    topN(m).forEach((s, k) => { const sp = document.createElement('span'); const i = document.createElement('i'); i.style.background = col(k); sp.append(i, document.createTextNode(s.tk)); el.append(sp); });
+    const linhaL = params().graf === 'linha'; const chart = () => document.querySelector('[data-draw="ch-stack"]');
+    topN(m).forEach((s, k) => { const sp = document.createElement('span'); const i = document.createElement('i'); i.style.background = col(k); sp.append(i, document.createTextNode(s.tk));
+      if (linhaL) { sp.style.cursor = 'pointer'; sp.style.opacity = !stickyHL || stickyHL === s.tk ? '1' : '.45'; sp.style.fontWeight = stickyHL === s.tk ? '600' : '';
+        sp.onmouseenter = () => chart()?._hl?.(s.tk); sp.onmouseleave = () => chart()?._hl?.(stickyHL);
+        sp.onclick = () => { stickyHL = stickyHL === s.tk ? null : s.tk; chart()?._hl?.(stickyHL); dash.draw('lg-stack'); }; }
+      el.append(sp); });
     if (params().graf !== 'linha') { const sp = document.createElement('span'); const i = document.createElement('i'); i.style.background = 'var(--cds-chart-muted)'; sp.append(i, document.createTextNode('Outras')); el.append(sp); }
   });
   dash.draw('ch-stack', (el) => {
@@ -181995,6 +182001,9 @@ window.dash = (() => {
     if (linha) {
       const ln = (tk) => d3.line().x((r) => x(r.d)).y((r) => y(r[tk]));
       paths = svg.append('g').selectAll('path').data(top).join('path').attr('d', (st) => ln(st.tk)(rows)).attr('fill', 'none').attr('stroke', (st, k) => col(k)).attr('stroke-width', 1.75).attr('stroke-linejoin', 'round').attr('stroke-linecap', 'round');
+      if (stickyHL && !top.some((st) => st.tk === stickyHL)) stickyHL = null;
+      el._hl = (tk) => { paths.attr('stroke-opacity', (st) => (!tk || st.tk === tk ? 1 : 0.12)).attr('stroke-width', (st) => (st.tk === tk ? 3 : 1.75)); if (tk) paths.filter((st) => st.tk === tk).raise(); };
+      el._hl(stickyHL);
     } else {
       const area = d3.area().x((d) => x(d.data.d)).y0((d) => y(d[0])).y1((d) => y(d[1]));
       svg.append('g').selectAll('path').data(series).join('path').attr('d', area).attr('fill', (sr, k) => (sr.key === 'Outras' ? 'var(--cds-chart-muted)' : col(k))).attr('fill-opacity', (sr) => (sr.key === 'Outras' ? 0.5 : 0.9));
@@ -182003,10 +182012,11 @@ window.dash = (() => {
     const bis = d3.bisector((r) => r.d).center;
     svg.append('rect').attr('x', ml).attr('y', 0).attr('width', Math.max(0, w - ml - 8)).attr('height', h).attr('fill', 'transparent')
       .on('pointermove', (ev) => { const [px, py] = d3.pointer(ev, el); const sx = px * (w / el.clientWidth); const r = rows[bis(rows, x.invert(sx))]; if (!r) return; rule.style('display', null).attr('x1', x(r.d)).attr('x2', x(r.d));
+        if (linha) { const sy = py * (w / el.clientWidth); let best = null, bd = 1e9; top.forEach((st) => { const d = Math.abs(y(r[st.tk]) - sy); if (d < bd) { bd = d; best = st.tk; } }); el._hl(bd < 22 ? best : stickyHL); }
         const lines = top.map((st, i) => [col(i), st.tk, r[st.tk]]).filter((l) => l[2] >= 0.0005).sort((a, b) => b[2] - a[2]).map((l) => [l[0], l[1], fPct0(l[2])]);
         if (!linha && r.Outras >= 0.0005) lines.push(['var(--cds-chart-muted)', 'Outras', fPct0(r.Outras)]);
         showTip(el, t, x(r.d) * el.clientWidth / w, py, ymLabel(r.ym) + ' · ações ' + fPct0(expL.get(r.ym) || 0), lines); })
-      .on('pointerleave', () => { rule.style('display', 'none'); t.hidden = true; });
+      .on('pointerleave', () => { rule.style('display', 'none'); t.hidden = true; if (linha) el._hl(stickyHL); });
   });
 
   // attribution bars
