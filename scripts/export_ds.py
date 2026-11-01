@@ -1,8 +1,8 @@
 import pandas as pd, numpy as np, json, sys, re
 W,O=sys.argv[1],sys.argv[2]
 ST=json.load(open(W+'/members.json'))
-# 2º filtro: fora fundos concentrados (maior posição > 30% da carteira de ações em média ou em mais de 1/3 dos meses, 2014-2018)
-C=pd.read_csv(W+'/concentr.csv',index_col='id'); EXCL=set(C[(C.top1s>0.30)|(C.meses_top1_30>1/3)].index)
+# 2º filtro: fora fundos com alguma posição acima de 50% do PL em algum mês de 2014-2018
+C=pd.read_csv(W+'/concentr.csv',index_col='id'); EXCL=set(C[C.top1max>0.50].index)
 # 3º filtro: no máximo 2 fundos por gestora (sai JGP Equity Multimercado e Oceana Valor)
 EXCL|={14,18}
 print('excluidos',sorted(EXCL)); ST=[s for s in ST if s['id'] not in EXCL]; S=pd.read_pickle(W+'/serie.pkl'); P=pd.read_pickle(W+'/pos.pkl'); S=S[~S.id.isin(EXCL)]; P=P[~P.id.isin(EXCL)]
