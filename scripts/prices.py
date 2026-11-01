@@ -51,6 +51,12 @@ for t in tks:
         ret[t]=yr[t].where(yr[t].notna(),r); src[t]=np.where(yr[t].notna(),'Y',np.where(r.notna(),'B',''))
     else:
         ret[t]=r; src[t]=np.where(r.notna(),'B','')
+# B3-only months with extreme moves: corporate actions not adjusted -> divide by the nearest usual factor; otherwise drop
+F=[2,3,4,5,6,8,10,15,20,25,30,40,50,100,200]; F=F+[1/x for x in F]
+for t in ret.columns:
+    for ym in ret.index[(src[t]=='B')&((ret[t]>1.0)|(ret[t]<-0.6))]:
+        ratio=1+ret.at[ym,t]; best=min(F,key=lambda k:abs(np.log(ratio/k)))
+        ret.at[ym,t]=ratio/best-1 if abs(np.log(ratio/best))<0.25 else np.nan
 ret=ret.clip(-0.9,3)
 ret.to_pickle(W+'/ret.pkl'); src.to_pickle(W+'/retsrc.pkl')
 ib=yh['^BVSP'] if '^BVSP' in yh else None

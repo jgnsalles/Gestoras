@@ -73,6 +73,12 @@
 .rx-sum tfoot tr + tr td { bottom: auto; }
 .rx-sum th[aria-sort="ascending"] button::after { content: " ↑"; }
 .rx-sum th[aria-sort="descending"] button::after { content: " ↓"; }
+.rx-chips { display: flex; flex-wrap: wrap; gap: var(--cds-gap-xs); min-height: 1.6em; }
+.rx-chip { font: inherit; font-size: var(--cds-font-size-caption); background: none; border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); color: var(--color-fg); padding: 3px 10px; cursor: pointer; font-variant-numeric: tabular-nums; }
+.rx-chip[aria-pressed="true"] { background: var(--rx-c0); border-color: var(--rx-c0); color: #fff; }
+.rx-emp td:first-child { white-space: normal; min-width: 10rem; }
+.rx-emp .rx-two { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr)); gap: var(--cds-gap-lg); }
+.rx-emp h3 { margin: var(--cds-gap-sm) 0 var(--cds-gap-xs); font-size: var(--cds-font-size-body); font-weight: var(--cds-font-weight-medium); }
 [data-dash-source-state=empty] { color: transparent; }
 [data-dash-source-state=refreshing] { opacity: .5; transition: opacity var(--cds-dur-slow); }
 .rx-fail { display: flex; align-items: center; justify-content: center; gap: 6px; min-height: inherit; color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
@@ -81,9 +87,11 @@
 
 <div class="rx">
   <header class="rx-head" id="topo">
-    <h1 class="rx-title">Raio-X Gestoras de Ações</h1>
+    <h1 class="rx-title">Navegando Dilma 2</h1>
+    <p class="rx-lead">Gestoras de ações Brasil que atravessaram 2014–2018: carteiras, performance e attribution, com dados da CVM.</p>
     <nav class="rx-tabs" role="tablist" aria-label="Páginas">
       <button type="button" role="tab" class="rx-tab" data-pg="resumo" aria-selected="true">Resumo</button>
+      <button type="button" role="tab" class="rx-tab" data-pg="empresas" aria-selected="false">Empresas</button>
       <button type="button" role="tab" class="rx-tab" data-pg="fundo" aria-selected="false">Fundo a fundo</button>
     </nav>
     <div class="rx-controls">
@@ -109,6 +117,26 @@
       <p class="rx-note" data-aba-note="perf">Retorno da cota do master em cada ano do período escolhido e no total. Verde é positivo, vermelho é negativo, e <b>negrito</b> é quando o fundo bateu o Ibovespa nos mesmos meses. Toque no título de uma coluna para ordenar; o Ibovespa fica sempre na última linha. Toque no nome do fundo para abrir a página dele.</p>
       <p class="rx-note" data-aba-note="pl" hidden>Patrimônio líquido do master no fim de cada ano do período (R$ milhões). A coluna Total mostra a variação do PL entre o início e o fim do período. A soma dos fundos e o Ibovespa (em pontos) ficam sempre nas últimas linhas.</p>
       <div class="rx-tablebox rx-sumbox" data-draw="tb-sum" data-source="fundos serie_mensal ibov"></div>
+    </article>
+  </section>
+
+  <section class="rx-page" id="pg-empresas" data-pg="empresas" hidden>
+    <article class="rx-card" id="empresas-card">
+      <div class="rx-cardhead">
+        <h2>O que os gestores tinham</h2>
+        <nav class="rx-subtabs" role="tablist" aria-label="Visão de empresas">
+          <button type="button" role="tab" class="rx-subtab rx-emptab" data-emp="ano" aria-selected="true">Mais detidas no ano</button>
+          <button type="button" role="tab" class="rx-subtab rx-emptab" data-emp="periodo" aria-selected="false">Período inteiro</button>
+          <button type="button" role="tab" class="rx-subtab rx-emptab" data-emp="fluxo" aria-selected="false">Compras e vendas</button>
+          <button type="button" role="tab" class="rx-subtab rx-emptab" data-emp="apostas" aria-selected="false">Apostas fora do consenso</button>
+        </nav>
+      </div>
+      <p class="rx-note" data-emp-note="ano">As 20 empresas com maior peso médio nos fundos no ano escolhido. Peso de consenso = média do peso da empresa em todos os fundos (zero para quem não tinha), na média dos meses do ano. Retorno com dividendos; <b>negrito</b> quando bateu o Ibovespa. Contribuição = quanto a empresa somou, em média, ao retorno dos fundos naquele ano.</p>
+      <p class="rx-note" data-emp-note="periodo" hidden>As 25 empresas com maior peso de consenso no período. Cada coluna de ano mostra o peso de consenso (quanto mais escuro, maior). Retorno e contribuição são do período todo.</p>
+      <p class="rx-note" data-emp-note="fluxo" hidden>Onde o dinheiro foi no ano escolhido: soma das compras menos vendas de todos os fundos, em R$ milhões. Fundos comprador/vendedor líquido contam quantos fundos terminaram o ano comprando ou vendendo a ação no saldo. A última coluna mostra o retorno da ação no ano seguinte, para ver se o movimento acertou.</p>
+      <p class="rx-note" data-emp-note="apostas" hidden>Empresas que poucos fundos tinham (no máximo 3 no ano) mas que mais somaram ou tiraram de quem tinha. Mostra os acertos e erros individuais, fora do consenso.</p>
+      <div class="rx-chips" data-draw="emp-anos" data-source="serie_mensal"></div>
+      <div class="rx-tablebox rx-sumbox" data-draw="tb-emp" data-source="posicoes_1 posicoes_2 serie_mensal precos acoes"></div>
     </article>
   </section>
 
@@ -215,7 +243,7 @@
       <p>Filtro de concentração: ficaram fora os fundos que tiveram uma única ação acima de 50% do PL em algum mês entre 2014 e 2018 (Neo Future, Tarpon e Safari). Fundos concentrados abaixo disso, como a Guepardo, continuam.</p>
       <p>No máximo dois fundos por gestora: saíram JGP Equity (multimercado, para ficar com os fundos de ações da JGP) e Oceana Valor (o menor dos três da Oceana em 2018).</p>
       <p>Retorno do fundo: variação da cota do master no Informe Diário da CVM, de fim de mês a fim de mês. Fica acima do retorno dos feeders porque o master não cobra a taxa de administração e performance cobrada no feeder.</p>
-      <p>Retorno das ações: retorno total com dividendos do Yahoo Finance quando o ticker ainda existe, e cotação de fechamento da B3 (COTAHIST, ajustada por desdobramentos) para ações que saíram da bolsa ou mudaram de ticker. Nessas, o dividendo não entra.</p>
+      <p>Retorno das ações: retorno total com dividendos do Yahoo Finance quando o ticker ainda existe, e cotação de fechamento da B3 (COTAHIST, ajustada por desdobramentos) para ações que saíram da bolsa ou mudaram de ticker. Nessas, o dividendo não entra; meses com saltos de grupamento, desdobramento ou troca de ticker foram corrigidos pelo fator mais próximo, e os que não batem com nenhum fator ficam sem retorno.</p>
       <p>Attribution: contribuição = peso no fim do mês anterior × retorno da ação no mês, encadeada pelo crescimento da cota para somar ao retorno do período. O resto (diferença entre o retorno do fundo e a soma das ações) vem de caixa, derivativos, ativos no exterior, operações dentro do mês e custos.</p>
       <p>Compras e vendas: variação mensal da quantidade de ações, já corrigida por desdobramentos e grupamentos, vezes o preço do mês, em % do PL. Como a CVM só mostra a carteira no fim do mês, operações compradas e vendidas no mesmo mês não aparecem.</p>
     </div>
@@ -229,7 +257,7 @@
   const fPct = L.format('+.1%'), fPct0 = L.format('.1%'), fPct2 = L.format('+.2%'), fNum = L.format(',.0f'), fPP = L.format('+.1f');
   const ymLabel = (s) => s ? MES[+s.slice(5, 7) - 1] + '/' + s.slice(2, 4) : '';
   const ymDate = (s) => new Date(Date.UTC(+s.slice(0, 4), +s.slice(5, 7) - 1, 1));
-  const DEF = { fundo: '1', inicio: '2013-12', fim: '2018-12', pg: 'resumo', aba: 'perf' };
+  const DEF = { fundo: '1', inicio: '2013-12', fim: '2018-12', pg: 'resumo', aba: 'perf', emp: 'ano' };
   const IDS = ['fundos', 'serie_mensal', 'posicoes_1', 'posicoes_2', 'precos', 'acoes'];
   const css = (v) => getComputedStyle(document.getElementById('dash-root')).getPropertyValue(v).trim();
   document.getElementById('dash-root').style.setProperty('--rx-c0', dash.colors[0]);
@@ -251,7 +279,7 @@
   };
   const ready = () => IDS.every((i) => dash.data(i).status === 'ok');
   const failed = () => IDS.some((i) => ['error', 'connect', 'declined', 'missing'].includes(dash.data(i).status));
-  const params = () => { const p = dash.params(); return { fundo: String(p.fundo ?? DEF.fundo), inicio: p.inicio || DEF.inicio, fim: p.fim || DEF.fim, acao: p.acao || null, pg: p.pg || DEF.pg, aba: p.aba || DEF.aba }; };
+  const params = () => { const p = dash.params(); return { fundo: String(p.fundo ?? DEF.fundo), inicio: p.inicio || DEF.inicio, fim: p.fim || DEF.fim, acao: p.acao || null, pg: p.pg || DEF.pg, aba: p.aba || DEF.aba, emp: p.emp || DEF.emp, anoEmp: p.anoEmp || null }; };
 
   let mcache = null;
   const model = () => {
@@ -337,13 +365,140 @@
   dash.draw('sel-fim', (sel) => { const ms = allMonths(); if (!ms.length) { sel.replaceChildren(); return; } fill(sel, ms.map((m) => [m, ymLabel(m)]), params().fim); sel.onchange = () => dash.setParams({ fim: sel.value }); });
   // page tabs
   document.querySelectorAll('.rx-tab').forEach((b) => b.addEventListener('click', () => { dash.setParams({ pg: b.dataset.pg }); dash.setLink && dash.setLink('pg-' + b.dataset.pg); }));
-  document.querySelectorAll('.rx-subtab').forEach((b) => b.addEventListener('click', () => dash.setParams({ aba: b.dataset.aba })));
+  document.querySelectorAll('.rx-subtab[data-aba]').forEach((b) => b.addEventListener('click', () => dash.setParams({ aba: b.dataset.aba })));
+  document.querySelectorAll('.rx-emptab').forEach((b) => b.addEventListener('click', () => dash.setParams({ emp: b.dataset.emp })));
   dash.onData(() => {
     const p = params();
     document.querySelectorAll('section.rx-page[data-pg]').forEach((sec) => { sec.hidden = sec.dataset.pg !== p.pg; });
     document.querySelectorAll('.rx-tab').forEach((b) => b.setAttribute('aria-selected', String(b.dataset.pg === p.pg)));
-    document.querySelectorAll('.rx-subtab').forEach((b) => b.setAttribute('aria-selected', String(b.dataset.aba === p.aba)));
+    document.querySelectorAll('.rx-subtab[data-aba]').forEach((b) => b.setAttribute('aria-selected', String(b.dataset.aba === p.aba)));
+    document.querySelectorAll('.rx-emptab').forEach((b) => b.setAttribute('aria-selected', String(b.dataset.emp === p.emp)));
+    document.querySelectorAll('[data-emp-note]').forEach((n) => { n.hidden = n.dataset.empNote !== p.emp; });
+    document.querySelectorAll('.rx-chips').forEach((c) => { c.hidden = p.emp === 'periodo'; });
     document.querySelectorAll('[data-aba-note]').forEach((n) => { n.hidden = n.dataset.abaNote !== p.aba; });
+  });
+
+  // ---- Empresas ----
+  let ecache = null;
+  const empModel = () => {
+    if (!ready()) return null;
+    const C = build(); const [ini, fim] = window_();
+    const k = [C.src, ini, fim].join('§'); if (ecache && ecache.k === k) return ecache.m;
+    const months = allMonths().filter((m) => m >= ini && m <= fim); const retMonths = months.slice(1);
+    const years = [...new Set(retMonths.map((m) => m.slice(0, 4)))];
+    const yMonths = new Map(years.map((y) => [y, retMonths.filter((m) => m.startsWith(y))]));
+    const yEnd = new Map(years.map((y) => { const ms = yMonths.get(y); return [y, ms[ms.length - 1]]; }));
+    const endSet = new Set(yEnd.values());
+    const root = (tk) => tk.slice(0, 4);
+    const PL = new Map(); const nAct = new Map(); const fundsYear = new Map(); const ibov = new Map();
+    for (const [fid, rows] of C.serie) { const m = new Map(); rows.forEach((r) => { if (Number.isFinite(r.PL)) { m.set(r.ym, r.PL); nAct.set(r.ym, (nAct.get(r.ym) || 0) + 1); const y = r.ym.slice(0, 4); if (!fundsYear.has(y)) fundsYear.set(y, new Set()); fundsYear.get(y).add(fid); } if (Number.isFinite(r.ri)) ibov.set(r.ym, r.ri); }); PL.set(fid, m); }
+    const agg = new Map();
+    const get = (c) => { let a = agg.get(c); if (!a) { a = { c, tks: new Map(), w: new Map(), con: new Map(), tr: new Map(), hold: new Map(), holders: new Map() }; agg.set(c, a); } return a; };
+    for (const [fid, rows] of C.pos) {
+      const pl = PL.get(fid) || new Map();
+      for (const r of rows) {
+        if (r.ym < ini || r.ym > fim) continue;
+        const a = get(root(r.tk)); const y = r.ym.slice(0, 4); const p = pl.get(r.ym);
+        if (Number.isFinite(r.w)) {
+          a.w.set(r.ym, (a.w.get(r.ym) || 0) + r.w);
+          if (Number.isFinite(p)) a.tks.set(r.tk, (a.tks.get(r.tk) || 0) + Math.abs(r.w) * p);
+          if (r.ym > ini && r.w >= 0.01) { if (!a.holders.has(y)) a.holders.set(y, new Set()); a.holders.get(y).add(fid); }
+          if (endSet.has(r.ym) && r.w >= 0.005) { const o = a.hold.get(y) || { n: new Set(), rs: 0 }; o.n.add(fid); o.rs += Number.isFinite(p) ? r.w * p : 0; a.hold.set(y, o); }
+        }
+        if (r.ym > ini && Number.isFinite(r.c)) { const m = a.con.get(y) || new Map(); m.set(fid, (m.get(fid) || 0) + r.c); a.con.set(y, m); }
+        if (r.ym > ini && Number.isFinite(r.t) && r.t !== 0 && Number.isFinite(p)) { const o = a.tr.get(y) || { b: 0, s: 0, f: new Map() }; if (r.t > 0) o.b += r.t * p; else o.s += r.t * p; o.f.set(fid, (o.f.get(fid) || 0) + r.t * p); a.tr.set(y, o); }
+      }
+    }
+    const comp = (ms, f) => { let g = 1, n = 0; ms.forEach((m) => { const x = f(m); if (Number.isFinite(x)) { g *= 1 + x; n++; } }); return n ? g - 1 : NaN; };
+    const yIb = new Map(years.map((y) => [y, comp(yMonths.get(y), (m) => ibov.get(m))]));
+    const ibTot = comp(retMonths, (m) => ibov.get(m));
+    const ymsOf = (y) => Array.from({ length: 12 }, (_, i) => y + '-' + String(i + 1).padStart(2, '0'));
+    const list = [...agg.values()].map((a) => {
+      const tk = [...a.tks].sort((x, y) => y[1] - x[1])[0]?.[0] || [...a.w.keys()][0] && a.c;
+      const rm = C.ret.get(tk) || new Map(); const rf = (m) => rm.get(m);
+      const yr = {};
+      years.forEach((y) => {
+        const ms = yMonths.get(y);
+        const cons = d3.mean(ms, (m) => (a.w.get(m) || 0) / (nAct.get(m) || 1));
+        const con = a.con.get(y); const nf = fundsYear.get(y)?.size || 1;
+        const contrib = con ? d3.sum([...con.values()]) / nf : 0;
+        const holdersContrib = con && a.holders.get(y)?.size ? d3.sum([...a.holders.get(y)].map((f) => con.get(f) || 0)) / a.holders.get(y).size : NaN;
+        const tr = a.tr.get(y);
+        yr[y] = { cons, contrib, holdersContrib, nHold: a.hold.get(y)?.n.size || 0, nAny: a.holders.get(y)?.size || 0, rs: a.hold.get(y)?.rs || 0, ret: comp(ms, rf), retNext: comp(ymsOf(String(+y + 1)), rf), net: tr ? tr.b + tr.s : 0, nb: tr ? [...tr.f.values()].filter((v) => v > 0).length : 0, ns: tr ? [...tr.f.values()].filter((v) => v < 0).length : 0 };
+      });
+      const consTot = d3.mean(retMonths, (m) => (a.w.get(m) || 0) / (nAct.get(m) || 1));
+      const allHolders = new Set(); a.holders.forEach((s) => s.forEach((f) => allHolders.add(f)));
+      return { c: a.c, tk, nome: C.nome.get(tk) || '', yr, consTot, retTot: comp(retMonths, rf), contribTot: d3.sum(years, (y) => yr[y].contrib), nTot: allHolders.size };
+    }).filter((x) => x.tk);
+    const m = { years, list, yIb, ibTot, nFundos: C.fundos.length };
+    ecache = { k, m }; return m;
+  };
+  const empYear = (m) => { const y = params().anoEmp; return m.years.includes(y) ? y : m.years[0]; };
+  dash.draw('emp-anos', (el) => {
+    el.replaceChildren(); const m = empModel(); if (!m) return; const y0 = empYear(m);
+    m.years.forEach((y) => { const b = document.createElement('button'); b.type = 'button'; b.className = 'rx-chip'; b.textContent = y; b.setAttribute('aria-pressed', String(y === y0)); b.onclick = () => dash.setParams({ anoEmp: y }); el.append(b); });
+  });
+  const sorts = {};
+  const sortTable = (drawName, key, cols, rows, def, foot) => {
+    const st = sorts[key] || (sorts[key] = { ...def });
+    const col = cols.find((c) => c.k === st.k) || cols[0];
+    const sv = col.sv || ((r) => r[col.k]);
+    rows = rows.slice().sort((a, b) => { const va = sv(a), vb = sv(b); if (typeof va === 'string') return st.d * d3.ascending(va, vb); const na = Number.isFinite(va), nb = Number.isFinite(vb); if (!na && !nb) return 0; if (!na) return 1; if (!nb) return -1; return st.d * (va - vb); });
+    const table = document.createElement('table'); table.className = 'rx-table rx-sum rx-emp';
+    const hr = table.createTHead().insertRow();
+    cols.forEach((c) => { const th = document.createElement('th'); if (c.left) th.style.textAlign = 'left'; th.setAttribute('aria-sort', st.k === c.k ? (st.d > 0 ? 'ascending' : 'descending') : 'none'); const b = document.createElement('button'); b.type = 'button'; b.textContent = c.t; b.onclick = () => { sorts[key] = { k: c.k, d: st.k === c.k ? -st.d : (c.str ? 1 : -1) }; dash.draw(drawName); }; th.append(b); hr.append(th); });
+    const tb = table.createTBody();
+    rows.forEach((r) => { const tr = tb.insertRow(); tr.style.cursor = 'default'; cols.forEach((c) => { const td = tr.insertCell(); const o = c.f(r); td.textContent = o.t; if (c.left) td.style.textAlign = 'left'; if (o.cls) td.className = o.cls; if (o.b) td.style.fontWeight = '700'; if (o.bg) td.style.background = o.bg; }); });
+    if (foot) { const tf = table.createTFoot(); foot.forEach((fr) => { const tr = tf.insertRow(); fr.forEach((o) => { const td = tr.insertCell(); td.textContent = o.t; if (o.cls) td.className = o.cls; if (o.left) td.style.textAlign = 'left'; }); }); }
+    return table;
+  };
+  const sc = (v) => (v > 0 ? 'rx-pos' : v < 0 ? 'rx-neg' : '');
+  const pctCell = (v, beat) => ({ t: Number.isFinite(v) ? fPct(v) : '—', cls: sc(v), b: !!beat });
+  const fMi = L.format(',.0f');
+  const empName = (r) => r.tk + (r.nome ? ' · ' + r.nome : '');
+  dash.draw('tb-emp', (box) => {
+    box.replaceChildren(); const m = empModel(); if (!m) { if (failed()) { const f = document.createElement('div'); f.className = 'rx-fail'; f.textContent = 'Não carregou'; box.append(f); } return; }
+    const p = params(); const y = empYear(m); const name = { k: 'emp', t: 'Empresa', left: true, str: true, sv: (r) => r.tk, f: (r) => ({ t: empName(r) }) };
+    if (p.emp === 'periodo') {
+      const rows = m.list.filter((r) => r.consTot > 0).sort((a, b) => b.consTot - a.consTot).slice(0, 25);
+      const mx = d3.max(rows, (r) => d3.max(m.years, (yy) => r.yr[yy].cons)) || 1;
+      const cols = [name, ...m.years.map((yy) => ({ k: 'y' + yy, t: yy, sv: (r) => r.yr[yy].cons, f: (r) => { const v = r.yr[yy].cons; return { t: v > 0.0005 ? fPct0(v) : '—', bg: v > 0 ? `color-mix(in srgb, var(--rx-c0) ${Math.round(8 + 50 * v / mx)}%, transparent)` : '' }; } })),
+        { k: 'consTot', t: 'Consenso médio', f: (r) => ({ t: fPct0(r.consTot) }) },
+        { k: 'nTot', t: 'Fundos que tiveram', f: (r) => ({ t: r.nTot + ' de ' + m.nFundos }) },
+        { k: 'retTot', t: 'Retorno período', f: (r) => pctCell(r.retTot, r.retTot > m.ibTot) },
+        { k: 'contribTot', t: 'Contribuição média', f: (r) => ({ t: fPct2(r.contribTot), cls: sc(r.contribTot) }) }];
+      box.append(sortTable('tb-emp', 'periodo', cols, rows, { k: 'consTot', d: -1 }, [[{ t: 'Ibovespa', left: true }, ...m.years.map(() => ({ t: '' })), { t: '' }, { t: '' }, { t: fPct(m.ibTot), cls: sc(m.ibTot) }, { t: '' }]]));
+      return;
+    }
+    if (p.emp === 'fluxo') {
+      const all = m.list.filter((r) => r.yr[y] && r.yr[y].net !== 0);
+      const cols = [name, { k: 'net', t: 'Líquido R$ mi', sv: (r) => r.yr[y].net, f: (r) => ({ t: fMi(r.yr[y].net), cls: sc(r.yr[y].net) }) },
+        { k: 'nb', t: 'Fundos comprador líquido', sv: (r) => r.yr[y].nb, f: (r) => ({ t: String(r.yr[y].nb) }) },
+        { k: 'ns', t: 'Fundos vendedor líquido', sv: (r) => r.yr[y].ns, f: (r) => ({ t: String(r.yr[y].ns) }) },
+        { k: 'ret', t: 'Retorno ' + y, sv: (r) => r.yr[y].ret, f: (r) => pctCell(r.yr[y].ret, r.yr[y].ret > m.yIb.get(y)) },
+        { k: 'retNext', t: 'Retorno ' + (+y + 1), sv: (r) => r.yr[y].retNext, f: (r) => pctCell(r.yr[y].retNext) }];
+      const wrap = document.createElement('div'); wrap.className = 'rx-two';
+      const h1 = document.createElement('div'); const t1 = document.createElement('h3'); t1.textContent = 'Mais compradas em ' + y; h1.append(t1, sortTable('tb-emp', 'buy' + y, cols, all.filter((r) => r.yr[y].net > 0).sort((a, b) => b.yr[y].net - a.yr[y].net).slice(0, 12), { k: 'net', d: -1 }));
+      const h2 = document.createElement('div'); const t2 = document.createElement('h3'); t2.textContent = 'Mais vendidas em ' + y; h2.append(t2, sortTable('tb-emp', 'sell' + y, cols, all.filter((r) => r.yr[y].net < 0).sort((a, b) => a.yr[y].net - b.yr[y].net).slice(0, 12), { k: 'net', d: 1 }));
+      wrap.append(h1, h2); box.append(wrap); return;
+    }
+    if (p.emp === 'apostas') {
+      const all = m.list.filter((r) => r.yr[y] && r.yr[y].nAny >= 1 && r.yr[y].nAny <= 3 && Number.isFinite(r.yr[y].holdersContrib));
+      const cols = [name, { k: 'nAny', t: 'Fundos com ≥1%', sv: (r) => r.yr[y].nAny, f: (r) => ({ t: String(r.yr[y].nAny) }) },
+        { k: 'hc', t: 'Contribuição p/ quem tinha', sv: (r) => r.yr[y].holdersContrib, f: (r) => ({ t: fPct2(r.yr[y].holdersContrib), cls: sc(r.yr[y].holdersContrib) }) },
+        { k: 'ret', t: 'Retorno ' + y, sv: (r) => r.yr[y].ret, f: (r) => pctCell(r.yr[y].ret, r.yr[y].ret > m.yIb.get(y)) }];
+      const wrap = document.createElement('div'); wrap.className = 'rx-two';
+      const h1 = document.createElement('div'); const t1 = document.createElement('h3'); t1.textContent = 'Melhores apostas de ' + y; h1.append(t1, sortTable('tb-emp', 'ap+' + y, cols, all.filter((r) => r.yr[y].holdersContrib > 0).sort((a, b) => b.yr[y].holdersContrib - a.yr[y].holdersContrib).slice(0, 10), { k: 'hc', d: -1 }));
+      const h2 = document.createElement('div'); const t2 = document.createElement('h3'); t2.textContent = 'Piores apostas de ' + y; h2.append(t2, sortTable('tb-emp', 'ap-' + y, cols, all.filter((r) => r.yr[y].holdersContrib < 0).sort((a, b) => a.yr[y].holdersContrib - b.yr[y].holdersContrib).slice(0, 10), { k: 'hc', d: 1 }));
+      wrap.append(h1, h2); box.append(wrap); return;
+    }
+    const rows = m.list.filter((r) => r.yr[y] && r.yr[y].cons > 0).sort((a, b) => b.yr[y].cons - a.yr[y].cons).slice(0, 20);
+    const cols = [name, { k: 'cons', t: 'Peso de consenso', sv: (r) => r.yr[y].cons, f: (r) => ({ t: fPct(r.yr[y].cons).replace('+', '') }) },
+      { k: 'nHold', t: 'Fundos com a ação (dez)', sv: (r) => r.yr[y].nHold, f: (r) => ({ t: r.yr[y].nHold + ' de ' + m.nFundos }) },
+      { k: 'rs', t: 'R$ mi nos fundos (dez)', sv: (r) => r.yr[y].rs, f: (r) => ({ t: fMi(r.yr[y].rs) }) },
+      { k: 'ret', t: 'Retorno ' + y, sv: (r) => r.yr[y].ret, f: (r) => pctCell(r.yr[y].ret, r.yr[y].ret > m.yIb.get(y)) },
+      { k: 'contrib', t: 'Contribuição média', sv: (r) => r.yr[y].contrib, f: (r) => ({ t: fPct2(r.yr[y].contrib), cls: sc(r.yr[y].contrib) }) }];
+    box.append(sortTable('tb-emp', 'ano' + y, cols, rows, { k: 'cons', d: -1 }, [[{ t: 'Ibovespa', left: true }, { t: '' }, { t: '' }, { t: '' }, { t: fPct(m.yIb.get(y)), cls: sc(m.yIb.get(y)) }, { t: '' }]]));
   });
 
   // summary table

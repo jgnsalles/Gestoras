@@ -32,7 +32,7 @@ html,body{margin:0;background:var(--color-bg);color:var(--color-fg);font-family:
 shim = '''
 window.dash = (() => {
   const data = {}; ['%s'].forEach((id) => { data[id] = d3.csvParse(document.getElementById('csv-' + id).textContent.trim()); });
-  const DEF = { fundo: '1', inicio: '2013-12', fim: '2018-12', acao: null, pg: 'resumo', aba: 'perf' };
+  const DEF = { fundo: '1', inicio: '2013-12', fim: '2018-12', acao: null, pg: 'resumo', aba: 'perf', emp: 'ano', anoEmp: null };
   let P = { ...DEF }; const draws = new Map(); const hooks = [];
   const runOne = (name) => { const fn = draws.get(name); if (!fn) return; document.querySelectorAll('[data-draw="' + name + '"]').forEach((el) => { try { fn(el); } catch (e) { console.error(name, e); } }); };
   const runAll = () => { hooks.forEach((f) => { try { f(); } catch (e) { console.error(e); } }); for (const n of draws.keys()) runOne(n); };
@@ -51,7 +51,7 @@ window.dash = (() => {
 ''' % "','".join(ids)
 html = f'''<!doctype html>
 <html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Raio-X Gestoras de Ações</title>
+<title>Navegando Dilma 2</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&family=Source+Serif+4:wght@400&display=swap">
 <style>{tokens}{style}</style></head>
 <body><div id="dash-root">
