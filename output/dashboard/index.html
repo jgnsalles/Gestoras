@@ -79,6 +79,24 @@
 .rx-emp td:first-child { white-space: normal; min-width: 10rem; }
 .rx-emp .rx-two { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr)); gap: var(--cds-gap-lg); }
 .rx-emp h3 { margin: var(--cds-gap-sm) 0 var(--cds-gap-xs); font-size: var(--cds-font-size-body); font-weight: var(--cds-font-weight-medium); }
+.rx-teses { display: grid; gap: var(--cds-gap-md); }
+.rx-tese { border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-md); display: grid; gap: var(--cds-gap-sm); background: var(--color-bg); min-width: 0; }
+.rx-tese-head { display: flex; flex-wrap: wrap; gap: var(--cds-gap-sm); align-items: baseline; justify-content: space-between; }
+.rx-tese-title { font-weight: 600; font-size: var(--cds-font-size-body); }
+.rx-tese-meta { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.rx-tese p { margin: 0; font-size: var(--cds-font-size-caption); line-height: 1.5; max-width: 90ch; }
+.rx-tese p b { font-weight: 600; }
+.rx-pill { display: inline-block; font-size: var(--cds-font-size-caption); padding: 1px 8px; border-radius: 999px; border: 1px solid var(--color-border-line); color: var(--color-fg-muted); }
+.rx-pill.ok { color: var(--color-ok); border-color: var(--color-ok); font-weight: 600; }
+.rx-pill.bad { color: var(--color-bad); border-color: var(--color-bad); font-weight: 600; }
+.rx-res { display: grid; grid-template-columns: repeat(auto-fit, minmax(7.5rem, 1fr)); gap: var(--cds-gap-sm); }
+.rx-res div { display: grid; gap: 1px; font-size: var(--cds-font-size-caption); }
+.rx-res span:first-child { color: var(--color-fg-muted); }
+.rx-res span:last-child { font-variant-numeric: tabular-nums; }
+.rx-cartas { margin: 0; padding-left: 1.1rem; display: grid; gap: 4px; font-size: var(--cds-font-size-caption); columns: 2 18rem; }
+.rx-cartas a, .rx-tese a, .rx-cg a { color: var(--color-fg); text-underline-offset: 3px; }
+.rx-cg tbody tr { cursor: pointer; }
+.rx-cg td { white-space: normal; }
 [data-dash-source-state=empty] { color: transparent; }
 [data-dash-source-state=refreshing] { opacity: .5; transition: opacity var(--cds-dur-slow); }
 .rx-fail { display: flex; align-items: center; justify-content: center; gap: 6px; min-height: inherit; color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
@@ -93,6 +111,7 @@
       <button type="button" role="tab" class="rx-tab" data-pg="resumo" aria-selected="true">Resumo</button>
       <button type="button" role="tab" class="rx-tab" data-pg="empresas" aria-selected="false">Empresas</button>
       <button type="button" role="tab" class="rx-tab" data-pg="fundo" aria-selected="false">Fundo a fundo</button>
+      <button type="button" role="tab" class="rx-tab" data-pg="cartas" aria-selected="false">Cartas</button>
     </nav>
     <div class="rx-controls">
       <label>Início (base)
@@ -140,6 +159,27 @@
     </article>
   </section>
 
+  <section class="rx-page" id="pg-cartas" data-pg="cartas" hidden>
+    <article class="rx-card" id="cartas-gestoras">
+      <h2>Cartas das gestoras</h2>
+      <p class="rx-note">Para cada gestora: onde ficam as cartas e quantas de 2014 a 2018 encontramos. Toque numa linha para ver as teses e as cartas da gestora.</p>
+      <div class="rx-tablebox" data-draw="tb-cartas-g" data-source="cartas_gestoras cartas_links cartas_teses"></div>
+    </article>
+    <article class="rx-card" id="cartas-detalhe">
+      <div class="rx-controls">
+        <label class="rx-fund">Gestora
+          <select id="rx-gestora" data-draw="sel-gestora" data-source="cartas_gestoras" aria-label="Gestora"></select>
+        </label>
+      </div>
+      <p class="rx-note" data-draw="cg-status" data-source="cartas_gestoras">—</p>
+      <h2>O que a gestora pensava, o que fez e o que aconteceu</h2>
+      <p class="rx-note">Resumo prático das cartas: a visão sobre a empresa, a decisão tomada e o retorno da ação (com dividendos) 1, 2 e 3 anos depois da carta, contra o Ibovespa no mesmo prazo. Em posições vendidas, saídas, reduções ou cautela, acertar é a ação ir pior que o índice. Em visões sobre a bolsa como um todo, vale o retorno do Ibovespa. Veredito pelo prazo de 2 anos (ou 1 ano, se não houver 2): acima de +5 p.p. é acerto, abaixo de −5 p.p. é erro.</p>
+      <div class="rx-teses" data-draw="cartas-teses" data-source="cartas_teses precos ibov acoes"></div>
+      <h2>Cartas de 2014 a 2018</h2>
+      <ul class="rx-cartas" data-draw="cartas-lista" data-source="cartas_links"></ul>
+    </article>
+  </section>
+
   <section class="rx-page" id="pg-fundo" data-pg="fundo" hidden>
   <div class="rx-head">
     <p class="rx-lead"><b data-draw="lead-fundo" data-source="fundos">—</b> rendeu <b data-draw="lead-ret" data-source="serie_mensal">—</b> contra <b data-draw="lead-ibov" data-source="serie_mensal">—</b> do Ibovespa entre <b data-draw="lead-ini">—</b> e <b data-draw="lead-fim">—</b>. A ação que mais contribuiu foi <b data-draw="lead-best" data-source="posicoes_1 posicoes_2">—</b>, e a que mais tirou foi <b data-draw="lead-worst" data-source="posicoes_1 posicoes_2">—</b>.</p>
@@ -147,6 +187,7 @@
       <label class="rx-fund">Fundo
         <select id="rx-fundo" data-draw="sel-fundo" data-source="fundos" aria-label="Fundo"></select>
       </label>
+      <button class="rx-btn rx-go-cartas" type="button">Ver cartas da gestora</button>
     </div>
   </div>
 
@@ -283,7 +324,7 @@
   };
   const ready = () => IDS.every((i) => dash.data(i).status === 'ok');
   const failed = () => IDS.some((i) => ['error', 'connect', 'declined', 'missing'].includes(dash.data(i).status));
-  const params = () => { const p = dash.params(); return { fundo: String(p.fundo ?? DEF.fundo), inicio: p.inicio || DEF.inicio, fim: p.fim || DEF.fim, acao: p.acao || null, pg: p.pg || DEF.pg, aba: p.aba || DEF.aba, emp: p.emp || DEF.emp, anoEmp: p.anoEmp || null, graf: p.graf || 'stack' }; };
+  const params = () => { const p = dash.params(); return { fundo: String(p.fundo ?? DEF.fundo), inicio: p.inicio || DEF.inicio, fim: p.fim || DEF.fim, acao: p.acao || null, pg: p.pg || DEF.pg, aba: p.aba || DEF.aba, emp: p.emp || DEF.emp, anoEmp: p.anoEmp || null, graf: p.graf || 'stack', gestora: p.gestora || null }; };
 
   let mcache = null;
   const model = () => {
@@ -371,6 +412,7 @@
   document.querySelectorAll('.rx-tab').forEach((b) => b.addEventListener('click', () => { dash.setParams({ pg: b.dataset.pg }); dash.setLink && dash.setLink('pg-' + b.dataset.pg); }));
   document.querySelectorAll('.rx-subtab[data-aba]').forEach((b) => b.addEventListener('click', () => dash.setParams({ aba: b.dataset.aba })));
   document.querySelectorAll('.rx-emptab').forEach((b) => b.addEventListener('click', () => dash.setParams({ emp: b.dataset.emp })));
+  document.querySelectorAll('.rx-go-cartas').forEach((b) => b.addEventListener('click', () => { dash.setParams({ pg: 'cartas', gestora: null }); document.getElementById('topo')?.scrollIntoView({ behavior: 'smooth' }); }));
   document.querySelectorAll('.rx-graftab').forEach((b) => b.addEventListener('click', () => dash.setParams({ graf: b.dataset.graf })));
   dash.onData(() => {
     const p = params();
@@ -507,6 +549,87 @@
     box.append(sortTable('tb-emp', 'ano' + y, cols, rows, { k: 'cons', d: -1 }, [[{ t: 'Ibovespa', left: true }, { t: '' }, { t: '' }, { t: '' }, { t: fPct(m.yIb.get(y)), cls: sc(m.yIb.get(y)) }, { t: '' }]]));
   });
 
+  // ---- Cartas ----
+  const C_IDS = ['cartas_gestoras', 'cartas_links', 'cartas_teses'];
+  const cReady = () => C_IDS.every((i) => dash.data(i).status === 'ok');
+  const safeUrl = (u) => (/^https:\/\//.test(u || '') ? u : null);
+  const link = (txt, url) => { const u = safeUrl(url); if (!u) { const s = document.createElement('span'); s.textContent = txt; return s; } const a = document.createElement('a'); a.href = u; a.target = '_blank'; a.rel = 'noopener'; a.textContent = txt; return a; };
+  const curGestora = () => {
+    const g = dash.data('cartas_gestoras').data || []; const p = dash.params();
+    if (p.gestora && g.some((r) => r.gestora === p.gestora)) return p.gestora;
+    const f = String(p.fundo ?? DEF.fundo); const m = g.find((r) => String(r.fundos || '').split(' ').includes(f)); return m ? m.gestora : g[0]?.gestora;
+  };
+  dash.draw('tb-cartas-g', (box) => {
+    box.replaceChildren(); if (!cReady()) return;
+    const g = dash.data('cartas_gestoras').data, L = dash.data('cartas_links').data, T = dash.data('cartas_teses').data; const cur = curGestora();
+    const table = document.createElement('table'); table.className = 'rx-table rx-cg';
+    const hr = table.createTHead().insertRow(); ['Gestora', 'Cartas 2014–18', 'Teses resumidas', 'Onde estão as cartas'].forEach((t, i) => { const th = document.createElement('th'); th.textContent = t; if (i === 0 || i === 3) th.style.textAlign = 'left'; hr.append(th); });
+    const tb = table.createTBody();
+    g.slice().sort((a, b) => (T.filter((t) => t.gestora === b.gestora).length - T.filter((t) => t.gestora === a.gestora).length) || d3.ascending(a.gestora, b.gestora)).forEach((r) => {
+      const tr = tb.insertRow(); tr.dataset.key = r.gestora; if (r.gestora === cur) tr.className = 'sel';
+      const c0 = tr.insertCell(); c0.textContent = r.gestora; c0.style.fontWeight = '600';
+      tr.insertCell().textContent = String(L.filter((l) => l.gestora === r.gestora && l.data >= '2014-01' && l.data <= '2018-12').length || (L.some((l) => l.gestora === r.gestora) ? 's/ data' : '0'));
+      tr.insertCell().textContent = String(T.filter((t) => t.gestora === r.gestora).length);
+      const c3 = tr.insertCell(); c3.style.textAlign = 'left'; c3.append(link(r.status, r.arquivo));
+    });
+    tb.onclick = (ev) => { if (ev.target.closest('a')) return; const tr = ev.target.closest('tr[data-key]'); if (tr) { dash.setParams({ gestora: tr.dataset.key }); document.getElementById('cartas-detalhe')?.scrollIntoView({ behavior: 'smooth', block: 'start' }); } };
+    box.append(table);
+  });
+  dash.draw('sel-gestora', (sel) => {
+    if (!cReady()) { sel.replaceChildren(); return; }
+    const g = dash.data('cartas_gestoras').data; fill(sel, g.map((r) => [r.gestora, r.gestora]), curGestora());
+    sel.onchange = () => dash.setParams({ gestora: sel.value });
+  });
+  dash.draw('cg-status', (el) => {
+    if (!cReady()) { el.textContent = '—'; return; }
+    const r = dash.data('cartas_gestoras').data.find((x) => x.gestora === curGestora()); el.replaceChildren();
+    if (!r) { el.textContent = '—'; return; }
+    const nomes = String(r.fundos || '').split(' ').map((id) => (dash.data('fundos').data || []).find((f) => String(f.id) === id)?.fundo).filter(Boolean);
+    el.append(document.createTextNode((nomes.length ? 'Fundos na lista: ' + nomes.join(', ') + '. ' : '') + r.status + ' '));
+    if (safeUrl(r.arquivo)) el.append(link('Abrir arquivo de cartas', r.arquivo));
+  });
+  const fwd = (base, n, rf, back) => {
+    const out = []; let y = +base.slice(0, 4), m = +base.slice(5, 7);
+    const step = (k) => { let mm = m + k, yy = y; while (mm > 12) { mm -= 12; yy++; } while (mm < 1) { mm += 12; yy--; } return yy + '-' + String(mm).padStart(2, '0'); };
+    if (back) { for (let k = -n + 1; k <= 0; k++) out.push(step(k)); } else { for (let k = 1; k <= n; k++) out.push(step(k)); }
+    let g = 1, c = 0; out.forEach((ym) => { const x = rf(ym); if (Number.isFinite(x)) { g *= 1 + x; c++; } }); return c >= n * 0.75 ? g - 1 : NaN;
+  };
+  dash.draw('cartas-teses', (box) => {
+    box.replaceChildren(); if (!cReady() || !ready()) return;
+    const C = build(); const g = curGestora();
+    const ibp = new Map((dash.data('ibov').data || []).map((r) => [r.ym, +r.pontos]));
+    const ibr = (ym) => { const [yy, mm] = ym.split('-').map(Number); const pv = (mm === 1 ? (yy - 1) + '-12' : yy + '-' + String(mm - 1).padStart(2, '0')); const a = ibp.get(ym), b = ibp.get(pv); return a && b ? a / b - 1 : NaN; };
+    const T = dash.data('cartas_teses').data.filter((t) => t.gestora === g).sort((a, b) => d3.ascending(a.base, b.base));
+    if (!T.length) { const p = document.createElement('p'); p.className = 'rx-note'; p.textContent = 'Sem teses resumidas para esta gestora: não encontramos cartas públicas de 2014 a 2018.'; box.append(p); return; }
+    const inv = (pos) => ['vendida', 'saída', 'reduziu', 'cautela'].includes(pos);
+    T.forEach((t) => {
+      const rm = C.ret.get(t.tk) || new Map(); const rf = (ym) => rm.get(ym); const back = t.janela === 'antes';
+      const hz = back ? [12] : [12, 24, 36];
+      const res = hz.map((n) => { const a = fwd(t.base, n, rf, back), b = fwd(t.base, n, ibr, back); return { n, a, b, d: a - b }; });
+      const key = back ? res[0] : (Number.isFinite(res[1].d) ? res[1] : res[0]);
+      const mkt = t.posicao === 'mercado'; let v = 'Neutro', vc = ''; if (Number.isFinite(key.d)) { const s = mkt ? key.a : inv(t.posicao) ? -key.d : key.d; if (s > 0.05) { v = 'Acertou'; vc = 'ok'; } else if (s < -0.05) { v = 'Errou'; vc = 'bad'; } } else v = 'Sem dado';
+      if (back) { v = key.d < -0.05 ? 'Erro reconhecido' : v; vc = key.d < -0.05 ? 'bad' : vc; }
+      const card = document.createElement('div'); card.className = 'rx-tese';
+      const head = document.createElement('div'); head.className = 'rx-tese-head';
+      const tt = document.createElement('div'); const t1 = document.createElement('div'); t1.className = 'rx-tese-title'; t1.textContent = t.tk + (C.nome.get(t.tk) ? ' · ' + C.nome.get(t.tk) : '');
+      const t2 = document.createElement('div'); t2.className = 'rx-tese-meta'; t2.append(document.createTextNode(ymLabel(t.base) + ' · ' + t.posicao + ' · '), link(t.carta, t.url)); tt.append(t1, t2);
+      const pill = document.createElement('span'); pill.className = 'rx-pill ' + vc; pill.textContent = v; head.append(tt, pill);
+      const p1 = document.createElement('p'); const b1 = document.createElement('b'); b1.textContent = 'O que pensava: '; p1.append(b1, document.createTextNode(t.visao));
+      const p2 = document.createElement('p'); const b2 = document.createElement('b'); b2.textContent = 'O que fez: '; p2.append(b2, document.createTextNode(t.acao));
+      card.append(head, p1, p2);
+      if (t.nota) { const p3 = document.createElement('p'); const b3 = document.createElement('b'); b3.textContent = 'O que aconteceu: '; p3.append(b3, document.createTextNode(t.nota)); card.append(p3); }
+      const rr = document.createElement('div'); rr.className = 'rx-res';
+      res.forEach((r) => { const d = document.createElement('div'); const a = document.createElement('span'); a.textContent = back ? '12 meses antes da carta' : r.n / 12 + (r.n === 12 ? ' ano depois' : ' anos depois'); const b = document.createElement('span');
+        b.textContent = !Number.isFinite(r.a) ? 'sem dado' : mkt ? 'Ibovespa ' + fPct(r.a) : fPct(r.a) + ' vs Ibov ' + fPct(r.b) + ' (' + fPP(r.d * 100) + ' p.p.)'; if (Number.isFinite(r.d)) b.className = sc(mkt ? r.a : inv(t.posicao) ? -r.d : r.d); d.append(a, b); rr.append(d); });
+      card.append(rr); box.append(card);
+    });
+  });
+  dash.draw('cartas-lista', (ul) => {
+    ul.replaceChildren(); if (!cReady()) return; const g = curGestora();
+    const L = dash.data('cartas_links').data.filter((l) => l.gestora === g).sort((a, b) => d3.ascending(a.data || 'z', b.data || 'z'));
+    if (!L.length) { const li = document.createElement('li'); li.textContent = 'Nenhuma carta de 2014 a 2018 encontrada publicamente.'; ul.append(li); return; }
+    L.forEach((l) => { const li = document.createElement('li'); li.append(link(l.carta, l.url)); if (l.data) li.append(document.createTextNode(' · ' + ymLabel(l.data))); ul.append(li); });
+  });
   // summary table
   let sumSort = { perf: { k: 'total', d: -1 }, pl: { k: 'total', d: -1 } };
   dash.draw('tb-sum', (box) => {

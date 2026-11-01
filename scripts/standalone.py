@@ -5,7 +5,7 @@ style = re.search(r'<style>(.*?)</style>', page, re.S).group(1)
 script = re.search(r'<script>(.*?)</script>', page, re.S).group(1)
 body = re.sub(r'<style>.*?</style>|<script>.*?</script>', '', page, flags=re.S).strip()
 d3 = open(S+'/lib/d3.min.js').read()
-ids = ['fundos','serie_mensal','posicoes_1','posicoes_2','precos','acoes','ibov']
+ids = ['fundos','serie_mensal','posicoes_1','posicoes_2','precos','acoes','ibov','cartas_gestoras','cartas_links','cartas_teses']
 data = '\n'.join(f'<script type="text/csv" id="csv-{i}">\n{open(S+"/out/"+i+".csv").read()}</script>' for i in ids)
 tokens = '''
 :root{
@@ -32,7 +32,7 @@ html,body{margin:0;background:var(--color-bg);color:var(--color-fg);font-family:
 shim = '''
 window.dash = (() => {
   const data = {}; ['%s'].forEach((id) => { data[id] = d3.csvParse(document.getElementById('csv-' + id).textContent.trim()); });
-  const DEF = { fundo: '1', inicio: '2013-12', fim: '2018-12', acao: null, pg: 'resumo', aba: 'perf', emp: 'ano', anoEmp: null, graf: 'stack' };
+  const DEF = { fundo: '1', inicio: '2013-12', fim: '2018-12', acao: null, pg: 'resumo', aba: 'perf', emp: 'ano', anoEmp: null, graf: 'stack', gestora: null };
   let P = { ...DEF }; const draws = new Map(); const hooks = [];
   const runOne = (name) => { const fn = draws.get(name); if (!fn) return; document.querySelectorAll('[data-draw="' + name + '"]').forEach((el) => { try { fn(el); } catch (e) { console.error(name, e); } }); };
   const runAll = () => { hooks.forEach((f) => { try { f(); } catch (e) { console.error(e); } }); for (const n of draws.keys()) runOne(n); };
