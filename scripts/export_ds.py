@@ -1,6 +1,9 @@
 import pandas as pd, numpy as np, json, sys, re
 W,O=sys.argv[1],sys.argv[2]
-ST=json.load(open(W+'/members.json')); S=pd.read_pickle(W+'/serie.pkl'); P=pd.read_pickle(W+'/pos.pkl')
+ST=json.load(open(W+'/members.json'))
+# 2º filtro: fora fundos concentrados (maior posição > 30% da carteira de ações em média ou em mais de 1/3 dos meses, 2014-2018)
+C=pd.read_csv(W+'/concentr.csv',index_col='id'); EXCL=set(C[(C.top1s>0.30)|(C.meses_top1_30>1/3)].index)
+print('excluidos',sorted(EXCL)); ST=[s for s in ST if s['id'] not in EXCL]; S=pd.read_pickle(W+'/serie.pkl'); P=pd.read_pickle(W+'/pos.pkl'); S=S[~S.id.isin(EXCL)]; P=P[~P.id.isin(EXCL)]
 ret=pd.read_pickle(W+'/ret.pkl'); b3=pd.read_pickle(W+'/b3_monthly.pkl'); names=pd.read_pickle(W+'/names.pkl')
 PAIRS=pd.read_pickle(W+'/pairs.pkl').set_index('r18')
 def sn(n):

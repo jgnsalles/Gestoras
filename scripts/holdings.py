@@ -15,12 +15,15 @@ cot=cot.groupby(['CNPJ_FUNDO','ym','CNPJ_FUNDO_COTA']).v.sum().reset_index()
 cot['w']=cot.v/[pl.get((a,b),np.nan) for a,b in zip(cot.CNPJ_FUNDO,cot.ym)]
 months=sorted(pos.ym.unique())
 rows=[]; masters=[]
+ROOTS={s['id']:{s['r14'],s['r18']} for s in ST}
+ALLR=set().union(*ROOTS.values())
 for s in ST:
     mem=set(s['members'])
     for m in months:
         c=cot[(cot.ym==m)&(cot.w>=0.5)]
         cand=set(mem)
         for _ in range(3): cand|=set(c[c.CNPJ_FUNDO.isin(cand)].CNPJ_FUNDO_COTA)
+        cand-=(ALLR-ROOTS[s['id']])
         ev={f:eqv.get((f,m),0) for f in cand}
         best=max(ev,key=ev.get) if ev else None
         if not best or ev[best]<=0: continue
