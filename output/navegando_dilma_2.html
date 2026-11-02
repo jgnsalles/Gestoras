@@ -104,6 +104,10 @@ html,body{margin:0;background:var(--color-bg);color:var(--color-fg);font-family:
 .rx-emp .rx-two { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr)); gap: var(--cds-gap-lg); }
 .rx-emp h3 { margin: var(--cds-gap-sm) 0 var(--cds-gap-xs); font-size: var(--cds-font-size-body); font-weight: var(--cds-font-weight-medium); }
 .rx-teses { display: grid; gap: var(--cds-gap-md); }
+.rx-grp { margin: var(--cds-gap-md) 0 0; font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); }
+.rx-grp.ok { color: var(--color-ok); }
+.rx-grp.bad { color: var(--color-bad); }
+.rx-teses .rx-note + .rx-tese { margin-top: 0; }
 .rx-tese { border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-md); display: grid; gap: var(--cds-gap-sm); background: var(--color-bg); min-width: 0; }
 .rx-tese-head { display: flex; flex-wrap: wrap; gap: var(--cds-gap-sm); align-items: baseline; justify-content: space-between; }
 .rx-tese-title { font-weight: 600; font-size: var(--cds-font-size-body); }
@@ -197,7 +201,7 @@ html,body{margin:0;background:var(--color-bg);color:var(--color-fg);font-family:
       </div>
       <p class="rx-note" data-draw="cg-status" data-source="cartas_gestoras">—</p>
       <h2>O que a gestora pensava, o que fez e o que aconteceu</h2>
-      <p class="rx-note">Resumo prático das cartas: a visão sobre a empresa, a decisão tomada e o retorno da ação (com dividendos) 1, 2 e 3 anos depois da carta, contra o Ibovespa no mesmo prazo. Em posições vendidas, saídas, reduções ou cautela, acertar é a ação ir pior que o índice. Em visões sobre a bolsa como um todo, vale o retorno do Ibovespa. Veredito pelo prazo de 2 anos (ou 1 ano, se não houver 2): acima de +5 p.p. é acerto, abaixo de −5 p.p. é erro.</p>
+      <p class="rx-note">Resumo prático das cartas: a visão sobre a empresa, a decisão tomada e o retorno da ação (com dividendos) 1, 2 e 3 anos depois da carta, contra o Ibovespa no mesmo prazo. Em posições vendidas, saídas, reduções ou cautela, acertar é a ação ir pior que o índice. Em visões sobre a bolsa como um todo, vale o retorno do Ibovespa. Veredito pelo prazo de 2 anos (ou 1 ano, se não houver 2): acima de +5 p.p. é acerto, abaixo de −5 p.p. é erro. As teses estão separadas em acertos e erros, long e short.</p>
       <div class="rx-teses" data-draw="cartas-teses" data-source="cartas_teses precos ibov acoes"></div>
       <h2>Cartas de 2014 a 2018</h2>
       <ul class="rx-cartas" data-draw="cartas-lista" data-source="cartas_links"></ul>
@@ -182113,6 +182117,7 @@ window.dash = (() => {
     const T = dash.data('cartas_teses').data.filter((t) => t.gestora === g).sort((a, b) => d3.ascending(a.base, b.base));
     if (!T.length) { const p = document.createElement('p'); p.className = 'rx-note'; p.textContent = 'Sem teses resumidas para esta gestora: não encontramos cartas públicas de 2014 a 2018.'; box.append(p); return; }
     const inv = (pos) => ['vendida', 'saída', 'reduziu', 'cautela'].includes(pos);
+    const groups = [];
     T.forEach((t) => {
       const rm = C.ret.get(t.tk) || new Map(); const rf = (ym) => rm.get(ym); const back = t.janela === 'antes';
       const hz = back ? [12] : [12, 24, 36];
@@ -182132,7 +182137,17 @@ window.dash = (() => {
       const rr = document.createElement('div'); rr.className = 'rx-res';
       res.forEach((r) => { const d = document.createElement('div'); const a = document.createElement('span'); a.textContent = back ? '12 meses antes da carta' : r.n / 12 + (r.n === 12 ? ' ano depois' : ' anos depois'); const b = document.createElement('span');
         b.textContent = !Number.isFinite(r.a) ? 'sem dado' : mkt ? 'Ibovespa ' + fPct(r.a) : fPct(r.a) + ' vs Ibov ' + fPct(r.b) + ' (' + fPP(r.d * 100) + ' p.p.)'; if (Number.isFinite(r.d)) b.className = sc(mkt ? r.a : inv(t.posicao) ? -r.d : r.d); d.append(a, b); rr.append(d); });
-      card.append(rr); box.append(card);
+      card.append(rr);
+      const lado = inv(t.posicao) ? 'short' : 'long';
+      const grp = (vc === 'ok' ? 'Acertos ' : vc === 'bad' ? 'Erros ' : 'Neutros') + (vc ? lado : '');
+      groups.push({ grp, card });
+    });
+    const ORDER = [['Acertos long', 'Comprou ou recomendou e a ação foi melhor que o Ibovespa.'], ['Acertos short', 'Vendeu, saiu, reduziu ou evitou e a ação foi pior que o Ibovespa.'], ['Erros long', 'Comprou ou recomendou e a ação foi pior que o Ibovespa.'], ['Erros short', 'Vendeu, saiu, reduziu ou evitou e a ação foi melhor que o Ibovespa.'], ['Neutros', 'Diferença menor que 5 p.p. ou sem dado suficiente.']];
+    ORDER.forEach(([name, desc]) => {
+      const items = groups.filter((x) => x.grp === name); if (!items.length) return;
+      const h = document.createElement('h3'); h.className = 'rx-grp ' + (name.startsWith('Acertos') ? 'ok' : name.startsWith('Erros') ? 'bad' : ''); h.textContent = name + ' (' + items.length + ')';
+      const d = document.createElement('p'); d.className = 'rx-note'; d.textContent = desc;
+      box.append(h, d); items.forEach((x) => box.append(x.card));
     });
   });
   dash.draw('cartas-lista', (ul) => {
