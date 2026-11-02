@@ -101,6 +101,12 @@
 .rx-cartas a, .rx-tese a, .rx-cg a { color: var(--color-fg); text-underline-offset: 3px; }
 .rx-cg tbody tr { cursor: pointer; }
 .rx-cg td { white-space: normal; }
+.rx-cmp-multi { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); gap: var(--cds-gap-md); }
+.rx-mini h3 { margin: 0 0 4px; font-size: var(--cds-font-size-body); font-weight: 600; display: flex; align-items: center; gap: 6px; }
+.rx-mini h3 i { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+.rx-mini .rx-chart { min-height: 240px; }
+.rx-chip.rm::after { content: " ×"; }
+.rx-heat td { text-align: right; }
 [data-dash-source-state=empty] { color: transparent; }
 [data-dash-source-state=refreshing] { opacity: .5; transition: opacity var(--cds-dur-slow); }
 .rx-fail { display: flex; align-items: center; justify-content: center; gap: 6px; min-height: inherit; color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
@@ -115,6 +121,7 @@
       <button type="button" role="tab" class="rx-tab" data-pg="resumo" aria-selected="true">Resumo</button>
       <button type="button" role="tab" class="rx-tab" data-pg="empresas" aria-selected="false">Empresas</button>
       <button type="button" role="tab" class="rx-tab" data-pg="fundo" aria-selected="false">Fundo a fundo</button>
+      <button type="button" role="tab" class="rx-tab" data-pg="comparar" aria-selected="false">Comparar</button>
       <button type="button" role="tab" class="rx-tab" data-pg="cartas" aria-selected="false">Cartas</button>
     </nav>
     <div class="rx-controls">
@@ -141,6 +148,11 @@
       <p class="rx-note" data-aba-note="pl" hidden>Patrimônio líquido do master no fim de cada ano do período (R$ milhões). A coluna Total mostra a variação do PL entre o início e o fim do período. A soma dos fundos e o Ibovespa (em pontos) ficam sempre nas últimas linhas.</p>
       <div class="rx-tablebox rx-sumbox" data-draw="tb-sum" data-source="fundos serie_mensal ibov"></div>
     </article>
+    <article class="rx-card" id="encerrados">
+      <h2>Fundos que ficaram pelo caminho</h2>
+      <p class="rx-note">Viés de sobrevivência: a lista acima só tem fundos que chegaram a 2018. Abaixo, fundos de gestoras independentes, relevantes em 2014, que foram encerrados ou passaram para outra gestora antes do fim de 2018. Retorno da cota do master de dez/2013 até o último mês sob a gestora original, contra o Ibovespa no mesmo período (não segue o filtro de período acima).</p>
+      <div class="rx-tablebox" data-draw="tb-enc" data-source="encerrados"></div>
+    </article>
   </section>
 
   <section class="rx-page" id="pg-empresas" data-pg="empresas" hidden>
@@ -152,12 +164,14 @@
           <button type="button" role="tab" class="rx-subtab rx-emptab" data-emp="periodo" aria-selected="false">Período inteiro</button>
           <button type="button" role="tab" class="rx-subtab rx-emptab" data-emp="fluxo" aria-selected="false">Compras e vendas</button>
           <button type="button" role="tab" class="rx-subtab rx-emptab" data-emp="apostas" aria-selected="false">Apostas fora do consenso</button>
+          <button type="button" role="tab" class="rx-subtab rx-emptab" data-emp="setores" aria-selected="false">Setores</button>
         </nav>
       </div>
       <p class="rx-note" data-emp-note="ano">As 20 empresas com maior peso médio nos fundos no ano escolhido. Peso de consenso = média do peso da empresa em todos os fundos (zero para quem não tinha), na média dos meses do ano. Retorno com dividendos; <b>negrito</b> quando bateu o Ibovespa. Contribuição = quanto a empresa somou, em média, ao retorno dos fundos naquele ano.</p>
       <p class="rx-note" data-emp-note="periodo" hidden>As 25 empresas com maior peso de consenso no período. Cada coluna de ano mostra o peso de consenso (quanto mais escuro, maior). Retorno e contribuição são do período todo.</p>
       <p class="rx-note" data-emp-note="fluxo" hidden>Onde o dinheiro foi no ano escolhido: soma das compras menos vendas de todos os fundos, em R$ milhões. Fundos comprador/vendedor líquido contam quantos fundos terminaram o ano comprando ou vendendo a ação no saldo. A última coluna mostra o retorno da ação no ano seguinte, para ver se o movimento acertou.</p>
       <p class="rx-note" data-emp-note="apostas" hidden>Empresas que poucos fundos tinham (no máximo 3 no ano) mas que mais somaram ou tiraram de quem tinha. Mostra os acertos e erros individuais, fora do consenso.</p>
+      <p class="rx-note" data-emp-note="setores" hidden>Performance setorial dos gestores. Peso de consenso = média do peso do setor nos fundos. Retorno do setor = retorno da carteira setorial "média" dos gestores (empresas ponderadas pelo peso de consenso do mês anterior), com dividendos; <b>negrito</b> quando bateu o Ibovespa. Contribuição = quanto o setor somou, em média, ao retorno dos fundos. Classificação setorial da B3.</p>
       <div class="rx-chips" data-draw="emp-anos" data-source="serie_mensal"></div>
       <div class="rx-tablebox rx-sumbox" data-draw="tb-emp" data-source="posicoes_1 posicoes_2 serie_mensal precos acoes"></div>
     </article>
@@ -181,6 +195,45 @@
       <div class="rx-teses" data-draw="cartas-teses" data-source="cartas_teses precos ibov acoes"></div>
       <h2>Cartas de 2014 a 2018</h2>
       <ul class="rx-cartas" data-draw="cartas-lista" data-source="cartas_links"></ul>
+    </article>
+  </section>
+
+  <section class="rx-page" id="pg-comparar" data-pg="comparar" hidden>
+    <article class="rx-card" id="cmp-escolha">
+      <h2>Comparar fundos</h2>
+      <p class="rx-note">Escolha de 2 a 4 fundos. Tudo segue o período escolhido no topo.</p>
+      <div class="rx-controls">
+        <label class="rx-fund">Adicionar fundo
+          <select id="rx-cmp-add" data-draw="cmp-add" data-source="fundos" aria-label="Adicionar fundo"></select>
+        </label>
+      </div>
+      <div class="rx-chips" data-draw="cmp-chips" data-source="fundos"></div>
+    </article>
+    <div class="rx-grid">
+      <article class="rx-card" id="cmp-perf-card">
+        <h2>Performance acumulada</h2>
+        <p class="rx-note">Retorno da cota de cada fundo no período, com o Ibovespa tracejado.</p>
+        <div class="rx-legend" data-draw="cmp-legend" data-source="fundos"></div>
+        <div class="rx-chart" data-draw="cmp-perf" data-source="serie_mensal"></div>
+      </article>
+      <article class="rx-card" id="cmp-anos-card">
+        <h2>Ano a ano</h2>
+        <p class="rx-note">Verde positivo, vermelho negativo, <b>negrito</b> quando bateu o Ibovespa no ano.</p>
+        <div class="rx-tablebox" data-draw="cmp-anos" data-source="serie_mensal"></div>
+      </article>
+    </div>
+    <article class="rx-card" id="cmp-fluxo-card">
+      <h2>Captação × performance</h2>
+      <p class="rx-note">Para cada fundo: retorno de 12 meses menos o Ibovespa (linha) e captação líquida mensal em R$ milhões (barras), na mesma escala para todos.</p>
+      <div class="rx-cmp-multi" data-draw="cmp-flows" data-source="serie_mensal"></div>
+    </article>
+    <article class="rx-card" id="cmp-attr-card">
+      <h2>Attribution por setor</h2>
+      <p class="rx-note">Quanto cada setor somou ao retorno de cada fundo no período (pontos percentuais, encadeado). Verde soma, vermelho tira; quanto mais forte a cor, maior o efeito.</p>
+      <div class="rx-tablebox" data-draw="cmp-setor" data-source="posicoes_1 posicoes_2 acoes"></div>
+      <h2>Attribution por empresa</h2>
+      <p class="rx-note">As empresas que mais somaram e mais tiraram em cada fundo, lado a lado. Célula vazia: o fundo não teve a empresa ou o efeito foi desprezível.</p>
+      <div class="rx-tablebox" data-draw="cmp-emp" data-source="posicoes_1 posicoes_2 acoes"></div>
     </article>
   </section>
 
@@ -222,6 +275,17 @@
       <div class="rx-chart tall" data-draw="ch-stack" data-source="posicoes_1 posicoes_2 serie_mensal acoes"></div>
     </article>
   </div>
+
+  <article class="rx-card" id="captacao">
+    <h2>Captação × performance</h2>
+    <p class="rx-note">Linha (em cima): retorno do fundo nos últimos 12 meses menos o Ibovespa, em pontos percentuais (eixo em p.p.). Barras (embaixo): captação líquida do mês em R$ milhões (aportes menos resgates, estimada pela variação do PL do master descontado o retorno). Mostra se o dinheiro chegou antes ou depois da boa fase.</p>
+    <div class="rx-split">
+      <div class="rx-kv"><span>Captação líquida no período</span><span data-draw="fl-tot" data-source="serie_mensal">—</span></div>
+      <div class="rx-kv"><span>Maior captação em 12 meses</span><span data-draw="fl-max" data-source="serie_mensal">—</span></div>
+      <div class="rx-kv"><span>Maior resgate em 12 meses</span><span data-draw="fl-min" data-source="serie_mensal">—</span></div>
+    </div>
+    <div class="rx-chart tall" data-draw="ch-flow" data-source="serie_mensal"></div>
+  </article>
 
   <h2 class="rx-sec" id="posicoes">Posições e attribution por ação</h2>
   <div class="rx-grid">
@@ -292,8 +356,9 @@
       <p>Filtro de concentração: ficaram fora os fundos que tiveram uma única ação acima de 50% do PL em algum mês entre 2014 e 2018 (Neo Future, Tarpon e Safari). Fundos concentrados abaixo disso, como a Guepardo, continuam.</p>
       <p>No máximo dois fundos por gestora: saíram JGP Equity (multimercado, para ficar com os fundos de ações da JGP) e Oceana Valor (o menor dos três da Oceana em 2018).</p>
       <p>Retorno do fundo: variação da cota do master no Informe Diário da CVM, de fim de mês a fim de mês. Fica acima do retorno dos feeders porque o master não cobra a taxa de administração e performance cobrada no feeder.</p>
-      <p>Retorno das ações: retorno total com dividendos do Yahoo Finance quando o ticker ainda existe, e cotação de fechamento da B3 (COTAHIST, ajustada por desdobramentos) para ações que saíram da bolsa ou mudaram de ticker. Nessas, o dividendo não entra; meses com saltos de grupamento, desdobramento ou troca de ticker foram corrigidos pelo fator mais próximo, e os que não batem com nenhum fator ficam sem retorno.</p>
+      <p>Retorno das ações: retorno total com dividendos do Yahoo Finance quando o ticker ainda existe ou tem sucessor com o mesmo histórico (por exemplo Kroton→Cogna, BM&amp;F→B3, Estácio→Yduqs, Embraer, CCR). Para ações que saíram da bolsa, cotação de fechamento da B3 (COTAHIST) mais os proventos (dividendos e JCP) do Fundamentus, somados no mês da data-com como dividend yield; ON, PN e units da mesma empresa aparecem juntas. Sem dados de proventos ficam cerca de 6% do peso das carteiras, em geral empresas que pagam pouco; meses com saltos de grupamento, desdobramento ou troca de ticker foram corrigidos pelo fator mais próximo, e os que não batem com nenhum fator ficam sem retorno.</p>
       <p>Attribution: contribuição = peso no fim do mês anterior × retorno da ação no mês, encadeada pelo crescimento da cota para somar ao retorno do período. O resto (diferença entre o retorno do fundo e a soma das ações) vem de caixa, derivativos, ativos no exterior, operações dentro do mês e custos.</p>
+      <p>Captação líquida: PL do master no mês menos PL do mês anterior corrigido pelo retorno da cota; meses em que o master muda ficam de fora. Setores: classificação setorial da B3 (2022), completada à mão para empresas que saíram da bolsa.</p>
       <p>Compras e vendas: variação mensal da quantidade de ações, já corrigida por desdobramentos e grupamentos, vezes o preço do mês, em % do PL. Como a CVM só mostra a carteira no fim do mês, operações compradas e vendidas no mesmo mês não aparecem.</p>
     </div>
   </article>
@@ -318,25 +383,26 @@
     if (cache && cache.src.every((x, k) => x === d[IDS[k]])) return cache;
     const num = (x) => (x === '' || x == null ? NaN : +x);
     const fundos = d.fundos.map((r) => ({ ...r, id: String(r.id) }));
-    const serie = d3.group(d.serie_mensal.map((r) => ({ id: String(r.id), ym: r.ym, PL: num(r.PL_mi), rf: num(r.ret_fundo), ri: num(r.ret_ibov), el: num(r.exp_long), es: num(r.exp_short), n: num(r.n_acoes), rc: num(r.ret_acoes_contrib) })), (r) => r.id);
+    const serie = d3.group(d.serie_mensal.map((r) => ({ id: String(r.id), ym: r.ym, PL: num(r.PL_mi), rf: num(r.ret_fundo), ri: num(r.ret_ibov), el: num(r.exp_long), es: num(r.exp_short), n: num(r.n_acoes), rc: num(r.ret_acoes_contrib), fl: num(r.fluxo_mi) })), (r) => r.id);
     const pos = d3.group([...d.posicoes_1, ...d.posicoes_2].map((r) => ({ id: String(r.id), ym: r.ym, tk: r.tk, w: num(r.peso), c: num(r.contrib), t: num(r.compra_venda_pct_pl) })), (r) => r.id);
     const precos = d3.group(d.precos.map((r) => ({ ym: r.ym, tk: r.tk, r: num(r.ret_total) })), (r) => r.tk);
     const ret = new Map([...precos].map(([tk, rows]) => [tk, new Map(rows.map((r) => [r.ym, r.r]))]));
     const nome = new Map(d.acoes.map((r) => [r.tk, r.empresa]));
-    cache = { src: IDS.map((i) => d[i]), fundos, serie, pos, ret, nome };
+    const setor = new Map(d.acoes.map((r) => [r.tk, r.setor || 'Outros']));
+    cache = { src: IDS.map((i) => d[i]), fundos, serie, pos, ret, nome, setor };
     return cache;
   };
   const ready = () => IDS.every((i) => dash.data(i).status === 'ok');
   const failed = () => IDS.some((i) => ['error', 'connect', 'declined', 'missing'].includes(dash.data(i).status));
-  const params = () => { const p = dash.params(); return { fundo: String(p.fundo ?? DEF.fundo), inicio: p.inicio || DEF.inicio, fim: p.fim || DEF.fim, acao: p.acao || null, pg: p.pg || DEF.pg, aba: p.aba || DEF.aba, emp: p.emp || DEF.emp, anoEmp: p.anoEmp || null, graf: p.graf || 'stack', gestora: p.gestora || null }; };
+  const params = () => { const p = dash.params(); return { fundo: String(p.fundo ?? DEF.fundo), inicio: p.inicio || DEF.inicio, fim: p.fim || DEF.fim, acao: p.acao || null, pg: p.pg || DEF.pg, aba: p.aba || DEF.aba, emp: p.emp || DEF.emp, anoEmp: p.anoEmp || null, graf: p.graf || 'stack', gestora: p.gestora || null, cmp: p.cmp }; };
 
-  let mcache = null;
-  const model = () => {
+  const mcache = new Map();
+  const model = (fid) => {
     if (!ready()) return null;
-    const C = build(); const p = params();
-    const mk = [C.src, p.fundo, p.inicio, p.fim].join('§');
-    if (mcache && mcache.k === mk) return mcache.m;
-    const fundo = C.fundos.find((f) => f.id === p.fundo) || C.fundos[0];
+    const C = build(); const p = params(); const want = String(fid ?? p.fundo);
+    const mk = [p.inicio, p.fim].join('§');
+    const hit = mcache.get(want); if (hit && hit.k === mk && hit.src === C.src) return hit.m;
+    const fundo = C.fundos.find((f) => f.id === want) || C.fundos[0];
     const all = (C.serie.get(fundo.id) || []).slice().sort((a, b) => d3.ascending(a.ym, b.ym));
     let ini = p.inicio, fim = p.fim; if (fim < ini) [ini, fim] = [fim, ini];
     const S = all.filter((r) => r.ym >= ini && r.ym <= fim);
@@ -367,7 +433,7 @@
     const totRet = g - 1, acoes = d3.sum(stocks, (s) => s.contrib);
     const best = d3.greatest(stocks, (s) => s.contrib), worst = d3.least(stocks, (s) => s.contrib);
     const m = { fundo, S, curve, months, stocks, totRet, ibov: gi - 1, acoes, resto: totRet - acoes, best, worst, ini, fim, G, prev, all };
-    mcache = { k: mk, m };
+    mcache.set(want, { k: mk, src: C.src, m });
     return m;
   };
 
@@ -480,9 +546,16 @@
       });
       const consTot = d3.mean(retMonths, (m) => (a.w.get(m) || 0) / (nAct.get(m) || 1));
       const allHolders = new Set(); a.holders.forEach((s) => s.forEach((f) => allHolders.add(f)));
-      return { c: a.c, tk, nome: C.nome.get(tk) || '', yr, consTot, retTot: comp(retMonths, rf), contribTot: d3.sum(years, (y) => yr[y].contrib), nTot: allHolders.size };
+      const cwm = new Map(months.map((mm) => [mm, (a.w.get(mm) || 0) / (nAct.get(mm) || 1)]));
+      return { c: a.c, tk, nome: C.nome.get(tk) || '', yr, consTot, retTot: comp(retMonths, rf), contribTot: d3.sum(years, (y) => yr[y].contrib), nTot: allHolders.size, cwm };
     }).filter((x) => x.tk);
-    const m = { years, list, yIb, ibTot, nFundos: C.fundos.length };
+    const prevOf = new Map(months.map((mm, k) => [mm, k ? months[k - 1] : null]));
+    const sectors = d3.groups(list, (r) => C.setor.get(r.tk) || 'Outros').map(([nm, cs]) => {
+      const mret = (mm) => { const mp = prevOf.get(mm); let nu = 0, de = 0; cs.forEach((c) => { const w = c.cwm.get(mp) || 0; const x = C.ret.get(c.tk)?.get(mm); if (w > 0 && Number.isFinite(x)) { nu += w * x; de += w; } }); return de > 0 ? nu / de : NaN; };
+      const yr = {}; years.forEach((y) => { yr[y] = { cons: d3.sum(cs, (c) => c.yr[y].cons), contrib: d3.sum(cs, (c) => c.yr[y].contrib), ret: comp(yMonths.get(y), mret), n: cs.filter((c) => c.yr[y].cons > 0.0005).length }; });
+      return { tk: nm, nome: '', setor: nm, yr, consTot: d3.sum(cs, (c) => c.consTot), retTot: comp(retMonths, mret), contribTot: d3.sum(cs, (c) => c.contribTot) };
+    });
+    const m = { years, list, yIb, ibTot, nFundos: C.fundos.length, sectors };
     ecache = { k, m }; return m;
   };
   const empYear = (m) => { const y = params().anoEmp; return m.years.includes(y) ? y : m.years[0]; };
@@ -511,6 +584,22 @@
   dash.draw('tb-emp', (box) => {
     box.replaceChildren(); const m = empModel(); if (!m) { if (failed()) { const f = document.createElement('div'); f.className = 'rx-fail'; f.textContent = 'Não carregou'; box.append(f); } return; }
     const p = params(); const y = empYear(m); const name = { k: 'emp', t: 'Empresa', left: true, str: true, sv: (r) => r.tk, f: (r) => ({ t: empName(r) }) };
+    if (p.emp === 'setores') {
+      const sname = { k: 'setor', t: 'Setor', left: true, str: true, sv: (r) => r.setor, f: (r) => ({ t: r.setor }) };
+      const rows = m.sectors.filter((r) => r.yr[y].cons > 0.0005);
+      const cols = [sname, { k: 'cons', t: 'Peso de consenso', sv: (r) => r.yr[y].cons, f: (r) => ({ t: fPct0(r.yr[y].cons) }) },
+        { k: 'n', t: 'Nº empresas', sv: (r) => r.yr[y].n, f: (r) => ({ t: String(r.yr[y].n) }) },
+        { k: 'ret', t: 'Retorno ' + y, sv: (r) => r.yr[y].ret, f: (r) => pctCell(r.yr[y].ret, r.yr[y].ret > m.yIb.get(y)) },
+        { k: 'contrib', t: 'Contribuição média', sv: (r) => r.yr[y].contrib, f: (r) => ({ t: fPct2(r.yr[y].contrib), cls: sc(r.yr[y].contrib) }) }];
+      const h1 = document.createElement('h3'); h1.textContent = 'Setores em ' + y; h1.style.margin = '0 0 4px';
+      box.append(h1, sortTable('tb-emp', 'setY' + y, cols, rows, { k: 'cons', d: -1 }, [[{ t: 'Ibovespa', left: true }, { t: '' }, { t: '' }, { t: fPct(m.yIb.get(y)), cls: sc(m.yIb.get(y)) }, { t: '' }]]));
+      const mx = d3.max(m.sectors, (r) => d3.max(m.years, (yy) => r.yr[yy].cons)) || 1;
+      const colsP = [sname, ...m.years.map((yy) => ({ k: 'y' + yy, t: yy, sv: (r) => r.yr[yy].ret, f: (r) => { const v = r.yr[yy].ret; return { t: Number.isFinite(v) ? fPct(v) : '—', cls: sc(v), b: v > m.yIb.get(yy), bg: r.yr[yy].cons > 0 ? `color-mix(in srgb, var(--rx-c0) ${Math.round(6 + 40 * r.yr[yy].cons / mx)}%, transparent)` : '' }; } })),
+        { k: 'consTot', t: 'Consenso médio', f: (r) => ({ t: fPct0(r.consTot) }) }, { k: 'retTot', t: 'Retorno período', f: (r) => pctCell(r.retTot, r.retTot > m.ibTot) }, { k: 'contribTot', t: 'Contribuição', f: (r) => ({ t: fPct2(r.contribTot), cls: sc(r.contribTot) }) }];
+      const h2 = document.createElement('h3'); h2.textContent = 'Período inteiro: retorno do setor por ano (fundo da célula = peso de consenso)'; h2.style.margin = '16px 0 4px';
+      box.append(h2, sortTable('tb-emp', 'setP', colsP, m.sectors.filter((r) => r.consTot > 0.0005), { k: 'consTot', d: -1 }, [[{ t: 'Ibovespa', left: true }, ...m.years.map((yy) => ({ t: fPct(m.yIb.get(yy)), cls: sc(m.yIb.get(yy)) })), { t: '' }, { t: fPct(m.ibTot), cls: sc(m.ibTot) }, { t: '' }]]));
+      return;
+    }
     if (p.emp === 'periodo') {
       const rows = m.list.filter((r) => r.consTot > 0).sort((a, b) => b.consTot - a.consTot).slice(0, 25);
       const mx = d3.max(rows, (r) => d3.max(m.years, (yy) => r.yr[yy].cons)) || 1;
@@ -644,6 +733,125 @@
     const L = dash.data('cartas_links').data.filter((l) => l.gestora === g).sort((a, b) => d3.ascending(a.data || 'z', b.data || 'z'));
     if (!L.length) { const li = document.createElement('li'); li.textContent = 'Nenhuma carta de 2014 a 2018 encontrada publicamente.'; ul.append(li); return; }
     L.forEach((l) => { const li = document.createElement('li'); li.append(link(l.carta, l.url)); if (l.data) li.append(document.createTextNode(' · ' + ymLabel(l.data))); ul.append(li); });
+  });
+  // ---- Captação × performance ----
+  const flowData = (m) => {
+    const all = m.all; const idx = new Map(all.map((r, i) => [r.ym, i]));
+    return m.S.map((r, k) => {
+      const i = idx.get(r.ym); let g = 1, gi = 1, n = 0;
+      for (let j = Math.max(1, i - 11); j <= i; j++) { const x = all[j]; const rf = Number.isFinite(x.rf) ? x.rf : x.rc; if (Number.isFinite(rf) && Number.isFinite(x.ri)) { g *= 1 + rf; gi *= 1 + x.ri; n++; } }
+      return { ym: r.ym, d: ymDate(r.ym), rel: n >= 12 ? g - gi : NaN, fl: k > 0 && Number.isFinite(r.fl) ? r.fl : 0, PL: r.PL };
+    });
+  };
+  const drawFlowChart = (el, m, h, scale) => {
+    const { svg, w } = svgFor(el, h); const t = tip(el); const rows = flowData(m); if (!rows.length) return;
+    const ml = 48, mr = 8, top = 8, gap = 22, hTop = Math.round((h - 30 - gap) * 0.55), hBot = h - 30 - gap - hTop - top;
+    const x = d3.scaleBand(rows.map((r) => r.ym), [ml, w - mr]).padding(0.15); const xc = (ym) => x(ym) + x.bandwidth() / 2;
+    const relMax = scale?.rel ?? Math.max(0.1, d3.max(rows, (r) => Math.abs(r.rel)) || 0.1);
+    const flMax = scale?.fl ?? Math.max(1, d3.max(rows, (r) => Math.abs(r.fl)) || 1);
+    const yR = d3.scaleLinear([-relMax, relMax], [top + hTop, top]).nice();
+    const y0 = top + hTop + gap; const yF = d3.scaleLinear([-flMax, flMax], [y0 + hBot, y0]).nice();
+    svg.append('g').attr('transform', `translate(${ml},0)`).call(d3.axisLeft(yR).ticks(4).tickFormat((v) => L.format('+.0f')(v * 100)).tickSize(-(w - ml - mr))).call(axisClean).call((g) => g.select('.domain').remove());
+    svg.append('line').attr('x1', ml).attr('x2', w - mr).attr('y1', yR(0)).attr('y2', yR(0)).attr('stroke', 'var(--cds-chart-reference)');
+    svg.append('path').datum(rows.filter((r) => Number.isFinite(r.rel))).attr('d', d3.line().x((r) => xc(r.ym)).y((r) => yR(r.rel))).attr('fill', 'none').attr('stroke', dash.colors[0]).attr('stroke-width', 2).attr('stroke-linejoin', 'round');
+    svg.append('text').attr('x', ml).attr('y', y0 - 6).attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)').text('Captação líquida (R$ mi)');
+    svg.append('g').attr('transform', `translate(${ml},0)`).call(d3.axisLeft(yF).ticks(3).tickFormat(L.format(',.0f')).tickSize(-(w - ml - mr))).call(axisClean).call((g) => g.select('.domain').remove());
+    svg.append('g').selectAll('rect').data(rows.filter((r) => r.fl)).join('rect').attr('x', (r) => x(r.ym)).attr('width', x.bandwidth()).attr('y', (r) => Math.min(yF(0), yF(r.fl))).attr('height', (r) => Math.max(1, Math.abs(yF(r.fl) - yF(0)))).attr('rx', 1).attr('fill', (r) => (r.fl > 0 ? 'var(--color-ok)' : 'var(--color-bad)')).attr('fill-opacity', 0.6);
+    const every = Math.max(1, Math.ceil(rows.length / xTicks(w - ml)));
+    svg.append('g').attr('transform', `translate(0,${y0 + hBot})`).call(d3.axisBottom(x).tickValues(rows.filter((r, k) => k % every === 0).map((r) => r.ym)).tickFormat((ym) => (ym.slice(5) === '01' ? ym.slice(0, 4) : ymLabel(ym))).tickSizeOuter(0)).call(axisClean);
+    const rule = svg.append('line').attr('y1', top).attr('y2', y0 + hBot).attr('stroke', 'var(--cds-chart-axis)').style('display', 'none');
+    svg.append('rect').attr('x', ml).attr('y', 0).attr('width', Math.max(0, w - ml - mr)).attr('height', h).attr('fill', 'transparent')
+      .on('pointermove', (ev) => { const [px, py] = d3.pointer(ev, el); const sx = px * (w / el.clientWidth); const k = Math.max(0, Math.min(rows.length - 1, Math.floor((sx - ml) / x.step()))); const r = rows[k]; rule.style('display', null).attr('x1', xc(r.ym)).attr('x2', xc(r.ym));
+        showTip(el, t, xc(r.ym) * el.clientWidth / w, py, ymLabel(r.ym), [[dash.colors[0], '12m vs Ibov', Number.isFinite(r.rel) ? fPP(r.rel * 100) + ' p.p.' : '—'], [r.fl >= 0 ? 'var(--color-ok)' : 'var(--color-bad)', 'Captação', L.format(',.1f')(r.fl) + ' mi'], [null, 'PL', fNum(r.PL) + ' mi']]); })
+      .on('pointerleave', () => { rule.style('display', 'none'); t.hidden = true; });
+  };
+  const roll12 = (rows) => { const v = rows.map((r) => r.fl); const out = []; for (let i = 11; i < v.length; i++) out.push(d3.sum(v.slice(i - 11, i + 1))); return out; };
+  dash.draw('ch-flow', (el) => { if (!status(el)) return; drawFlowChart(el, model(), 320); });
+  text('fl-tot', (m) => { const v = d3.sum(flowData(m), (r) => r.fl); return { t: L.format('+,.0f')(v) + ' mi', s: sgn(v) }; });
+  text('fl-max', (m) => { const r = roll12(flowData(m)); return r.length ? L.format('+,.0f')(d3.max(r)) + ' mi' : '—'; });
+  text('fl-min', (m) => { const r = roll12(flowData(m)); return r.length ? L.format('+,.0f')(d3.min(r)) + ' mi' : '—'; });
+
+  // ---- Comparar ----
+  const CMPC = ['#3b6fd8', '#e07b39', '#2a9d8f', '#d9679a'];
+  const cmpIds = () => { const p = dash.params(); const v = String(p.cmp == null ? '1,2,3' : p.cmp).split(',').filter(Boolean); return [...new Set(v)].slice(0, 4); };
+  const cmpModels = () => { if (!ready()) return null; const C = build(); return cmpIds().map((id) => model(id)).filter((m) => m && C.fundos.some((f) => f.id === m.fundo.id)); };
+  dash.draw('cmp-add', (sel) => { if (!ready()) { sel.replaceChildren(); return; } const C = build(); const ids = cmpIds();
+    fill(sel, [['', ids.length >= 4 ? 'Máximo de 4 fundos' : 'Escolha um fundo…'], ...C.fundos.filter((f) => !ids.includes(f.id)).map((f) => [f.id, f.fundo + ' — ' + f.gestora])], ''); sel.disabled = ids.length >= 4;
+    sel.onchange = () => { if (sel.value) dash.setParams({ cmp: [...cmpIds(), sel.value].join(',') }); }; });
+  dash.draw('cmp-chips', (el) => { el.replaceChildren(); if (!ready()) return; const C = build();
+    cmpIds().forEach((id, k) => { const f = C.fundos.find((x) => x.id === id); if (!f) return; const b = document.createElement('button'); b.type = 'button'; b.className = 'rx-chip rm'; b.style.borderColor = CMPC[k]; b.style.borderWidth = '2px'; b.textContent = f.fundo; b.setAttribute('aria-label', 'Remover ' + f.fundo); b.onclick = () => dash.setParams({ cmp: cmpIds().filter((x) => x !== id).join(',') }); el.append(b); }); });
+  dash.draw('cmp-legend', (el) => { el.replaceChildren(); const ms = cmpModels(); if (!ms) return; ms.forEach((m, k) => { const sp = document.createElement('span'); const i = document.createElement('i'); i.style.background = CMPC[k]; sp.append(i, document.createTextNode(m.fundo.fundo)); el.append(sp); }); const sp = document.createElement('span'); const i = document.createElement('i'); i.style.background = 'var(--cds-chart-muted)'; sp.append(i, document.createTextNode('Ibovespa')); el.append(sp); });
+  dash.draw('cmp-perf', (el) => {
+    if (!status(el)) return; const ms = cmpModels(); const h = 300; const { svg, w } = svgFor(el, h); const t = tip(el); if (!ms.length) return;
+    const ib = ms[0].curve; const ext = d3.extent(ms.flatMap((m) => m.curve.map((r) => r.f)).concat(ib.map((r) => r.i)));
+    const y = d3.scaleLinear([Math.min(0, ext[0]), Math.max(0, ext[1])], [h - 28, 12]).nice(); const ml = 46, mr = 8;
+    const x = d3.scaleUtc(d3.extent(ib, (r) => r.d), [ml, w - mr]);
+    svg.append('g').attr('transform', `translate(0,${h - 28})`).call(d3.axisBottom(x).ticks(xTicks(w - ml)).tickFormat(yearTickFmt).tickSizeOuter(0)).call(axisClean);
+    svg.append('g').attr('transform', `translate(${ml},0)`).call(d3.axisLeft(y).ticks(5).tickFormat(L.format('.0%')).tickSize(-(w - ml - mr))).call(axisClean).call((g) => g.select('.domain').remove());
+    svg.append('path').datum(ib).attr('d', d3.line().x((r) => x(r.d)).y((r) => y(r.i))).attr('fill', 'none').attr('stroke', 'var(--cds-chart-muted)').attr('stroke-width', 2).attr('stroke-dasharray', '5 4');
+    ms.forEach((m, k) => svg.append('path').datum(m.curve).attr('d', d3.line().x((r) => x(r.d)).y((r) => y(r.f))).attr('fill', 'none').attr('stroke', CMPC[k]).attr('stroke-width', 2).attr('stroke-linejoin', 'round'));
+    const bis = d3.bisector((r) => r.d).center; const rule = svg.append('line').attr('y1', 12).attr('y2', h - 28).attr('stroke', 'var(--cds-chart-axis)').style('display', 'none');
+    svg.append('rect').attr('x', ml).attr('y', 0).attr('width', Math.max(0, w - ml - mr)).attr('height', h).attr('fill', 'transparent')
+      .on('pointermove', (ev) => { const [px, py] = d3.pointer(ev, el); const sx = px * (w / el.clientWidth); const i = bis(ib, x.invert(sx)); const r = ib[i]; if (!r) return; rule.style('display', null).attr('x1', x(r.d)).attr('x2', x(r.d));
+        const lines = ms.map((m, k) => [CMPC[k], m.fundo.fundo, m.curve[i] ? m.curve[i].f : NaN]).concat([['var(--cds-chart-muted)', 'Ibovespa', r.i]]).filter((l) => Number.isFinite(l[2])).sort((a, b) => b[2] - a[2]).map((l) => [l[0], l[1], fPct(l[2])]);
+        showTip(el, t, x(r.d) * el.clientWidth / w, py, ymLabel(r.ym), lines); })
+      .on('pointerleave', () => { rule.style('display', 'none'); t.hidden = true; });
+  });
+  const yearRets = (m) => { const out = {}; d3.groups(m.S.slice(1), (r) => r.ym.slice(0, 4)).forEach(([y, rows]) => { let g = 1, gi = 1; rows.forEach((r) => { g *= 1 + (Number.isFinite(r.rf) ? r.rf : (Number.isFinite(r.rc) ? r.rc : 0)); gi *= 1 + (Number.isFinite(r.ri) ? r.ri : 0); }); out[y] = { f: g - 1, i: gi - 1 }; }); return out; };
+  dash.draw('cmp-anos', (box) => {
+    box.replaceChildren(); const ms = cmpModels(); if (!ms || !ms.length) return;
+    const yrs = ms.map(yearRets); const years = [...new Set(yrs.flatMap((o) => Object.keys(o)))].sort();
+    const table = document.createElement('table'); table.className = 'rx-table rx-sum';
+    const hr = table.createTHead().insertRow(); ['Fundo', ...years, 'Total', 'PL fim (R$ mi)'].forEach((tt, i) => { const th = document.createElement('th'); th.textContent = tt; if (i === 0) th.style.textAlign = 'left'; hr.append(th); });
+    const tb = table.createTBody();
+    ms.forEach((m, k) => { const tr = tb.insertRow(); const c0 = tr.insertCell(); const i = document.createElement('i'); i.style.cssText = `display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;background:${CMPC[k]}`; c0.append(i, document.createTextNode(m.fundo.fundo));
+      years.forEach((y) => { const o = yrs[k][y]; const td = tr.insertCell(); if (!o) { td.textContent = '—'; return; } td.textContent = fPct(o.f); const c = sc(o.f); if (c) td.classList.add(c); if (o.f > o.i) td.classList.add('beat'); });
+      const td = tr.insertCell(); td.textContent = fPct(m.totRet); const c = sc(m.totRet); if (c) td.classList.add(c); if (m.totRet > m.ibov) td.classList.add('beat'); td.classList.add('tot');
+      tr.insertCell().textContent = fNum(m.S[m.S.length - 1]?.PL); });
+    const tf = table.createTFoot(); const tr = tf.insertRow(); tr.insertCell().textContent = 'Ibovespa'; years.forEach((y) => { const o = yrs.find((x) => x[y])?.[y]; const td = tr.insertCell(); td.textContent = o ? fPct(o.i) : '—'; if (o) { const c = sc(o.i); if (c) td.classList.add(c); } }); const td = tr.insertCell(); td.textContent = fPct(ms[0].ibov); td.className = 'tot ' + sc(ms[0].ibov); tr.insertCell();
+    box.append(table);
+  });
+  dash.draw('cmp-flows', (box) => {
+    box.replaceChildren(); const ms = cmpModels(); if (!ms || !ms.length) return;
+    const fds = ms.map(flowData); const scale = { rel: Math.max(0.1, d3.max(fds.flat(), (r) => Math.abs(r.rel)) || 0.1), fl: Math.max(1, d3.max(fds.flat(), (r) => Math.abs(r.fl)) || 1) };
+    ms.map((m, k) => { const card = document.createElement('div'); card.className = 'rx-mini'; const h3 = document.createElement('h3'); const i = document.createElement('i'); i.style.background = CMPC[k]; h3.append(i, document.createTextNode(m.fundo.fundo + ' · captação ' + L.format('+,.0f')(d3.sum(fds[k], (r) => r.fl)) + ' mi')); const ch = document.createElement('div'); ch.className = 'rx-chart'; card.append(h3, ch); box.append(card); return ch; }).forEach((ch, k) => drawFlowChart(ch, ms[k], 240, scale));
+  });
+  const heatBg = (v, mx) => (Number.isFinite(v) && Math.abs(v) > 0.0005 ? `color-mix(in srgb, var(${v > 0 ? '--color-ok' : '--color-bad'}) ${Math.round(8 + 42 * Math.min(1, Math.abs(v) / mx))}%, transparent)` : '');
+  const matrix = (box, rowsKeys, label, ms, val, totRow) => {
+    const table = document.createElement('table'); table.className = 'rx-table rx-heat';
+    const hr = table.createTHead().insertRow(); const th0 = document.createElement('th'); th0.textContent = label; th0.style.textAlign = 'left'; hr.append(th0);
+    ms.forEach((m, k) => { const th = document.createElement('th'); const i = document.createElement('i'); i.style.cssText = `display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:5px;background:${CMPC[k]}`; th.append(i, document.createTextNode(m.fundo.fundo)); hr.append(th); });
+    const mx = d3.max(rowsKeys.flatMap((r) => ms.map((m) => Math.abs(val(r, m) || 0)))) || 0.01; const tb = table.createTBody();
+    rowsKeys.forEach((r) => { const tr = tb.insertRow(); const c0 = tr.insertCell(); c0.textContent = r.label; c0.style.textAlign = 'left'; ms.forEach((m) => { const v = val(r, m); const td = tr.insertCell(); td.textContent = Number.isFinite(v) && Math.abs(v) > 0.0005 ? fPct2(v) : ''; td.style.background = heatBg(v, mx); }); });
+    if (totRow) { const tf = table.createTFoot(); const tr = tf.insertRow(); tr.insertCell().textContent = totRow.label; ms.forEach((m) => { const td = tr.insertCell(); const v = totRow.val(m); td.textContent = fPct2(v); td.className = sc(v); }); }
+    box.append(table);
+  };
+  dash.draw('cmp-setor', (box) => {
+    box.replaceChildren(); const ms = cmpModels(); if (!ms || !ms.length) return; const C = build();
+    const bySet = ms.map((m) => { const o = new Map(); m.stocks.forEach((s) => { const k = C.setor.get(s.tk) || 'Outros'; o.set(k, (o.get(k) || 0) + s.contrib); }); return o; });
+    const keys = [...new Set(bySet.flatMap((o) => [...o.keys()]))].map((k) => ({ label: k, k, tot: d3.sum(bySet, (o) => Math.abs(o.get(k) || 0)) })).filter((r) => r.tot > 0.001).sort((a, b) => b.tot - a.tot);
+    matrix(box, keys, 'Setor', ms, (r, m) => bySet[ms.indexOf(m)].get(r.k), { label: 'Total ações', val: (m) => m.acoes });
+  });
+  dash.draw('cmp-emp', (box) => {
+    box.replaceChildren(); const ms = cmpModels(); if (!ms || !ms.length) return; const C = build();
+    const pick = new Set(); ms.forEach((m) => { const s = m.stocks.slice().sort((a, b) => b.contrib - a.contrib); s.slice(0, 6).forEach((x) => pick.add(x.tk)); s.slice(-4).filter((x) => x.contrib < 0).forEach((x) => pick.add(x.tk)); });
+    const val = (r, m) => m.stocks.find((s) => s.tk === r.k)?.contrib;
+    const keys = [...pick].map((tk) => ({ k: tk, label: tk + (C.nome.get(tk) ? ' · ' + C.nome.get(tk) : ''), tot: d3.sum(ms, (m) => val({ k: tk }, m) || 0) })).sort((a, b) => b.tot - a.tot);
+    matrix(box, keys, 'Empresa', ms, val, { label: 'Resto (caixa, derivativos, taxas)', val: (m) => m.resto });
+  });
+
+  // ---- Encerrados ----
+  dash.draw('tb-enc', (box) => {
+    box.replaceChildren(); const d = dash.data('encerrados'); if (d.status !== 'ok') return;
+    const table = document.createElement('table'); table.className = 'rx-table rx-sum';
+    const hr = table.createTHead().insertRow(); ['Fundo', 'Gestora', 'PL dez/14 (R$ mi)', 'PL máximo', 'Até', 'O que aconteceu', 'Retorno', 'Ibovespa', 'Diferença'].forEach((t, i) => { const th = document.createElement('th'); th.textContent = t; if (i < 2 || i === 5) th.style.textAlign = 'left'; hr.append(th); });
+    const tb = table.createTBody();
+    d.data.forEach((r) => { const tr = tb.insertRow(); tr.style.cursor = 'default'; const rf = +r.ret_fundo, ri = +r.ret_ibov;
+      [[r.fundo, 1], [r.gestora, 1], [fNum(+r.pl_2014_mi)], [fNum(+r.pl_max_mi)], [ymLabel(r.ultimo_mes)], [r.evento, 1]].forEach(([v, left]) => { const td = tr.insertCell(); td.textContent = v; if (left) { td.style.textAlign = 'left'; td.style.whiteSpace = 'normal'; } });
+      const a = tr.insertCell(); a.textContent = fPct(rf); a.className = sc(rf); if (rf > ri) a.classList.add('beat');
+      const b = tr.insertCell(); b.textContent = fPct(ri); b.className = sc(ri);
+      const c = tr.insertCell(); c.textContent = fPP((rf - ri) * 100) + ' p.p.'; c.className = sc(rf - ri); });
+    box.append(table);
   });
   // summary table
   let sumSort = { perf: { k: 'total', d: -1 }, pl: { k: 'total', d: -1 } };

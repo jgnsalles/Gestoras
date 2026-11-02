@@ -111,5 +111,6 @@ th('Dynamo','Carta 91/92 – BVMF',dy(91),'2016-12','B3SA3','comprada','BM&FBove
 th('Constellation','Carta dez/2017 (via Capital Aberto)','https://capitalaberto.com.br/empresas/2018/04/crise-boa-para-investir','2017-12','FLRY3','comprada','Empresas saíram mais eficientes da crise; projeção de PIB +2,7% e lucro das investidas +26% em 2018. Destaques de 2017: Fleury, CVC, B3 e Raia Drogasil.','Manteve as posições em Fleury, CVC, B3 e Raia.')
 th('Constellation','Carta dez/2017 (via Capital Aberto)','https://capitalaberto.com.br/empresas/2018/04/crise-boa-para-investir','2017-12','CVCB3','comprada','CVC como uma das principais posições e destaque de 2017, apostando na recuperação do consumo.','Manteve a posição.')
 T=pd.DataFrame(T); T.insert(0,'id',range(1,len(T)+1))
+REP=json.load(open('work/rep.json')); T['tk']=T.tk.map(lambda t: REP.get(t,t))
 gest.to_csv('out/cartas_gestoras.csv',index=False); L.to_csv('out/cartas_links.csv',index=False); T.to_csv('out/cartas_teses.csv',index=False)
 print(len(gest),len(L),len(T)); print(L.groupby('gestora').size()); print(gest[['gestora','fundos']].to_string())

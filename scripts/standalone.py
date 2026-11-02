@@ -5,7 +5,7 @@ style = re.search(r'<style>(.*?)</style>', page, re.S).group(1)
 script = re.search(r'<script>(.*?)</script>', page, re.S).group(1)
 body = re.sub(r'<style>.*?</style>|<script>.*?</script>', '', page, flags=re.S).strip()
 d3 = open(S+'/lib/d3.min.js').read()
-ids = ['fundos','serie_mensal','posicoes_1','posicoes_2','precos','acoes','ibov','cartas_gestoras','cartas_links','cartas_teses']
+ids = ['fundos','serie_mensal','posicoes_1','posicoes_2','precos','acoes','ibov','cartas_gestoras','cartas_links','cartas_teses','encerrados']
 data = '\n'.join(f'<script type="text/csv" id="csv-{i}">\n{open(S+"/out/"+i+".csv").read()}</script>' for i in ids)
 tokens = '''
 :root{

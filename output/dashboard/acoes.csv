@@ -1,483 +1,381 @@
-tk,empresa
-AALR3,ALLIAR
-ABCB4,ABC BRASIL
-ABEV3,AMBEV S/A
-ABRE11,ABRIL EDUCA
-ABRE3,ABRIL EDUCA
-AEDU3,ANHANGUERA
-AERI3,AERIS
-AESB3,AES BRASIL
-AGRO3,BRASILAGRO
-ALLL3,ALL AMER LAT
-ALOS3,ALLOS
-ALPA3,ALPARGATAS
-ALPA4,ALPARGATAS
-ALPK3,ESTAPAR
-ALSC3,ALIANSCE
-ALSO3,ALIANSCSONAE
-ALUP11,ALUPAR
-ALUP3,ALUPAR
-ALUP4,ALUPAR
-AMAR3,LOJAS MARISA
-AMBP3,AMBIPAR
-AMBV3,AMBEV
-AMBV4,AMBEV
-AMER3,AMERICANAS
-AMIL3,AMIL
-ANIM3,ANIMA
-APER3,ALPER S.A.
-ARML3,ARMAC
-ARTR3,ARTERIS
-ARZZ3,AREZZO CO
-ASAI3,ASSAI
-AURA33,AURA 360
-AURE3,AUREN
-AUTM3,AUTOMETAL
-AZUL4,AZUL
-B3SA3,B3
-BAHI3,BAHEMA
-BAUH4,EXCELSIOR
-BBAS3,BRASIL
-BBDC3,BRADESCO
-BBDC4,BRADESCO
-BBPO11,FII BB PRGII
-BBRK3,BR BROKERS
-BBSE3,BBSEGURIDADE
-BBTG11,BTG PACTUAL
-BCFF11,FII BC FFII
-BEEF3,MINERVA
-BEES4,BANESTES
-BEMA3,BEMATECH
-BHGR3,BHG
-BHIA3,CASAS BAHIA
-BICB4,BICBANCO
-BIDI11,BANCO INTER
-BIDI12,BANCO INTER
-BIDI3,BANCO INTER
-BIDI4,BANCO INTER
-BISA3,BROOKFIELD
-BKBR3,BK BRASIL
-BLAU3,BLAU
-BMGB11,BANCO BMG
-BMGB4,BANCO BMG
-BMOB3,BEMOBI TECH
-BOAS3,BOA VISTA
-BOVA11,ISHARES BOVA
-BOVV11,IT NOW IBOV
-BPAC11,BTGP BANCO
-BPAC13,BTGP BANCO
-BPAC7,
-BPAN4,BANCO PAN
-BPHA3,BR PHARMA
-BPNM4,PANAMERICANO
-BRAP3,BRADESPAR
-BRAP4,BRADESPAR
-BRBI11,BR PARTNERS
-BRCR12,FII BC FUND
-BRDT3,PETROBRAS BR
-BRFS3,BRF SA
-BRIN3,BR INSURANCE
-BRIT3,BRISANET
-BRIV4,ALFA INVEST
-BRKM5,BRASKEM
-BRML3,BR MALLS PAR
-BRPR3,BR PROPERT
-BRSR6,BANRISUL
-BRTO3,BRASIL TELEC
-BRTO4,BRASIL TELEC
-BSEV3,BIOSEV
-BTOW1,B2W DIGITAL
-BTOW3,B2W DIGITAL
-BVMF3,B3
-CAMB3,CAMBUCI
-CAMB4,
-CAML3,CAMIL
-CARD3,CSU CARDSYST
-CASH3,MELIUZ
-CBAV3,CBA
-CCIM3,CC DES IMOB
-CCPR3,CYRE COM-CCP
-CCRO3,CCR SA
-CCXC3,CCX CARVAO
-CEAB3,CEA MODAS
-CEBR3,CEB
-CEBR5,CEB
-CELP3,CELPA
-CESP3,CESP
-CESP6,CESP
-CGAS3,COMGAS
-CGAS5,COMGAS
-CIEL3,CIELO
-CLSA3,CLEARSALE
-CLSC4,CELESC
-CMIG2,CEMIG
-CMIG3,CEMIG
-CMIG4,CEMIG
-CMIN3,CSNMINERACAO
-CNFB4,CONFAB
-CNTO3,CENTAURO
-COCE3,COELCE
-COCE5,COELCE
-COGN3,COGNA ON
-CPFE3,CPFL ENERGIA
-CPLE11,COPEL
-CPLE3,COPEL
-CPLE6,COPEL
-CPRE3,CPFL RENOVAV
-CRDE3,CR2
-CREM3,CREMER
-CRFB3,CARREFOUR BR
-CRUZ3,SOUZA CRUZ
-CSAN3,COSAN
-CSED3,CRUZEIRO EDU
-CSMG3,COPASA
-CSNA3,SID NACIONAL
-CTAX11,CONTAX
-CTAX3,CONTAX
-CTAX4,CONTAX
-CTIP3,CETIP
-CTKA4,KARSTEN
-CTNM4,COTEMINAS
-CTSA3,SANTANENSE
-CURY3,CURY S/A
-CVCB1,CVC BRASIL
-CVCB11,CVC BRASIL
-CVCB3,CVC BRASIL
-CVCB9,CVC BRASIL
-CXSE3,CAIXA SEGURI
-CYRE3,CYRELA REALT
-CZLT11,COSAN LTD
-CZLT33,COSAN LTD
-DAGB11,DUFRY AG
-DAGB33,DUFRY AG
-DASA3,DASA
-DAYC4,DAYCOVAL
-DESK3,DESKTOP
-DIRR3,DIRECIONAL
-DMMO3,DOMMO
-DOTZ3,DOTZ SA
-DTEX1,DURATEX
-DTEX3,DURATEX
-DTEX9,DURATEX
-DXCO3,DEXCO
-EBTP3,EMBRATEL PAR
-EBTP4,EMBRATEL PAR
-ECOR3,ECORODOVIAS
-EGIE3,ENGIE BRASIL
-EKTR4,ELEKTRO
-ELET1,ELETROBRAS
-ELET12,ELETROBRAS
-ELET3,ELETROBRAS
-ELET6,ELETROBRAS
-ELET9,ELETROBRAS
-ELMD3,ELETROMIDIA
-ELPL3,ELETROPAULO
-ELPL4,ELETROPAULO
-EMBR3,EMBRAER
-ENAT3,ENAUTA PART
-ENBR3,ENERGIAS BR
-ENEV3,ENEVA
-ENGI11,ENERGISA
-ENGI4,ENERGISA
-ENJU3,ENJOEI
-ENMA3B,CEMAR
-EQPA3,EQTL PARA
-EQTL3,EQUATORIAL
-EQTL9,EQUATORIAL
-ESPA3,ESPACOLASER
-ESTC3,ESTACIO PART
-ETER3,ETERNIT
-EUCA4,EUCATEX
-EVEN3,EVEN
-EXCO32,EXITO
-EZTC3,EZTEC
-FESA4,FERBASA
-FHER3,FER HERINGER
-FIBR3,FIBRIA
-FIEI3,FICA
-FIQE3,UNIFIQUE
-FJTA4,FORJA TAURUS
-FLRY1,FLEURY
-FLRY3,FLEURY
-FRAS3,FRAS-LE
-GBIO33,BIOTOSCANA
-GETI3,AES TIETE
-GETI4,AES TIETE
-GETT11,GETNET BR
-GETT4,GETNET BR
-GFSA3,GAFISA
-GGBR3,GERDAU
-GGBR4,GERDAU
-GGPS3,GPS
-GLOB3,GLOBEX
-GMAT3,GRUPO MATEUS
-GNDI3,INTERMEDICA
-GOAU11,GERDAU MET
-GOAU3,GERDAU MET
-GOAU4,GERDAU MET
-GOLL4,GOL
-GPIV33,GP INVEST
-GRND3,GRENDENE
-GSHP3,GENERALSHOPP
-GUAR3,GUARARAPES
-GUAR4,GUARARAPES
-HAPV3,HAPVIDA
-HBOR3,HELBOR
-HBRE3,HBR REALTY
-HBSA3,HIDROVIAS
-HGLG11,FII CSHG LOG
-HGRE11,FII HG REAL
-HGTX3,CIA HERING
-HRTP3,HRT PETROLEO
-HYPE3,HYPERA
-IFCM3,INFRACOMM
-IGTA3,IGUATEMI
-IGTI11,IGUATEMI S.A
-IGTI3,IGUATEMI S.A
-IGTI4,IGUATEMI S.A
-IMCH3,IMC HOLDINGS
-INBR32,INTER CO
-INTB3,INTELBRAS
-IRBR1,IRBBRASIL RE
-IRBR3,IRBBRASIL RE
-IRBR9,IRBBRASIL RE
-ITSA2,ITAUSA
-ITSA3,ITAUSA
-ITSA4,ITAUSA
-ITUB3,ITAUUNIBANCO
-ITUB4,ITAUUNIBANCO
-JALL3,JALLESMACHAD
-JBSS3,JBS
-JHSF3,JHSF PART
-JPSA3,JEREISSATI
-JPSA4,JEREISSATI
-JSLG11,JSL
-JSLG3,JSL
-KEPL3,KEPLER WEBER
-KLBN11,KLABIN S/A
-KLBN4,KLABIN S/A
-KNCR11,FII KINEA RI
-KNIP11,FII KINEA IP
-KROT11,KROTON
-KROT3,KROTON
-KROT4,KROTON
-KRSA3,KORA SAUDE
-LAME3,LOJAS AMERIC
-LAME4,LOJAS AMERIC
-LAVV3,LAVVI
-LCAM3,LOCAMERICA
-LEVE3,METAL LEVE
-LIGT3,LIGHT S/A
-LINX3,LINX
-LJQQ3,QUERO-QUERO
-LLIS3,LE LIS BLANC
-LLXL3,LLX LOG
-LOGG3,LOG COM PROP
-LOGN3,LOG-IN
-LPSB3,LOPES BRASIL
-LREN3,LOJAS RENNER
-LUPA3,LUPATECH
-LVTC3,WDC NETWORKS
-LWSA3,LOCAWEB
-MAGG3,MAGNESITA SA
-MATD3,MATER DEI
-MBLY3,MOBLY
-MDIA3,M.DIASBRANCO
-MDNE3,MOURA DUBEUX
-MEAL3,IMC S/A
-MEGA3,OMEGAENERGIA
-MELI34,MERCADOLIBRE
-MELK3,MELNICK
-MGLU3,MAGAZ LUIZA
-MILS3,MILLS
-MLAS3,MULTILASER
-MLFT4,JEREISSATI
-MMMC34,3M
-MMXM11,MMX MINER
-MMXM3,MMX MINER
-MOAR3,MONT ARANHA
-MODL11,MODALMAIS
-MODL3,MODALMAIS
-MOSI3,MOSAICO
-MOVI3,MOVIDA
-MOVI9,MOVIDA
-MPLU3,MULTIPLUS
-MPXE3,ENEVA
-MRFG3,MARFRIG
-MRVE3,MRV
-MTRE3,MITRE REALTY
-MULT1,MULTIPLAN
-MULT3,MULTIPLAN
-MXRF11,FII MAXI REN
-MYPK3,IOCHP-MAXION
-NATU3,NATURA
-NEOE3,NEOENERGIA
-NETC4,NET
-NGRD3,NEOGRID
-NINJ3,GETNINJAS
-NTCO1,GRUPO NATURA
-NTCO3,GRUPO NATURA
-NTCO9,GRUPO NATURA
-NUBR33,NU-NUBANK
-ODPV3,ODONTOPREV
-OFSA3,OUROFINO S/A
-OGXP3,OGX PETROLEO
-OHLB3,OHL BRASIL
-OIBR11,
-OIBR3,OI
-OIBR4,OI
-OMGE3,OMEGA GER
-ONCO3,ONCOCLINICAS
-OPCT3,OCEANPACT
-ORVR3,ORIZON
-OSXB3,OSX BRASIL
-PARC3,PARCORRETORA
-PARD3,IHPARDINI
-PASS5,
-PASS6,
-PCAR3,P.ACUCAR-CBD
-PCAR4,P.ACUCAR-CBD
-PDGR3,PDG REALT
-PETR3,PETROBRAS
-PETR4,PETROBRAS
-PETZ3,PETZ
-PFRM3,PROFARMA
-PGMN3,PAGUE MENOS
-PLPL3,PLANOEPLANO
-PMAM3,PARANAPANEMA
-PNVL3,DIMED
-PNVL4,DIMED
-POMO3,MARCOPOLO
-POMO4,MARCOPOLO
-PORT3,WILSON SONS
-POSI3,POSITIVO TEC
-POWE3,FOCUS ON
-PRBC4,PARANA
-PRIO3,PETRORIO
-PRNR3,PRINER
-PSSA3,PORTO SEGURO
-PTBL3,PORTOBELLO
-QGEP3,QGEP PART
-QUAL3,QUALICORP
-RADL3,RAIADROGASIL
-RAIL3,RUMO S.A.
-RAIZ4,RAIZEN
-RANI3,IRANI
-RAPT3,RANDON PART
-RAPT4,RANDON PART
-RDCD3,REDECARD
-RDNI3,RNI
-RDOR3,REDE D OR
-RDTR3,REDENTOR
-RECV3,PETRORECSA
-REDE3,REDE ENERGIA
-RENT1,LOCALIZA
-RENT3,LOCALIZA
-RENT9,LOCALIZA
-RLOG3,COSAN LOG
-RNEW11,RENOVA
-ROMI3,ROMI
-ROXO34,NU HOLDINGS
-RRRP3,3R PETROLEUM
-RSID3,ROSSI RESID
-RUMO3,RUMO LOG
-SANB11,SANTANDER BR
-SANB3,SANTANDER BR
-SANB4,SANTANDER BR
-SAPR11,SANEPAR
-SAPR4,SANEPAR
-SBFG3,GRUPO SBF
-SBSP3,SABESP
-SCAR3,SAO CARLOS
-SEDU3,SOMOS EDUCA
-SEER1,SER EDUCA
-SEER3,SER EDUCA
-SEER9,SER EDUCA
-SEQL3,SEQUOIA LOG
-SGPS3,SPRINGS
-SHOW3,TIME FOR FUN
-SHUL4,SCHULZ
-SIMH3,SIMPAR
-SLCE3,SLC AGRICOLA
-SLED4,SARAIVA LIVR
-SMAL11,ISHARES SMAL
-SMFT3,SMART FIT
-SMLE11,
-SMLE3,SMILES
-SMLS3,SMILES
-SMTO3,SAO MARTINHO
-SNSL3,SENIOR SOL
-SNSL3M,SENIOR SOL
-SOJA3,BOA SAFRA
-SOMA3,GRUPO SOMA
-SQIA3,SINQIA
-SRNA3,SERENA
-SSBR3,SIERRABRASIL
-STBP11,SANTOS BRP
-STBP3,SANTOS BRP
-SUBZ3,
-SULA11,SUL AMERICA
-SUZB3,SUZANO S.A.
-SUZB5,SUZANO PAPEL
-SYNE3,SYN PROP TEC
-TAEE11,TAESA
-TAMM4,TAM S/A
-TASA4,TAURUS ARMAS
-TBLE3,TRACTEBEL
-TCSA3,TECNISA
-TECN3,TECHNOS
-TEMP3,TEMPO PART
-TEND3,TENDA
-TERM3,
-TERM6,
-TFCO4,TRACK FIELD
-TGMA3,TEGMA
-TIET11,AES TIETE E
-TIMP3,TIM PART S/A
-TIMS3,TIM
-TMAR3,TELEMAR N L
-TMAR5,TELEMAR N L
-TNCP3,TELE NORT CL
-TNCP4,TELE NORT CL
-TNLP3,TELEMAR
-TNLP4,TELEMAR
-TOTS3,TOTVS
-TPIS3,TRIUNFO PART
-TRAD3,TC
-TRIS3,TRISUL
-TRPL4,TRAN PAULIST
-TRPN3,TARPON INV
-TTEN3,3TENTOS
-TUPY3,TUPY
-TUPY4,TUPY
-UCAS3,UNICASA
-UGPA3,ULTRAPAR
-UNIP6,UNIPAR
-USIM3,USIMINAS
-USIM5,USIMINAS
-VAGR3,V-AGRO
-VALE3,VALE
-VALE5,VALE
-VAMO3,VAMOS
-VBBR3,VIBRA
-VIIA3,VIA
-VITT3,VITTIA
-VIVA3,VIVARA S.A.
-VIVR3,VIVER
-VIVT3,TELEF BRASIL
-VIVT4,TELEF BRASIL
-VLID11,VALID
-VLID3,VALID
-VLOL11,FII OLIMPIA
-VULC3,VULCABRAS
-VVAR11,VIAVAREJO
-VVAR3,VIAVAREJO
-VVEO3,VIVEO
-WEGE3,WEG
-WEST3,WESTWING
-WIZS3,WIZ S.A.
-WSON33,WILSON SONS
-XPBR31,XP INC
-XPML11,FII XP MALLS
-YDUQ3,YDUQS PART
-ZAMP3,ZAMP S.A.
+tk,empresa,setor,subsetor
+AALR3,ALLIAR,Saúde,"Serviços Médico - Hospitalares, Análises e Diagnósticos"
+ABCB4,ABC BRASIL,Financeiro,Intermediários Financeiros
+ABEV3,AMBEV S/A,Consumo não Cíclico,Bebidas
+AEDU3,ANHANGUERA,Consumo Cíclico,Diversos
+AERI3,AERIS,Bens Industriais,Máquinas e Equipamentos
+AESB3,AES BRASIL,Utilidade Pública,Energia Elétrica
+AGRO3,BRASILAGRO,Consumo não Cíclico,Agropecuária
+ALLL3,ALL AMER LAT,Bens Industriais,Transporte
+ALOS3,ALLOS,Outros/não classificado,
+ALPA4,ALPARGATAS,Consumo Cíclico,"Tecidos, Vestuário e Calçados"
+ALPK3,ESTAPAR,Bens Industriais,Serviços Diversos
+ALSC3,ALIANSCE,Financeiro,Exploração de Imóveis
+ALSO3,ALIANSCSONAE,Financeiro,Exploração de Imóveis
+ALUP11,ALUPAR,Utilidade Pública,Energia Elétrica
+AMAR3,LOJAS MARISA,Consumo Cíclico,Comércio
+AMBP3,AMBIPAR,Utilidade Pública,Água e Saneamento
+AMBV3,AMBEV,Outros/não classificado,
+AMER3,AMERICANAS,Consumo Cíclico,Comércio
+AMIL3,AMIL,Outros/não classificado,
+ANIM3,ANIMA,Consumo Cíclico,Diversos
+APER3,ALPER S.A.,Financeiro,Previdência e Seguros
+ARML3,ARMAC,Bens Industriais,Máquinas e Equipamentos
+ARTR3,ARTERIS,Bens Industriais,Transporte
+ARZZ3,AREZZO CO,Consumo Cíclico,Comércio
+ASAI3,ASSAI,Consumo não Cíclico,Comércio e Distribuição
+AURA33,AURA 360,Materiais Básicos,Mineração
+AURE3,AUREN,Utilidade Pública,Energia Elétrica
+AUTM3,AUTOMETAL,Outros/não classificado,
+AZUL4,AZUL,Bens Industriais,Transporte
+BAHI3,BAHEMA,Consumo Cíclico,Diversos
+BAUH4,EXCELSIOR,Consumo não Cíclico,Alimentos Processados
+BBAS3,BRASIL,Financeiro,Intermediários Financeiros
+BBDC4,BRADESCO,Financeiro,Intermediários Financeiros
+BBPO11,FII BB PRGII,Outros/não classificado,
+BBRK3,BR BROKERS,Financeiro,Exploração de Imóveis
+BBSE3,BBSEGURIDADE,Financeiro,Previdência e Seguros
+BBTG11,BTG PACTUAL,Financeiro,Intermediários Financeiros
+BCFF11,FII BC FFII,Outros/não classificado,
+BEEF3,MINERVA,Consumo não Cíclico,Alimentos Processados
+BEES4,BANESTES,Financeiro,Intermediários Financeiros
+BEMA3,BEMATECH,Tecnologia da Informação,Computadores e Equipamentos
+BHGR3,BHG,Outros/não classificado,
+BHIA3,CASAS BAHIA,Outros/não classificado,
+BICB4,BICBANCO,Outros/não classificado,
+BIDI11,BANCO INTER,Financeiro,Intermediários Financeiros
+BISA3,BROOKFIELD,Outros/não classificado,
+BKBR3,BK BRASIL,Consumo Cíclico,Hoteis e Restaurantes
+BLAU3,BLAU,Saúde,Comércio e Distribuição
+BMGB4,BANCO BMG,Financeiro,Intermediários Financeiros
+BMOB3,BEMOBI TECH,Tecnologia da Informação,Programas e Serviços
+BOAS3,BOA VISTA,Financeiro,Serviços Financeiros Diversos
+BOVA11,ISHARES BOVA,ETF de índice,ETF de índice
+BOVV11,IT NOW IBOV,ETF de índice,ETF de índice
+BPAC11,BTGP BANCO,Financeiro,Intermediários Financeiros
+BPAN4,BANCO PAN,Financeiro,Intermediários Financeiros
+BPHA3,BR PHARMA,Saúde,Comércio e Distribuição
+BPNM4,PANAMERICANO,Outros/não classificado,
+BRAP4,BRADESPAR,Materiais Básicos,Mineração
+BRBI11,BR PARTNERS,Financeiro,Intermediários Financeiros
+BRCR12,FII BC FUND,Outros/não classificado,
+BRDT3,PETROBRAS BR,"Petróleo, Gás e Biocombustíveis","Petróleo, Gás e Biocombustíveis"
+BRFS3,BRF SA,Consumo não Cíclico,Alimentos Processados
+BRIN3,BR INSURANCE,Outros/não classificado,
+BRIT3,BRISANET,Comunicações,Telecomunicações
+BRIV4,ALFA INVEST,Financeiro,Intermediários Financeiros
+BRKM5,BRASKEM,Materiais Básicos,Químicos
+BRML3,BR MALLS PAR,Financeiro,Exploração de Imóveis
+BRPR3,BR PROPERT,Financeiro,Exploração de Imóveis
+BRSR6,BANRISUL,Financeiro,Intermediários Financeiros
+BRTO3,BRASIL TELEC,Outros/não classificado,
+BSEV3,BIOSEV,Outros/não classificado,
+BTOW3,B2W DIGITAL,Consumo Cíclico,Comércio
+BVMF3,B3,Financeiro,Serviços Financeiros Diversos
+CAMB4,,Consumo Cíclico,"Tecidos, Vestuário e Calçados"
+CAML3,CAMIL,Consumo não Cíclico,Alimentos Processados
+CARD3,CSU CARDSYST,Outros/não classificado,
+CASH3,MELIUZ,Tecnologia da Informação,Programas e Serviços
+CBAV3,CBA,Materiais Básicos,Mineração
+CCIM3,CC DES IMOB,Outros/não classificado,
+CCPR3,CYRE COM-CCP,Consumo não Cíclico,Agropecuária
+CCRO3,CCR SA,Bens Industriais,Transporte
+CCXC3,CCX CARVAO,Outros/não classificado,
+CEAB3,CEA MODAS,Consumo Cíclico,Comércio
+CEBR5,CEB,Utilidade Pública,Energia Elétrica
+CELP3,CELPA,Utilidade Pública,Energia Elétrica
+CESP6,CESP,Utilidade Pública,Energia Elétrica
+CGAS5,COMGAS,Utilidade Pública,Gás
+CIEL3,CIELO,Financeiro,Serviços Financeiros Diversos
+CLSA3,CLEARSALE,Financeiro,Serviços Financeiros Diversos
+CLSC4,CELESC,Utilidade Pública,Energia Elétrica
+CMIG4,CEMIG,Utilidade Pública,Energia Elétrica
+CMIN3,CSNMINERACAO,Materiais Básicos,Mineração
+CNFB4,CONFAB,Outros/não classificado,
+CNTO3,CENTAURO,Outros/não classificado,
+COCE5,COELCE,Utilidade Pública,Energia Elétrica
+CPFE3,CPFL ENERGIA,Utilidade Pública,Energia Elétrica
+CPLE6,COPEL,Utilidade Pública,Energia Elétrica
+CPRE3,CPFL RENOVAV,Utilidade Pública,Energia Elétrica
+CRDE3,CR2,Consumo Cíclico,Construção Civil
+CREM3,CREMER,Outros/não classificado,
+CRFB3,CARREFOUR BR,Consumo não Cíclico,Comércio e Distribuição
+CRUZ3,SOUZA CRUZ,Consumo não Cíclico,Fumo
+CSAN3,COSAN,"Petróleo, Gás e Biocombustíveis","Petróleo, Gás e Biocombustíveis"
+CSED3,CRUZEIRO EDU,Consumo Cíclico,Diversos
+CSMG3,COPASA,Utilidade Pública,Água e Saneamento
+CSNA3,SID NACIONAL,Materiais Básicos,Siderurgia e Metalurgia
+CTAX11,CONTAX,Bens Industriais,Serviços
+CTIP3,CETIP,Financeiro,Serviços Financeiros Diversos
+CTKA4,KARSTEN,Consumo Cíclico,"Tecidos, Vestuário e Calçados"
+CTNM4,COTEMINAS,Consumo Cíclico,"Tecidos, Vestuário e Calçados"
+CTSA3,SANTANENSE,Consumo Cíclico,"Tecidos, Vestuário e Calçados"
+CURY3,CURY S/A,Consumo Cíclico,Construção Civil
+CVCB3,CVC BRASIL,Consumo Cíclico,Viagens e Lazer
+CXSE3,CAIXA SEGURI,Financeiro,Previdência e Seguros
+CYRE3,CYRELA REALT,Consumo Cíclico,Construção Civil
+CZLT33,COSAN LTD,"Petróleo, Gás e Biocombustíveis","Petróleo, Gás e Biocombustíveis"
+DAGB33,DUFRY AG,Consumo Cíclico,Comércio
+DASA3,DASA,Saúde,"Serviços Médico - Hospitalares, Análises e Diagnósticos"
+DAYC4,DAYCOVAL,Outros/não classificado,
+DESK3,DESKTOP,Comunicações,Telecomunicações
+DIRR3,DIRECIONAL,Consumo Cíclico,Construção Civil
+DMMO3,DOMMO,"Petróleo, Gás e Biocombustíveis","Petróleo, Gás e Biocombustíveis"
+DOTZ3,DOTZ SA,Consumo Cíclico,Diversos
+DTEX3,DURATEX,Materiais Básicos,Madeira e Papel
+DXCO3,DEXCO,Materiais Básicos,Madeira e Papel
+EBTP4,EMBRATEL PAR,Comunicações,Telecomunicações
+ECOR3,ECORODOVIAS,Bens Industriais,Transporte
+EGIE3,ENGIE BRASIL,Utilidade Pública,Energia Elétrica
+EKTR4,ELEKTRO,Utilidade Pública,Energia Elétrica
+ELET3,ELETROBRAS,Utilidade Pública,Energia Elétrica
+ELMD3,ELETROMIDIA,Comunicações,Mídia
+ELPL4,ELETROPAULO,Utilidade Pública,Energia Elétrica
+EMBR3,EMBRAER,Bens Industriais,Material de Transporte
+ENAT3,ENAUTA PART,"Petróleo, Gás e Biocombustíveis","Petróleo, Gás e Biocombustíveis"
+ENBR3,ENERGIAS BR,Utilidade Pública,Energia Elétrica
+ENEV3,ENEVA,Utilidade Pública,Energia Elétrica
+ENGI11,ENERGISA,Utilidade Pública,Energia Elétrica
+ENJU3,ENJOEI,Tecnologia da Informação,Programas e Serviços
+ENMA3B,CEMAR,Outros/não classificado,
+EQPA3,EQTL PARA,Utilidade Pública,Energia Elétrica
+EQTL3,EQUATORIAL,Utilidade Pública,Energia Elétrica
+ESPA3,ESPACOLASER,Consumo Cíclico,Comércio
+ESTC3,ESTACIO PART,Consumo Cíclico,Diversos
+ETER3,ETERNIT,Bens Industriais,Construção e Engenharia
+EUCA4,EUCATEX,Materiais Básicos,Madeira e Papel
+EVEN3,EVEN,Consumo Cíclico,Construção Civil
+EXCO32,EXITO,Outros/não classificado,
+EZTC3,EZTEC,Consumo Cíclico,Construção Civil
+FESA4,FERBASA,Materiais Básicos,Siderurgia e Metalurgia
+FHER3,FER HERINGER,Materiais Básicos,Químicos
+FIBR3,FIBRIA,Materiais Básicos,Madeira e Papel
+FIEI3,FICA,Outros/não classificado,
+FIQE3,UNIFIQUE,Comunicações,Telecomunicações
+FJTA4,FORJA TAURUS,Outros/não classificado,
+FLRY3,FLEURY,Saúde,"Serviços Médico - Hospitalares, Análises e Diagnósticos"
+FRAS3,FRAS-LE,Bens Industriais,Material de Transporte
+GBIO33,BIOTOSCANA,Outros/não classificado,
+GETI4,AES TIETE,Utilidade Pública,Energia Elétrica
+GETT11,GETNET BR,Financeiro,Serviços Financeiros Diversos
+GFSA3,GAFISA,Consumo Cíclico,Construção Civil
+GGBR4,GERDAU,Materiais Básicos,Siderurgia e Metalurgia
+GGPS3,GPS,Bens Industriais,Serviços Diversos
+GLOB3,GLOBEX,Outros/não classificado,
+GMAT3,GRUPO MATEUS,Consumo não Cíclico,Comércio e Distribuição
+GNDI3,INTERMEDICA,Saúde,Serv.Méd.Hospit..Análises e Diagnósticos
+GOAU4,GERDAU MET,Materiais Básicos,Siderurgia e Metalurgia
+GOLL4,GOL,Bens Industriais,Transporte
+GPIV33,GP INVEST,Financeiro,Serviços Financeiros Diversos
+GRND3,GRENDENE,Consumo Cíclico,"Tecidos, Vestuário e Calçados"
+GSHP3,GENERALSHOPP,Financeiro,Exploração de Imóveis
+GUAR3,GUARARAPES,Consumo Cíclico,Comércio
+HAPV3,HAPVIDA,Saúde,"Serviços Médico - Hospitalares, Análises e Diagnósticos"
+HBOR3,HELBOR,Consumo Cíclico,Construção Civil
+HBRE3,HBR REALTY,Financeiro,Exploração de Imóveis
+HBSA3,HIDROVIAS,Bens Industriais,Transporte
+HGLG11,FII CSHG LOG,Outros/não classificado,
+HGRE11,FII HG REAL,Outros/não classificado,
+HGTX3,CIA HERING,Consumo Cíclico,"Tecidos, Vestuário e Calçados"
+HRTP3,HRT PETROLEO,Outros/não classificado,
+HYPE3,HYPERA,Saúde,Comércio e Distribuição
+IFCM3,INFRACOMM,Tecnologia da Informação,Programas e Serviços
+IGTA3,IGUATEMI,Financeiro,Exploração de Imóveis
+IGTI11,IGUATEMI S.A,Financeiro,Exploração de Imóveis
+IMCH3,IMC HOLDINGS,Consumo Cíclico,Hoteis e Restaurantes
+INBR32,INTER CO,Financeiro,Intermediários Financeiros
+INTB3,INTELBRAS,Tecnologia da Informação,Computadores e Equipamentos
+IRBR3,IRBBRASIL RE,Financeiro,Previdência e Seguros
+ITSA4,ITAUSA,Financeiro,Intermediários Financeiros
+ITUB4,ITAUUNIBANCO,Financeiro,Intermediários Financeiros
+JALL3,JALLESMACHAD,Consumo não Cíclico,Alimentos Processados
+JBSS3,JBS,Consumo não Cíclico,Alimentos Processados
+JHSF3,JHSF PART,Consumo Cíclico,Construção Civil
+JPSA3,JEREISSATI,Outros/não classificado,
+JSLG3,JSL,Bens Industriais,Transporte
+KEPL3,KEPLER WEBER,Bens Industriais,Máquinas e Equipamentos
+KLBN11,KLABIN S/A,Materiais Básicos,Madeira e Papel
+KNCR11,FII KINEA RI,Outros/não classificado,
+KNIP11,FII KINEA IP,Outros/não classificado,
+KROT3,KROTON,Consumo Cíclico,Diversos
+KRSA3,KORA SAUDE,Saúde,"Serviços Médico - Hospitalares, Análises e Diagnósticos"
+LAME4,LOJAS AMERIC,Consumo Cíclico,Comércio
+LAVV3,LAVVI,Consumo Cíclico,Construção Civil
+LCAM3,LOCAMERICA,Consumo Cíclico,Diversos
+LEVE3,METAL LEVE,Consumo Cíclico,Automóveis e Motocicletas
+LIGT3,LIGHT S/A,Utilidade Pública,Energia Elétrica
+LINX3,LINX,Tecnologia da Informação,Programas e Serviços
+LJQQ3,QUERO-QUERO,Consumo Cíclico,Comércio
+LLIS3,LE LIS BLANC,Consumo Cíclico,Comércio
+LLXL3,LLX LOG,Outros/não classificado,
+LOGG3,LOG COM PROP,Financeiro,Exploração de Imóveis
+LOGN3,LOG-IN,Bens Industriais,Transporte
+LPSB3,LOPES BRASIL,Financeiro,Exploração de Imóveis
+LREN3,LOJAS RENNER,Consumo Cíclico,Comércio
+LUPA3,LUPATECH,"Petróleo, Gás e Biocombustíveis","Petróleo, Gás e Biocombustíveis"
+LVTC3,WDC NETWORKS,Tecnologia da Informação,Programas e Serviços
+LWSA3,LOCAWEB,Tecnologia da Informação,Programas e Serviços
+MAGG3,MAGNESITA SA,Materiais Básicos,Mineração
+MATD3,MATER DEI,Saúde,"Serviços Médico - Hospitalares, Análises e Diagnósticos"
+MBLY3,MOBLY,Tecnologia da Informação,Programas e Serviços
+MDIA3,M.DIASBRANCO,Consumo não Cíclico,Alimentos Processados
+MDNE3,MOURA DUBEUX,Consumo Cíclico,Construção Civil
+MEAL3,IMC S/A,Consumo Cíclico,Hoteis e Restaurantes
+MEGA3,OMEGAENERGIA,Utilidade Pública,Energia Elétrica
+MELI34,MERCADOLIBRE,Outros/não classificado,
+MELK3,MELNICK,Consumo Cíclico,Construção Civil
+MGLU3,MAGAZ LUIZA,Consumo Cíclico,Comércio
+MILS3,MILLS,Bens Industriais,Máquinas e Equipamentos
+MLAS3,MULTILASER,Tecnologia da Informação,Computadores e Equipamentos
+MLFT4,JEREISSATI,Consumo não Cíclico,Comércio e Distribuição
+MMMC34,3M,Outros/não classificado,
+MMXM11,MMX MINER,Materiais Básicos,Mineração
+MOAR3,MONT ARANHA,Financeiro,Holdings Diversificadas
+MODL11,MODALMAIS,Financeiro,Intermediários Financeiros
+MOSI3,MOSAICO,Outros/não classificado,
+MOVI3,MOVIDA,Consumo Cíclico,Diversos
+MPLU3,MULTIPLUS,Consumo Cíclico,Diversos
+MPXE3,ENEVA,Outros/não classificado,
+MRFG3,MARFRIG,Consumo não Cíclico,Alimentos Processados
+MRVE3,MRV,Consumo Cíclico,Construção Civil
+MTRE3,MITRE REALTY,Consumo Cíclico,Construção Civil
+MULT3,MULTIPLAN,Financeiro,Exploração de Imóveis
+MXRF11,FII MAXI REN,Outros/não classificado,
+MYPK3,IOCHP-MAXION,Consumo Cíclico,Automóveis e Motocicletas
+NEOE3,NEOENERGIA,Utilidade Pública,Energia Elétrica
+NETC4,NET,Outros/não classificado,
+NGRD3,NEOGRID,Tecnologia da Informação,Programas e Serviços
+NINJ3,GETNINJAS,Tecnologia da Informação,Programas e Serviços
+NTCO3,GRUPO NATURA,Consumo não Cíclico,Produtos de Uso Pessoal e de Limpeza
+NUBR33,NU-NUBANK,Financeiro,Intermediários Financeiros
+ODPV3,ODONTOPREV,Saúde,"Serviços Médico - Hospitalares, Análises e Diagnósticos"
+OFSA3,OUROFINO S/A,Saúde,Medicamentos e Outros Produtos
+OGXP3,OGX PETROLEO,Outros/não classificado,
+OHLB3,OHL BRASIL,Outros/não classificado,
+OIBR3,OI,Comunicações,Telecomunicações
+OMGE3,OMEGA GER,Utilidade Pública,Energia Elétrica
+ONCO3,ONCOCLINICAS,Saúde,"Serviços Médico - Hospitalares, Análises e Diagnósticos"
+OPCT3,OCEANPACT,"Petróleo, Gás e Biocombustíveis","Petróleo, Gás e Biocombustíveis"
+ORVR3,ORIZON,Utilidade Pública,Água e Saneamento
+OSXB3,OSX BRASIL,"Petróleo, Gás e Biocombustíveis","Petróleo, Gás e Biocombustíveis"
+PARC3,PARCORRETORA,Financeiro,Previdência e Seguros
+PARD3,IHPARDINI,Saúde,"Serviços Médico - Hospitalares, Análises e Diagnósticos"
+PASS5,,Utilidade Pública,Gás
+PCAR4,P.ACUCAR-CBD,Consumo não Cíclico,Comércio e Distribuição
+PDGR3,PDG REALT,Consumo Cíclico,Construção Civil
+PETR4,PETROBRAS,"Petróleo, Gás e Biocombustíveis","Petróleo, Gás e Biocombustíveis"
+PETZ3,PETZ,Consumo Cíclico,Comércio
+PFRM3,PROFARMA,Saúde,Comércio e Distribuição
+PGMN3,PAGUE MENOS,Saúde,Comércio e Distribuição
+PLPL3,PLANOEPLANO,Consumo Cíclico,Construção Civil
+PMAM3,PARANAPANEMA,Materiais Básicos,Siderurgia e Metalurgia
+PNVL3,DIMED,Saúde,Comércio e Distribuição
+POMO4,MARCOPOLO,Bens Industriais,Material de Transporte
+PORT3,WILSON SONS,Bens Industriais,Transporte
+POSI3,POSITIVO TEC,Tecnologia da Informação,Computadores e Equipamentos
+POWE3,FOCUS ON,Outros/não classificado,
+PRBC4,PARANA,Outros/não classificado,
+PRIO3,PETRORIO,"Petróleo, Gás e Biocombustíveis","Petróleo, Gás e Biocombustíveis"
+PRNR3,PRINER,Bens Industriais,Serviços Diversos
+PSSA3,PORTO SEGURO,Financeiro,Previdência e Seguros
+PTBL3,PORTOBELLO,Bens Industriais,Construção e Engenharia
+QGEP3,QGEP PART,"Petróleo, Gás e Biocombustíveis","Petróleo, Gás e Biocombustíveis"
+QUAL3,QUALICORP,Saúde,"Serviços Médico - Hospitalares, Análises e Diagnósticos"
+RADL3,RAIADROGASIL,Saúde,Comércio e Distribuição
+RAIL3,RUMO S.A.,Bens Industriais,Transporte
+RAIZ4,RAIZEN,Consumo não Cíclico,Agropecuária
+RANI3,IRANI,Materiais Básicos,Embalagens
+RAPT4,RANDON PART,Bens Industriais,Material de Transporte
+RDCD3,REDECARD,Outros/não classificado,
+RDNI3,RNI,Consumo Cíclico,Construção Civil
+RDOR3,REDE D OR,Saúde,"Serviços Médico - Hospitalares, Análises e Diagnósticos"
+RDTR3,REDENTOR,Outros/não classificado,
+RECV3,PETRORECSA,"Petróleo, Gás e Biocombustíveis","Petróleo, Gás e Biocombustíveis"
+REDE3,REDE ENERGIA,Utilidade Pública,Energia Elétrica
+RENT3,LOCALIZA,Consumo Cíclico,Diversos
+RLOG3,COSAN LOG,Bens Industriais,Transporte
+RNEW11,RENOVA,Utilidade Pública,Energia Elétrica
+ROMI3,ROMI,Bens Industriais,Máquinas e Equipamentos
+ROXO34,NU HOLDINGS,Outros/não classificado,
+RRRP3,3R PETROLEUM,"Petróleo, Gás e Biocombustíveis","Petróleo, Gás e Biocombustíveis"
+RSID3,ROSSI RESID,Consumo Cíclico,Construção Civil
+SANB11,SANTANDER BR,Financeiro,Intermediários Financeiros
+SAPR4,SANEPAR,Utilidade Pública,Água e Saneamento
+SBFG3,GRUPO SBF,Consumo Cíclico,Comércio
+SBSP3,SABESP,Utilidade Pública,Água e Saneamento
+SCAR3,SAO CARLOS,Financeiro,Exploração de Imóveis
+SEDU3,SOMOS EDUCA,Consumo Cíclico,Diversos
+SEER3,SER EDUCA,Consumo Cíclico,Diversos
+SEQL3,SEQUOIA LOG,Bens Industriais,Serviços Diversos
+SGPS3,SPRINGS,Consumo Cíclico,"Tecidos, Vestuário e Calçados"
+SHOW3,TIME FOR FUN,Consumo Cíclico,Viagens e Lazer
+SHUL4,SCHULZ,Bens Industriais,Máquinas e Equipamentos
+SIMH3,SIMPAR,Financeiro,Holdings Diversificadas
+SLCE3,SLC AGRICOLA,Consumo não Cíclico,Agropecuária
+SLED4,SARAIVA LIVR,Consumo Cíclico,Comércio
+SMAL11,ISHARES SMAL,ETF de índice,ETF de índice
+SMFT3,SMART FIT,Consumo Cíclico,Viagens e Lazer
+SMLE3,SMILES,Consumo Cíclico,Diversos
+SMLS3,SMILES,Consumo Cíclico,Diversos
+SMTO3,SAO MARTINHO,Consumo não Cíclico,Alimentos Processados
+SNSL3,SENIOR SOL,Tecnologia da Informação,Programas e Serviços
+SNSL3M,SENIOR SOL,Tecnologia da Informação,Programas e Serviços
+SOJA3,BOA SAFRA,Consumo não Cíclico,Agropecuária
+SOMA3,GRUPO SOMA,Consumo Cíclico,Comércio
+SQIA3,SINQIA,Tecnologia da Informação,Programas e Serviços
+SRNA3,SERENA,Outros/não classificado,
+SSBR3,SIERRABRASIL,Financeiro,Exploração de Imóveis
+STBP3,SANTOS BRP,Bens Industriais,Transporte
+SUBZ3,,Outros/não classificado,
+SULA11,SUL AMERICA,Financeiro,Previdência e Seguros
+SUZB3,SUZANO S.A.,Materiais Básicos,Madeira e Papel
+SYNE3,SYN PROP TEC,Financeiro,Exploração de Imóveis
+TAEE11,TAESA,Utilidade Pública,Energia Elétrica
+TAMM4,TAM S/A,Outros/não classificado,
+TASA4,TAURUS ARMAS,Bens Industriais,Máquinas e Equipamentos
+TBLE3,TRACTEBEL,Utilidade Pública,Energia Elétrica
+TCSA3,TECNISA,Consumo Cíclico,Construção Civil
+TECN3,TECHNOS,Consumo Cíclico,"Tecidos, Vestuário e Calçados"
+TEMP3,TEMPO PART,Saúde,Serv.Méd.Hospit..Análises e Diagnósticos
+TEND3,TENDA,Consumo Cíclico,Construção Civil
+TERM6,,Bens Industriais,Construção e Engenharia
+TFCO4,TRACK FIELD,Consumo Cíclico,"Tecidos, Vestuário e Calçados"
+TGMA3,TEGMA,Bens Industriais,Transporte
+TIET11,AES TIETE E,Utilidade Pública,Energia Elétrica
+TIMP3,TIM PART S/A,Comunicações,Telecomunicações
+TIMS3,TIM,Comunicações,Telecomunicações
+TMAR5,TELEMAR N L,Outros/não classificado,
+TNCP3,TELE NORT CL,Outros/não classificado,
+TNLP4,TELEMAR,Outros/não classificado,
+TOTS3,TOTVS,Tecnologia da Informação,Programas e Serviços
+TPIS3,TRIUNFO PART,Bens Industriais,Transporte
+TRAD3,TC,Tecnologia da Informação,Programas e Serviços
+TRIS3,TRISUL,Consumo Cíclico,Construção Civil
+TRPL4,TRAN PAULIST,Utilidade Pública,Energia Elétrica
+TRPN3,TARPON INV,Outros/não classificado,
+TTEN3,3TENTOS,Consumo não Cíclico,Agropecuária
+TUPY3,TUPY,Bens Industriais,Material de Transporte
+UCAS3,UNICASA,Consumo Cíclico,Utilidades Domésticas
+UGPA3,ULTRAPAR,"Petróleo, Gás e Biocombustíveis","Petróleo, Gás e Biocombustíveis"
+UNIP6,UNIPAR,Materiais Básicos,Químicos
+USIM5,USIMINAS,Materiais Básicos,Siderurgia e Metalurgia
+VAGR3,V-AGRO,Consumo não Cíclico,Agropecuária
+VALE3,VALE,Materiais Básicos,Mineração
+VAMO3,VAMOS,Consumo Cíclico,Diversos
+VBBR3,VIBRA,"Petróleo, Gás e Biocombustíveis","Petróleo, Gás e Biocombustíveis"
+VITT3,VITTIA,Materiais Básicos,Químicos
+VIVA3,VIVARA S.A.,Consumo Cíclico,"Tecidos, Vestuário e Calçados"
+VIVR3,VIVER,Consumo Cíclico,Construção Civil
+VIVT4,TELEF BRASIL,Comunicações,Telecomunicações
+VLID3,VALID,Bens Industriais,Serviços Diversos
+VLOL11,FII OLIMPIA,Outros/não classificado,
+VULC3,VULCABRAS,Consumo Cíclico,"Tecidos, Vestuário e Calçados"
+VVAR3,VIAVAREJO,Consumo Cíclico,Comércio
+VVEO3,VIVEO,Saúde,Comércio e Distribuição
+WEGE3,WEG,Bens Industriais,Máquinas e Equipamentos
+WEST3,WESTWING,Tecnologia da Informação,Programas e Serviços
+WIZS3,WIZ S.A.,Financeiro,Previdência e Seguros
+WSON33,WILSON SONS,Outros/não classificado,
+XPBR31,XP INC,Financeiro,Serviços Financeiros Diversos
+XPML11,FII XP MALLS,Outros/não classificado,
+ZAMP3,ZAMP S.A.,Outros/não classificado,
