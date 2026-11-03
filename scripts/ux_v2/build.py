@@ -14,18 +14,20 @@ OUT = os.path.join(ROOT, 'output', 'navegando_dilma_2_v2.html')
 s = open(SRC, encoding='utf-8').read()
 css = open(os.path.join(HERE, 'ux.css'), encoding='utf-8').read()
 js = open(os.path.join(HERE, 'ux.js'), encoding='utf-8').read()
+gross = open(os.path.join(ROOT, 'output', 'dashboard', 'captacao_bruta.csv'), encoding='utf-8').read()
 
 CICLO = '''<section class="rx-page" id="pg-ciclo" data-pg="ciclo">
     <article class="rx-card" id="cy-card">
       <h2>O ciclo, mês a mês</h2>
       <div class="rx-legend" data-draw="cy-legend"></div>
+      <div class="rx-chips-b" data-draw="cy-gran"></div>
       <div class="rx-chart" data-draw="cy-main" data-source="serie_mensal precos acoes ibov"></div>
-      <p class="rx-note">Fundos: média simples da cota dos 30 masters. Setores: mediana do retorno das ações do setor no trimestre menos o Ibovespa. Universo: ações que algum dos 30 fundos teve com ≥0,5% do PL.</p>
+      <p class="rx-note">Fundos: média simples da cota dos 30 masters. Setores: mediana do retorno das ações do setor no trimestre menos o Ibovespa. Universo: ações que algum dos 30 fundos teve com ≥0,5% do PL. Captação e resgate: soma diária do Informe Diário da CVM no master de cada fundo.</p>
     </article>
     <article class="rx-card" id="cy-fases">
       <h2>Melhores e piores por fase</h2>
       <p class="rx-note">Retorno total com dividendos. Só entram ações com preço em todos os meses da fase. Toque numa ação para ver o gráfico dela.</p>
-      <div class="rx-phases" data-draw="cy-phases" data-source="precos acoes"></div>
+      <div data-draw="cy-phases" data-source="precos acoes"></div>
     </article>
     <article class="rx-card" id="cy-acao-card">
       <h2 data-draw="cy-acao-t">—</h2>
@@ -76,6 +78,7 @@ REPL = [
      '<article class="rx-card" id="resumo-tabela">\n      <div class="rx-cardhead">\n        <h2>Tabela dos 30 fundos</h2>', 1),
     ('<article class="rx-card" id="empresas-card">', BUB + '<article class="rx-card" id="empresas-card">', 1),
     ('<article class="rx-card" id="cartas-gestoras">', CT + '<article class="rx-card" id="cartas-gestoras">', 1),
+    ('<script type="text/csv" id="csv-encerrados">', '<script type="text/csv" id="csv-captacao_bruta">\n' + gross + '</script>\n<script type="text/csv" id="csv-encerrados">', 1),
     ('<script>dash._run();</script>', '<script>\n' + js + '\n</script>\n<script>dash._run();</script>', 1),
 ]
 for old, new, n in REPL:

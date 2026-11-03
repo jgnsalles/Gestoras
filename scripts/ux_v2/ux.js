@@ -42,7 +42,9 @@
     }
     const rep = new Map(); [...cnt].sort((a, b) => b[1] - a[1]).forEach(([tk]) => { const rt = tk.slice(0, 4); if (!rep.has(rt) && ret.has(tk)) rep.set(rt, tk); });
     const nAct = new Map(months.map((m) => [m, (byM.get(m) || []).filter((r) => Number.isFinite(r.PL)).length]));
-    B = { ibr, byM, months, ret, nome, setor, hold, wsum, rep, rootMax, nAct };
+    const gross = new Map(); const gEl = document.getElementById('csv-captacao_bruta');
+    if (gEl) d3.csvParse(gEl.textContent.trim()).forEach((r) => { const c = num(r.capt_mi), z = num(r.resg_mi); if (Number.isFinite(c) && Number.isFinite(z)) gross.set(String(r.id) + '|' + r.ym, { c, z }); });
+    B = { gross, ibr, byM, months, ret, nome, setor, hold, wsum, rep, rootMax, nAct };
     return B;
   };
   const tkName = (b, tk) => tk + (b.nome.get(tk) ? ' · ' + b.nome.get(tk) : '');
@@ -94,21 +96,26 @@
       const rs = b.byM.get(ym) || [];
       if (i > 0) { const ri = b.ibr(ym); if (Number.isFinite(ri)) gi *= 1 + ri; const fr = rs.map((r) => r.rf).filter(Number.isFinite); if (fr.length) gf *= 1 + d3.mean(fr); }
       const el = rs.map((r) => r.el).filter(Number.isFinite).sort(d3.ascending); const fl = rs.map((r) => r.fl).filter(Number.isFinite);
-      return { ym, d: endDate(ym), ib: gi - 1, fu: gf - 1, el: d3.mean(el), e25: d3.quantile(el, 0.25), e75: d3.quantile(el, 0.75), fl: i > 0 && fl.length ? d3.sum(fl) : NaN, nf: rs.filter((r) => Number.isFinite(r.rf)).length };
+      const gs = rs.filter((r) => Number.isFinite(r.PL)).map((r) => b.gross.get(r.id + '|' + ym)); const gk = gs.filter(Boolean);
+      return { ym, d: endDate(ym), ib: gi - 1, fu: gf - 1, el: d3.mean(el), e25: d3.quantile(el, 0.25), e75: d3.quantile(el, 0.75), fl: i > 0 && fl.length ? d3.sum(fl) : NaN, nf: rs.filter((r) => Number.isFinite(r.rf)).length,
+        cap: i > 0 && gk.length ? d3.sum(gk, (g) => g.c) : NaN, res: i > 0 && gk.length ? d3.sum(gk, (g) => g.z) : NaN, gMiss: gs.length - gk.length };
     });
-    const quarters = d3.groups(rm, (m) => m.slice(0, 4) + ' T' + Math.ceil(+m.slice(5, 7) / 3)).map(([q, qm]) => ({ q, ms: qm, d0: endDate(prevYm(qm[0])), d1: endDate(qm[qm.length - 1]), ib: comp(qm, b.ibr), partial: qm.length < 3 }));
+    const GK = { T: [(m) => m.slice(0, 4) + ' T' + Math.ceil(+m.slice(5, 7) / 3), 3], S: [(m) => m.slice(0, 4) + ' S' + Math.ceil(+m.slice(5, 7) / 6), 6], A: [(m) => m.slice(0, 4), 12] };
     const uni = [...b.rep].filter(([rt]) => (b.rootMax.get(rt) || 0) >= 0.005).map(([rt, tk]) => ({ rt, tk, s: b.setor.get(tk) || '' }));
     const full = (tk, list) => { const m = b.ret.get(tk); return list.every((x) => Number.isFinite(m.get(x))) ? comp(list, (x) => m.get(x)) : NaN; };
-    const sectors = d3.groups(uni.filter((u) => SHORT[u.s]), (u) => u.s).map(([s, us]) => ({
-      s, short: SHORT[s], n: us.length,
-      cells: quarters.map((Q) => { const rs = us.map((u) => full(u.tk, Q.ms)).filter(Number.isFinite); const med = rs.length ? d3.median(rs) : NaN; return { Q, n: rs.length, med, ex: med - Q.ib }; }),
-    })).sort((a, z) => z.n - a.n);
+    const secCache = {};
+    const sectorsFor = (g) => { if (secCache[g]) return secCache[g]; const [kf, len] = GK[g];
+      const per = d3.groups(rm, kf).map(([q, qm]) => ({ q, ms: qm, d0: endDate(prevYm(qm[0])), d1: endDate(qm[qm.length - 1]), ib: comp(qm, b.ibr), partial: qm.length < len }));
+      return (secCache[g] = d3.groups(uni.filter((u) => SHORT[u.s]), (u) => u.s).map(([s, us]) => ({
+        s, short: SHORT[s], n: us.length,
+        cells: per.map((Q) => { const rs = us.map((u) => full(u.tk, Q.ms)).filter(Number.isFinite); const med = rs.length ? d3.median(rs) : NaN; return { Q, n: rs.length, med, ex: med - Q.ib }; }),
+      })).sort((a, z) => z.n - a.n)); };
     const phases = phasesIn(ini, fim).map((p) => {
       const pm = rm.filter((m) => m > p.a && m <= p.z);
       const st = uni.map((u) => ({ ...u, r: full(u.tk, pm) })).filter((u) => Number.isFinite(u.r)).sort((x, y) => y.r - x.r);
-      return { ...p, pm, ib: comp(pm, b.ibr), best: st.slice(0, 5), worst: st.slice(-5).reverse(), n: st.length };
+      return { ...p, pm, ib: comp(pm, b.ibr), best: st.slice(0, 20), worst: st.slice(-20).reverse(), n: st.length };
     });
-    const m = { ms, rm, rows, quarters, sectors, phases, ini, fim };
+    const m = { ms, rm, rows, sectorsFor, phases, ini, fim };
     CM = { k, m }; return m;
   };
 
@@ -119,9 +126,16 @@
     add(C0, 'Fundos (média)'); add('var(--cds-chart-muted)', 'Ibovespa'); add('var(--color-ok)', 'setor bateu o Ibov'); add('var(--color-bad)', 'setor perdeu');
     add('repeating-linear-gradient(45deg, var(--color-fg-muted) 0 1px, transparent 1px 4px)', 'menos de 3 ações');
   });
+  const curG = (el) => { const g = P().cyG; return ['T', 'S', 'A'].includes(g) ? g : (Math.max(300, el?.clientWidth || 900) < 760 ? 'A' : 'T'); };
+  dash.draw('cy-gran', (el) => {
+    el.replaceChildren(); const g = curG(document.querySelector('[data-draw="cy-main"]'));
+    const lb = document.createElement('span'); lb.className = 'rx-tile-label'; lb.textContent = 'Setores por'; lb.style.alignSelf = 'center'; lb.style.marginRight = '4px'; el.append(lb);
+    [['T', 'Trimestre'], ['S', 'Semestre'], ['A', 'Ano']].forEach(([k, t]) => { const bt = document.createElement('button'); bt.type = 'button'; bt.className = 'rx-chip'; bt.textContent = t; bt.setAttribute('aria-pressed', String(k === g)); bt.onclick = () => dash.setParams({ cyG: k }); el.append(bt); });
+  });
   dash.draw('cy-main', (el) => {
-    const m = cyc(); if (!m || m.rows.length < 2) return; const t = tipOf(el);
-    const { svg, w } = svgFor(el, 10); const narrow = w < 560;
+    const m0 = cyc(); if (!m0 || m0.rows.length < 2) return; const t = tipOf(el);
+    const { svg, w } = svgFor(el, 10); const narrow = w < 560; const G = curG(el);
+    const m = { ...m0, sectors: m0.sectorsFor(G) }; const GN = { T: 'trimestre', S: 'semestre', A: 'ano' }[G];
     const ml = narrow ? 84 : 104, mr = narrow ? 44 : 56;
     const d0 = m.rows[0].d, d1 = m.rows[m.rows.length - 1].d;
     const x = d3.scaleUtc([d0, d1], [ml, w - mr]);
@@ -130,8 +144,8 @@
     if (narrow && evs.length) { const key = document.createElement('div'); key.className = 'rx-legend cy-key'; evs.forEach((e) => { const sp = document.createElement('span'); const b = document.createElement('b'); b.textContent = e.l0; sp.append(b, document.createTextNode(' ' + e.l + ' (' + e.ds.slice(8) + '/' + e.ds.slice(5, 7) + '/' + e.ds.slice(2, 4) + ')')); key.append(sp); }); el.append(key); }
     const phY = 12, evTop = 22, evH = nRows * 13 + 4;
     const pTop = evTop + evH + 22, pH = narrow ? 130 : 170;
-    const hRow = narrow ? 14 : 16, hTop = pTop + pH + 30, hH = m.sectors.length * hRow;
-    const eTop = hTop + hH + 30, eH = 56, fTop = eTop + eH + 30, fH = 60, H = fTop + fH + 24;
+    const hRow = narrow ? 19 : 21, hTop = pTop + pH + 30, hH = m.sectors.length * hRow;
+    const eTop = hTop + hH + 30, eH = 56, fTop = eTop + eH + 30, fH = narrow ? 90 : 110, H = fTop + fH + 24;
     setH(svg, w, H);
     drawPhases(svg, x, evTop - 2, H - 24, m.ini, m.fim, phY);
     // events
@@ -153,7 +167,7 @@
     svg.append('text').attr('x', w - mr + 5).attr('y', yf).attr('dy', '0.35em').attr('fill', C0).style('font-size', '11px').style('font-weight', 600).text(fPct0(last.fu));
     svg.append('text').attr('x', w - mr + 5).attr('y', yi).attr('dy', '0.35em').attr('fill', 'var(--color-fg-muted)').style('font-size', '11px').text(fPct0(last.ib));
     // heatmap
-    label(svg, 0, hTop - 8, narrow ? 'Setores vs Ibov, por trimestre' : 'Setores: mediana do trimestre menos o Ibovespa');
+    label(svg, 0, hTop - 8, narrow ? 'Setores menos Ibov (p.p.), por ' + GN : 'Setores: mediana do ' + GN + ' menos o Ibovespa (p.p.)');
     const pid = 'cyh' + Math.random().toString(36).slice(2, 8);
     svg.append('defs').append('pattern').attr('id', pid).attr('width', 4).attr('height', 4).attr('patternUnits', 'userSpaceOnUse').attr('patternTransform', 'rotate(45)')
       .append('line').attr('x1', 0).attr('y1', 0).attr('x2', 0).attr('y2', 4).style('stroke', 'var(--color-fg)').style('stroke-width', 1).style('opacity', 0.45);
@@ -162,8 +176,9 @@
       svg.append('text').attr('x', ml - 6).attr('y', y + hRow / 2).attr('dy', '0.35em').attr('text-anchor', 'end').attr('fill', 'var(--color-fg)').style('font-size', '11px').text(s.short);
       s.cells.forEach((c) => {
         const cx = x(c.Q.d0) + 0.5, cw = Math.max(1, x(c.Q.d1) - x(c.Q.d0) - 1);
-        svg.append('rect').attr('x', cx).attr('y', y).attr('width', cw).attr('height', hRow - 2).attr('rx', 1.5).style('fill', Number.isFinite(c.ex) ? div(c.ex, 0.15) : 'none').style('stroke', Number.isFinite(c.ex) ? 'none' : 'var(--color-border-line)');
+        svg.append('rect').attr('x', cx).attr('y', y).attr('width', cw).attr('height', hRow - 2).attr('rx', 1.5).style('fill', Number.isFinite(c.ex) ? div(c.ex, G === 'T' ? 0.15 : G === 'S' ? 0.2 : 0.3) : 'none').style('stroke', Number.isFinite(c.ex) ? 'none' : 'var(--color-border-line)');
         if (c.n > 0 && c.n < 3) svg.append('rect').attr('x', cx).attr('y', y).attr('width', cw).attr('height', hRow - 2).attr('fill', `url(#${pid})`);
+        if (Number.isFinite(c.ex) && cw >= 20) svg.append('text').attr('x', cx + cw / 2).attr('y', y + (hRow - 2) / 2).attr('dy', '0.35em').attr('text-anchor', 'middle').attr('fill', 'var(--color-fg)').style('font-size', cw < 30 ? '9.5px' : '11px').style('font-weight', Math.abs(c.ex) >= 0.1 ? 600 : 400).style('pointer-events', 'none').text(L.format('+.0f')(c.ex * 100).replace('+0', '0').replace('−0', '0'));
       });
     });
     // exposure
@@ -174,14 +189,17 @@
     svg.append('path').datum(er).attr('d', d3.area().x((r) => x(r.d)).y0((r) => yE(r.e25)).y1((r) => yE(r.e75))).style('fill', C0).style('opacity', 0.16);
     svg.append('path').datum(er).attr('d', d3.line().x((r) => x(r.d)).y((r) => yE(r.el))).attr('fill', 'none').attr('stroke', C0).attr('stroke-width', 1.75);
     // flows
-    label(svg, 0, fTop - 8, 'Captação líquida somada dos fundos (R$ mi)');
-    const fmax = Math.max(1, d3.max(m.rows, (r) => Math.abs(r.fl)) || 1);
+    label(svg, 0, fTop - 8, narrow ? 'Captação (↑) e resgate (↓) brutos, R$ mi' : 'Captação (para cima) e resgate (para baixo) brutos dos 30 masters, R$ mi; linha = líquido');
+    const gr = m.rows.filter((r) => Number.isFinite(r.cap));
+    const fmax = Math.max(1, d3.max(gr, (r) => Math.max(r.cap, r.res)) || 1);
     const yF = d3.scaleLinear([-fmax, fmax], [fTop + fH, fTop]).nice();
-    svg.append('g').attr('transform', `translate(${ml},0)`).call(d3.axisLeft(yF).ticks(2).tickFormat(L.format(',.0f')).tickSize(-(w - ml - mr))).call(axisClean).call((g) => g.select('.domain').remove());
+    svg.append('g').attr('transform', `translate(${ml},0)`).call(d3.axisLeft(yF).ticks(4).tickFormat((v) => L.format(',.0f')(Math.abs(v))).tickSize(-(w - ml - mr))).call(axisClean).call((g) => g.select('.domain').remove());
     const step = (w - ml - mr) / Math.max(1, m.rows.length - 1);
-    svg.append('g').selectAll('rect').data(m.rows.filter((r) => Number.isFinite(r.fl) && r.fl !== 0)).join('rect')
-      .attr('x', (r) => x(r.d) - step * 0.85).attr('width', Math.max(1, step * 0.7)).attr('y', (r) => Math.min(yF(0), yF(r.fl))).attr('height', (r) => Math.max(1, Math.abs(yF(r.fl) - yF(0))))
-      .style('fill', (r) => (r.fl > 0 ? 'var(--color-ok)' : 'var(--color-bad)')).style('opacity', 0.7);
+    const bx = (r) => x(r.d) - step * 0.85, bw = Math.max(1, step * 0.7);
+    svg.append('g').selectAll('rect').data(gr).join('rect').attr('x', bx).attr('width', bw).attr('y', (r) => yF(r.cap)).attr('height', (r) => Math.max(0, yF(0) - yF(r.cap))).style('fill', 'var(--color-ok)').style('opacity', 0.75);
+    svg.append('g').selectAll('rect').data(gr).join('rect').attr('x', bx).attr('width', bw).attr('y', yF(0)).attr('height', (r) => Math.max(0, yF(-r.res) - yF(0))).style('fill', 'var(--color-bad)').style('opacity', 0.75);
+    svg.append('path').datum(gr).attr('d', d3.line().x((r) => x(r.d) - step / 2).y((r) => yF(r.cap - r.res))).attr('fill', 'none').attr('stroke', 'var(--color-fg)').attr('stroke-width', 1.25);
+    svg.append('line').attr('x1', ml).attr('x2', w - mr).attr('y1', yF(0)).attr('y2', yF(0)).attr('stroke', 'var(--cds-chart-reference)');
     yearAxis(svg, x, H - 24, w);
     // hover
     const rule = svg.append('line').attr('y1', pTop).attr('y2', H - 24).attr('stroke', 'var(--color-fg-muted)').style('display', 'none');
@@ -200,7 +218,7 @@
         }
       }
       const ev2 = EVENTS.filter((e) => Math.abs(x(e.d) - sx) < 6).map((e) => [null, e.l, e.ds.split('-').reverse().join('/')]);
-      showTip(el, t, px, py, ymLabel(r.ym), [[C0, 'Fundos (média)', fPct(r.fu)], ['var(--cds-chart-muted)', 'Ibovespa', fPct(r.ib)], [null, 'Exposição média', Number.isFinite(r.el) ? fPct0(r.el) : '—'], [Number.isFinite(r.fl) ? (r.fl >= 0 ? 'var(--color-ok)' : 'var(--color-bad)') : null, 'Captação do mês', Number.isFinite(r.fl) ? L.format('+,.0f')(r.fl) + ' mi' : '—'], ...ev2]);
+      showTip(el, t, px, py, ymLabel(r.ym), [[C0, 'Fundos (média)', fPct(r.fu)], ['var(--cds-chart-muted)', 'Ibovespa', fPct(r.ib)], [null, 'Exposição média', Number.isFinite(r.el) ? fPct0(r.el) : '—'], ['var(--color-ok)', 'Captação bruta', Number.isFinite(r.cap) ? fNum(r.cap) + ' mi' : '—'], ['var(--color-bad)', 'Resgate bruto', Number.isFinite(r.res) ? fNum(r.res) + ' mi' : '—'], [null, 'Líquido', Number.isFinite(r.cap) ? L.format('+,.0f')(r.cap - r.res) + ' mi' : '—'], ...(r.gMiss ? [[null, r.gMiss + ' fundo(s) sem dado no mês', null]] : []), ...ev2]);
     };
     svg.append('rect').attr('x', ml).attr('y', pTop - 10).attr('width', Math.max(0, w - ml - mr)).attr('height', H - 24 - pTop + 10).attr('fill', 'transparent')
       .on('pointermove', move).on('pointerdown', move).on('pointerleave', () => { rule.style('display', 'none'); hl.style('display', 'none'); t.hidden = true; });
@@ -210,13 +228,15 @@
   const curTk = (m, b) => { const p = P().cTk; if (p && b.ret.has(p)) return p; return m.phases[0]?.best[0]?.tk || null; };
   dash.draw('cy-phases', (el) => {
     el.replaceChildren(); const m = cyc(); if (!m) return; const b = base(); const sel = curTk(m, b);
+    const grid = document.createElement('div'); grid.className = 'rx-phases'; el.append(grid);
     m.phases.forEach((p) => {
       const c = document.createElement('div'); c.className = 'rx-phase';
       const h = document.createElement('h3'); h.textContent = p.nm;
       const meta = document.createElement('div'); meta.className = 'meta'; meta.append(document.createTextNode(ymLabel(p.a) + ' → ' + ymLabel(p.z) + ' · Ibov '));
       const iv = document.createElement('span'); iv.className = sc(p.ib); iv.textContent = fPct(p.ib); meta.append(iv);
       c.append(h, meta);
-      [['Subiram mais', p.best], ['Caíram mais', p.worst]].forEach(([t, list]) => {
+      const N = P().cyN === 20 ? 20 : 10;
+      [['Subiram mais', p.best.slice(0, N)], ['Caíram mais', p.worst.slice(0, N)]].forEach(([t, list]) => {
         const l = document.createElement('div'); l.className = 'lbl'; l.textContent = t; c.append(l);
         list.forEach((s) => {
           const bt = document.createElement('button'); bt.type = 'button'; bt.className = 'rx-stk'; bt.setAttribute('aria-pressed', String(s.tk === sel));
@@ -226,8 +246,10 @@
           bt.append(a, n, v); bt.onclick = () => { dash.setParams({ cTk: s.tk }); go('cy-acao-card'); }; c.append(bt);
         });
       });
-      el.append(c);
+      grid.append(c);
     });
+    const more = document.createElement('button'); more.type = 'button'; more.className = 'rx-btn'; more.style.justifySelf = 'start'; more.style.marginTop = '12px'; const big = P().cyN === 20;
+    more.textContent = big ? 'Mostrar 10 por lista' : 'Mostrar 20 por lista'; more.onclick = () => dash.setParams({ cyN: big ? 10 : 20 }); el.append(more);
   });
 
   // ---------- ciclo: stock detail ----------
@@ -296,10 +318,10 @@
   dash.draw('hm-sum', (el) => {
     const m = sumModel(); if (!m) return; const t = tipOf(el); const { svg, w } = svgFor(el, 10); const narrow = w < 560;
     const nameW = narrow ? 118 : 230, totW = narrow ? 54 : 74, rh = 22, head = 22, gapIb = 8;
-    const cw = (w - nameW - totW - 6) / Math.max(1, m.years.length); const showNum = cw >= 44;
+    const cw = (w - nameW - totW - 6) / Math.max(1, m.years.length); const showNum = cw >= 26; const nf = cw < 44 ? '9.5px' : '11px';
     const H = head + m.rows.length * rh + gapIb + rh + 4; setH(svg, w, H);
     const maxC = narrow ? 17 : 34; const cut = (s) => (s.length > maxC ? s.slice(0, maxC - 1) + '…' : s);
-    m.years.forEach((y, j) => svg.append('text').attr('x', nameW + j * cw + cw / 2).attr('y', 14).attr('text-anchor', 'middle').attr('fill', 'var(--color-fg-muted)').style('font-size', '11px').text((showNum ? y : "'" + y.slice(2)) + (m.partial[j] ? '*' : '')));
+    m.years.forEach((y, j) => svg.append('text').attr('x', nameW + j * cw + cw / 2).attr('y', 14).attr('text-anchor', 'middle').attr('fill', 'var(--color-fg-muted)').style('font-size', '11px').text((cw >= 44 ? y : "'" + y.slice(2)) + (m.partial[j] ? '*' : '')));
     svg.append('text').attr('x', w - totW / 2).attr('y', 14).attr('text-anchor', 'middle').attr('fill', 'var(--color-fg-muted)').style('font-size', '11px').style('font-weight', 600).text('Total');
     const cellTip = (ev, f, yLab, c) => { const [px, py] = d3.pointer(ev, el); showTip(el, t, px, py, f.fundo + ' · ' + yLab, [[null, 'Fundo', Number.isFinite(c.v) ? fPct(c.v) : 'sem cota'], [null, 'Ibovespa', fPct(c.ib)], [Number.isFinite(c.d) ? (c.d >= 0 ? 'var(--color-ok)' : 'var(--color-bad)') : null, 'Diferença', Number.isFinite(c.d) ? fPP(c.d * 100) + ' p.p.' : '—'], ...(c.full ? [] : [[null, 'Só ' + c.n + ' meses com cota', null]])]); };
     m.rows.forEach((f, i) => {
@@ -311,7 +333,7 @@
       cells.forEach((o) => {
         const g = svg.append('g').style('cursor', 'default');
         g.append('rect').attr('x', o.x + 1).attr('y', y + 1).attr('width', Math.max(1, o.wd - 2)).attr('height', rh - 2).attr('rx', 2).style('fill', Number.isFinite(o.c.v) ? div(o.c.d, o.cap) : 'none').style('stroke', Number.isFinite(o.c.v) ? 'none' : 'var(--color-border-line)');
-        if (Number.isFinite(o.c.v) && (showNum || o.tot)) g.append('text').attr('x', o.x + o.wd / 2).attr('y', y + rh / 2).attr('dy', '0.35em').attr('text-anchor', 'middle').attr('fill', 'var(--color-fg)').style('font-size', '11px').style('font-weight', o.tot ? 600 : 400).text(fPct0(o.c.v) + (o.c.full ? '' : '¹'));
+        if (Number.isFinite(o.c.v) && (showNum || o.tot)) g.append('text').attr('x', o.x + o.wd / 2).attr('y', y + rh / 2).attr('dy', '0.35em').attr('text-anchor', 'middle').attr('fill', 'var(--color-fg)').style('font-size', o.tot ? '11px' : nf).style('font-weight', o.tot ? 600 : 400).text(fPct0(o.c.v) + (o.c.full ? '' : '¹'));
         g.on('pointermove', (ev) => cellTip(ev, f, o.lab, o.c)).on('pointerdown', (ev) => cellTip(ev, f, o.lab, o.c)).on('pointerleave', () => { t.hidden = true; });
       });
     });
@@ -319,7 +341,7 @@
     svg.append('line').attr('x1', 0).attr('x2', w).attr('y1', yI - gapIb / 2).attr('y2', yI - gapIb / 2).attr('stroke', 'var(--color-fg-muted)');
     svg.append('text').attr('x', 0).attr('y', yI + rh / 2).attr('dy', '0.35em').attr('fill', 'var(--color-fg)').style('font-size', '12px').style('font-weight', 600).text('Ibovespa');
     [...m.ibY.map((v, j) => ({ v, x: nameW + j * cw, wd: cw })), { v: m.ibT, x: w - totW, wd: totW, tot: true }].forEach((o) => {
-      if (showNum || o.tot) svg.append('text').attr('x', o.x + o.wd / 2).attr('y', yI + rh / 2).attr('dy', '0.35em').attr('text-anchor', 'middle').attr('class', sc(o.v)).style('fill', o.v >= 0 ? 'var(--color-ok)' : 'var(--color-bad)').style('font-size', '11px').style('font-weight', 600).text(fPct0(o.v));
+      if (showNum || o.tot) svg.append('text').attr('x', o.x + o.wd / 2).attr('y', yI + rh / 2).attr('dy', '0.35em').attr('text-anchor', 'middle').attr('class', sc(o.v)).style('fill', o.v >= 0 ? 'var(--color-ok)' : 'var(--color-bad)').style('font-size', o.tot ? '11px' : nf).style('font-weight', 600).text(fPct0(o.v));
       else svg.append('rect').attr('x', o.x + 1).attr('y', yI + 1).attr('width', o.wd - 2).attr('height', rh - 2).attr('rx', 2).style('fill', 'transparent').on('pointerdown', (ev) => { const [px, py] = d3.pointer(ev, el); showTip(el, t, px, py, 'Ibovespa', [[null, 'Retorno', fPct(o.v)]]); });
     });
   });
