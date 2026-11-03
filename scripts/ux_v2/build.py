@@ -93,6 +93,8 @@ REPL = [
     ('<script type="text/csv" id="csv-encerrados">', '<script type="text/csv" id="csv-captacao_bruta">\n' + gross + '</script>\n<script type="text/csv" id="csv-encerrados">', 1),
     ('<article class="rx-card" id="metodologia">\n    <h2>Como os números foram feitos</h2>', '<article class="rx-card" id="metodologia">\n    <details class="rx-more" style="border:0"><summary>Como os números foram feitos</summary>', 1),
     ('    </div>\n  </article>\n</div>\n</div>', '    </div></details>\n  </article>\n</div>\n</div>', 1),
+    ('<div class="rx-cmp-multi" data-draw="cmp-flows" data-source="serie_mensal"></div>', '<div class="rx-legend" data-draw="cmp-flows-lg"></div><div class="rx-chips-b" data-draw="cmp-flows-u"></div><div class="rx-chart" data-draw="cmp-flows" data-source="serie_mensal"></div>', 1),
+    ('Para cada fundo: retorno de 12 meses menos o Ibovespa (linha) e captação líquida mensal em R$ milhões (barras), na mesma escala para todos.', 'Todos os fundos no mesmo gráfico e na mesma escala. Em cima: retorno de 12 meses menos o Ibovespa. Embaixo: captação líquida acumulada desde o início do período.', 1),
     ('<script>dash._run();</script>', '<script>\n' + js + '\n</script>\n<script>dash._run();</script>', 1),
 ]
 for old, new, n in REPL:

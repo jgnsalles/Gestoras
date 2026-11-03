@@ -478,6 +478,72 @@
     el.append(card);
   });
 
+  // ---------- comparar: captação × performance num gráfico só ----------
+  const CMPC = ['#3b6fd8', '#e07b39', '#2a9d8f', '#d9679a'];
+  const cmpIds = () => { const p = P(); return [...new Set(String(p.cmp == null ? '1,2,3' : p.cmp).split(',').filter(Boolean))].slice(0, 4); };
+  dash.draw('cmp-flows-lg', (el) => { const F = D('fundos'); mkLegend(el, cmpIds().map((id, k) => [CMPC[k], F.find((x) => String(x.id) === id)?.fundo]).filter((x) => x[1])); });
+  dash.draw('cmp-flows-u', (el) => {
+    el.replaceChildren(); const u = P().cmpU === 'pct' ? 'pct' : 'mi';
+    [['mi', 'R$ milhões'], ['pct', '% do PL inicial']].forEach(([k, t]) => { const bt = document.createElement('button'); bt.type = 'button'; bt.className = 'rx-chip'; bt.textContent = t; bt.setAttribute('aria-pressed', String(k === u)); bt.onclick = () => dash.setParams({ cmpU: k }); el.append(bt); });
+  });
+  dash.draw('cmp-flows', (el) => {
+    const b = base(); if (!b) return; const t = tipOf(el); const [ini, fim] = win(); const pct = P().cmpU === 'pct';
+    const F = D('fundos'); const ser = d3.group(D('serie_mensal'), (r) => String(r.id));
+    const ms = b.months.filter((m) => m >= ini && m <= fim);
+    const funds = cmpIds().map((id, k) => {
+      const f = F.find((x) => String(x.id) === id); if (!f) return null;
+      const all = (ser.get(id) || []).slice().sort((a, z) => d3.ascending(a.ym, z.ym)); const idx = new Map(all.map((r, i) => [r.ym, i]));
+      const rfOf = (r) => { const a = num(r.ret_fundo); return Number.isFinite(a) ? a : num(r.ret_acoes_contrib); };
+      const pl0 = num(all.find((r) => r.ym >= ini && Number.isFinite(num(r.PL_mi)))?.PL_mi);
+      let cum = 0;
+      const rows = ms.map((ym, j) => {
+        const i = idx.get(ym); let rel = NaN, fl = NaN, pl = NaN;
+        if (i != null) {
+          let g = 1, gi = 1, n = 0; for (let q = Math.max(1, i - 11); q <= i; q++) { const x = all[q]; const rf = rfOf(x), ri = num(x.ret_ibov); if (Number.isFinite(rf) && Number.isFinite(ri)) { g *= 1 + rf; gi *= 1 + ri; n++; } }
+          rel = n >= 12 ? g - gi : NaN; fl = j > 0 ? num(all[i].fluxo_mi) : 0; pl = num(all[i].PL_mi);
+        }
+        if (Number.isFinite(fl)) cum += fl;
+        return { ym, d: endDate(ym), rel, fl, cum, has: i != null, pl, cumV: pct ? cum / pl0 : cum };
+      });
+      return { id, nome: f.fundo, c: CMPC[k], rows, pl0 };
+    }).filter(Boolean);
+    const { svg, w } = svgFor(el, 10); if (!funds.length) return; const narrow = w < 560;
+    const ml = 50, mr = narrow ? 12 : 120, top = 24, h1 = narrow ? 170 : 210, gap = 40, h2 = narrow ? 150 : 190, H = top + h1 + gap + h2 + 26; setH(svg, w, H);
+    const x = d3.scaleUtc([endDate(ms[0]), endDate(ms[ms.length - 1])], [ml, w - mr]);
+    drawPhases(svg, x, top - 6, H - 26, ini, fim, 12);
+    eventLines(svg, x, x.domain()[0], x.domain()[1], top, H - 26);
+    const all1 = funds.flatMap((f) => f.rows.map((r) => r.rel)).filter(Number.isFinite);
+    const m1 = Math.max(0.1, d3.max(all1, Math.abs) || 0.1);
+    const y1 = d3.scaleLinear([-m1, m1], [top + h1, top]).nice();
+    svg.append('text').attr('x', ml).attr('y', top + 10).attr('fill', 'var(--color-fg-muted)').style('font-size', '11px').text('Retorno 12 meses menos Ibovespa (p.p.)');
+    svg.append('g').attr('transform', `translate(${ml},0)`).call(d3.axisLeft(y1).ticks(5).tickFormat((v) => L.format('+.0f')(v * 100)).tickSize(-(w - ml - mr))).call(axisClean).call((g) => g.select('.domain').remove());
+    svg.append('line').attr('x1', ml).attr('x2', w - mr).attr('y1', y1(0)).attr('y2', y1(0)).attr('stroke', 'var(--cds-chart-reference)');
+    const t2 = top + h1 + gap;
+    const all2 = funds.flatMap((f) => f.rows.map((r) => r.cumV)).filter(Number.isFinite);
+    const y2 = d3.scaleLinear([Math.min(0, d3.min(all2)), Math.max(0, d3.max(all2))], [t2 + h2, t2]).nice();
+    svg.append('text').attr('x', ml).attr('y', t2 - 8).attr('fill', 'var(--color-fg-muted)').style('font-size', '11px').text(pct ? 'Captação líquida acumulada (% do PL no início)' : 'Captação líquida acumulada (R$ mi)');
+    svg.append('g').attr('transform', `translate(${ml},0)`).call(d3.axisLeft(y2).ticks(5).tickFormat(pct ? L.format('.0%') : L.format(',.0f')).tickSize(-(w - ml - mr))).call(axisClean).call((g) => g.select('.domain').remove());
+    svg.append('line').attr('x1', ml).attr('x2', w - mr).attr('y1', y2(0)).attr('y2', y2(0)).attr('stroke', 'var(--cds-chart-reference)');
+    funds.forEach((f) => {
+      svg.append('path').datum(f.rows).attr('d', d3.line().defined((r) => Number.isFinite(r.rel)).x((r) => x(r.d)).y((r) => y1(r.rel))).attr('fill', 'none').attr('stroke', f.c).attr('stroke-width', 2);
+      svg.append('path').datum(f.rows).attr('d', d3.line().defined((r) => r.has && Number.isFinite(r.cumV)).x((r) => x(r.d)).y((r) => y2(r.cumV))).attr('fill', 'none').attr('stroke', f.c).attr('stroke-width', 2.25);
+    });
+    if (!narrow) {
+      const ends = funds.map((f) => { const r = [...f.rows].reverse().find((z) => z.has && Number.isFinite(z.cumV)); return r ? { f, y: y2(r.cumV), v: r.cumV } : null; }).filter(Boolean).sort((a, z) => a.y - z.y);
+      ends.forEach((e, i) => { if (i && e.y - ends[i - 1].y < 13) e.y = ends[i - 1].y + 13; svg.append('text').attr('x', w - mr + 6).attr('y', e.y).attr('dy', '0.35em').attr('fill', e.f.c).style('font-size', '11px').style('font-weight', 600).text((pct ? L.format('+.0%')(e.v) : L.format('+,.0f')(e.v) + ' mi') + ' ' + e.f.nome.split(' ')[0]); });
+    }
+    yearAxis(svg, x, H - 26, w);
+    const rule = svg.append('line').attr('y1', top).attr('y2', H - 26).attr('stroke', 'var(--color-fg-muted)').style('display', 'none');
+    const bis = d3.bisector((r) => r.d).center; const R0 = funds[0].rows;
+    const mv = (ev) => {
+      const [px, py] = d3.pointer(ev, el); const i = bis(R0, x.invert(px * w / el.clientWidth)); const r = R0[i]; if (!r) return; rule.style('display', null).attr('x1', x(r.d)).attr('x2', x(r.d));
+      const lines = [];
+      funds.forEach((f) => { const z = f.rows[i]; lines.push([f.c, f.nome, (Number.isFinite(z.rel) ? fPP(z.rel * 100) + ' p.p.' : '—') + ' · capt. mês ' + (Number.isFinite(z.fl) ? L.format('+,.0f')(z.fl) : '—') + ' · acum. ' + (pct ? L.format('+.0%')(z.cumV) : L.format('+,.0f')(z.cum) + ' mi')]); });
+      showTip(el, t, px, py, ymLabel(r.ym), lines);
+    };
+    svg.append('rect').attr('x', ml).attr('y', 0).attr('width', Math.max(0, w - ml - mr)).attr('height', H).attr('fill', 'transparent').on('pointermove', mv).on('pointerdown', mv).on('pointerleave', () => { rule.style('display', 'none'); t.hidden = true; });
+  });
+
   // ---------- hooks ----------
   document.getElementById('cy-close')?.addEventListener('click', () => dash.setParams({ cTk: null }));
   dash.onData(() => { const c = document.getElementById('cy-acao-card'); if (c) c.hidden = !P().cTk; });
