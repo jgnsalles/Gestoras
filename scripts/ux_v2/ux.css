@@ -24,3 +24,15 @@
   .rx-cardify tfoot tr { background: var(--color-bg); }
   .rx-tablebox { max-height: 34rem; }
 }
+
+.rx-pbig { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 6px 0 2px; }
+.rx-pbig div { display: grid; }
+.rx-pbig span:first-child { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.rx-pbig span:last-child { font-family: var(--font-anthropic-serif); font-size: 1.6rem; line-height: 1.15; }
+[data-draw="cy-strip"] .rx-stk { grid-template-columns: minmax(0, 1fr) auto; }
+.rx-stk.st { cursor: default; }
+.rx-stk.st:hover { background: none; }
+.rx-more { border-top: 1px solid var(--color-border-line); padding: 6px 0; }
+.rx-more > summary { font-size: var(--cds-font-size-body); color: var(--color-fg); font-weight: 600; padding: 6px 0; }
+#cy-detalhes { gap: 0; }
+[data-draw="cy-exp"], [data-draw="cy-heat"] { min-height: 0; }

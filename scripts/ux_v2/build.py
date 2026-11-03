@@ -18,22 +18,34 @@ gross = open(os.path.join(ROOT, 'output', 'dashboard', 'captacao_bruta.csv'), en
 
 CICLO = '''<section class="rx-page" id="pg-ciclo" data-pg="ciclo">
     <article class="rx-card" id="cy-card">
-      <h2>O ciclo, mês a mês</h2>
+      <h2>O ciclo</h2>
       <div class="rx-legend" data-draw="cy-legend"></div>
-      <div class="rx-chips-b" data-draw="cy-gran"></div>
-      <div class="rx-chart" data-draw="cy-main" data-source="serie_mensal precos acoes ibov"></div>
-      <p class="rx-note">Fundos: média simples da cota dos 30 masters. Setores: mediana do retorno das ações do setor no trimestre menos o Ibovespa. Universo: ações que algum dos 30 fundos teve com ≥0,5% do PL. Captação e resgate: soma diária do Informe Diário da CVM no master de cada fundo.</p>
+      <div class="rx-chart" data-draw="cy-main" data-source="serie_mensal ibov"></div>
     </article>
-    <article class="rx-card" id="cy-fases">
-      <h2>Melhores e piores por fase</h2>
-      <p class="rx-note">Retorno total com dividendos. Só entram ações com preço em todos os meses da fase. Toque numa ação para ver o gráfico dela.</p>
-      <div data-draw="cy-phases" data-source="precos acoes"></div>
+    <article class="rx-card" id="cy-fases-card">
+      <h2>O que funcionou em cada fase</h2>
+      <div class="rx-phases" data-draw="cy-strip" data-source="precos acoes serie_mensal"></div>
     </article>
-    <article class="rx-card" id="cy-acao-card">
-      <h2 data-draw="cy-acao-t">—</h2>
+    <article class="rx-card" id="cy-acao-card" hidden>
+      <div class="rx-cardhead"><h2 data-draw="cy-acao-t">—</h2><button type="button" class="rx-btn" id="cy-close">Fechar</button></div>
       <div class="rx-legend" data-draw="cy-acao-lg"></div>
       <div class="rx-chart" data-draw="cy-acao" data-source="precos posicoes_1 posicoes_2"></div>
       <div class="rx-split" data-draw="cy-acao-k"></div>
+    </article>
+    <article class="rx-card" id="cy-detalhes">
+      <details class="rx-more"><summary>Setores período a período</summary>
+        <div class="rx-chips-b" data-draw="cy-gran"></div>
+        <div class="rx-chart" data-draw="cy-heat"></div>
+        <p class="rx-note">Mediana do retorno das ações do setor no período menos o Ibovespa, em p.p. Hachurado: menos de 3 ações.</p>
+      </details>
+      <details class="rx-more"><summary>Exposição dos fundos em ações</summary>
+        <div class="rx-chart" data-draw="cy-exp"></div>
+        <p class="rx-note">Média e faixa 25–75% dos 30 fundos, ações à vista em % do PL.</p>
+      </details>
+      <details class="rx-more"><summary>Todas as ações que mais subiram e caíram por fase</summary>
+        <div data-draw="cy-phases"></div>
+      </details>
+      <p class="rx-note">Fundos: média simples da cota dos 30 masters. Setores e ações: só as que algum dos 30 fundos teve com ≥0,5% do PL, com preço em todos os meses do período. Captação e resgate: Informe Diário da CVM, master de cada fundo.</p>
     </article>
   </section>
 
@@ -79,6 +91,8 @@ REPL = [
     ('<article class="rx-card" id="empresas-card">', BUB + '<article class="rx-card" id="empresas-card">', 1),
     ('<article class="rx-card" id="cartas-gestoras">', CT + '<article class="rx-card" id="cartas-gestoras">', 1),
     ('<script type="text/csv" id="csv-encerrados">', '<script type="text/csv" id="csv-captacao_bruta">\n' + gross + '</script>\n<script type="text/csv" id="csv-encerrados">', 1),
+    ('<article class="rx-card" id="metodologia">\n    <h2>Como os números foram feitos</h2>', '<article class="rx-card" id="metodologia">\n    <details class="rx-more" style="border:0"><summary>Como os números foram feitos</summary>', 1),
+    ('    </div>\n  </article>\n</div>\n</div>', '    </div></details>\n  </article>\n</div>\n</div>', 1),
     ('<script>dash._run();</script>', '<script>\n' + js + '\n</script>\n<script>dash._run();</script>', 1),
 ]
 for old, new, n in REPL:
