@@ -75,7 +75,6 @@ CT = '''<article class="rx-card" id="cartas-tempo">
     </article>
     '''
 
-RADAR = '<section class="rx-page" id="pg-radar" data-pg="radar" hidden>\n    <article class="rx-card" id="radar-card">\n      <h2>Radar da gestora</h2>\n      <p class="rx-note">Cada eixo é a posição do fundo entre os 30 no período escolhido no topo: centro = o menor, borda = o maior, tracejado = mediana. Em vol e queda máxima, mais para fora é menor. Na tabela, 1º = mais para fora. Toque num ponto para ver o valor.</p>\n      <div class="rx-controls" data-draw="rd-sel" data-source="fundos"></div>\n      <div class="rx-legend" data-draw="rd-lg"></div>\n      <div class="rx-chart" data-draw="rd-chart" data-source="serie_mensal posicoes_1 posicoes_2"></div>\n      <div class="rx-tablebox" data-draw="rd-tb"></div>\n    </article>\n  </section>\n\n  '
 REPL = [
     ('<title>Navegando Dilma 2</title>', '<title>Navegando Dilma 2 v2</title>', 1),
     ('</style></head>', css + '</style></head>', 1),
@@ -96,8 +95,6 @@ REPL = [
     ('    </div>\n  </article>\n</div>\n</div>', '    </div></details>\n  </article>\n</div>\n</div>', 1),
     ('<div class="rx-cmp-multi" data-draw="cmp-flows" data-source="serie_mensal"></div>', '<div class="rx-legend" data-draw="cmp-flows-lg"></div><div class="rx-chips-b" data-draw="cmp-flows-u"></div><div class="rx-chart" data-draw="cmp-flows" data-source="serie_mensal"></div>', 1),
     ('Para cada fundo: retorno de 12 meses menos o Ibovespa (linha) e captação líquida mensal em R$ milhões (barras), na mesma escala para todos.', 'Todos os fundos no mesmo gráfico e na mesma escala. Em cima: retorno de 12 meses menos o Ibovespa. Embaixo: captação líquida acumulada desde o início do período.', 1),
-    ('<button type="button" role="tab" class="rx-tab" data-pg="comparar" aria-selected="false">Comparar</button>', '<button type="button" role="tab" class="rx-tab" data-pg="comparar" aria-selected="false">Comparar</button>\n      <button type="button" role="tab" class="rx-tab" data-pg="radar" aria-selected="false">Radar</button>', 1),
-    ('<section class="rx-page" id="pg-comparar" data-pg="comparar" hidden>', RADAR + '<section class="rx-page" id="pg-comparar" data-pg="comparar" hidden>', 1),
     ('<script>dash._run();</script>', '<script>\n' + js + '\n</script>\n<script>dash._run();</script>', 1),
 ]
 for old, new, n in REPL:
