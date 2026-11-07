@@ -9,3 +9,4 @@ App estilo Notion para estudar as 10 apostilas do CFA Level 1 (Academia Rafael T
 Os PDFs (apostila inteira e recortes por assunto) não ficam no repositório; eles são publicados junto com o app.
 
 - `build_app_offline.py`: gera a versão instalável no celular (pasta com index.html, manifest, service worker, ícones, pdf.js e os recortes), para hospedar e adicionar à Tela de Início.
+- `build_single_html.py`: gera um único arquivo HTML com tudo dentro (inclusive as páginas das apostilas como imagens), para abrir no Safari e adicionar à Tela de Início.
