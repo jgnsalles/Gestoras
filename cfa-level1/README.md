@@ -7,3 +7,5 @@ App estilo Notion para estudar as 10 apostilas do CFA Level 1 (Academia Rafael T
 - `template.html`: o app. O `structure.json` entra no lugar de `/*STRUCT*/`.
 
 Os PDFs (apostila inteira e recortes por assunto) não ficam no repositório; eles são publicados junto com o app.
+
+- `build_app_offline.py`: gera a versão instalável no celular (pasta com index.html, manifest, service worker, ícones, pdf.js e os recortes), para hospedar e adicionar à Tela de Início.
