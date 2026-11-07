@@ -1,0 +1,650 @@
+<title>CFA Level 1 · Caderno</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* Layout: Notion-style workspace — fixed sidebar tree + centered 900px page column; sidebar becomes a drawer under 820px */
+:root{
+  --bg:#ffffff; --side:#f7f7f5; --fg:#37352f; --fg2:rgba(55,53,47,.65); --fg3:rgba(55,53,47,.45);
+  --line:rgba(55,53,47,.09); --hover:rgba(55,53,47,.06); --hover2:rgba(55,53,47,.1);
+  --accent:#2383e2; --accent-bg:rgba(35,131,226,.1);
+  --callout:#f1f1ef; --cover:#e9e5dc; --coverline:rgba(80,70,50,.08);
+  --t-gray:#e3e2e0; --t-gray-fg:#32302c;
+  --t-green:#dbeddb; --t-green-fg:#1c3829;
+  --t-yellow:#fdecc8; --t-yellow-fg:#402c1b;
+  --t-red:#ffe2dd; --t-red-fg:#5d1715;
+  --t-blue:#d3e5ef; --t-blue-fg:#183347;
+  --c-easy:#4f9a6e; --c-med:#d9a23a; --c-hard:#d4574a; --c-done:#5b8fd6; --c-track:#ebeae7;
+  --shadow:0 0 0 1px rgba(15,15,15,.05),0 3px 6px rgba(15,15,15,.1),0 9px 24px rgba(15,15,15,.2);
+  --sans:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI Variable Display","Segoe UI",Helvetica,"Apple Color Emoji",Arial,sans-serif;
+  --serif:"Lyon-Text",Georgia,ui-serif,serif;
+  --mono:"SFMono-Regular",Menlo,Consolas,"Liberation Mono",monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#191919; --side:#202020; --fg:rgba(255,255,255,.81); --fg2:rgba(255,255,255,.52); --fg3:rgba(255,255,255,.32);
+  --line:rgba(255,255,255,.08); --hover:rgba(255,255,255,.055); --hover2:rgba(255,255,255,.1);
+  --accent:#529cca; --accent-bg:rgba(82,156,202,.16);
+  --callout:#252525; --cover:#2a2723; --coverline:rgba(255,240,210,.05);
+  --t-gray:#373737; --t-gray-fg:rgba(255,255,255,.8);
+  --t-green:#2b4a37; --t-green-fg:#cfe8d6;
+  --t-yellow:#59472a; --t-yellow-fg:#f4e2bf;
+  --t-red:#5c302b; --t-red-fg:#f7d3cd;
+  --t-blue:#283f55; --t-blue-fg:#cfe1f0;
+  --c-easy:#4f9a6e; --c-med:#c79a3a; --c-hard:#d65a4c; --c-done:#5b8fd6; --c-track:#2c2c2c;
+  --shadow:0 0 0 1px rgba(255,255,255,.08),0 3px 6px rgba(0,0,0,.4),0 9px 24px rgba(0,0,0,.5);
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#191919; --side:#202020; --fg:rgba(255,255,255,.81); --fg2:rgba(255,255,255,.52); --fg3:rgba(255,255,255,.32);
+  --line:rgba(255,255,255,.08); --hover:rgba(255,255,255,.055); --hover2:rgba(255,255,255,.1);
+  --accent:#529cca; --accent-bg:rgba(82,156,202,.16);
+  --callout:#252525; --cover:#2a2723; --coverline:rgba(255,240,210,.05);
+  --t-gray:#373737; --t-gray-fg:rgba(255,255,255,.8);
+  --t-green:#2b4a37; --t-green-fg:#cfe8d6;
+  --t-yellow:#59472a; --t-yellow-fg:#f4e2bf;
+  --t-red:#5c302b; --t-red-fg:#f7d3cd;
+  --t-blue:#283f55; --t-blue-fg:#cfe1f0;
+  --c-easy:#4f9a6e; --c-med:#c79a3a; --c-hard:#d65a4c; --c-done:#5b8fd6; --c-track:#2c2c2c;
+  --shadow:0 0 0 1px rgba(255,255,255,.08),0 3px 6px rgba(0,0,0,.4),0 9px 24px rgba(0,0,0,.5);
+  color-scheme:dark}
+html,body{height:100%}
+body{background:var(--bg);color:var(--fg);font-family:var(--sans);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;padding:0}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:1px;border-radius:3px}
+.app{display:flex;height:100%}
+/* sidebar */
+.side{width:252px;flex:none;background:var(--side);border-right:1px solid var(--line);height:100%;overflow-y:auto;padding:10px 6px 40px;padding-left:max(6px,env(safe-area-inset-left,0px));font-size:14px;color:var(--fg2)}
+.ws{display:flex;align-items:center;gap:8px;padding:6px 8px;margin-bottom:6px;color:var(--fg);font-weight:600}
+.ws .logo{width:22px;height:22px;border-radius:4px;background:var(--fg);color:var(--bg);display:grid;place-items:center;font-size:11px;font-weight:700;letter-spacing:.02em}
+.ws small{display:block;font-weight:400;font-size:12px;color:var(--fg3);line-height:1.2}
+.sgroup{margin-top:14px;padding:4px 8px;font-size:12px;font-weight:600;color:var(--fg3)}
+.si{display:flex;align-items:center;gap:4px;min-height:28px;padding:2px 6px;border-radius:5px;cursor:pointer;text-decoration:none;user-select:none}
+.si:hover{background:var(--hover)}
+.si.on{background:var(--hover2);color:var(--fg);font-weight:500}
+.si .tw{width:20px;height:20px;flex:none;display:grid;place-items:center;border-radius:3px;color:var(--fg3);transition:transform .12s}
+.si .tw:hover{background:var(--hover2)}
+.si .tw.open{transform:rotate(90deg)}
+.si .ic{width:20px;flex:none;text-align:center;font-size:15px}
+.si .lb{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.si .ct{font-size:11px;color:var(--fg3);font-variant-numeric:tabular-nums}
+.si .dot{width:7px;height:7px;border-radius:50%;flex:none;margin:0 6px 0 7px;background:var(--c-track);border:1px solid var(--fg3)}
+.si .dot.d{background:var(--c-done);border-color:var(--c-done)}
+.si .dot.f{background:var(--c-easy);border-color:var(--c-easy)}
+.si .dot.m{background:var(--c-med);border-color:var(--c-med)}
+.si .dot.h{background:var(--c-hard);border-color:var(--c-hard)}
+.kids{margin-left:12px}
+/* main */
+.main{flex:1;min-width:0;height:100%;overflow-y:auto;position:relative}
+.top{position:sticky;top:0;z-index:5;background:var(--bg);display:flex;align-items:center;gap:8px;height:45px;padding-left:max(12px,env(safe-area-inset-left,0px));padding-right:max(12px,env(safe-area-inset-right,0px));font-size:14px;color:var(--fg2)}
+.menu{display:none;width:28px;height:28px;border-radius:5px;place-items:center}
+.menu:hover{background:var(--hover)}
+.crumbs{flex:1;min-width:0;display:flex;align-items:center;gap:2px;white-space:nowrap;overflow:hidden}
+.crumbs a{padding:2px 6px;border-radius:4px;text-decoration:none;overflow:hidden;text-overflow:ellipsis;max-width:220px}
+.crumbs a:hover{background:var(--hover)}
+.crumbs .sep{color:var(--fg3)}
+.sync{font-size:12px;color:var(--fg3);white-space:nowrap}
+.page{max-width:900px;margin:0 auto;padding-block:0 120px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+@media (min-width:821px){.page{padding-left:96px;padding-right:96px}}
+.cover{height:180px;background-color:var(--cover);background-image:linear-gradient(var(--coverline) 1px,transparent 1px),linear-gradient(90deg,var(--coverline) 1px,transparent 1px);background-size:24px 24px;position:relative;overflow:hidden}
+.cover svg{position:absolute;inset:0;width:100%;height:100%}
+.picon{font-size:72px;line-height:1;margin-top:-42px;position:relative;width:max-content}
+.picon.nocover{margin-top:56px}
+h1{font-size:40px;line-height:1.2;font-weight:700;margin:14px 0 4px;letter-spacing:-.01em;text-wrap:balance}
+.sub{color:var(--fg2);font-size:15px;margin:0 0 14px}
+h2{font-size:24px;font-weight:600;line-height:1.3;margin:38px 0 6px;letter-spacing:-.005em;text-wrap:balance}
+h3{font-size:19px;font-weight:600;margin:24px 0 4px}
+p{margin:4px 0}
+.muted{color:var(--fg2)} .faint{color:var(--fg3)}
+.num{font-variant-numeric:tabular-nums}
+.mono{font-family:var(--mono);font-size:.86em}
+hr{border:0;border-top:1px solid var(--line);margin:18px 0}
+/* properties */
+.props{display:grid;grid-template-columns:minmax(120px,160px) 1fr;font-size:14px;margin:10px 0 6px}
+.props>div{min-height:34px;display:flex;align-items:center;padding:3px 6px}
+.props .k{color:var(--fg2);gap:8px}
+.props .k svg{width:15px;height:15px;opacity:.6;flex:none}
+.props .v{min-width:0;flex-wrap:wrap;gap:6px;border-radius:4px}
+/* callout */
+.callout{display:flex;gap:10px;background:var(--callout);border-radius:6px;padding:16px 16px 16px 12px;margin:12px 0}
+.callout .ci{font-size:20px;line-height:1.3;flex:none;width:26px;text-align:center}
+.callout>div:last-child{min-width:0}
+/* tags */
+.tag{display:inline-flex;align-items:center;height:21px;padding:0 7px;border-radius:3px;font-size:13px;white-space:nowrap;background:var(--t-gray);color:var(--t-gray-fg)}
+.tag.f{background:var(--t-green);color:var(--t-green-fg)}
+.tag.m{background:var(--t-yellow);color:var(--t-yellow-fg)}
+.tag.h{background:var(--t-red);color:var(--t-red-fg)}
+.tag.b{background:var(--t-blue);color:var(--t-blue-fg)}
+select.dsel{appearance:none;-webkit-appearance:none;border:0;font:inherit;font-size:13px;height:22px;padding:0 8px;border-radius:3px;cursor:pointer;background:transparent;color:var(--fg3);max-width:100%}
+select.dsel:hover{background:var(--hover2)}
+select.dsel.f{background:var(--t-green);color:var(--t-green-fg)}
+select.dsel.m{background:var(--t-yellow);color:var(--t-yellow-fg)}
+select.dsel.h{background:var(--t-red);color:var(--t-red-fg)}
+select.dsel option{background:var(--bg);color:var(--fg)}
+/* checkbox */
+.cb{width:16px;height:16px;flex:none;border:1.5px solid var(--fg2);border-radius:3px;display:grid;place-items:center;cursor:pointer;transition:background .1s}
+.cb svg{width:12px;height:12px;opacity:0}
+.cb.on{background:var(--accent);border-color:var(--accent)}
+.cb.on svg{opacity:1}
+/* toggle block */
+.tgl{margin:2px 0}
+.tgl>.th{display:flex;align-items:center;gap:6px;padding:4px 2px;border-radius:4px;cursor:pointer;user-select:none}
+.tgl>.th:hover{background:var(--hover)}
+.tgl>.th .tw{width:22px;height:22px;display:grid;place-items:center;color:var(--fg2);transition:transform .12s;flex:none}
+.tgl.open>.th .tw{transform:rotate(90deg)}
+.tgl>.tb{display:none;padding-left:28px}
+.tgl.open>.tb{display:block}
+.th .tt{flex:1;min-width:0;font-weight:600;font-size:17px}
+.th .meta{font-size:13px;color:var(--fg3);white-space:nowrap}
+/* table */
+.tbl-wrap{overflow-x:auto;margin:6px 0 14px;border-top:1px solid var(--line)}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:520px}
+th{font-weight:400;color:var(--fg2);text-align:left;font-size:13px;padding:6px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:5px 8px;border-bottom:1px solid var(--line);vertical-align:middle}
+td+td,th+th{border-left:1px solid var(--line)}
+tr.row:hover td{background:var(--hover)}
+td.name a{text-decoration:none;font-weight:500;display:flex;gap:6px;align-items:center}
+td.name a:hover span{border-bottom:1px solid var(--fg3)}
+td.name .pg{font-size:13px}
+.rowdone td.name a span{color:var(--fg2)}
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:18px 0 6px}
+.stat{border:1px solid var(--line);border-radius:6px;padding:12px 14px}
+.stat .l{font-size:12px;color:var(--fg2)}
+.stat .n{font-size:26px;font-weight:600;line-height:1.25;font-variant-numeric:tabular-nums;margin-top:2px}
+.stat .s{font-size:12px;color:var(--fg3)}
+@media (max-width:640px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* charts */
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px;color:var(--fg2);margin:6px 0 10px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+.bars{display:grid;grid-template-columns:minmax(0,190px) minmax(0,1fr) 44px;gap:8px 10px;align-items:center;font-size:13px}
+.bars .bl{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-decoration:none;display:flex;gap:6px;align-items:center}
+.bars .bl:hover span{border-bottom:1px solid var(--fg3)}
+.bars .bp{text-align:right;color:var(--fg2);font-variant-numeric:tabular-nums}
+.track{display:flex;height:14px;background:var(--c-track);border-radius:4px;overflow:hidden;gap:2px;position:relative;cursor:default}
+.track>b{display:block;height:100%}
+.track>b:last-child{border-radius:0 4px 4px 0}
+.track>b:first-child{border-radius:4px 0 0 4px}
+.track>b:only-child{border-radius:4px}
+@media (max-width:560px){.bars{grid-template-columns:minmax(0,1fr) 40px}.bars .bl{grid-column:1/-1;margin-bottom:-6px}}
+.tip{position:fixed;z-index:50;pointer-events:none;background:var(--bg);color:var(--fg);box-shadow:var(--shadow);border-radius:6px;padding:8px 10px;font-size:12px;line-height:1.5;max-width:240px}
+.tip b{font-weight:600}
+.weeks{display:flex;align-items:flex-end;gap:6px;height:120px;padding-top:16px;border-bottom:1px solid var(--line);position:relative}
+.weeks .col{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:4px;position:relative}
+.weeks .col b{width:100%;max-width:34px;background:var(--c-done);border-radius:4px 4px 0 0;min-height:2px}
+.weeks .col b.z{background:var(--c-track)}
+.weeks .col em{font-style:normal;font-size:11px;color:var(--fg2);font-variant-numeric:tabular-nums}
+.wlab{display:flex;gap:6px;font-size:11px;color:var(--fg3);margin-top:4px}
+.wlab span{flex:1;text-align:center;white-space:nowrap;overflow:hidden}
+/* lists */
+.list{display:flex;flex-direction:column}
+.li{display:flex;align-items:center;gap:10px;padding:6px 4px;border-radius:4px;text-decoration:none;min-width:0}
+.li:hover{background:var(--hover)}
+.li .lt{flex:1;min-width:0}
+.li .lt>div:first-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.li .lt small{display:block;font-size:12px;color:var(--fg3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rank{width:22px;height:22px;border-radius:50%;flex:none;display:grid;place-items:center;font-size:12px;font-weight:600;background:var(--t-gray);color:var(--t-gray-fg)}
+.minibar{width:70px;height:6px;background:var(--c-track);border-radius:3px;overflow:hidden;flex:none}
+.minibar b{display:block;height:100%;background:var(--c-done)}
+/* gallery */
+.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin:10px 0}
+.card{border:1px solid var(--line);border-radius:6px;text-decoration:none;overflow:hidden;display:flex;flex-direction:column;transition:background .1s}
+.card:hover{background:var(--hover)}
+.card .cv{height:56px;background:var(--cover);display:flex;align-items:flex-end;padding:0 12px}
+.card .cv span{font-size:30px;line-height:1;transform:translateY(12px)}
+.card .cb2{padding:18px 12px 12px;display:flex;flex-direction:column;gap:6px}
+.card .t1{font-weight:600;font-size:14px;line-height:1.3}
+.card .t2{font-size:12px;color:var(--fg3)}
+.card .row2{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--fg2)}
+.card .row2 .minibar{flex:1}
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 12px;border-radius:5px;font-size:14px;font-weight:500;text-decoration:none;border:1px solid var(--line);background:var(--bg)}
+.btn:hover{background:var(--hover)}
+.btn.pri{background:var(--accent);color:#fff;border-color:transparent}
+.btn.pri:hover{filter:brightness(1.07)}
+.next{display:flex;align-items:center;gap:14px;border:1px solid var(--line);border-radius:6px;padding:14px;text-decoration:none;margin:10px 0}
+.next:hover{background:var(--hover)}
+.next .nt{flex:1;min-width:0}
+.next .nt small{display:block;color:var(--fg3);font-size:12px}
+.next .nt div{font-weight:600}
+/* topic page */
+.slides{columns:2;column-gap:24px;font-size:14px;margin:4px 0}
+.slides div{break-inside:avoid;display:flex;gap:10px;padding:2px 0}
+.slides .mono{color:var(--fg3);min-width:28px;text-align:right}
+@media (max-width:560px){.slides{columns:1}}
+textarea.notes{width:100%;min-height:90px;border:0;background:transparent;color:var(--fg);font:inherit;font-size:15px;resize:vertical;padding:6px 2px;border-radius:4px}
+textarea.notes:hover,textarea.notes:focus{background:var(--hover);outline:none}
+.viewer{margin:10px 0;display:flex;flex-direction:column;gap:12px}
+.viewer canvas{width:100%;height:auto;border-radius:4px;box-shadow:0 0 0 1px var(--line),0 2px 6px rgba(0,0,0,.06);background:#fff;display:block}
+.pghold{position:relative}
+.pghold .pn{position:absolute;right:8px;bottom:8px;font-size:11px;background:rgba(0,0,0,.55);color:#fff;padding:1px 7px;border-radius:9px;font-family:var(--mono)}
+.ph{aspect-ratio:3/2;max-width:100%;border-radius:4px;background:var(--callout);display:grid;place-items:center;color:var(--fg3);font-size:13px}
+.pager{display:flex;gap:10px;justify-content:space-between;margin-top:30px;flex-wrap:wrap}
+.pager a{flex:1 1 220px;min-width:0;border:1px solid var(--line);border-radius:6px;padding:10px 14px;text-decoration:none}
+.pager a:hover{background:var(--hover)}
+.pager small{display:block;color:var(--fg3);font-size:12px}
+.pager span{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:500}
+.pager a.r{text-align:right}
+/* plan */
+.wk{border-left:2px solid var(--line);padding-left:14px;margin:0 0 4px 10px}
+.wk.now{border-color:var(--accent)}
+.prow{display:flex;align-items:center;gap:10px;padding:4px 2px;font-size:15px;border-radius:4px;min-width:0}
+.prow:hover{background:var(--hover)}
+.prow a{flex:1;min-width:0;text-decoration:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.prow .pm{font-size:12px;color:var(--fg3);white-space:nowrap}
+.prow.done a{color:var(--fg3);text-decoration:line-through}
+.milestone{font-size:13px;color:var(--fg2);padding:4px 2px 4px 26px}
+ol.order{margin:6px 0;padding-left:26px}
+ol.order li{padding:2px 0}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:5px;overflow:hidden}
+.seg button{padding:2px 10px;font-size:13px;height:26px}
+.seg button+button{border-left:1px solid var(--line)}
+.seg button.on{background:var(--accent-bg);color:var(--accent);font-weight:600}
+input[type=date]{font:inherit;font-size:14px;color:var(--fg);background:transparent;border:0;border-radius:4px;padding:2px 4px}
+input[type=date]:hover{background:var(--hover)}
+.empty{color:var(--fg3);font-size:14px;padding:6px 2px}
+.scrim{display:none}
+@media (max-width:820px){
+  .menu{display:grid}
+  .side{position:fixed;left:0;top:0;bottom:0;z-index:30;transform:translateX(-105%);transition:transform .2s;box-shadow:var(--shadow);width:min(300px,86vw);padding-top:calc(10px + env(safe-area-inset-top,0px))}
+  .side.open{transform:none}
+  .scrim.open{display:block;position:fixed;inset:0;z-index:20;background:rgba(0,0,0,.3)}
+  h1{font-size:32px}
+  .picon{font-size:56px;margin-top:-34px}
+  .cover{height:130px}
+  .props{grid-template-columns:118px 1fr}
+}
+.top{top:env(safe-area-inset-top,0px)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="app">
+  <nav class="side" id="side" aria-label="Navegação"></nav>
+  <div class="scrim" id="scrim"></div>
+  <main class="main" id="main">
+    <div class="top">
+      <button class="menu" id="menuBtn" aria-label="Abrir menu"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 5h12M3 9h12M3 13h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+      <div class="crumbs" id="crumbs"></div>
+      <div class="sync" id="sync">Salvo neste aparelho</div>
+    </div>
+    <div id="view"></div>
+  </main>
+</div>
+<div class="tip" id="tip" hidden></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script>
+const MODS = /*STRUCT*/;
+const META = {
+  1:{icon:"📐",w:[6,9]}, 2:{icon:"🌍",w:[6,9]}, 3:{icon:"🏢",w:[6,9]}, 4:{icon:"📊",w:[11,14]}, 5:{icon:"📈",w:[11,14]},
+  6:{icon:"🏦",w:[11,14]}, 7:{icon:"🔀",w:[5,8]}, 8:{icon:"🏗️",w:[7,10]}, 9:{icon:"🧺",w:[8,12]}, 10:{icon:"⚖️",w:[15,20]}
+};
+const ORDER = [1,2,3,4,5,6,7,8,9,10];
+const ORDER_WHY = {
+  1:"Base de cálculo (HP 12C, VPL, estatística) que aparece em todo o resto.",
+  2:"Contexto macro e de mercado. Leve e bom para engatar o hábito.",
+  3:"Prepara o terreno para FSA: estrutura de capital, capital de giro, WACC.",
+  4:"O maior bloco de páginas. Vale pegar cedo, com calma.",
+  5:"Usa FSA e Quant: múltiplos, DDM, índices.",
+  6:"Duration, convexidade e crédito. Pede prática com a calculadora.",
+  7:"Depende de Renda Fixa e de valor do dinheiro no tempo.",
+  8:"Curto e conceitual; fecha bem depois de derivativos.",
+  9:"Junta tudo: CAPM, risco, IPS e finanças comportamentais.",
+  10:"Maior peso da prova. Ler agora e reler perto da prova, quando ela for marcada."
+};
+const DIFF = {f:"Fácil", m:"Médio", h:"Difícil"};
+
+/* ---------- index ---------- */
+const TOPICS = [], TBY = {}, MBY = {};
+MODS.forEach(m=>{ MBY[m.id]=m; m.pages=0; m.topicCount=0;
+  m.chapters.forEach((c,ci)=>{ c.idx=ci+1; c.topics.forEach(t=>{ t.m=m.id; t.c=ci+1; t.chName=c.name; t.np=t.end-t.start+1; m.pages+=t.np; m.topicCount++; t.order=TOPICS.length; TOPICS.push(t); TBY[t.id]=t; }); });
+});
+const TOTAL_PAGES = TOPICS.reduce((a,t)=>a+t.np,0);
+
+/* ---------- state ---------- */
+const LS_KEY="cfa-l1-state-v1";
+let S = {t:{}, pace:5, start:null, upd:0};
+function lsGet(k){try{return localStorage.getItem(k)}catch(e){return null}}
+function lsSet(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+try{ const raw=lsGet(LS_KEY); if(raw){ const o=JSON.parse(raw); if(o&&o.t) S=Object.assign(S,o); } }catch(e){}
+if(!S.start) S.start = isoDate(new Date());
+const ts = id => S.t[id] || {};
+let db=null, dbDoc=null, saveTimer=null, dbOk=false;
+function setSync(txt){ document.getElementById('sync').textContent=txt; }
+function save(){
+  S.upd=Date.now();
+  lsSet(LS_KEY, JSON.stringify(S));
+  if(dbDoc){ setSync("Salvando…"); clearTimeout(saveTimer); saveTimer=setTimeout(async()=>{
+      try{ await dbDoc.set(JSON.parse(JSON.stringify(S))); setSync("Salvo na nuvem"); }
+      catch(e){ setSync("Salvo neste aparelho"); }
+    },700); }
+}
+function setTopic(id, patch){
+  const cur = Object.assign({}, S.t[id]||{}, patch);
+  if(patch.d===1 && !cur.at) cur.at = Date.now();
+  if(patch.d===0){ delete cur.at; }
+  if(!cur.d && !cur.f && !cur.n) delete S.t[id]; else S.t[id]=cur;
+  save(); refreshSide();
+}
+(async function initDb(){
+  if(!window.claude || !claude.use) return;
+  try{
+    db = await claude.use("db"); if(!db) return;
+    dbDoc = db.doc("study/progress");
+    const timer = setTimeout(()=>{}, 10000);
+    const snap = await dbDoc.get(); clearTimeout(timer);
+    dbOk=true;
+    const remote = snap.exists ? snap.data() : null;
+    if(remote && remote.t && (remote.upd||0) > (S.upd||0)){ S = Object.assign({t:{},pace:5,start:S.start,upd:0}, remote); lsSet(LS_KEY, JSON.stringify(S)); render(); refreshSide(); }
+    else if(Object.keys(S.t).length){ await dbDoc.set(JSON.parse(JSON.stringify(S))); }
+    setSync("Salvo na nuvem");
+  }catch(e){ setSync("Salvo neste aparelho"); }
+})();
+
+/* ---------- helpers ---------- */
+function isoDate(d){ const z=n=>String(n).padStart(2,'0'); return d.getFullYear()+"-"+z(d.getMonth()+1)+"-"+z(d.getDate()); }
+function esc(s){ return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+const MESES=["jan","fev","mar","abr","mai","jun","jul","ago","set","out","nov","dez"];
+function fmtD(d){ return d.getDate()+" "+MESES[d.getMonth()]; }
+function fmtDY(d){ return d.getDate()+" "+MESES[d.getMonth()]+" "+d.getFullYear(); }
+function pp(t){ return t.start===t.end ? "p. "+t.start : "pp. "+t.start+"–"+t.end; }
+function mStats(mid){
+  const r={n:0,done:0,f:0,m:0,h:0,dn:0,pages:0,pdone:0};
+  TOPICS.forEach(t=>{ if(mid && t.m!==mid) return; r.n++; r.pages+=t.np; const s=ts(t.id);
+    if(s.d){ r.done++; r.pdone+=t.np; if(s.f) r[s.f]++; else r.dn++; } });
+  return r;
+}
+function cStats(m,c){ let n=0,d=0; c.topics.forEach(t=>{n++; if(ts(t.id).d) d++;}); return {n,d}; }
+const CHECK = '<svg viewBox="0 0 12 12" fill="none"><path d="M2.5 6.2l2.3 2.3 4.7-5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+const CARET = '<svg width="10" height="10" viewBox="0 0 10 10"><path d="M3 1.5L7 5 3 8.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+const CARET_S = '<svg width="12" height="12" viewBox="0 0 12 12"><path d="M4 2l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+function cbHtml(id,on){ return `<button class="cb${on?' on':''}" role="checkbox" aria-checked="${on?'true':'false'}" aria-label="Marcar como estudado" data-cb="${id}">${CHECK}</button>`; }
+function selHtml(id,v){ return `<select class="dsel ${v||''}" data-sel="${id}" aria-label="Dificuldade"><option value="">${v?'Limpar':'Dificuldade'}</option><option value="f"${v==='f'?' selected':''}>Fácil</option><option value="m"${v==='m'?' selected':''}>Médio</option><option value="h"${v==='h'?' selected':''}>Difícil</option></select>`; }
+const IC = {
+  check:'<svg viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="3" stroke="currentColor" stroke-width="1.4"/><path d="M5 8l2 2 4-4.5" stroke="currentColor" stroke-width="1.4"/></svg>',
+  sel:'<svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7l2.5 2.5L10.5 7" stroke="currentColor" stroke-width="1.4"/></svg>',
+  doc:'<svg viewBox="0 0 16 16" fill="none"><path d="M4 2h5l3 3v9H4z" stroke="currentColor" stroke-width="1.4"/><path d="M6 8h4M6 11h4" stroke="currentColor" stroke-width="1.4"/></svg>',
+  cal:'<svg viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="11" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M2 6.5h12M5 1.5v3M11 1.5v3" stroke="currentColor" stroke-width="1.4"/></svg>',
+  pct:'<svg viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3" stroke="currentColor" stroke-width="1.4"/><circle cx="4.5" cy="4.5" r="2" stroke="currentColor" stroke-width="1.4"/><circle cx="11.5" cy="11.5" r="2" stroke="currentColor" stroke-width="1.4"/></svg>',
+  folder:'<svg viewBox="0 0 16 16" fill="none"><path d="M2 4h4l1.5 1.5H14V13H2z" stroke="currentColor" stroke-width="1.4"/></svg>',
+  w:'<svg viewBox="0 0 16 16" fill="none"><path d="M8 2v12M3 5h10M3 5l-1.5 4h3zM13 5l-1.5 4h3z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>',
+  clock:'<svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.4"/><path d="M8 4.5V8l2.5 1.5" stroke="currentColor" stroke-width="1.4"/></svg>'
+};
+function prop(icon,k,v){ return `<div class="k">${IC[icon]}${k}</div><div class="v">${v}</div>`; }
+
+/* ---------- sidebar ---------- */
+let OPEN={}; try{OPEN=JSON.parse(lsGet("cfa-l1-open")||"{}")}catch(e){}
+function saveOpen(){ lsSet("cfa-l1-open", JSON.stringify(OPEN)); }
+function dotCls(id){ const s=ts(id); if(!s.d) return ''; return s.f||'d'; }
+function refreshSide(){
+  const route=parseRoute();
+  let h=`<div class="ws"><div class="logo">L1</div><div>CFA Level 1<small>Caderno de estudos</small></div></div>`;
+  h+=`<a class="si${route.v==='home'?' on':''}" href="#inicio"><span class="tw"></span><span class="ic">🏠</span><span class="lb">Início</span></a>`;
+  h+=`<a class="si${route.v==='plan'?' on':''}" href="#plano"><span class="tw"></span><span class="ic">🗓️</span><span class="lb">Plano de estudos</span></a>`;
+  h+=`<a class="si${route.v==='rev'?' on':''}" href="#revisar"><span class="tw"></span><span class="ic">🔁</span><span class="lb">Para revisar</span><span class="ct">${dueReviews().length||''}</span></a>`;
+  h+=`<div class="sgroup">Módulos</div>`;
+  MODS.forEach(m=>{
+    const st=mStats(m.id), ko='m'+m.id, isOn=route.v==='mod'&&route.m===m.id;
+    h+=`<a class="si${isOn?' on':''}" href="#m${m.id}"><span class="tw${OPEN[ko]?' open':''}" data-tw="${ko}">${CARET}</span><span class="ic">${META[m.id].icon}</span><span class="lb">${esc(m.en)}</span><span class="ct">${st.done}/${st.n}</span></a>`;
+    if(OPEN[ko]){ h+='<div class="kids">';
+      m.chapters.forEach(c=>{ const kc=ko+'c'+c.idx, cs=cStats(m,c);
+        h+=`<div class="si" data-tw="${kc}"><span class="tw${OPEN[kc]?' open':''}">${CARET}</span><span class="ic" style="font-size:13px">📁</span><span class="lb">${esc(c.name)}</span><span class="ct">${cs.d}/${cs.n}</span></div>`;
+        if(OPEN[kc]){ h+='<div class="kids">'; c.topics.forEach(t=>{
+          h+=`<a class="si${route.v==='topic'&&route.id===t.id?' on':''}" href="#t${t.id}"><span class="dot ${dotCls(t.id)}"></span><span class="lb">${esc(t.name)}</span></a>`; }); h+='</div>'; }
+      }); h+='</div>'; }
+  });
+  h+=`<div class="sgroup" style="font-weight:400;line-height:1.45">${TOPICS.length} assuntos · ${TOTAL_PAGES} páginas de apostila</div>`;
+  const side=document.getElementById('side'); const st=side.scrollTop; side.innerHTML=h; side.scrollTop=st;
+}
+document.getElementById('side').addEventListener('click',e=>{
+  const tw=e.target.closest('[data-tw]');
+  if(tw && (tw.classList.contains('tw')||tw.classList.contains('si'))){ e.preventDefault(); e.stopPropagation(); const k=tw.dataset.tw; OPEN[k]=!OPEN[k]; saveOpen(); refreshSide(); return; }
+  if(e.target.closest('a')) closeSide();
+});
+function openSide(){ document.getElementById('side').classList.add('open'); document.getElementById('scrim').classList.add('open'); }
+function closeSide(){ document.getElementById('side').classList.remove('open'); document.getElementById('scrim').classList.remove('open'); }
+document.getElementById('menuBtn').onclick=openSide; document.getElementById('scrim').onclick=closeSide;
+
+/* ---------- routing ---------- */
+function parseRoute(){
+  const h=(location.hash||'').slice(1);
+  if(h==='plano') return {v:'plan'};
+  if(h==='revisar') return {v:'rev'};
+  let m=h.match(/^m(\d+)$/); if(m && MBY[+m[1]]) return {v:'mod',m:+m[1]};
+  m=h.match(/^t(\d+-\d+-\d+)$/); if(m && TBY[m[1]]) return {v:'topic',id:m[1]};
+  return {v:'home'};
+}
+function crumbs(list){ document.getElementById('crumbs').innerHTML = list.map((c,i)=>(i?'<span class="sep">/</span>':'')+`<a href="${c[1]}">${esc(c[0])}</a>`).join(''); }
+let lastRoute='';
+function render(){
+  const r=parseRoute(), key=JSON.stringify(r), same=key===lastRoute; lastRoute=key;
+  const main=document.getElementById('main'), y=main.scrollTop;
+  const v=document.getElementById('view');
+  if(r.v==='home') v.innerHTML=homeView();
+  else if(r.v==='plan') v.innerHTML=planView();
+  else if(r.v==='rev') v.innerHTML=revView();
+  else if(r.v==='mod') v.innerHTML=modView(r.m);
+  else if(r.v==='topic'){ v.innerHTML=topicView(r.id); mountViewer(r.id); }
+  main.scrollTop = same ? y : 0;
+  bindCharts();
+}
+window.addEventListener('hashchange',()=>{ render(); refreshSide(); });
+
+/* ---------- interactions ---------- */
+document.addEventListener('click',e=>{
+  const cb=e.target.closest('[data-cb]');
+  if(cb){ e.preventDefault(); const id=cb.dataset.cb; const on=!ts(id).d; setTopic(id,{d:on?1:0}); rerenderSoft(); return; }
+  const tg=e.target.closest('.tgl>.th');
+  if(tg){ const el=tg.parentElement; el.classList.toggle('open'); if(el.dataset.k){ OPEN[el.dataset.k]=el.classList.contains('open'); saveOpen(); } return; }
+  const pc=e.target.closest('[data-pace]');
+  if(pc){ S.pace=+pc.dataset.pace; save(); render(); return; }
+});
+document.addEventListener('change',e=>{
+  const s=e.target.closest('[data-sel]');
+  if(s){ const v=s.value; const patch={f:v||undefined}; if(v && !ts(s.dataset.sel).d) patch.d=1; setTopic(s.dataset.sel,patch); if(!v){ const c=S.t[s.dataset.sel]; if(c){ delete c.f; save(); } } rerenderSoft(); return; }
+  if(e.target.id==='startDate'){ if(e.target.value){ S.start=e.target.value; save(); render(); } }
+});
+let noteTimer=null;
+document.addEventListener('input',e=>{
+  if(e.target.dataset.note){ const id=e.target.dataset.note, val=e.target.value; clearTimeout(noteTimer); noteTimer=setTimeout(()=>setTopic(id,{n:val||undefined}),600); }
+});
+function rerenderSoft(){
+  const r=parseRoute();
+  if(r.v==='topic'){ // update only properties, keep viewer
+    const box=document.getElementById('tprops'); if(box) box.innerHTML=topicProps(TBY[r.id]); return; }
+  render();
+}
+
+/* ---------- views ---------- */
+function coverSvg(){
+  // a quiet compounding curve: FV = PV(1+r)^n — the subject's own shape
+  let pts=[]; for(let i=0;i<=40;i++){ const x=i/40*1000; const y=170-Math.pow(1.075,i)*7; pts.push(x.toFixed(1)+','+y.toFixed(1)); }
+  return `<svg viewBox="0 0 1000 180" preserveAspectRatio="none" aria-hidden="true"><polyline points="${pts.join(' ')}" fill="none" stroke="var(--fg3)" stroke-width="1.5" vector-effect="non-scaling-stroke"/></svg>`;
+}
+function weekStart(d){ const x=new Date(d); x.setHours(0,0,0,0); const wd=(x.getDay()+6)%7; x.setDate(x.getDate()-wd); return x; }
+function weeklyCounts(n){
+  const ws=weekStart(new Date()), out=[];
+  for(let i=n-1;i>=0;i--){ const a=new Date(ws); a.setDate(a.getDate()-7*i); const b=new Date(a); b.setDate(b.getDate()+7); out.push({a,b,c:0,p:0}); }
+  Object.values(S.t).forEach(s=>{ if(s.d&&s.at){ out.forEach(w=>{ if(s.at>=w.a.getTime()&&s.at<w.b.getTime()) w.c++; }); } });
+  TOPICS.forEach(t=>{ const s=ts(t.id); if(s.d&&s.at) out.forEach(w=>{ if(s.at>=w.a.getTime()&&s.at<w.b.getTime()) w.p+=t.np; }); });
+  return out;
+}
+function priority(){
+  return MODS.map(m=>{ const st=mStats(m.id), w=(META[m.id].w[0]+META[m.id].w[1])/2;
+    const unf=(st.n-st.done)/st.n, hard=st.done? st.h/st.n : 0, med=st.done? st.m/st.n:0;
+    const score=w*(unf*1+hard*1.6+med*.5);
+    let why=[]; if(st.h) why.push(st.h+" difíce"+(st.h>1?"is":"l")); if(st.n-st.done) why.push((st.n-st.done)+" a estudar"); why.push("peso "+META[m.id].w[0]+"–"+META[m.id].w[1]+"%");
+    return {m,st,score,why:why.join(" · ")}; }).sort((a,b)=>b.score-a.score);
+}
+function nextTopic(){ const p=planSeq(); return p.find(t=>!ts(t.id).d); }
+function homeView(){
+  crumbs([["Início","#inicio"]]);
+  const all=mStats(), pct=Math.round(all.done/all.n*100), wk=weeklyCounts(8), last7=wk[wk.length-1].c;
+  const nt=nextTopic(); const rev=dueReviews();
+  let h=`<div class="cover">${coverSvg()}</div><div class="page"><div class="picon">📚</div><h1>CFA Level 1</h1>
+  <p class="sub">10 módulos · ${TOPICS.length} assuntos · ${TOTAL_PAGES} páginas de apostila</p>
+  <div class="callout"><div class="ci">🌱</div><div>Sem prova marcada, sem pressão. A ideia é avançar um assunto por vez, no seu ritmo, e chegar no dia de marcar a prova já com a base feita. Marque cada assunto como <b>estudado</b> e dê uma <b>dificuldade</b>: os gráficos e o plano se ajustam sozinhos.</div></div>
+  <div class="stats">
+    <div class="stat"><div class="l">Progresso geral</div><div class="n">${pct}%</div><div class="s">${all.done} de ${all.n} assuntos</div></div>
+    <div class="stat"><div class="l">Páginas estudadas</div><div class="n">${all.pdone}</div><div class="s">de ${all.pages}</div></div>
+    <div class="stat"><div class="l">Nesta semana</div><div class="n">${last7}</div><div class="s">meta: ${S.pace} assuntos</div></div>
+    <div class="stat"><div class="l">Marcados difíceis</div><div class="n">${all.h}</div><div class="s">${rev.length} para revisar agora</div></div>
+  </div>`;
+  if(nt){ h+=`<h2>Continuar</h2><a class="next" href="#t${nt.id}"><span style="font-size:28px">${META[nt.m].icon}</span><div class="nt"><small>${esc(MBY[nt.m].en)} · ${esc(nt.chName)}</small><div>${esc(nt.name)}</div><small>${pp(nt)} · ${nt.np} página${nt.np>1?'s':''}</small></div><span class="btn pri">Estudar</span></a>`; }
+  else h+=`<div class="callout"><div class="ci">🎉</div><div>Você passou por todos os assuntos. Agora é revisar os difíceis e partir para questões.</div></div>`;
+  // progress by module
+  h+=`<h2>Progresso por módulo</h2><p class="muted" style="font-size:14px">Cada barra é um módulo. A parte colorida é o que já foi estudado, separada pela dificuldade que você marcou.</p>
+  <div class="legend"><span><i style="background:var(--c-easy)"></i>Fácil</span><span><i style="background:var(--c-med)"></i>Médio</span><span><i style="background:var(--c-hard)"></i>Difícil</span><span><i style="background:var(--c-done)"></i>Estudado, sem dificuldade</span><span><i style="background:var(--c-track);box-shadow:inset 0 0 0 1px var(--line)"></i>A estudar</span></div>
+  <div class="bars">`;
+  MODS.forEach(m=>{ const st=mStats(m.id); const seg=(n,c)=>n?`<b style="width:${n/st.n*100}%;background:var(${c})"></b>`:'';
+    h+=`<a class="bl" href="#m${m.id}">${META[m.id].icon} <span>${esc(m.en)}</span></a><div class="track" data-tip="m${m.id}">${seg(st.f,'--c-easy')}${seg(st.m,'--c-med')}${seg(st.h,'--c-hard')}${seg(st.dn,'--c-done')}</div><div class="bp">${Math.round(st.done/st.n*100)}%</div>`; });
+  h+=`</div>`;
+  // attention
+  const pr=priority().slice(0,4);
+  h+=`<h2>Onde dar atenção</h2><p class="muted" style="font-size:14px">Ordem calculada pelo peso do módulo na prova, pelo quanto falta e pelos assuntos que você marcou como difíceis.</p><div class="list">`;
+  pr.forEach((p,i)=>{ h+=`<a class="li" href="#m${p.m.id}"><span class="rank">${i+1}</span><span style="font-size:18px">${META[p.m.id].icon}</span><div class="lt"><div>${esc(p.m.en)} <span class="faint">· ${esc(p.m.pt)}</span></div><small>${p.why}</small></div><div class="minibar"><b style="width:${p.st.done/p.st.n*100}%"></b></div></a>`; });
+  h+=`</div>`;
+  // weekly
+  h+=`<h2>Ritmo das últimas 8 semanas</h2><p class="muted" style="font-size:14px">Assuntos marcados como estudados em cada semana (segunda a domingo).</p>`;
+  const mx=Math.max(S.pace, ...wk.map(w=>w.c), 1);
+  h+=`<div class="weeks">`+wk.map((w,i)=>`<div class="col" data-tip="w${i}"><em>${w.c||''}</em><b class="${w.c?'':'z'}" style="height:${Math.max(w.c/mx*80,2)}%"></b></div>`).join('')+`</div><div class="wlab">`+wk.map(w=>`<span>${fmtD(w.a)}</span>`).join('')+`</div>`;
+  window._wk=wk;
+  // reviews
+  if(rev.length){ h+=`<h2>Para revisar</h2><div class="list">`+rev.slice(0,5).map(reviewRow).join('')+`</div>`+(rev.length>5?`<p><a href="#revisar" class="muted" style="font-size:14px">Ver todos (${rev.length})</a></p>`:''); }
+  // gallery
+  h+=`<h2>Módulos</h2><div class="gal">`;
+  MODS.forEach(m=>{ const st=mStats(m.id); h+=`<a class="card" href="#m${m.id}"><div class="cv"><span>${META[m.id].icon}</span></div><div class="cb2"><div class="t1">${esc(m.en)}</div><div class="t2">Módulo ${m.id} · ${esc(m.pt)}</div><div class="row2"><span class="tag">${META[m.id].w[0]}–${META[m.id].w[1]}%</span><div class="minibar"><b style="width:${st.done/st.n*100}%"></b></div><span class="num">${st.done}/${st.n}</span></div></div></a>`; });
+  h+=`</div>`;
+  h+=`<p class="faint" style="font-size:12px;margin-top:30px">Pesos de prova: faixas oficiais do CFA Institute para o Level 1. Recortes e títulos: apostilas da Academia de Finanças Rafael Toro.</p></div>`;
+  return h;
+}
+function bindCharts(){
+  const tip=document.getElementById('tip');
+  document.querySelectorAll('[data-tip]').forEach(el=>{
+    const show=e=>{ const k=el.dataset.tip; let html='';
+      if(k[0]==='m'){ const m=MBY[+k.slice(1)], st=mStats(m.id); html=`<b>${esc(m.en)}</b><br>${st.done} de ${st.n} assuntos estudados<br>Fácil ${st.f} · Médio ${st.m} · Difícil ${st.h}${st.dn?' · sem dificuldade '+st.dn:''}<br>${st.pdone} de ${st.pages} páginas`; }
+      else { const w=window._wk[+k.slice(1)]; const e2=new Date(w.b); e2.setDate(e2.getDate()-1); html=`<b>${fmtD(w.a)} – ${fmtD(e2)}</b><br>${w.c} assunto${w.c===1?'':'s'} · ${w.p} páginas`; }
+      tip.innerHTML=html; tip.hidden=false; move(e); };
+    const move=e=>{ const x=(e.touches?e.touches[0].clientX:e.clientX), y=(e.touches?e.touches[0].clientY:e.clientY); const r=tip.getBoundingClientRect(); tip.style.left=Math.min(x+12, innerWidth-r.width-8)+'px'; tip.style.top=Math.max(8,y-r.height-12)+'px'; };
+    el.addEventListener('mouseenter',show); el.addEventListener('mousemove',move); el.addEventListener('mouseleave',()=>tip.hidden=true);
+    el.addEventListener('touchstart',e=>{show(e); setTimeout(()=>tip.hidden=true,2200);},{passive:true});
+  });
+}
+function modView(mid){
+  const m=MBY[mid], st=mStats(mid);
+  crumbs([["Início","#inicio"],[m.en,"#m"+mid]]);
+  let h=`<div class="page"><div class="picon nocover">${META[mid].icon}</div><h1>${esc(m.en)}</h1><p class="sub">Módulo ${mid} · ${esc(m.pt)}</p>
+  <div class="props">${prop('w','Peso na prova',`<span class="tag b">${META[mid].w[0]}–${META[mid].w[1]}%</span>`)}${prop('folder','Capítulos',m.chapters.length+' capítulos · '+st.n+' assuntos')}${prop('doc','Apostila',st.pages+' páginas')}${prop('pct','Progresso',`<div class="minibar" style="width:120px"><b style="width:${st.done/st.n*100}%"></b></div><span class="num">${Math.round(st.done/st.n*100)}% · ${st.done}/${st.n}</span>`)}${prop('sel','Dificuldade',(st.f?`<span class="tag f">Fácil ${st.f}</span>`:'')+(st.m?`<span class="tag m">Médio ${st.m}</span>`:'')+(st.h?`<span class="tag h">Difícil ${st.h}</span>`:'')+(!st.f&&!st.m&&!st.h?'<span class="faint">Ainda sem marcações</span>':''))}</div>
+  <div class="callout"><div class="ci">💡</div><div><b>Ordem no plano:</b> ${ORDER.indexOf(mid)+1}º módulo. ${esc(ORDER_WHY[mid])}</div></div><hr>`;
+  m.chapters.forEach(c=>{ const cs=cStats(m,c), k='pm'+mid+'c'+c.idx, open=OPEN[k]!==false;
+    h+=`<div class="tgl${open?' open':''}" data-k="${k}"><div class="th"><span class="tw">${CARET_S}</span><span class="tt">📁 ${c.idx}. ${esc(c.name)}</span><span class="meta num">pp. ${c.start}–${c.end} · ${cs.d}/${cs.n}</span></div><div class="tb"><div class="tbl-wrap"><table><thead><tr><th style="width:34px"></th><th>Assunto</th><th style="width:118px">Páginas</th><th style="width:120px">Dificuldade</th></tr></thead><tbody>`;
+    c.topics.forEach(t=>{ const s=ts(t.id);
+      h+=`<tr class="row${s.d?' rowdone':''}"><td>${cbHtml(t.id,s.d)}</td><td class="name"><a href="#t${t.id}">📄 <span>${esc(t.name)}</span></a></td><td class="mono faint num" style="white-space:nowrap">${pp(t)}</td><td>${selHtml(t.id,s.f)}</td></tr>`; });
+    h+=`</tbody></table></div></div></div>`; });
+  h+=`</div>`; return h;
+}
+function topicProps(t){
+  const s=ts(t.id);
+  return prop('check','Estudado',`<span style="display:flex;align-items:center;gap:8px">${cbHtml(t.id,s.d)}<span class="muted">${s.d?(s.at?'em '+fmtDY(new Date(s.at)):'sim'):'ainda não'}</span></span>`)+
+    prop('sel','Dificuldade',selHtml(t.id,s.f))+
+    prop('doc','Páginas da apostila',`<span class="num">${pp(t)} · ${t.np} página${t.np>1?'s':''}</span>`)+
+    prop('folder','Capítulo',`${esc(t.chName)}`)+
+    prop('w','Módulo',`<a href="#m${t.m}">${META[t.m].icon} ${esc(MBY[t.m].en)}</a>`);
+}
+function topicView(id){
+  const t=TBY[id], m=MBY[t.m];
+  crumbs([["Início","#inicio"],[m.en,"#m"+m.id],[t.name,"#t"+id]]);
+  const prev=TOPICS[t.order-1], next=TOPICS[t.order+1];
+  let h=`<div class="page"><div class="picon nocover" style="font-size:56px">📄</div><h1>${esc(t.name)}</h1><p class="sub">${esc(m.en)} · Capítulo ${t.c}: ${esc(t.chName)}</p>
+  <div class="props" id="tprops">${topicProps(t)}</div>
+  <div class="callout"><div class="ci">🧭</div><div><b>Neste recorte</b><div class="slides">${t.slides.map(s=>`<div><span class="mono num">${s[0]}</span><span>${esc(s[1])}</span></div>`).join('')}</div></div></div>
+  <h3>Anotações</h3><textarea class="notes" id="note-${id}" data-note="${id}" placeholder="Escreva aqui fórmulas, dúvidas, o que pegar com mais calma…">${esc(ts(id).n||'')}</textarea>
+  <h2 style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">Recorte da apostila <a class="btn" style="margin-left:auto" href="pdf/${id}.pdf" target="_blank" rel="noopener">Abrir PDF</a></h2>
+  <div class="viewer" id="viewer">${t.slides.map(s=>`<div class="pghold"><div class="ph">Carregando página ${s[0]}…</div></div>`).join('')}</div>
+  <div class="pager">${prev?`<a href="#t${prev.id}"><small>← Anterior</small><span>${esc(prev.name)}</span></a>`:'<span></span>'}${next?`<a class="r" href="#t${next.id}"><small>Próximo →</small><span>${esc(next.name)}</span></a>`:''}</div></div>`;
+  return h;
+}
+let viewerToken=0;
+async function mountViewer(id){
+  const tok=++viewerToken, t=TBY[id], box=document.getElementById('viewer');
+  if(!window.pdfjsLib){ box.innerHTML=`<div class="callout"><div class="ci">📄</div><div>O leitor embutido não carregou aqui. Use o botão <b>Abrir PDF</b> acima.</div></div>`; return; }
+  try{
+    pdfjsLib.GlobalWorkerOptions.workerSrc='lib/pdf.worker.min.js';
+    const doc=await pdfjsLib.getDocument({url:'pdf/'+id+'.pdf'}).promise; if(tok!==viewerToken) return;
+    const holds=[...box.querySelectorAll('.pghold')];
+    const renderPage=async(i)=>{ const page=await doc.getPage(i+1); if(tok!==viewerToken) return;
+      const w=box.clientWidth||700, vp0=page.getViewport({scale:1}), dpr=Math.min(window.devicePixelRatio||1,2.5), sc=w/vp0.width*dpr, vp=page.getViewport({scale:sc});
+      const cv=document.createElement('canvas'); cv.width=Math.floor(vp.width); cv.height=Math.floor(vp.height);
+      await page.render({canvasContext:cv.getContext('2d'),viewport:vp}).promise; if(tok!==viewerToken) return;
+      holds[i].innerHTML=''; holds[i].appendChild(cv); const pn=document.createElement('span'); pn.className='pn'; pn.textContent='p. '+t.slides[i][0]; holds[i].appendChild(pn); };
+    const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ io.unobserve(e.target); renderPage(+e.target.dataset.i).catch(()=>{}); } }),{root:document.getElementById('main'),rootMargin:'600px'});
+    holds.forEach((el,i)=>{ el.dataset.i=i; if(i<doc.numPages) io.observe(el); else el.remove(); });
+  }catch(e){ if(tok===viewerToken) box.innerHTML=`<div class="callout"><div class="ci">📄</div><div>Não deu para mostrar o recorte aqui. Use o botão <b>Abrir PDF</b> acima.</div></div>`; }
+}
+
+/* ---------- plan ---------- */
+function planSeq(){ const seq=[]; ORDER.forEach(mid=>TOPICS.forEach(t=>{ if(t.m===mid) seq.push(t); })); return seq; }
+function buildPlan(){
+  const seq=planSeq(), pending=seq.filter(t=>!ts(t.id).d), pace=Math.max(1,S.pace);
+  let ws=weekStart(new Date()); const st=weekStart(new Date(S.start+"T12:00:00")); if(st>ws) ws=st;
+  // topics already done this week count toward this week's quota
+  const doneThisWeek=TOPICS.filter(t=>{const s=ts(t.id); return s.d&&s.at&&s.at>=ws.getTime();}).length;
+  const weeks=[]; let i=0, quota=Math.max(pace-doneThisWeek,0), w=0;
+  while(i<pending.length){ const a=new Date(ws); a.setDate(a.getDate()+7*w); const items=[];
+    let q = w===0 ? quota : pace;
+    while(q>0 && i<pending.length){ items.push(pending[i]); i++; q--; }
+    weeks.push({a,items}); w++; if(w>400) break; }
+  return {weeks, pending, seq};
+}
+function planView(){
+  crumbs([["Início","#inicio"],["Plano de estudos","#plano"]]);
+  const P=buildPlan(), last=P.weeks.length?P.weeks[P.weeks.length-1].a:new Date(); const end=new Date(last); end.setDate(end.getDate()+6);
+  const pagesPer = Math.round(TOTAL_PAGES/TOPICS.length*S.pace);
+  let h=`<div class="page"><div class="picon nocover">🗓️</div><h1>Plano de estudos</h1><p class="sub">Feito para a rotina de estágio + faculdade, sem data de prova.</p>
+  <div class="props">${prop('clock','Ritmo',`<div class="seg">${[3,5,8,10].map(n=>`<button data-pace="${n}" class="${S.pace===n?'on':''}">${n}</button>`).join('')}</div><span class="muted">assuntos por semana · ~${pagesPer} páginas</span>`)}
+  ${prop('cal','Começo',`<input type="date" id="startDate" value="${S.start}">`)}
+  ${prop('cal','Fim estimado',P.pending.length?`<span class="tag b">${fmtDY(end)}</span><span class="muted">${P.weeks.length} semanas</span>`:'<span class="tag f">Tudo estudado</span>')}
+  ${prop('pct','Faltam',`${P.pending.length} assuntos · ${P.pending.reduce((a,t)=>a+t.np,0)} páginas`)}</div>
+  <div class="callout"><div class="ci">🎒</div><div><b>A rotina</b>
+  <p style="margin-top:6px"><b>Segunda a sexta, durante as aulas mais leves:</b> abra o assunto do dia e leia o recorte direto aqui no app (são ~5 páginas, uns 25–40 min). Ao terminar, marque <b>estudado</b> e a <b>dificuldade</b>.</p>
+  <p><b>Uma vez na semana (15 min):</b> abra <a href="#revisar">Para revisar</a> e releia o que ficou difícil.</p>
+  <p><b>Fim de semana:</b> livre. Se sobrar energia, refaça um exemplo numérico da semana na HP 12C.</p>
+  <p class="muted" style="font-size:14px">Ritmo 5 é um bom começo: um assunto por dia útil. Semana pesada no estágio? Mude para 3; nada se perde, o plano só se redistribui.</p></div></div>
+  <h2>Ordem dos módulos</h2><ol class="order">${ORDER.map(mid=>{const st=mStats(mid); return `<li><a href="#m${mid}"><b>${esc(MBY[mid].en)}</b></a> <span class="faint">${st.done}/${st.n}</span><br><span class="muted" style="font-size:14px">${esc(ORDER_WHY[mid])}</span></li>`}).join('')}</ol>
+  <div class="callout"><div class="ci">💬</div><div>Quer outro formato (mais devagar nas provas da faculdade, pular um módulo, adiantar Ethics)? É só me pedir no chat que eu ajusto o plano. Seu progresso fica salvo e eu consigo ler.</div></div>
+  <h2>Semana a semana</h2>`;
+  if(!P.weeks.length) h+=`<p class="empty">Nada pendente. Hora de revisar e fazer questões.</p>`;
+  const nowWs=weekStart(new Date()).getTime(); let prevM=null;
+  P.weeks.forEach((w,wi)=>{ const e2=new Date(w.a); e2.setDate(e2.getDate()+6); const k='pw'+wi, open = OPEN[k]!==undefined ? OPEN[k] : wi<3; const isNow=w.a.getTime()===nowWs;
+    const mods=[...new Set(w.items.map(t=>t.m))].map(x=>META[x].icon).join(' ');
+    h+=`<div class="tgl${open?' open':''}" data-k="${k}"><div class="th"><span class="tw">${CARET_S}</span><span class="tt" style="font-size:16px">${isNow?'Esta semana':'Semana '+(wi+1)} <span class="faint" style="font-weight:400">· ${fmtD(w.a)} – ${fmtD(e2)}</span></span><span class="meta">${mods} ${w.items.length?w.items.length+' assuntos':'meta já cumprida'}</span></div><div class="tb"><div class="wk${isNow?' now':''}">`;
+    if(!w.items.length) h+=`<div class="milestone">Você já bateu a meta desta semana. 👏</div>`;
+    w.items.forEach(t=>{ if(prevM!==null && t.m!==prevM) h+=`<div class="milestone">✅ Fim de ${esc(MBY[prevM].en)}: tire 30 min para reler os assuntos difíceis do módulo.</div>`; prevM=t.m;
+      h+=`<div class="prow">${cbHtml(t.id,false)}<a href="#t${t.id}">${META[t.m].icon} ${esc(t.name)}</a><span class="pm num">${pp(t)}</span></div>`; });
+    h+=`</div></div></div>`; });
+  h+=`</div>`; return h;
+}
+/* ---------- reviews (spaced) ---------- */
+function dueReviews(){
+  const now=Date.now(), DAY=864e5, out=[];
+  TOPICS.forEach(t=>{ const s=ts(t.id); if(!s.d||!s.at||(s.f!=='h'&&s.f!=='m')) return;
+    const gaps = s.f==='h' ? [3,7,21,45] : [7,30];
+    const age=(now-s.at)/DAY; const rv=s.rv||0;
+    if(rv<gaps.length && age>=gaps[rv]) out.push({t,s,age}); });
+  return out.sort((a,b)=>(a.s.f===b.s.f?0:a.s.f==='h'?-1:1)||b.age-a.age);
+}
+function reviewRow(r){ return `<div class="li"><span class="tag ${r.s.f}">${DIFF[r.s.f]}</span><a class="lt" href="#t${r.t.id}" style="text-decoration:none"><div>${esc(r.t.name)}</div><small>${esc(MBY[r.t.m].en)} · estudado há ${Math.floor(r.age)} dias · ${pp(r.t)}</small></a><button class="btn" data-rev="${r.t.id}">Revisei</button></div>`; }
+document.addEventListener('click',e=>{ const b=e.target.closest('[data-rev]'); if(b){ const id=b.dataset.rev, c=Object.assign({},S.t[id]); c.rv=(c.rv||0)+1; c.at=Date.now(); S.t[id]=c; save(); render(); refreshSide(); } });
+function revView(){
+  crumbs([["Início","#inicio"],["Para revisar","#revisar"]]);
+  const rev=dueReviews();
+  const hard=TOPICS.filter(t=>ts(t.id).f==='h');
+  let h=`<div class="page"><div class="picon nocover">🔁</div><h1>Para revisar</h1><p class="sub">Revisão espaçada dos assuntos que você marcou como difíceis ou médios.</p>
+  <div class="callout"><div class="ci">⏱️</div><div>Assunto <span class="tag h">Difícil</span> volta para cá 3, 7, 21 e 45 dias depois de estudado. <span class="tag m">Médio</span> volta com 7 e 30 dias. Depois de reler, toque em <b>Revisei</b>.</div></div>
+  <h2>Agora</h2>`;
+  h+= rev.length ? `<div class="list">${rev.map(reviewRow).join('')}</div>` : `<p class="empty">Nada para revisar hoje.</p>`;
+  h+=`<h2>Todos os difíceis</h2>`;
+  h+= hard.length ? `<div class="list">${hard.map(t=>`<a class="li" href="#t${t.id}"><span style="font-size:18px">${META[t.m].icon}</span><div class="lt"><div>${esc(t.name)}</div><small>${esc(MBY[t.m].en)} · ${pp(t)}</small></div></a>`).join('')}</div>` : `<p class="empty">Quando você marcar um assunto como Difícil, ele aparece aqui.</p>`;
+  return h+`</div>`;
+}
+
+refreshSide(); render();
+</script>

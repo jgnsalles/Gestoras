@@ -1,0 +1,5549 @@
+[
+ {
+  "id": 1,
+  "en": "Quantitative Methods",
+  "pt": "Métodos Quantitativos",
+  "pdfPages": 129,
+  "chapters": [
+   {
+    "name": "Taxas & Retornos",
+    "start": 4,
+    "end": 22,
+    "topics": [
+     {
+      "name": "Tipos de Rentabilidade",
+      "start": 4,
+      "end": 11,
+      "slides": [
+       [
+        4,
+        "Abertura do capítulo"
+       ],
+       [
+        5,
+        "Conceito"
+       ],
+       [
+        6,
+        "Rentabilidade Absoluta & Relativa"
+       ],
+       [
+        7,
+        "Rentabilidade Real: Fórmula"
+       ],
+       [
+        8,
+        "Tipos de Rentabilidade"
+       ],
+       [
+        9,
+        "Rentabilidade Nominal: Exemplo 1 (Base 100)"
+       ],
+       [
+        10,
+        "Rentabilidade Efetiva: Exemplo"
+       ],
+       [
+        11,
+        "Rentabilidade Alavancada: Exemplo"
+       ]
+      ],
+      "id": "1-1-1"
+     },
+     {
+      "name": "Média Simples (Aritmética)",
+      "start": 12,
+      "end": 13,
+      "slides": [
+       [
+        12,
+        "Conceito"
+       ],
+       [
+        13,
+        "Exemplo: HP 12C [G0]"
+       ]
+      ],
+      "id": "1-1-2"
+     },
+     {
+      "name": "Médias: Ponderada, Geométrica e Harmônica",
+      "start": 14,
+      "end": 18,
+      "slides": [
+       [
+        14,
+        "Exemplo"
+       ],
+       [
+        15,
+        "Conceito"
+       ],
+       [
+        16,
+        "Exemplo: HP-12C [Base 100]"
+       ],
+       [
+        17,
+        "Exemplo: Fórmula Padrão"
+       ],
+       [
+        18,
+        "Tabela Resumida"
+       ]
+      ],
+      "id": "1-1-3"
+     },
+     {
+      "name": "HPR, TMA e WACC",
+      "start": 19,
+      "end": 22,
+      "slides": [
+       [
+        19,
+        "HPR: Exemplo"
+       ],
+       [
+        20,
+        "Determinando TMA"
+       ],
+       [
+        21,
+        "Conceito"
+       ],
+       [
+        22,
+        "CMPC Custo Médio Ponderado de"
+       ]
+      ],
+      "id": "1-1-4"
+     }
+    ]
+   },
+   {
+    "name": "Valor do Dinheiro no Tempo",
+    "start": 23,
+    "end": 51,
+    "topics": [
+     {
+      "name": "Juros Simples",
+      "start": 23,
+      "end": 27,
+      "slides": [
+       [
+        23,
+        "Abertura do capítulo"
+       ],
+       [
+        24,
+        "Definições"
+       ],
+       [
+        25,
+        "Conceito"
+       ],
+       [
+        26,
+        "Exemplo 2"
+       ],
+       [
+        27,
+        "Exemplo (Gráfico)"
+       ]
+      ],
+      "id": "1-2-1"
+     },
+     {
+      "name": "Juros Compostos",
+      "start": 28,
+      "end": 37,
+      "slides": [
+       [
+        28,
+        "Conceito"
+       ],
+       [
+        29,
+        "Exemplo 1"
+       ],
+       [
+        30,
+        "Exemplo 3 (FV)"
+       ],
+       [
+        31,
+        "Exemplo 5 (PMT)"
+       ],
+       [
+        32,
+        "Exemplo 6 (PMT)"
+       ],
+       [
+        33,
+        "Exemplo 7 (PMT)"
+       ],
+       [
+        34,
+        "Exemplo 8 (PMT Postecipado)"
+       ],
+       [
+        35,
+        "Exemplo 8 (PMT Postecipado - Tabela)"
+       ],
+       [
+        36,
+        "Exemplo 9 (PMT Antecipado - Gráfico)"
+       ],
+       [
+        37,
+        "Equivalência de Taxas"
+       ]
+      ],
+      "id": "1-2-2"
+     },
+     {
+      "name": "Juros Contínuos e Perpetuidade",
+      "start": 38,
+      "end": 40,
+      "slides": [
+       [
+        38,
+        "Conceito"
+       ],
+       [
+        39,
+        "Exemplo 2"
+       ],
+       [
+        40,
+        "Conceito"
+       ]
+      ],
+      "id": "1-2-3"
+     },
+     {
+      "name": "VPL & TIR",
+      "start": 41,
+      "end": 46,
+      "slides": [
+       [
+        41,
+        "Conceito"
+       ],
+       [
+        42,
+        "Solução do Exemplo"
+       ],
+       [
+        43,
+        "Exemplo"
+       ],
+       [
+        44,
+        "Conceito"
+       ],
+       [
+        45,
+        "Solução do Exemplo"
+       ],
+       [
+        46,
+        "Conceito"
+       ]
+      ],
+      "id": "1-2-4"
+     },
+     {
+      "name": "TIRM (MIRR)",
+      "start": 47,
+      "end": 49,
+      "slides": [
+       [
+        47,
+        "Conceito"
+       ],
+       [
+        48,
+        "Solução do Exemplo"
+       ],
+       [
+        49,
+        "Exemplo"
+       ]
+      ],
+      "id": "1-2-5"
+     },
+     {
+      "name": "TWRR & MWRR",
+      "start": 50,
+      "end": 51,
+      "slides": [
+       [
+        50,
+        "TWRR: Exemplo"
+       ],
+       [
+        51,
+        "MWRR: Exemplo"
+       ]
+      ],
+      "id": "1-2-6"
+     }
+    ]
+   },
+   {
+    "name": "Probabilidade & Estatística",
+    "start": 52,
+    "end": 75,
+    "topics": [
+     {
+      "name": "Probabilidade, Árvores e Bayes",
+      "start": 52,
+      "end": 58,
+      "slides": [
+       [
+        52,
+        "Abertura do capítulo"
+       ],
+       [
+        53,
+        "Conceito"
+       ],
+       [
+        54,
+        "Conceito"
+       ],
+       [
+        55,
+        "Exemplo: Resposta"
+       ],
+       [
+        56,
+        "Fórmula"
+       ],
+       [
+        57,
+        "Exemplo: Gráfico em Árvore"
+       ],
+       [
+        58,
+        "Probabilidade Risco-Neutro"
+       ]
+      ],
+      "id": "1-3-1"
+     },
+     {
+      "name": "Medidas de Posição Central",
+      "start": 59,
+      "end": 61,
+      "slides": [
+       [
+        59,
+        "Conceito"
+       ],
+       [
+        60,
+        "Média"
+       ],
+       [
+        61,
+        "Mediana"
+       ]
+      ],
+      "id": "1-3-2"
+     },
+     {
+      "name": "Medidas de Dispersão",
+      "start": 62,
+      "end": 70,
+      "slides": [
+       [
+        62,
+        "Desvio Absoluto Médio (DAM)"
+       ],
+       [
+        63,
+        "Variância e Desvio Padrão: Passo a Passo"
+       ],
+       [
+        64,
+        "Variância e Desvio Padrão Amostral"
+       ],
+       [
+        65,
+        "Variância e Desvio Padrão Populacional"
+       ],
+       [
+        66,
+        "Desvio Padrão do Retorno Esperado"
+       ],
+       [
+        67,
+        "Exemplo: Toro Cursos"
+       ],
+       [
+        68,
+        "Exemplo: Conclusão"
+       ],
+       [
+        69,
+        "Desvio de Baixa"
+       ],
+       [
+        70,
+        "Desvio de Baixa: Resposta"
+       ]
+      ],
+      "id": "1-3-3"
+     },
+     {
+      "name": "Medidas de associação entre 2 variáveis",
+      "start": 71,
+      "end": 75,
+      "slides": [
+       [
+        71,
+        "Covariância"
+       ],
+       [
+        72,
+        "Covariância e Coef ( )"
+       ],
+       [
+        73,
+        "Covariância: Cálculo"
+       ],
+       [
+        74,
+        "Covariância do Retorno Esperado"
+       ],
+       [
+        75,
+        "Covariância: Resposta"
+       ]
+      ],
+      "id": "1-3-4"
+     }
+    ]
+   },
+   {
+    "name": "Distribuição e Forma",
+    "start": 76,
+    "end": 101,
+    "topics": [
+     {
+      "name": "Medidas de Posição Relativa e de Forma",
+      "start": 76,
+      "end": 82,
+      "slides": [
+       [
+        76,
+        "Abertura do capítulo"
+       ],
+       [
+        77,
+        "Quartis, decis, percentis"
+       ],
+       [
+        78,
+        "Quartis, decis, percentis"
+       ],
+       [
+        79,
+        "Z-score (pontuação padronizada)"
+       ],
+       [
+        80,
+        "Assimetria (Skewness)"
+       ],
+       [
+        81,
+        "Curtose (Kurtosis)"
+       ],
+       [
+        82,
+        "Curtose (Kurtosis)"
+       ]
+      ],
+      "id": "1-4-1"
+     },
+     {
+      "name": "Distribuições de Probabilidade",
+      "start": 83,
+      "end": 91,
+      "slides": [
+       [
+        83,
+        "Distribuição normal"
+       ],
+       [
+        84,
+        "Distribuição normal"
+       ],
+       [
+        85,
+        "Lognormal"
+       ],
+       [
+        86,
+        "Binomial (Básica)"
+       ],
+       [
+        87,
+        "Uniforme"
+       ],
+       [
+        88,
+        "Uniforme"
+       ],
+       [
+        89,
+        "Simulação de Monte Carlo"
+       ],
+       [
+        90,
+        "Bootstrapping"
+       ],
+       [
+        91,
+        "Bootstrapping"
+       ]
+      ],
+      "id": "1-4-2"
+     },
+     {
+      "name": "Estimação e Inferência",
+      "start": 92,
+      "end": 101,
+      "slides": [
+       [
+        92,
+        "Amostragem Aleatória Simples"
+       ],
+       [
+        93,
+        "Amostragem Sistemática"
+       ],
+       [
+        94,
+        "Amostragem Aleatória Estratificada"
+       ],
+       [
+        95,
+        "Amostragem por Conglomerados"
+       ],
+       [
+        96,
+        "Amostragem não Probabilística"
+       ],
+       [
+        97,
+        "Amostragem de Diferentes Distribuições"
+       ],
+       [
+        98,
+        "Teorema Central do Limite"
+       ],
+       [
+        99,
+        "Erro Padrão da Média"
+       ],
+       [
+        100,
+        "Justificativa para uso da normalidade na inferência"
+       ],
+       [
+        101,
+        "Jackknife"
+       ]
+      ],
+      "id": "1-4-3"
+     }
+    ]
+   },
+   {
+    "name": "Estatística Aplicada",
+    "start": 102,
+    "end": 129,
+    "topics": [
+     {
+      "name": "Teste de Hipóteses",
+      "start": 102,
+      "end": 110,
+      "slides": [
+       [
+        102,
+        "Abertura do capítulo"
+       ],
+       [
+        103,
+        "Conceito"
+       ],
+       [
+        104,
+        "Etapas do Teste de Hipóteses"
+       ],
+       [
+        105,
+        "Nível de Significância e Estatística do Teste"
+       ],
+       [
+        106,
+        "Exemplo"
+       ],
+       [
+        107,
+        "A Tabela de Probabilidade da Curva Normal"
+       ],
+       [
+        108,
+        "Teste Bicaudal"
+       ],
+       [
+        109,
+        "Teste de Hipóteses"
+       ],
+       [
+        110,
+        "Resumo"
+       ]
+      ],
+      "id": "1-5-1"
+     },
+     {
+      "name": "Testes Paramétricos e Não Paramétricos",
+      "start": 111,
+      "end": 116,
+      "slides": [
+       [
+        111,
+        "Conceito"
+       ],
+       [
+        112,
+        "Teste t"
+       ],
+       [
+        113,
+        "Teste F"
+       ],
+       [
+        114,
+        "Conceito"
+       ],
+       [
+        115,
+        "Qui-Quadrado"
+       ],
+       [
+        116,
+        "Qui-Quadrado"
+       ]
+      ],
+      "id": "1-5-2"
+     },
+     {
+      "name": "Regressão Linear Simples",
+      "start": 117,
+      "end": 126,
+      "slides": [
+       [
+        117,
+        "Conceito"
+       ],
+       [
+        118,
+        "Estimação"
+       ],
+       [
+        119,
+        "Gráficos"
+       ],
+       [
+        120,
+        "Estimação dos Parâmetros"
+       ],
+       [
+        121,
+        "Suposições do Modelo"
+       ],
+       [
+        122,
+        "Teste de Hipóteses no Modelo de Regressão"
+       ],
+       [
+        123,
+        "ANOVA"
+       ],
+       [
+        124,
+        "Teste de Hipóteses no Modelo de Regressão"
+       ],
+       [
+        125,
+        "Previsão na Regressão Linear Simples"
+       ],
+       [
+        126,
+        "Formas Funcionais na Regressão Linear Simples"
+       ]
+      ],
+      "id": "1-5-3"
+     },
+     {
+      "name": "Introdução a Técnicas de Big Data",
+      "start": 127,
+      "end": 129,
+      "slides": [
+       [
+        127,
+        "Uso em análise quantitativa de investimentos"
+       ],
+       [
+        128,
+        "Inteligência Artificial e Machine Learning"
+       ],
+       [
+        129,
+        "Big Data e Ciência de Dados"
+       ]
+      ],
+      "id": "1-5-4"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": 2,
+  "en": "Economics",
+  "pt": "Economia",
+  "pdfPages": 92,
+  "chapters": [
+   {
+    "name": "Microeconomia",
+    "start": 4,
+    "end": 46,
+    "topics": [
+     {
+      "name": "Oferta e Demanda",
+      "start": 4,
+      "end": 14,
+      "slides": [
+       [
+        4,
+        "Abertura do capítulo"
+       ],
+       [
+        5,
+        "Introdução"
+       ],
+       [
+        6,
+        "Oferta e Demanda"
+       ],
+       [
+        7,
+        "Deslocamentos da curva de demanda"
+       ],
+       [
+        8,
+        "Deslocamentos da curva de demanda"
+       ],
+       [
+        9,
+        "Deslocamentos da curva de demanda"
+       ],
+       [
+        10,
+        "Deslocamentos da curva de oferta"
+       ],
+       [
+        11,
+        "Curvas de Oferta e Demanda: o equilíbrio"
+       ],
+       [
+        12,
+        "Fora do equilíbrio"
+       ],
+       [
+        13,
+        "Deslocamento da demanda: novo equilíbrio"
+       ],
+       [
+        14,
+        "Resumo"
+       ]
+      ],
+      "id": "2-1-1"
+     },
+     {
+      "name": "Elasticidade",
+      "start": 15,
+      "end": 23,
+      "slides": [
+       [
+        15,
+        "Elasticidade"
+       ],
+       [
+        16,
+        "Elasticidade-preço da demanda"
+       ],
+       [
+        17,
+        "Cálculo da Elasticidade-preço da demanda"
+       ],
+       [
+        18,
+        "Elasticidade ao longo de curva de demanda"
+       ],
+       [
+        19,
+        "Curvas de Demanda e a Elasticidade-Preço"
+       ],
+       [
+        20,
+        "Outras Elasticidades"
+       ],
+       [
+        21,
+        "Curvas de Oferta e a Elasticidade-Preço"
+       ],
+       [
+        22,
+        "Efeito Renda e Efeito Substituição"
+       ],
+       [
+        23,
+        "Efeito Renda e Efeito Substituição"
+       ]
+      ],
+      "id": "2-1-2"
+     },
+     {
+      "name": "Receita, Lucro e Custos",
+      "start": 24,
+      "end": 30,
+      "slides": [
+       [
+        24,
+        "Análise da Oferta"
+       ],
+       [
+        25,
+        "Receita Total e Receita Média"
+       ],
+       [
+        26,
+        "Exemplo"
+       ],
+       [
+        27,
+        "Maximização do Lucro"
+       ],
+       [
+        28,
+        "Breakeven"
+       ],
+       [
+        29,
+        "Decisão de Shutdown"
+       ],
+       [
+        30,
+        "Decisão de Shutdown"
+       ]
+      ],
+      "id": "2-1-3"
+     },
+     {
+      "name": "Economias de Escala",
+      "start": 31,
+      "end": 32,
+      "slides": [
+       [
+        31,
+        "Economias e Deseconomias de Escala"
+       ],
+       [
+        32,
+        "Economias e Deseconomias de Escala"
+       ]
+      ],
+      "id": "2-1-4"
+     },
+     {
+      "name": "Estruturas de Mercado",
+      "start": 33,
+      "end": 44,
+      "slides": [
+       [
+        33,
+        "Estruturas de Mercado"
+       ],
+       [
+        34,
+        "Custos e Receita"
+       ],
+       [
+        35,
+        "Equilíbrio no Longo Prazo"
+       ],
+       [
+        36,
+        "Discriminação de Preços - Monopólio"
+       ],
+       [
+        37,
+        "Monopólio Natural e Regulamentação"
+       ],
+       [
+        38,
+        "Competição Monopolística"
+       ],
+       [
+        39,
+        "Custo"
+       ],
+       [
+        40,
+        "Oligopólio"
+       ],
+       [
+        41,
+        "Oligopólio"
+       ],
+       [
+        42,
+        "Oligopólio Modelo de Cournot"
+       ],
+       [
+        43,
+        "Oligopólio"
+       ],
+       [
+        44,
+        "Resumo Estruturas de Mercado"
+       ]
+      ],
+      "id": "2-1-5"
+     },
+     {
+      "name": "Concentração de Mercado",
+      "start": 45,
+      "end": 46,
+      "slides": [
+       [
+        45,
+        "Índice de Concentração (IC)"
+       ],
+       [
+        46,
+        "Limitações"
+       ]
+      ],
+      "id": "2-1-6"
+     }
+    ]
+   },
+   {
+    "name": "Macroeconomia & Ciclos Econômicos",
+    "start": 47,
+    "end": 67,
+    "topics": [
+     {
+      "name": "PIB",
+      "start": 47,
+      "end": 49,
+      "slides": [
+       [
+        47,
+        "Abertura do capítulo"
+       ],
+       [
+        48,
+        "PIB e o Valor Agregado (Adicionado)"
+       ],
+       [
+        49,
+        "Ótica da Produção"
+       ]
+      ],
+      "id": "2-2-1"
+     },
+     {
+      "name": "Inflação",
+      "start": 50,
+      "end": 51,
+      "slides": [
+       [
+        50,
+        "Conceito"
+       ],
+       [
+        51,
+        "Hiperinflação, Deflação & Estagflação"
+       ]
+      ],
+      "id": "2-2-2"
+     },
+     {
+      "name": "Política Monetária",
+      "start": 52,
+      "end": 55,
+      "slides": [
+       [
+        52,
+        "Banco Central"
+       ],
+       [
+        53,
+        "Quantitative Easing (QE)"
+       ],
+       [
+        54,
+        "Taxa de Juros Neutra"
+       ],
+       [
+        55,
+        "Regra de Taylor - Exemplo"
+       ]
+      ],
+      "id": "2-2-3"
+     },
+     {
+      "name": "Política Fiscal",
+      "start": 56,
+      "end": 58,
+      "slides": [
+       [
+        56,
+        "Contas do Setor Público"
+       ],
+       [
+        57,
+        "Redistribuição de Renda"
+       ],
+       [
+        58,
+        "Crowding out"
+       ]
+      ],
+      "id": "2-2-4"
+     },
+     {
+      "name": "Ciclos Econômicos",
+      "start": 59,
+      "end": 62,
+      "slides": [
+       [
+        59,
+        "Contração (Declínio)"
+       ],
+       [
+        60,
+        "Expansão (Recuperação)"
+       ],
+       [
+        61,
+        "Exemplo em Gráfico"
+       ],
+       [
+        62,
+        "Prevendo Ciclos Econômicos"
+       ]
+      ],
+      "id": "2-2-5"
+     },
+     {
+      "name": "Curva de Juros (ETTJ) e Curva de Phillips",
+      "start": 63,
+      "end": 67,
+      "slides": [
+       [
+        63,
+        "ETTJ: Principais tipos de Curvas de Juros"
+       ],
+       [
+        64,
+        "ETTJ: Exemplo 1"
+       ],
+       [
+        65,
+        "ETTJ: Exemplo 2"
+       ],
+       [
+        66,
+        "Curva de Phillips"
+       ],
+       [
+        67,
+        "Ciclos Econômicos: Resumo"
+       ]
+      ],
+      "id": "2-2-6"
+     }
+    ]
+   },
+   {
+    "name": "Geopolítica & Comércio Global",
+    "start": 68,
+    "end": 92,
+    "topics": [
+     {
+      "name": "Geopolítica e Cooperação",
+      "start": 68,
+      "end": 70,
+      "slides": [
+       [
+        68,
+        "Abertura do capítulo"
+       ],
+       [
+        69,
+        "Conceito"
+       ],
+       [
+        70,
+        "Conceito"
+       ]
+      ],
+      "id": "2-3-1"
+     },
+     {
+      "name": "Globalização e Organizações Internacionais",
+      "start": 71,
+      "end": 72,
+      "slides": [
+       [
+        71,
+        "Conceito"
+       ],
+       [
+        72,
+        "Conceito"
+       ]
+      ],
+      "id": "2-3-2"
+     },
+     {
+      "name": "Comportamento dos Países e Instrumentos",
+      "start": 73,
+      "end": 74,
+      "slides": [
+       [
+        73,
+        "Conceito"
+       ],
+       [
+        74,
+        "Conceito"
+       ]
+      ],
+      "id": "2-3-3"
+     },
+     {
+      "name": "Riscos Geopolíticos",
+      "start": 75,
+      "end": 76,
+      "slides": [
+       [
+        75,
+        "Conceito"
+       ],
+       [
+        76,
+        "Conceito"
+       ]
+      ],
+      "id": "2-3-4"
+     },
+     {
+      "name": "Comércio Internacional: Tarifas, Cotas e Blocos",
+      "start": 77,
+      "end": 81,
+      "slides": [
+       [
+        77,
+        "Benefícios"
+       ],
+       [
+        78,
+        "Introdução"
+       ],
+       [
+        79,
+        "Conceito"
+       ],
+       [
+        80,
+        "Conceito"
+       ],
+       [
+        81,
+        "Conceito"
+       ]
+      ],
+      "id": "2-3-5"
+     },
+     {
+      "name": "Câmbio: Cotações e PPP",
+      "start": 82,
+      "end": 87,
+      "slides": [
+       [
+        82,
+        "Base e Price Currencies"
+       ],
+       [
+        83,
+        "PPP - Exemplo"
+       ],
+       [
+        84,
+        "Taxa de Câmbio Real"
+       ],
+       [
+        85,
+        "Participantes do Mercado"
+       ],
+       [
+        86,
+        "Cotação de Taxas de Câmbio"
+       ],
+       [
+        87,
+        "Cotação de Taxas de Câmbio"
+       ]
+      ],
+      "id": "2-3-6"
+     },
+     {
+      "name": "Câmbio: Balança, Restrições e Forwards",
+      "start": 88,
+      "end": 92,
+      "slides": [
+       [
+        88,
+        "Taxas de Câmbio e Balança Comercial"
+       ],
+       [
+        89,
+        "Restrições de Capital"
+       ],
+       [
+        90,
+        "Taxas de Câmbio a Prazo (Forward)"
+       ],
+       [
+        91,
+        "Arbitragem: Conceito"
+       ],
+       [
+        92,
+        "Arbitragem: Exemplos"
+       ]
+      ],
+      "id": "2-3-7"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": 3,
+  "en": "Corporate Issuers",
+  "pt": "Emissores Corporativos",
+  "pdfPages": 67,
+  "chapters": [
+   {
+    "name": "Estruturas Empresariais & Governança Corporativa",
+    "start": 4,
+    "end": 27,
+    "topics": [
+     {
+      "name": "Estruturas Empresariais",
+      "start": 4,
+      "end": 11,
+      "slides": [
+       [
+        4,
+        "Abertura do capítulo"
+       ],
+       [
+        5,
+        "Conceito"
+       ],
+       [
+        6,
+        "Pass-Through"
+       ],
+       [
+        7,
+        "Partnerships"
+       ],
+       [
+        8,
+        "Limited Liability Company (LLC)"
+       ],
+       [
+        9,
+        "Corporation"
+       ],
+       [
+        10,
+        "Public Company"
+       ],
+       [
+        11,
+        "Resumo"
+       ]
+      ],
+      "id": "3-1-1"
+     },
+     {
+      "name": "IPO, SPAC e Fechamento de Capital",
+      "start": 12,
+      "end": 14,
+      "slides": [
+       [
+        12,
+        "Initial Public Offering (IPO)"
+       ],
+       [
+        13,
+        "SPAC"
+       ],
+       [
+        14,
+        "Conceito"
+       ]
+      ],
+      "id": "3-1-2"
+     },
+     {
+      "name": "Stakeholders",
+      "start": 15,
+      "end": 17,
+      "slides": [
+       [
+        15,
+        "Propriedade e Participantes do Mercado"
+       ],
+       [
+        16,
+        "Investidor Institucional"
+       ],
+       [
+        17,
+        "Governos"
+       ]
+      ],
+      "id": "3-1-3"
+     },
+     {
+      "name": "Captação e Direitos de Acionistas x Credores",
+      "start": 18,
+      "end": 20,
+      "slides": [
+       [
+        18,
+        "Capital de terceiros x Capital Próprio"
+       ],
+       [
+        19,
+        "Risco e retorno: credores x acionista"
+       ],
+       [
+        20,
+        "Covenants"
+       ]
+      ],
+      "id": "3-1-4"
+     },
+     {
+      "name": "Governança Corporativa",
+      "start": 21,
+      "end": 27,
+      "slides": [
+       [
+        21,
+        "Grupos de Stakeholders e Governança Corporativa"
+       ],
+       [
+        22,
+        "Direitos dos acionistas e eventos societários"
+       ],
+       [
+        23,
+        "Conflitos entre stakeholders"
+       ],
+       [
+        24,
+        "Mecanismos dos acionistas"
+       ],
+       [
+        25,
+        "Conselho e comitês"
+       ],
+       [
+        26,
+        "Mecanismos não-acionários"
+       ],
+       [
+        27,
+        "OPA/tender e controlador × minoritário"
+       ]
+      ],
+      "id": "3-1-5"
+     }
+    ]
+   },
+   {
+    "name": "Gestão Financeira de Curto e Longo Prazo",
+    "start": 28,
+    "end": 47,
+    "topics": [
+     {
+      "name": "Ciclo Operacional e de Caixa",
+      "start": 28,
+      "end": 32,
+      "slides": [
+       [
+        28,
+        "Abertura do capítulo"
+       ],
+       [
+        29,
+        "Introdução"
+       ],
+       [
+        30,
+        "Ciclo Operacional"
+       ],
+       [
+        31,
+        "Gestão do Ciclo de Conversão de Caixa"
+       ],
+       [
+        32,
+        "Ciclo de Caixa & Capital de Giro sobre Vendas"
+       ]
+      ],
+      "id": "3-2-1"
+     },
+     {
+      "name": "Fontes e Custo de Liquidez",
+      "start": 33,
+      "end": 34,
+      "slides": [
+       [
+        33,
+        "Fontes Primárias de Liquidez"
+       ],
+       [
+        34,
+        "Custo de Liquidez: Exemplo"
+       ]
+      ],
+      "id": "3-2-2"
+     },
+     {
+      "name": "Gestão de Liquidez e Capital de Giro",
+      "start": 35,
+      "end": 37,
+      "slides": [
+       [
+        35,
+        "Mensurando e Avaliando a Liquidez"
+       ],
+       [
+        36,
+        "Gestão de Capital de Giro"
+       ],
+       [
+        37,
+        "Liquidez e Financiamento de Curto Prazo"
+       ]
+      ],
+      "id": "3-2-3"
+     },
+     {
+      "name": "Estrutura de Capital: Determinantes",
+      "start": 38,
+      "end": 41,
+      "slides": [
+       [
+        38,
+        "Introdução"
+       ],
+       [
+        39,
+        "Capital-Intensive Business"
+       ],
+       [
+        40,
+        "Ciclos de Vida Corporativo"
+       ],
+       [
+        41,
+        "Determinantes dos Custos de Capital"
+       ]
+      ],
+      "id": "3-2-4"
+     },
+     {
+      "name": "Modigliani-Miller",
+      "start": 42,
+      "end": 45,
+      "slides": [
+       [
+        42,
+        "Modigliani Miller e a Estrutura de Capital"
+       ],
+       [
+        43,
+        "MM Proposition I: Sem Imposto"
+       ],
+       [
+        44,
+        "MM Proposition I: Com Imposto"
+       ],
+       [
+        45,
+        "Modigliani Miller: Resumo"
+       ]
+      ],
+      "id": "3-2-5"
+     },
+     {
+      "name": "Estrutura Ótima e Pecking Order",
+      "start": 46,
+      "end": 47,
+      "slides": [
+       [
+        46,
+        "Estrutura de Capital Ótima"
+       ],
+       [
+        47,
+        "Pecking Order Theory e Custos de Agência"
+       ]
+      ],
+      "id": "3-2-6"
+     }
+    ]
+   },
+   {
+    "name": "Decisões de Investimentos e Modelos de Negócio",
+    "start": 48,
+    "end": 67,
+    "topics": [
+     {
+      "name": "Tipos de Investimento de Capital",
+      "start": 48,
+      "end": 51,
+      "slides": [
+       [
+        48,
+        "Abertura do capítulo"
+       ],
+       [
+        49,
+        "Investimentos de Capital"
+       ],
+       [
+        50,
+        "Manutenção: Going Concern Projects"
+       ],
+       [
+        51,
+        "Expansão: Expansion of Existing Business"
+       ]
+      ],
+      "id": "3-3-1"
+     },
+     {
+      "name": "Alocação de Capital e Ferramentas",
+      "start": 52,
+      "end": 54,
+      "slides": [
+       [
+        52,
+        "Alocação de Capital"
+       ],
+       [
+        53,
+        "Ferramentas de Avaliação de Investimentos"
+       ],
+       [
+        54,
+        "ROIC: Decomposição"
+       ]
+      ],
+      "id": "3-3-2"
+     },
+     {
+      "name": "Princípios, Armadilhas e Vieses",
+      "start": 55,
+      "end": 56,
+      "slides": [
+       [
+        55,
+        "Princípios & Armadilhas na Alocação de Capital"
+       ],
+       [
+        56,
+        "Vieses Comportamentais na Alocação de Capital"
+       ]
+      ],
+      "id": "3-3-3"
+     },
+     {
+      "name": "Opções Reais",
+      "start": 57,
+      "end": 58,
+      "slides": [
+       [
+        57,
+        "Opções Reais: Cálculo"
+       ],
+       [
+        58,
+        "Opções Reais: Exemplo"
+       ]
+      ],
+      "id": "3-3-4"
+     },
+     {
+      "name": "Modelos de Negócio: Oferta e Precificação",
+      "start": 59,
+      "end": 63,
+      "slides": [
+       [
+        59,
+        "Introdução"
+       ],
+       [
+        60,
+        "Oferta de Produto/Serviço (O Quê)"
+       ],
+       [
+        61,
+        "Precificação (Quanto)"
+       ],
+       [
+        62,
+        "Modelos Comuns de Precificação"
+       ],
+       [
+        63,
+        "Modelos de Precificação: Penetração & Digital"
+       ]
+      ],
+      "id": "3-3-5"
+     },
+     {
+      "name": "Proposta e Cadeia de Valor",
+      "start": 64,
+      "end": 65,
+      "slides": [
+       [
+        64,
+        "Proposta de Valor"
+       ],
+       [
+        65,
+        "Cadeia de Valor e Geração de Lucro"
+       ]
+      ],
+      "id": "3-3-6"
+     },
+     {
+      "name": "Modelos Convencionais e Plataformas",
+      "start": 66,
+      "end": 67,
+      "slides": [
+       [
+        66,
+        "Modelos de Negócio Convencionais & Variações"
+       ],
+       [
+        67,
+        "Efeitos de Rede e Modelos de Plataforma"
+       ]
+      ],
+      "id": "3-3-7"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": 4,
+  "en": "Financial Statement Analysis",
+  "pt": "Análise de Demonstrações Financeiras",
+  "pdfPages": 195,
+  "chapters": [
+   {
+    "name": "Introdução à Análise das Demonstrações Financeiras",
+    "start": 4,
+    "end": 18,
+    "topics": [
+     {
+      "name": "Framework e Escopo da Análise",
+      "start": 4,
+      "end": 8,
+      "slides": [
+       [
+        4,
+        "Abertura do capítulo"
+       ],
+       [
+        5,
+        "Propósito e Contexto da Análise"
+       ],
+       [
+        6,
+        "Processamento dos Dados"
+       ],
+       [
+        7,
+        "Desenvolver e Comunicar Conclusões e Recomendações"
+       ],
+       [
+        8,
+        "Conceito"
+       ]
+      ],
+      "id": "4-1-1"
+     },
+     {
+      "name": "Fontes de Informação",
+      "start": 9,
+      "end": 11,
+      "slides": [
+       [
+        9,
+        "Conceito"
+       ],
+       [
+        10,
+        "Relatório do Auditor"
+       ],
+       [
+        11,
+        "Conceito"
+       ]
+      ],
+      "id": "4-1-2"
+     },
+     {
+      "name": "Principais Demonstrações Contábeis",
+      "start": 12,
+      "end": 18,
+      "slides": [
+       [
+        12,
+        "Conceito"
+       ],
+       [
+        13,
+        "Mensuração dos Elementos Financeiros"
+       ],
+       [
+        14,
+        "Balanço Patrimonial"
+       ],
+       [
+        15,
+        "Demonstração de Resultado"
+       ],
+       [
+        16,
+        "Demonstração de Resultado"
+       ],
+       [
+        17,
+        "Demonstração de Mutações do PL"
+       ],
+       [
+        18,
+        "Demonstração de Fluxo de Caixa"
+       ]
+      ],
+      "id": "4-1-3"
+     }
+    ]
+   },
+   {
+    "name": "Análise da Demonstração de Resultado",
+    "start": 19,
+    "end": 50,
+    "topics": [
+     {
+      "name": "Componentes do Income Statement",
+      "start": 19,
+      "end": 25,
+      "slides": [
+       [
+        19,
+        "Abertura do capítulo"
+       ],
+       [
+        20,
+        "Estrutura"
+       ],
+       [
+        21,
+        "Depreciação e Amortização"
+       ],
+       [
+        22,
+        "Depreciação e Amortização"
+       ],
+       [
+        23,
+        "Itens não Operacionais"
+       ],
+       [
+        24,
+        "Itens não Operacionais"
+       ],
+       [
+        25,
+        "Comprehensive Income"
+       ]
+      ],
+      "id": "4-2-1"
+     },
+     {
+      "name": "Reconhecimento de Receita e Despesa",
+      "start": 26,
+      "end": 32,
+      "slides": [
+       [
+        26,
+        "Princípios Gerais"
+       ],
+       [
+        27,
+        "Princípios Gerais"
+       ],
+       [
+        28,
+        "Capitalizar x Despender"
+       ],
+       [
+        29,
+        "Capitalização de Custos de Juros"
+       ],
+       [
+        30,
+        "Capitalização de Custos de Desenvolvimento"
+       ],
+       [
+        31,
+        "Implicações para Analistas Financeiros"
+       ],
+       [
+        32,
+        "Implicações para Analistas Financeiros"
+       ]
+      ],
+      "id": "4-2-2"
+     },
+     {
+      "name": "Itens Não Recorrentes",
+      "start": 33,
+      "end": 36,
+      "slides": [
+       [
+        33,
+        "Itens Incomuns ou Infrequentes"
+       ],
+       [
+        34,
+        "Operações Descontinuadas"
+       ],
+       [
+        35,
+        "Operações Descontinuadas"
+       ],
+       [
+        36,
+        "Operações Descontinuadas"
+       ]
+      ],
+      "id": "4-2-3"
+     },
+     {
+      "name": "Mudanças Contábeis, Escopo e Câmbio",
+      "start": 37,
+      "end": 38,
+      "slides": [
+       [
+        37,
+        "Conceito"
+       ],
+       [
+        38,
+        "Conceito"
+       ]
+      ],
+      "id": "4-2-4"
+     },
+     {
+      "name": "Lucro por Ação",
+      "start": 39,
+      "end": 47,
+      "slides": [
+       [
+        39,
+        "Estrutura de Capital"
+       ],
+       [
+        40,
+        "EPS Básico"
+       ],
+       [
+        41,
+        "EPS Diluído"
+       ],
+       [
+        42,
+        "EPS Diluído"
+       ],
+       [
+        43,
+        "EPS Diluído"
+       ],
+       [
+        44,
+        "EPS Diluído"
+       ],
+       [
+        45,
+        "EPS Diluído"
+       ],
+       [
+        46,
+        "Antidiluição"
+       ],
+       [
+        47,
+        "Mudanças no EPS"
+       ]
+      ],
+      "id": "4-2-5"
+     },
+     {
+      "name": "Análise Vertical/Horizontal e Índices",
+      "start": 48,
+      "end": 50,
+      "slides": [
+       [
+        48,
+        "Conceito"
+       ],
+       [
+        49,
+        "Exemplo"
+       ],
+       [
+        50,
+        "Conceito"
+       ]
+      ],
+      "id": "4-2-6"
+     }
+    ]
+   },
+   {
+    "name": "Análise de Balanços",
+    "start": 51,
+    "end": 69,
+    "topics": [
+     {
+      "name": "Estrutura do Balanço",
+      "start": 51,
+      "end": 54,
+      "slides": [
+       [
+        51,
+        "Abertura do capítulo"
+       ],
+       [
+        52,
+        "Introdução"
+       ],
+       [
+        53,
+        "Circulante e Não Circulante"
+       ],
+       [
+        54,
+        "Circulante e Não Circulante"
+       ]
+      ],
+      "id": "4-3-1"
+     },
+     {
+      "name": "Ativos e Passivos Circulantes",
+      "start": 55,
+      "end": 57,
+      "slides": [
+       [
+        55,
+        "Ativos Circulantes"
+       ],
+       [
+        56,
+        "Estoques e Outros Ativos Circulantes"
+       ],
+       [
+        57,
+        "Passivos Circulantes"
+       ]
+      ],
+      "id": "4-3-2"
+     },
+     {
+      "name": "Impostos Diferidos e PL",
+      "start": 58,
+      "end": 59,
+      "slides": [
+       [
+        58,
+        "Ativos Fiscais Diferidos"
+       ],
+       [
+        59,
+        "Componentes do Patrimônio Líquido"
+       ]
+      ],
+      "id": "4-3-3"
+     },
+     {
+      "name": "Intangíveis e Goodwill",
+      "start": 60,
+      "end": 62,
+      "slides": [
+       [
+        60,
+        "Ativos Intangíveis"
+       ],
+       [
+        61,
+        "Goodwill"
+       ],
+       [
+        62,
+        "Goodwill"
+       ]
+      ],
+      "id": "4-3-4"
+     },
+     {
+      "name": "Instrumentos Financeiros",
+      "start": 63,
+      "end": 65,
+      "slides": [
+       [
+        63,
+        "Instrumentos Financeiros"
+       ],
+       [
+        64,
+        "Instrumentos Financeiros"
+       ],
+       [
+        65,
+        "Instrumentos Financeiros"
+       ]
+      ],
+      "id": "4-3-5"
+     },
+     {
+      "name": "Passivos de Longo Prazo e Fiscais Diferidos",
+      "start": 66,
+      "end": 68,
+      "slides": [
+       [
+        66,
+        "Passivos de Longo Prazo"
+       ],
+       [
+        67,
+        "Passivos Fiscais Diferidos"
+       ],
+       [
+        68,
+        "Passivos Fiscais Diferidos"
+       ]
+      ],
+      "id": "4-3-6"
+     },
+     {
+      "name": "Índices do Balanço",
+      "start": 69,
+      "end": 69,
+      "slides": [
+       [
+        69,
+        "Conceito"
+       ]
+      ],
+      "id": "4-3-7"
+     }
+    ]
+   },
+   {
+    "name": "Análise de Fluxos de Caixa",
+    "start": 70,
+    "end": 89,
+    "topics": [
+     {
+      "name": "Ligação entre Demonstrativos",
+      "start": 70,
+      "end": 76,
+      "slides": [
+       [
+        70,
+        "Abertura do capítulo"
+       ],
+       [
+        71,
+        "Introdução"
+       ],
+       [
+        72,
+        "Ligação entre demonstrativos contábeis"
+       ],
+       [
+        73,
+        "Impacto no caixa"
+       ],
+       [
+        74,
+        "Análise de Fluxos de Caixa"
+       ],
+       [
+        75,
+        "Análise de Fluxos de Caixa"
+       ],
+       [
+        76,
+        "Impacto no caixa"
+       ]
+      ],
+      "id": "4-4-1"
+     },
+     {
+      "name": "Métodos Direto e Indireto",
+      "start": 77,
+      "end": 79,
+      "slides": [
+       [
+        77,
+        "Método Direto"
+       ],
+       [
+        78,
+        "Método Indireto"
+       ],
+       [
+        79,
+        "Método Indireto"
+       ]
+      ],
+      "id": "4-4-2"
+     },
+     {
+      "name": "Investimento, Financiamento e IFRS x US GAAP",
+      "start": 80,
+      "end": 82,
+      "slides": [
+       [
+        80,
+        "Fluxos de Caixa de Investimento"
+       ],
+       [
+        81,
+        "Fluxos de Caixa de Financiamento"
+       ],
+       [
+        82,
+        "IFRS x US GAAP"
+       ]
+      ],
+      "id": "4-4-3"
+     },
+     {
+      "name": "Análises Avançadas e FCF",
+      "start": 83,
+      "end": 87,
+      "slides": [
+       [
+        83,
+        "Análises Avançadas"
+       ],
+       [
+        84,
+        "Avaliando Fontes e Usos de Caixa"
+       ],
+       [
+        85,
+        "Análise Vertical"
+       ],
+       [
+        86,
+        "Medidas de Fluxo de Caixa Livre"
+       ],
+       [
+        87,
+        "Medidas de Fluxo de Caixa Livre"
+       ]
+      ],
+      "id": "4-4-4"
+     },
+     {
+      "name": "Índices de Fluxo de Caixa",
+      "start": 88,
+      "end": 89,
+      "slides": [
+       [
+        88,
+        "Índices de Performance"
+       ],
+       [
+        89,
+        "Índices de Cobertura"
+       ]
+      ],
+      "id": "4-4-5"
+     }
+    ]
+   },
+   {
+    "name": "Análise de Estoques",
+    "start": 90,
+    "end": 100,
+    "topics": [
+     {
+      "name": "Valoração de Estoques",
+      "start": 90,
+      "end": 93,
+      "slides": [
+       [
+        90,
+        "Abertura do capítulo"
+       ],
+       [
+        91,
+        "Introdução"
+       ],
+       [
+        92,
+        "Valoração (Valuation) de Estoques"
+       ],
+       [
+        93,
+        "Valoração (Valuation) de Estoques"
+       ]
+      ],
+      "id": "4-5-1"
+     },
+     {
+      "name": "Inflação, Deflação e Write-Downs",
+      "start": 94,
+      "end": 98,
+      "slides": [
+       [
+        94,
+        "Efeitos da Inflação e Deflação"
+       ],
+       [
+        95,
+        "Efeitos da Inflação e Deflação"
+       ],
+       [
+        96,
+        "Efeitos da Inflação e Deflação"
+       ],
+       [
+        97,
+        "Write-Downs"
+       ],
+       [
+        98,
+        "Write-Downs"
+       ]
+      ],
+      "id": "4-5-2"
+     },
+     {
+      "name": "Índices e Divulgação",
+      "start": 99,
+      "end": 100,
+      "slides": [
+       [
+        99,
+        "Impactos em índices"
+       ],
+       [
+        100,
+        "Apresentação e Divulgação"
+       ]
+      ],
+      "id": "4-5-3"
+     }
+    ]
+   },
+   {
+    "name": "Análise de Ativos de Longo Prazo",
+    "start": 101,
+    "end": 111,
+    "topics": [
+     {
+      "name": "Ativos não Circulantes",
+      "start": 101,
+      "end": 104,
+      "slides": [
+       [
+        101,
+        "Abertura do capítulo"
+       ],
+       [
+        102,
+        "Ativos não Circulantes"
+       ],
+       [
+        103,
+        "Ativos não Circulantes"
+       ],
+       [
+        104,
+        "Ativos não Circulantes"
+       ]
+      ],
+      "id": "4-6-1"
+     },
+     {
+      "name": "Ativos Intangíveis",
+      "start": 105,
+      "end": 106,
+      "slides": [
+       [
+        105,
+        "Categorias de Ativos Intangíveis"
+       ],
+       [
+        106,
+        "Categorias de Ativos Intangíveis"
+       ]
+      ],
+      "id": "4-6-2"
+     },
+     {
+      "name": "Impairment e Derecognition",
+      "start": 107,
+      "end": 108,
+      "slides": [
+       [
+        107,
+        "Impairment PP&E"
+       ],
+       [
+        108,
+        "Impairment e Derecognition"
+       ]
+      ],
+      "id": "4-6-3"
+     },
+     {
+      "name": "Apresentação e Divulgação",
+      "start": 109,
+      "end": 111,
+      "slides": [
+       [
+        109,
+        "Apresentação e Divulgação"
+       ],
+       [
+        110,
+        "Apresentação e Divulgação"
+       ],
+       [
+        111,
+        "Usando divulgações na análise"
+       ]
+      ],
+      "id": "4-6-4"
+     }
+    ]
+   },
+   {
+    "name": "Passivos de Longo Prazo e Equity",
+    "start": 112,
+    "end": 129,
+    "topics": [
+     {
+      "name": "Leases: Conceitos",
+      "start": 112,
+      "end": 115,
+      "slides": [
+       [
+        112,
+        "Abertura do capítulo"
+       ],
+       [
+        113,
+        "Leases"
+       ],
+       [
+        114,
+        "Leases"
+       ],
+       [
+        115,
+        "Leases"
+       ]
+      ],
+      "id": "4-7-1"
+     },
+     {
+      "name": "Lessee Accounting (IFRS e US GAAP)",
+      "start": 116,
+      "end": 120,
+      "slides": [
+       [
+        116,
+        "Lessee Accounting (IFRS)"
+       ],
+       [
+        117,
+        "Lessee Accounting (IFRS)"
+       ],
+       [
+        118,
+        "Lessee Accounting (US GAAP)"
+       ],
+       [
+        119,
+        "Lessee Accounting (US GAAP)"
+       ],
+       [
+        120,
+        "Lessee Accounting (US GAAP)"
+       ]
+      ],
+      "id": "4-7-2"
+     },
+     {
+      "name": "Lessor Accounting",
+      "start": 121,
+      "end": 122,
+      "slides": [
+       [
+        121,
+        "Lessor Accounting"
+       ],
+       [
+        122,
+        "Lessor Accounting"
+       ]
+      ],
+      "id": "4-7-3"
+     },
+     {
+      "name": "Planos de Compensação",
+      "start": 123,
+      "end": 127,
+      "slides": [
+       [
+        123,
+        "Planos de Compensação"
+       ],
+       [
+        124,
+        "Planos de Compensação"
+       ],
+       [
+        125,
+        "Planos de Compensação"
+       ],
+       [
+        126,
+        "Planos de Compensação"
+       ],
+       [
+        127,
+        "Planos de Compensação"
+       ]
+      ],
+      "id": "4-7-4"
+     },
+     {
+      "name": "Apresentação e Divulgação",
+      "start": 128,
+      "end": 129,
+      "slides": [
+       [
+        128,
+        "Apresentação e Divulgação de Leases"
+       ],
+       [
+        129,
+        "Apresentação e Divulgação de Planos de Compensação"
+       ]
+      ],
+      "id": "4-7-5"
+     }
+    ]
+   },
+   {
+    "name": "Análise de Impostos",
+    "start": 130,
+    "end": 137,
+    "topics": [
+     {
+      "name": "Lucro Contábil x Renda Tributável",
+      "start": 130,
+      "end": 133,
+      "slides": [
+       [
+        130,
+        "Abertura do capítulo"
+       ],
+       [
+        131,
+        "Introdução"
+       ],
+       [
+        132,
+        "Lucro Contábil x Renda Tributável"
+       ],
+       [
+        133,
+        "Lucro Contábil x Renda Tributável"
+       ]
+      ],
+      "id": "4-8-1"
+     },
+     {
+      "name": "DTA x DTL e IR Corporativo",
+      "start": 134,
+      "end": 137,
+      "slides": [
+       [
+        134,
+        "DTA x DTL"
+       ],
+       [
+        135,
+        "DTA x DTL"
+       ],
+       [
+        136,
+        "DTA x DTL"
+       ],
+       [
+        137,
+        "Imposto de Renda Corporativo"
+       ]
+      ],
+      "id": "4-8-2"
+     }
+    ]
+   },
+   {
+    "name": "Qualidade dos Relatórios Financeiros",
+    "start": 138,
+    "end": 150,
+    "topics": [
+     {
+      "name": "Qualidade: Conceitos e Espectro",
+      "start": 138,
+      "end": 140,
+      "slides": [
+       [
+        138,
+        "Abertura do capítulo"
+       ],
+       [
+        139,
+        "Introdução"
+       ],
+       [
+        140,
+        "Relatórios de alta qualidade"
+       ]
+      ],
+      "id": "4-9-1"
+     },
+     {
+      "name": "Contabilidade Viesada e Earnings Management",
+      "start": 141,
+      "end": 143,
+      "slides": [
+       [
+        141,
+        "Contabilidade Viesada"
+       ],
+       [
+        142,
+        "Relatórios com Earnings Management"
+       ],
+       [
+        143,
+        "Conservatism x Aggressive Accounting"
+       ]
+      ],
+      "id": "4-9-2"
+     },
+     {
+      "name": "Disciplina e Detecção de Problemas",
+      "start": 144,
+      "end": 146,
+      "slides": [
+       [
+        144,
+        "Qualidade dos Relatórios Financeiros"
+       ],
+       [
+        145,
+        "Disciplina da Qualidade dos Relatórios Financeiros"
+       ],
+       [
+        146,
+        "Detecção de Problemas com a FRQ"
+       ]
+      ],
+      "id": "4-9-3"
+     },
+     {
+      "name": "Impactos nas Demonstrações e Sinais de Alerta",
+      "start": 147,
+      "end": 150,
+      "slides": [
+       [
+        147,
+        "Impactos no Resultado e no Balanço"
+       ],
+       [
+        148,
+        "Impactos no Fluxo de Caixa"
+       ],
+       [
+        149,
+        "Impactos nos Relatórios Financeiros"
+       ],
+       [
+        150,
+        "Sinais de Alerta"
+       ]
+      ],
+      "id": "4-9-4"
+     }
+    ]
+   },
+   {
+    "name": "Técnicas de Análise Financeira",
+    "start": 151,
+    "end": 176,
+    "topics": [
+     {
+      "name": "Processo e Ferramentas de Análise",
+      "start": 151,
+      "end": 154,
+      "slides": [
+       [
+        151,
+        "Abertura do capítulo"
+       ],
+       [
+        152,
+        "Introdução"
+       ],
+       [
+        153,
+        "Processo de Análise Financeira"
+       ],
+       [
+        154,
+        "Ferramentas Analíticas e Técnicas"
+       ]
+      ],
+      "id": "4-10-1"
+     },
+     {
+      "name": "Análise por Índices e Common-Size",
+      "start": 155,
+      "end": 160,
+      "slides": [
+       [
+        155,
+        "Análise de Índices Financeiros"
+       ],
+       [
+        156,
+        "Universo dos Índices"
+       ],
+       [
+        157,
+        "Universo dos Índices"
+       ],
+       [
+        158,
+        "Análise por Índices"
+       ],
+       [
+        159,
+        "Common-Size"
+       ],
+       [
+        160,
+        "Common-Size"
+       ]
+      ],
+      "id": "4-10-2"
+     },
+     {
+      "name": "Gráficos e Regressão",
+      "start": 161,
+      "end": 162,
+      "slides": [
+       [
+        161,
+        "Análise Financeira"
+       ],
+       [
+        162,
+        "Uso de Gráficos e Análise de Regressão"
+       ]
+      ],
+      "id": "4-10-3"
+     },
+     {
+      "name": "Índices de Atividade",
+      "start": 163,
+      "end": 165,
+      "slides": [
+       [
+        163,
+        "Índices Financeiros"
+       ],
+       [
+        164,
+        "Índices de Atividade"
+       ],
+       [
+        165,
+        "Índices de Atividade"
+       ]
+      ],
+      "id": "4-10-4"
+     },
+     {
+      "name": "Índices de Liquidez",
+      "start": 166,
+      "end": 167,
+      "slides": [
+       [
+        166,
+        "Índices de Liquidez"
+       ],
+       [
+        167,
+        "Índices de Liquidez"
+       ]
+      ],
+      "id": "4-10-5"
+     },
+     {
+      "name": "Índices de Solvência",
+      "start": 168,
+      "end": 170,
+      "slides": [
+       [
+        168,
+        "Índices de Solvência"
+       ],
+       [
+        169,
+        "Índices de Solvência"
+       ],
+       [
+        170,
+        "Índices de Solvência"
+       ]
+      ],
+      "id": "4-10-6"
+     },
+     {
+      "name": "Índices de Rentabilidade",
+      "start": 171,
+      "end": 173,
+      "slides": [
+       [
+        171,
+        "Índices de Rentabilidade"
+       ],
+       [
+        172,
+        "Índices de Rentabilidade"
+       ],
+       [
+        173,
+        "Índices de Rentabilidade"
+       ]
+      ],
+      "id": "4-10-7"
+     },
+     {
+      "name": "DuPont e Índices Setoriais",
+      "start": 174,
+      "end": 176,
+      "slides": [
+       [
+        174,
+        "Análise Integrada de Índices"
+       ],
+       [
+        175,
+        "Análise Dupont"
+       ],
+       [
+        176,
+        "Índices de Setores Específicos"
+       ]
+      ],
+      "id": "4-10-8"
+     }
+    ]
+   },
+   {
+    "name": "Introdução à Modelagem de Demonstrações Financeiras",
+    "start": 177,
+    "end": 195,
+    "topics": [
+     {
+      "name": "Construção do Modelo e Receitas",
+      "start": 177,
+      "end": 180,
+      "slides": [
+       [
+        177,
+        "Abertura do capítulo"
+       ],
+       [
+        178,
+        "Construindo o Modelo"
+       ],
+       [
+        179,
+        "Overview da Companhia"
+       ],
+       [
+        180,
+        "Projeção de Receitas"
+       ]
+      ],
+      "id": "4-11-1"
+     },
+     {
+      "name": "Projeção de Custos e Despesas",
+      "start": 181,
+      "end": 182,
+      "slides": [
+       [
+        181,
+        "COGS"
+       ],
+       [
+        182,
+        "SG&A"
+       ]
+      ],
+      "id": "4-11-2"
+     },
+     {
+      "name": "Lucro por Segmento e Imposto",
+      "start": 183,
+      "end": 184,
+      "slides": [
+       [
+        183,
+        "Lucro Operacional por Segmento"
+       ],
+       [
+        184,
+        "Projeção de Imposto de Renda"
+       ]
+      ],
+      "id": "4-11-3"
+     },
+     {
+      "name": "Demonstrações Pro Forma",
+      "start": 185,
+      "end": 186,
+      "slides": [
+       [
+        185,
+        "Demonstração de Resultados Pro Forma"
+       ],
+       [
+        186,
+        "Demonstração de Fluxo de Caixa Pro Forma"
+       ]
+      ],
+      "id": "4-11-4"
+     },
+     {
+      "name": "Capex, Capital de Giro e FCF",
+      "start": 187,
+      "end": 189,
+      "slides": [
+       [
+        187,
+        "Projeção de Capex e Depreciação"
+       ],
+       [
+        188,
+        "Projeção de Capital de Giro"
+       ],
+       [
+        189,
+        "Projeção da Demonstração do Fluxo de Caixa"
+       ]
+      ],
+      "id": "4-11-5"
+     },
+     {
+      "name": "Inputs de Valuation",
+      "start": 190,
+      "end": 190,
+      "slides": [
+       [
+        190,
+        "Inputs do Modelo de Valuation"
+       ]
+      ],
+      "id": "4-11-6"
+     },
+     {
+      "name": "Finanças Comportamentais nas Projeções",
+      "start": 191,
+      "end": 193,
+      "slides": [
+       [
+        191,
+        "Finanças Comportamentais e Projeções do Analista"
+       ],
+       [
+        192,
+        "Finanças Comportamentais e Projeções do Analista"
+       ],
+       [
+        193,
+        "Finanças Comportamentais e Projeções do Analista"
+       ]
+      ],
+      "id": "4-11-7"
+     },
+     {
+      "name": "Inflação, Deflação e Receita Normalizada",
+      "start": 194,
+      "end": 195,
+      "slides": [
+       [
+        194,
+        "Projeções de Custos com Inflação e Deflação"
+       ],
+       [
+        195,
+        "Receita Normalizada"
+       ]
+      ],
+      "id": "4-11-8"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": 5,
+  "en": "Equity Investments",
+  "pt": "Renda Variável",
+  "pdfPages": 87,
+  "chapters": [
+   {
+    "name": "Estrutura do Mercado Financeiro",
+    "start": 4,
+    "end": 21,
+    "topics": [
+     {
+      "name": "Sistema e Mercado Financeiro",
+      "start": 4,
+      "end": 8,
+      "slides": [
+       [
+        4,
+        "Abertura do capítulo"
+       ],
+       [
+        5,
+        "Conceito"
+       ],
+       [
+        6,
+        "Sistemas Financeiros que Funcionam Bem"
+       ],
+       [
+        7,
+        "Conceito"
+       ],
+       [
+        8,
+        "Classificação de Ativos"
+       ]
+      ],
+      "id": "5-1-1"
+     },
+     {
+      "name": "Intermediários Financeiros",
+      "start": 9,
+      "end": 11,
+      "slides": [
+       [
+        9,
+        "Corretores, Bolsas e Sistemas Alternativos"
+       ],
+       [
+        10,
+        "Serviços de Liquidação & Custódia"
+       ],
+       [
+        11,
+        "Dealers"
+       ]
+      ],
+      "id": "5-1-2"
+     },
+     {
+      "name": "Mercado Primário & Mercado Secundário",
+      "start": 12,
+      "end": 19,
+      "slides": [
+       [
+        12,
+        "Conceito"
+       ],
+       [
+        13,
+        "Gráfico"
+       ],
+       [
+        14,
+        "Tipo de Colocação: Garantia Firme"
+       ],
+       [
+        15,
+        "Tipo de Colocação: Residual"
+       ],
+       [
+        16,
+        "Procedimentos de uma reserva"
+       ],
+       [
+        17,
+        "Sessões de Negociação"
+       ],
+       [
+        18,
+        "Mecanismos de Execução"
+       ],
+       [
+        19,
+        "Regras de Precificação de Transações"
+       ]
+      ],
+      "id": "5-1-3"
+     },
+     {
+      "name": "Ordens e Instruções de Negociação",
+      "start": 20,
+      "end": 21,
+      "slides": [
+       [
+        20,
+        "Tipos de Ordem"
+       ],
+       [
+        21,
+        "Ordem Stop"
+       ]
+      ],
+      "id": "5-1-4"
+     }
+    ]
+   },
+   {
+    "name": "Conceitos de Renda Variável",
+    "start": 22,
+    "end": 31,
+    "topics": [
+     {
+      "name": "Ações",
+      "start": 22,
+      "end": 25,
+      "slides": [
+       [
+        22,
+        "Abertura do capítulo"
+       ],
+       [
+        23,
+        "Investimento Direto x Investimento Coletivo"
+       ],
+       [
+        24,
+        "Common Stocks"
+       ],
+       [
+        25,
+        "Preferred Stocks: Dividendos"
+       ]
+      ],
+      "id": "5-2-1"
+     },
+     {
+      "name": "Depositary Receipts",
+      "start": 26,
+      "end": 30,
+      "slides": [
+       [
+        26,
+        "Introdução"
+       ],
+       [
+        27,
+        "Tipos de DRs"
+       ],
+       [
+        28,
+        "ADR"
+       ],
+       [
+        29,
+        "ADR: Programas (I)"
+       ],
+       [
+        30,
+        "GDR"
+       ]
+      ],
+      "id": "5-2-2"
+     },
+     {
+      "name": "Fontes de Retorno",
+      "start": 31,
+      "end": 31,
+      "slides": [
+       [
+        31,
+        "Fontes de Retorno das Ações"
+       ]
+      ],
+      "id": "5-2-3"
+     }
+    ]
+   },
+   {
+    "name": "Índices do Mercado Financeiro",
+    "start": 32,
+    "end": 46,
+    "topics": [
+     {
+      "name": "Cálculos de Índices",
+      "start": 32,
+      "end": 34,
+      "slides": [
+       [
+        32,
+        "Abertura do capítulo"
+       ],
+       [
+        33,
+        "Conceito"
+       ],
+       [
+        34,
+        "Single-Period Total Return"
+       ]
+      ],
+      "id": "5-3-1"
+     },
+     {
+      "name": "Construção de Índices",
+      "start": 35,
+      "end": 40,
+      "slides": [
+       [
+        35,
+        "Construindo um Índice de Mercado"
+       ],
+       [
+        36,
+        "Ponderação de Índices"
+       ],
+       [
+        37,
+        "Equal-Weighted"
+       ],
+       [
+        38,
+        "Float-Adjusted Market-Capitalization-Weighted"
+       ],
+       [
+        39,
+        "Rebalanceamento de Índices"
+       ],
+       [
+        40,
+        "Tracking Error em Índices"
+       ]
+      ],
+      "id": "5-3-2"
+     },
+     {
+      "name": "Índices de Mercado",
+      "start": 41,
+      "end": 46,
+      "slides": [
+       [
+        41,
+        "Três Grandes Famílias de Índices"
+       ],
+       [
+        42,
+        "Ações: Índices Multimercado"
+       ],
+       [
+        43,
+        "Ações: Índices de Estilo"
+       ],
+       [
+        44,
+        "Renda Fixa: Tipos de Índices"
+       ],
+       [
+        45,
+        "Investimentos Alternativos: Imobiliário"
+       ],
+       [
+        46,
+        "Exemplos: EUA"
+       ]
+      ],
+      "id": "5-3-3"
+     }
+    ]
+   },
+   {
+    "name": "Análise Setorial & Empresarial",
+    "start": 47,
+    "end": 70,
+    "topics": [
+     {
+      "name": "Modelo de Negócio e Receita",
+      "start": 47,
+      "end": 51,
+      "slides": [
+       [
+        47,
+        "Abertura do capítulo"
+       ],
+       [
+        48,
+        "Introdução"
+       ],
+       [
+        49,
+        "Definição do Modelo"
+       ],
+       [
+        50,
+        "Conceitos-Chave de Modelo"
+       ],
+       [
+        51,
+        "Pricing Powers"
+       ]
+      ],
+      "id": "5-4-1"
+     },
+     {
+      "name": "Análise de Lucratividade & Capital de Giro",
+      "start": 52,
+      "end": 55,
+      "slides": [
+       [
+        52,
+        "Custos Operacionais"
+       ],
+       [
+        53,
+        "Rentabilidade Operacional"
+       ],
+       [
+        54,
+        "EBITDA Margin"
+       ],
+       [
+        55,
+        "Capital de Giro"
+       ]
+      ],
+      "id": "5-4-2"
+     },
+     {
+      "name": "Investimentos e Estrutura de Capital",
+      "start": 56,
+      "end": 57,
+      "slides": [
+       [
+        56,
+        "Fontes e Usos do Capital"
+       ],
+       [
+        57,
+        "Retornos Alavancados e Não Alavancados"
+       ]
+      ],
+      "id": "5-4-3"
+     },
+     {
+      "name": "Análise da Indústria e Competitividade",
+      "start": 58,
+      "end": 63,
+      "slides": [
+       [
+        58,
+        "Objetivo"
+       ],
+       [
+        59,
+        "Classificação de Indústrias"
+       ],
+       [
+        60,
+        "Classificação da Indústria: Métodos Alternativos"
+       ],
+       [
+        61,
+        "Levantamento Setorial: Market Share"
+       ],
+       [
+        62,
+        "Modelo: PESTLE"
+       ],
+       [
+        63,
+        "Posicionamento Competitivo"
+       ]
+      ],
+      "id": "5-4-4"
+     },
+     {
+      "name": "Forecasting",
+      "start": 64,
+      "end": 70,
+      "slides": [
+       [
+        64,
+        "Objetos das Projeções"
+       ],
+       [
+        65,
+        "Resultados Históricos"
+       ],
+       [
+        66,
+        "Orientações da Administração"
+       ],
+       [
+        67,
+        "Horizonte de Tempo"
+       ],
+       [
+        68,
+        "Projeção de Despesas"
+       ],
+       [
+        69,
+        "Projeção de Despesas: SG&A"
+       ],
+       [
+        70,
+        "Análise de Cenários"
+       ]
+      ],
+      "id": "5-4-5"
+     }
+    ]
+   },
+   {
+    "name": "Avaliação de Ações",
+    "start": 71,
+    "end": 87,
+    "topics": [
+     {
+      "name": "Conceitos de Valuation",
+      "start": 71,
+      "end": 75,
+      "slides": [
+       [
+        71,
+        "Abertura do capítulo"
+       ],
+       [
+        72,
+        "Conceitos"
+       ],
+       [
+        73,
+        "Market Value"
+       ],
+       [
+        74,
+        "Intrinsic Value & Market Value"
+       ],
+       [
+        75,
+        "Categorias de Valuation"
+       ]
+      ],
+      "id": "5-5-1"
+     },
+     {
+      "name": "Modelos de Múltiplos",
+      "start": 76,
+      "end": 81,
+      "slides": [
+       [
+        76,
+        "ROE: Retorno sobre o Patrimônio Líquido"
+       ],
+       [
+        77,
+        "Valor Patrimonial por Ação (VPA)"
+       ],
+       [
+        78,
+        "P/B: Preço sobre Valor Contábil"
+       ],
+       [
+        79,
+        "P/FC: Preço sobre o Fluxo de Caixa"
+       ],
+       [
+        80,
+        "Dividend Yield"
+       ],
+       [
+        81,
+        "Índice de Payout: Exemplo"
+       ]
+      ],
+      "id": "5-5-2"
+     },
+     {
+      "name": "Modelos de Valor Presente (FCFF e DDM)",
+      "start": 82,
+      "end": 86,
+      "slides": [
+       [
+        82,
+        "Fluxo de Caixa Descontado da Firma (FCFF)"
+       ],
+       [
+        83,
+        "Modelo de Gordon"
+       ],
+       [
+        84,
+        "Modelo de Gordon: Exemplo 1 [%T]"
+       ],
+       [
+        85,
+        "DDM com Gordon: Exemplo 3"
+       ],
+       [
+        86,
+        "DDM com Gordon : Exemplo 3 (Cálculo)"
+       ]
+      ],
+      "id": "5-5-3"
+     },
+     {
+      "name": "Asset-based Valuation",
+      "start": 87,
+      "end": 87,
+      "slides": [
+       [
+        87,
+        "Conceitos"
+       ]
+      ],
+      "id": "5-5-4"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": 6,
+  "en": "Fixed Income",
+  "pt": "Renda Fixa",
+  "pdfPages": 82,
+  "chapters": [
+   {
+    "name": "Renda Fixa: Conceitos & Produtos",
+    "start": 4,
+    "end": 26,
+    "topics": [
+     {
+      "name": "Conceitos de Renda Fixa",
+      "start": 4,
+      "end": 11,
+      "slides": [
+       [
+        4,
+        "Abertura do capítulo"
+       ],
+       [
+        5,
+        "Introdução a Renda Fixa"
+       ],
+       [
+        6,
+        "Spread de Crédito"
+       ],
+       [
+        7,
+        "Tipos de Remuneração"
+       ],
+       [
+        8,
+        "Covenants"
+       ],
+       [
+        9,
+        "Opções Embutidas em Títulos"
+       ],
+       [
+        10,
+        "Risco de Crédito & a Hierarquia de Pagamentos"
+       ],
+       [
+        11,
+        "Original Issue Discount (OID)"
+       ]
+      ],
+      "id": "6-1-1"
+     },
+     {
+      "name": "Títulos Governamentais",
+      "start": 12,
+      "end": 15,
+      "slides": [
+       [
+        12,
+        "Agency Bonds & Quasi-Government Bonds"
+       ],
+       [
+        13,
+        "Treasury Notes"
+       ],
+       [
+        14,
+        "TIPS (Inflação)"
+       ],
+       [
+        15,
+        "Municipal Bonds"
+       ]
+      ],
+      "id": "6-1-2"
+     },
+     {
+      "name": "Títulos Privados",
+      "start": 16,
+      "end": 19,
+      "slides": [
+       [
+        16,
+        "Commercial Papers"
+       ],
+       [
+        17,
+        "Foreign Bond, Eurobond & Global Bonds"
+       ],
+       [
+        18,
+        "Covered Bonds"
+       ],
+       [
+        19,
+        "Medium Term Notes"
+       ]
+      ],
+      "id": "6-1-3"
+     },
+     {
+      "name": "Securitização",
+      "start": 20,
+      "end": 26,
+      "slides": [
+       [
+        20,
+        "Processo de Securitização"
+       ],
+       [
+        21,
+        "Tranches"
+       ],
+       [
+        22,
+        "Impacto Contratual no Fluxo de Caixa"
+       ],
+       [
+        23,
+        "Asset-Backed Securities (ABS)"
+       ],
+       [
+        24,
+        "Ginnie Mae, Fannie Mae & Freddie Mac"
+       ],
+       [
+        25,
+        "CLO (Collateralized Loan Obligation)"
+       ],
+       [
+        26,
+        "CMO (Collateralized Mortgage Obligation)"
+       ]
+      ],
+      "id": "6-1-4"
+     }
+    ]
+   },
+   {
+    "name": "Precificação & Retornos na Renda Fixa",
+    "start": 27,
+    "end": 42,
+    "topics": [
+     {
+      "name": "Precificação e YTM",
+      "start": 27,
+      "end": 29,
+      "slides": [
+       [
+        27,
+        "Abertura do capítulo"
+       ],
+       [
+        28,
+        "Retorno (YTM)"
+       ],
+       [
+        29,
+        "Exemplo"
+       ]
+      ],
+      "id": "6-2-1"
+     },
+     {
+      "name": "Full Price, Flat Price e Accrued Interest",
+      "start": 30,
+      "end": 31,
+      "slides": [
+       [
+        30,
+        "Full Price, Flat Price e Accrued Interest"
+       ],
+       [
+        31,
+        "Full Price: Exemplo"
+       ]
+      ],
+      "id": "6-2-2"
+     },
+     {
+      "name": "Relações de Preço e Matrix Pricing",
+      "start": 32,
+      "end": 33,
+      "slides": [
+       [
+        32,
+        "Relação Preço vs Características do Título"
+       ],
+       [
+        33,
+        "Matrix Pricing: Exemplo"
+       ]
+      ],
+      "id": "6-2-3"
+     },
+     {
+      "name": "Fixed-Rate Notes: Yields e Spreads",
+      "start": 34,
+      "end": 37,
+      "slides": [
+       [
+        34,
+        "EAR & APR"
+       ],
+       [
+        35,
+        "Exemplo: YTM & CY"
+       ],
+       [
+        36,
+        "Spreads de rendimento e taxas de referência"
+       ],
+       [
+        37,
+        "Z-Spread"
+       ]
+      ],
+      "id": "6-2-4"
+     },
+     {
+      "name": "Floating-Rate Notes e Money Market",
+      "start": 38,
+      "end": 40,
+      "slides": [
+       [
+        38,
+        "Discount Margin (DM)"
+       ],
+       [
+        39,
+        "Money Market"
+       ],
+       [
+        40,
+        "Money Market: (Gráfico)"
+       ]
+      ],
+      "id": "6-2-5"
+     },
+     {
+      "name": "Forward Rates e WAC",
+      "start": 41,
+      "end": 42,
+      "slides": [
+       [
+        41,
+        "Nomenclatura dos Forwards Rates"
+       ],
+       [
+        42,
+        "WAC: Conceito"
+       ]
+      ],
+      "id": "6-2-6"
+     }
+    ]
+   },
+   {
+    "name": "Riscos na Renda Fixa – Parte I",
+    "start": 43,
+    "end": 57,
+    "topics": [
+     {
+      "name": "Risco de Mercado",
+      "start": 43,
+      "end": 46,
+      "slides": [
+       [
+        43,
+        "Abertura do capítulo"
+       ],
+       [
+        44,
+        "Conceito"
+       ],
+       [
+        45,
+        "Interest Rate Risk"
+       ],
+       [
+        46,
+        "Prepayment Risk"
+       ]
+      ],
+      "id": "6-3-1"
+     },
+     {
+      "name": "Risco de Crédito",
+      "start": 47,
+      "end": 53,
+      "slides": [
+       [
+        47,
+        "Conceito"
+       ],
+       [
+        48,
+        "Agências de Rating"
+       ],
+       [
+        49,
+        "Agências de Rating: Análise Quantitativa"
+       ],
+       [
+        50,
+        "Credit Migration Risk (Downgrade Risk)"
+       ],
+       [
+        51,
+        "Balloom Risk"
+       ],
+       [
+        52,
+        "Debt Service Coverage Ratio (DSCR)"
+       ],
+       [
+        53,
+        "Loss Given Default (LGD)"
+       ]
+      ],
+      "id": "6-3-2"
+     },
+     {
+      "name": "Riscos Legais, Operacionais e de Liquidez",
+      "start": 54,
+      "end": 57,
+      "slides": [
+       [
+        54,
+        "Conceito"
+       ],
+       [
+        55,
+        "Collateral Risk"
+       ],
+       [
+        56,
+        "Margining Risk: Haircut"
+       ],
+       [
+        57,
+        "Exemplo: Covered Bonds"
+       ]
+      ],
+      "id": "6-3-3"
+     }
+    ]
+   },
+   {
+    "name": "Riscos na Renda Fixa – Parte II",
+    "start": 58,
+    "end": 82,
+    "topics": [
+     {
+      "name": "Fontes de Retorno e Duration",
+      "start": 58,
+      "end": 63,
+      "slides": [
+       [
+        58,
+        "Abertura do capítulo"
+       ],
+       [
+        59,
+        "Fontes de Retorno"
+       ],
+       [
+        60,
+        "Duration"
+       ],
+       [
+        61,
+        "Prazo Médio Ponderado: Riscos Associados"
+       ],
+       [
+        62,
+        "Duration: Exemplo"
+       ],
+       [
+        63,
+        "Duration de Macaulay - Passo a Passo"
+       ]
+      ],
+      "id": "6-4-1"
+     },
+     {
+      "name": "Limitações da Duration e Horizonte",
+      "start": 64,
+      "end": 65,
+      "slides": [
+       [
+        64,
+        "Duration: Limitações"
+       ],
+       [
+        65,
+        "Horizonte de Investimento x Risco de Taxa de Juros"
+       ]
+      ],
+      "id": "6-4-2"
+     },
+     {
+      "name": "Duration Baseada em Yield",
+      "start": 66,
+      "end": 71,
+      "slides": [
+       [
+        66,
+        "Introdução"
+       ],
+       [
+        67,
+        "Aproximate Modified Duration"
+       ],
+       [
+        68,
+        "Money Duration"
+       ],
+       [
+        69,
+        "Price Value of a Basis Point"
+       ],
+       [
+        70,
+        "Títulos com Taxas Flutuantes e Empréstimos"
+       ],
+       [
+        71,
+        "Duration: Relações Diretas e Indiretas"
+       ]
+      ],
+      "id": "6-4-3"
+     },
+     {
+      "name": "Convexidade",
+      "start": 72,
+      "end": 77,
+      "slides": [
+       [
+        72,
+        "Ajuste de Convexidade"
+       ],
+       [
+        73,
+        "Convexidade"
+       ],
+       [
+        74,
+        "Ajuste de Convexidade"
+       ],
+       [
+        75,
+        "Ajuste de Convexidade"
+       ],
+       [
+        76,
+        "Ajuste de Convexidade"
+       ],
+       [
+        77,
+        "Duration e Convexidade de Carteiras"
+       ]
+      ],
+      "id": "6-4-4"
+     },
+     {
+      "name": "Medidas Baseadas na Curva",
+      "start": 78,
+      "end": 82,
+      "slides": [
+       [
+        78,
+        "Introdução"
+       ],
+       [
+        79,
+        "Effective Duration"
+       ],
+       [
+        80,
+        "Effective Duration e Convexity"
+       ],
+       [
+        81,
+        "Key Rate Duration"
+       ],
+       [
+        82,
+        "Empirical Duration"
+       ]
+      ],
+      "id": "6-4-5"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": 7,
+  "en": "Derivatives",
+  "pt": "Derivativos",
+  "pdfPages": 51,
+  "chapters": [
+   {
+    "name": "Introdução aos Derivativos",
+    "start": 4,
+    "end": 15,
+    "topics": [
+     {
+      "name": "O que são Derivativos",
+      "start": 4,
+      "end": 7,
+      "slides": [
+       [
+        4,
+        "Abertura do capítulo"
+       ],
+       [
+        5,
+        "Introdução"
+       ],
+       [
+        6,
+        "Exemplos de Derivativos"
+       ],
+       [
+        7,
+        "Benefícios"
+       ]
+      ],
+      "id": "7-1-1"
+     },
+     {
+      "name": "Local de Negociação",
+      "start": 8,
+      "end": 10,
+      "slides": [
+       [
+        8,
+        "Mercado de Balcão (OTC)"
+       ],
+       [
+        9,
+        "Central Clearing"
+       ],
+       [
+        10,
+        "Compensação & Liquidação"
+       ]
+      ],
+      "id": "7-1-2"
+     },
+     {
+      "name": "Riscos nos Derivativos",
+      "start": 11,
+      "end": 12,
+      "slides": [
+       [
+        11,
+        "Sistemas de Garantias"
+       ],
+       [
+        12,
+        "Ajuste Diário: Exemplo"
+       ]
+      ],
+      "id": "7-1-3"
+     },
+     {
+      "name": "Estratégias: Alavancagem, Hedge e Arbitragem",
+      "start": 13,
+      "end": 15,
+      "slides": [
+       [
+        13,
+        "Tipos de Estratégias: Alavancagem"
+       ],
+       [
+        14,
+        "Tipos de Estratégias: Hedge nas Empresas"
+       ],
+       [
+        15,
+        "Tipos de Estratégias: Arbitragem e o Cost of Carry"
+       ]
+      ],
+      "id": "7-1-4"
+     }
+    ]
+   },
+   {
+    "name": "Compromissos Firmes: Termo, Futuro & Swap",
+    "start": 16,
+    "end": 25,
+    "topics": [
+     {
+      "name": "Contrato a Termo",
+      "start": 16,
+      "end": 20,
+      "slides": [
+       [
+        16,
+        "Abertura do capítulo"
+       ],
+       [
+        17,
+        "Conceito"
+       ],
+       [
+        18,
+        "Exemplo"
+       ],
+       [
+        19,
+        "MTM em FX Forwards"
+       ],
+       [
+        20,
+        "Forward Rate Agreement (FRA) - Exemplo"
+       ]
+      ],
+      "id": "7-2-1"
+     },
+     {
+      "name": "Contrato Futuro",
+      "start": 21,
+      "end": 22,
+      "slides": [
+       [
+        21,
+        "Exemplo: Compra de Contrato Futuro"
+       ],
+       [
+        22,
+        "Interest Rate Future"
+       ]
+      ],
+      "id": "7-2-2"
+     },
+     {
+      "name": "Swap",
+      "start": 23,
+      "end": 25,
+      "slides": [
+       [
+        23,
+        "Gráfico"
+       ],
+       [
+        24,
+        "Principais Tipos"
+       ],
+       [
+        25,
+        "Exemplo"
+       ]
+      ],
+      "id": "7-2-3"
+     }
+    ]
+   },
+   {
+    "name": "Reivindicações Contingentes",
+    "start": 26,
+    "end": 39,
+    "topics": [
+     {
+      "name": "Reivindicações Contingentes",
+      "start": 26,
+      "end": 29,
+      "slides": [
+       [
+        26,
+        "Abertura do capítulo"
+       ],
+       [
+        27,
+        "Introdução"
+       ],
+       [
+        28,
+        "Warrants"
+       ],
+       [
+        29,
+        "Opções"
+       ]
+      ],
+      "id": "7-3-1"
+     },
+     {
+      "name": "Valor do Prêmio e Moneyness",
+      "start": 30,
+      "end": 32,
+      "slides": [
+       [
+        30,
+        "Precificação"
+       ],
+       [
+        31,
+        "Limite inferior & Limite Superior"
+       ],
+       [
+        32,
+        "Moneyness: Exemplo"
+       ]
+      ],
+      "id": "7-3-2"
+     },
+     {
+      "name": "Operações Básicas",
+      "start": 33,
+      "end": 35,
+      "slides": [
+       [
+        33,
+        "Short Call - Exemplo"
+       ],
+       [
+        34,
+        "Short Put - Exemplo"
+       ],
+       [
+        35,
+        "Call (Opção de Compra)"
+       ]
+      ],
+      "id": "7-3-3"
+     },
+     {
+      "name": "Operações Estruturadas",
+      "start": 36,
+      "end": 37,
+      "slides": [
+       [
+        36,
+        "Covered Call – Gráfico"
+       ],
+       [
+        37,
+        "Protective Put- Exemplo"
+       ]
+      ],
+      "id": "7-3-4"
+     },
+     {
+      "name": "Opções em Renda Fixa",
+      "start": 38,
+      "end": 39,
+      "slides": [
+       [
+        38,
+        "Renda Fixa com Call/Put"
+       ],
+       [
+        39,
+        "Gráfico: Renda Fixa com PUT"
+       ]
+      ],
+      "id": "7-3-5"
+     }
+    ]
+   },
+   {
+    "name": "Paridades & Precificação de Opções",
+    "start": 40,
+    "end": 51,
+    "topics": [
+     {
+      "name": "Paridade Put-Call",
+      "start": 40,
+      "end": 43,
+      "slides": [
+       [
+        40,
+        "Abertura do capítulo"
+       ],
+       [
+        41,
+        "Conceito"
+       ],
+       [
+        42,
+        "Exemplo"
+       ],
+       [
+        43,
+        "Conceito"
+       ]
+      ],
+      "id": "7-4-1"
+     },
+     {
+      "name": "Árvore Binomial",
+      "start": 44,
+      "end": 47,
+      "slides": [
+       [
+        44,
+        "Conceito"
+       ],
+       [
+        45,
+        "Hedge Ratio (Δ)"
+       ],
+       [
+        46,
+        "Precificação da Call– Exemplo"
+       ],
+       [
+        47,
+        "Exemplo"
+       ]
+      ],
+      "id": "7-4-2"
+     },
+     {
+      "name": "Fatores e Gregas",
+      "start": 48,
+      "end": 51,
+      "slides": [
+       [
+        48,
+        "Fatores que determinam o preço: Call"
+       ],
+       [
+        49,
+        "Delta (Δ)"
+       ],
+       [
+        50,
+        "Gamma (Г)"
+       ],
+       [
+        51,
+        "Rho (ρ)"
+       ]
+      ],
+      "id": "7-4-3"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": 8,
+  "en": "Alternative Investments",
+  "pt": "Investimentos Alternativos",
+  "pdfPages": 60,
+  "chapters": [
+   {
+    "name": "Principais Conceitos",
+    "start": 4,
+    "end": 13,
+    "topics": [
+     {
+      "name": "Conceito e Real Assets",
+      "start": 4,
+      "end": 6,
+      "slides": [
+       [
+        4,
+        "Abertura do capítulo"
+       ],
+       [
+        5,
+        "Conceito"
+       ],
+       [
+        6,
+        "Real Assets"
+       ]
+      ],
+      "id": "8-1-1"
+     },
+     {
+      "name": "Métodos de Investimento",
+      "start": 7,
+      "end": 9,
+      "slides": [
+       [
+        7,
+        "Introdução"
+       ],
+       [
+        8,
+        "Funds Investment"
+       ],
+       [
+        9,
+        "Co-Investment"
+       ]
+      ],
+      "id": "8-1-2"
+     },
+     {
+      "name": "Estruturas e Mecanismos (Hurdle, HWM, Waterfall)",
+      "start": 10,
+      "end": 13,
+      "slides": [
+       [
+        10,
+        "Ownership Structures"
+       ],
+       [
+        11,
+        "Mecanismos: Hurdle Rate"
+       ],
+       [
+        12,
+        "Mecanismos: High-water mark"
+       ],
+       [
+        13,
+        "Waterfalls"
+       ]
+      ],
+      "id": "8-1-3"
+     }
+    ]
+   },
+   {
+    "name": "Categorias de Ativos",
+    "start": 14,
+    "end": 39,
+    "topics": [
+     {
+      "name": "Private Equity",
+      "start": 14,
+      "end": 19,
+      "slides": [
+       [
+        14,
+        "Abertura do capítulo"
+       ],
+       [
+        15,
+        "Conceito"
+       ],
+       [
+        16,
+        "Características"
+       ],
+       [
+        17,
+        "Estágios das Empresas"
+       ],
+       [
+        18,
+        "Exit: Trade Sale"
+       ],
+       [
+        19,
+        "Exit: Demais formas"
+       ]
+      ],
+      "id": "8-2-1"
+     },
+     {
+      "name": "Private Debt",
+      "start": 20,
+      "end": 22,
+      "slides": [
+       [
+        20,
+        "Conceito"
+       ],
+       [
+        21,
+        "Riscos & Retornos"
+       ],
+       [
+        22,
+        "Terminologias"
+       ]
+      ],
+      "id": "8-2-2"
+     },
+     {
+      "name": "Real Estate",
+      "start": 23,
+      "end": 27,
+      "slides": [
+       [
+        23,
+        "Conceito"
+       ],
+       [
+        24,
+        "Estruturas"
+       ],
+       [
+        25,
+        "Investimento Indireto"
+       ],
+       [
+        26,
+        "REIT: Estratégias"
+       ],
+       [
+        27,
+        "Vantagens & Desvantagens"
+       ]
+      ],
+      "id": "8-2-3"
+     },
+     {
+      "name": "Infraestrutura",
+      "start": 28,
+      "end": 30,
+      "slides": [
+       [
+        28,
+        "Categorias de Investimentos"
+       ],
+       [
+        29,
+        "Formas de Investimentos"
+       ],
+       [
+        30,
+        "Benefício da Diversificação"
+       ]
+      ],
+      "id": "8-2-4"
+     },
+     {
+      "name": "Land e Commodities",
+      "start": 31,
+      "end": 34,
+      "slides": [
+       [
+        31,
+        "Conceito"
+       ],
+       [
+        32,
+        "Características e Dinâmicas"
+       ],
+       [
+        33,
+        "Precificação"
+       ],
+       [
+        34,
+        "Vantagens & Desvantagens"
+       ]
+      ],
+      "id": "8-2-5"
+     },
+     {
+      "name": "Hedge Funds",
+      "start": 35,
+      "end": 39,
+      "slides": [
+       [
+        35,
+        "Introdução"
+       ],
+       [
+        36,
+        "Estratégia: Event-Driven"
+       ],
+       [
+        37,
+        "Estratégia: Opportunistic"
+       ],
+       [
+        38,
+        "Formas de Investimentos: Direta"
+       ],
+       [
+        39,
+        "Retorno, Risco & Vieses"
+       ]
+      ],
+      "id": "8-2-6"
+     }
+    ]
+   },
+   {
+    "name": "Análise de Performance & Digital Assets",
+    "start": 40,
+    "end": 60,
+    "topics": [
+     {
+      "name": "Mensuração de Desempenho (DPI, TVPI)",
+      "start": 40,
+      "end": 44,
+      "slides": [
+       [
+        40,
+        "Abertura do capítulo"
+       ],
+       [
+        41,
+        "Introdução"
+       ],
+       [
+        42,
+        "Mensuração de Desempenho"
+       ],
+       [
+        43,
+        "Distributions to Paid-in Capital (DPI)"
+       ],
+       [
+        44,
+        "Total Value to Paid-in Capital (TVPI)"
+       ]
+      ],
+      "id": "8-3-1"
+     },
+     {
+      "name": "Precificação e Fee Arrangements",
+      "start": 45,
+      "end": 46,
+      "slides": [
+       [
+        45,
+        "Precificação de Ativos"
+       ],
+       [
+        46,
+        "Custom Fee Arrangements"
+       ]
+      ],
+      "id": "8-3-2"
+     },
+     {
+      "name": "Exercícios",
+      "start": 47,
+      "end": 48,
+      "slides": [
+       [
+        47,
+        "Pergunta 1"
+       ],
+       [
+        48,
+        "Pergunta 3"
+       ]
+      ],
+      "id": "8-3-3"
+     },
+     {
+      "name": "Ativos Digitais e DLT",
+      "start": 49,
+      "end": 52,
+      "slides": [
+       [
+        49,
+        "Introdução"
+       ],
+       [
+        50,
+        "Como funciona na prática?"
+       ],
+       [
+        51,
+        "Como a Rede Alcança o Consenso?"
+       ],
+       [
+        52,
+        "Permissioned & Permissionless Networks"
+       ]
+      ],
+      "id": "8-3-4"
+     },
+     {
+      "name": "Tipos de Ativos Digitais",
+      "start": 53,
+      "end": 58,
+      "slides": [
+       [
+        53,
+        "Comparação"
+       ],
+       [
+        54,
+        "Bitcoin"
+       ],
+       [
+        55,
+        "Altcoins: Stablecoins"
+       ],
+       [
+        56,
+        "CBDC"
+       ],
+       [
+        57,
+        "NFTs"
+       ],
+       [
+        58,
+        "Utility Tokens"
+       ]
+      ],
+      "id": "8-3-5"
+     },
+     {
+      "name": "Riscos e Diversificação",
+      "start": 59,
+      "end": 60,
+      "slides": [
+       [
+        59,
+        "Riscos de investir de forma direta"
+       ],
+       [
+        60,
+        "Diversificação"
+       ]
+      ],
+      "id": "8-3-6"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": 9,
+  "en": "Portfolio Management",
+  "pt": "Gestão de Portfólios",
+  "pdfPages": 87,
+  "chapters": [
+   {
+    "name": "Risco, Retorno e Dominância",
+    "start": 4,
+    "end": 14,
+    "topics": [
+     {
+      "name": "Princípio da Dominância",
+      "start": 4,
+      "end": 6,
+      "slides": [
+       [
+        4,
+        "Abertura do capítulo"
+       ],
+       [
+        5,
+        "Conceito"
+       ],
+       [
+        6,
+        "Retorno Excedente"
+       ]
+      ],
+      "id": "9-1-1"
+     },
+     {
+      "name": "Risco Total e Sistêmico",
+      "start": 7,
+      "end": 9,
+      "slides": [
+       [
+        7,
+        "Conceito"
+       ],
+       [
+        8,
+        "Beta"
+       ],
+       [
+        9,
+        "Gráfico"
+       ]
+      ],
+      "id": "9-1-2"
+     },
+     {
+      "name": "Outros Riscos (Crédito, Legal, Modelo, Operacional)",
+      "start": 10,
+      "end": 14,
+      "slides": [
+       [
+        10,
+        "Conceito"
+       ],
+       [
+        11,
+        "Conceito"
+       ],
+       [
+        12,
+        "Conceito"
+       ],
+       [
+        13,
+        "Conceito"
+       ],
+       [
+        14,
+        "Conceito"
+       ]
+      ],
+      "id": "9-1-3"
+     }
+    ]
+   },
+   {
+    "name": "Teoria Moderna de Carteiras",
+    "start": 15,
+    "end": 34,
+    "topics": [
+     {
+      "name": "Utilidade e Tolerância ao Risco",
+      "start": 15,
+      "end": 19,
+      "slides": [
+       [
+        15,
+        "Abertura do capítulo"
+       ],
+       [
+        16,
+        "Aversão ao risco Aplicada no Mercado"
+       ],
+       [
+        17,
+        "Curvas de Utilidade Esperada"
+       ],
+       [
+        18,
+        "Pergunta 1"
+       ],
+       [
+        19,
+        "Conceito"
+       ]
+      ],
+      "id": "9-2-1"
+     },
+     {
+      "name": "Fronteira Eficiente de Markowitz",
+      "start": 20,
+      "end": 24,
+      "slides": [
+       [
+        20,
+        "Conceitos"
+       ],
+       [
+        21,
+        "Gráfico"
+       ],
+       [
+        22,
+        "Cálculo do Risco de 2 Ativos"
+       ],
+       [
+        23,
+        "Covariância e Coef (ρ)"
+       ],
+       [
+        24,
+        "Quando devemos adicionar um novo ativo?"
+       ]
+      ],
+      "id": "9-2-2"
+     },
+     {
+      "name": "CAL / CML",
+      "start": 25,
+      "end": 26,
+      "slides": [
+       [
+        25,
+        "Gráfico"
+       ],
+       [
+        26,
+        "Conceito"
+       ]
+      ],
+      "id": "9-2-3"
+     },
+     {
+      "name": "SML",
+      "start": 27,
+      "end": 29,
+      "slides": [
+       [
+        27,
+        "Conceito"
+       ],
+       [
+        28,
+        "Gráfico"
+       ],
+       [
+        29,
+        "Exemplo: Gráfico"
+       ]
+      ],
+      "id": "9-2-4"
+     },
+     {
+      "name": "Modelos Multifatoriais (Fama-French, Carhart, APT)",
+      "start": 30,
+      "end": 33,
+      "slides": [
+       [
+        30,
+        "Conceito"
+       ],
+       [
+        31,
+        "Exemplo: Pergunta"
+       ],
+       [
+        32,
+        "Conceito"
+       ],
+       [
+        33,
+        "Resumo"
+       ]
+      ],
+      "id": "9-2-5"
+     },
+     {
+      "name": "Mercado Eficiente (EMH)",
+      "start": 34,
+      "end": 34,
+      "slides": [
+       [
+        34,
+        "Formas de Eficiência de Mercado"
+       ]
+      ],
+      "id": "9-2-6"
+     }
+    ]
+   },
+   {
+    "name": "Gestão de Performance & Gestão de Risco",
+    "start": 35,
+    "end": 56,
+    "topics": [
+     {
+      "name": "Medidas de Performance",
+      "start": 35,
+      "end": 41,
+      "slides": [
+       [
+        35,
+        "Abertura do capítulo"
+       ],
+       [
+        36,
+        "Conceito"
+       ],
+       [
+        37,
+        "Safety-First Ratio (SFR)"
+       ],
+       [
+        38,
+        "Índice de Modigliani (M2)"
+       ],
+       [
+        39,
+        "Alfa de Jensen (𝛼)"
+       ],
+       [
+        40,
+        "Alfa de Jensen: Information Ratio"
+       ],
+       [
+        41,
+        "Resumo"
+       ]
+      ],
+      "id": "9-3-1"
+     },
+     {
+      "name": "Framework de Gestão de Risco",
+      "start": 42,
+      "end": 47,
+      "slides": [
+       [
+        42,
+        "O que é Gestão de Risco?"
+       ],
+       [
+        43,
+        "Framework de Gestão de Risco"
+       ],
+       [
+        44,
+        "Governança de Risco: Fundação do Framework"
+       ],
+       [
+        45,
+        "Governança de Riscos: Visão Integrada de Riscos"
+       ],
+       [
+        46,
+        "Infraestrutura, Políticas e Processos de Risco"
+       ],
+       [
+        47,
+        "Processo de gestão de riscos para indivíduos"
+       ]
+      ],
+      "id": "9-3-2"
+     },
+     {
+      "name": "Orçamento e Métricas de Risco (VaR, CVaR)",
+      "start": 48,
+      "end": 52,
+      "slides": [
+       [
+        48,
+        "Definição"
+       ],
+       [
+        49,
+        "Métricas: Conceito"
+       ],
+       [
+        50,
+        "Value at Risk (VaR) – Exemplo"
+       ],
+       [
+        51,
+        "Conditional VaR (CVaR)"
+       ],
+       [
+        52,
+        "Credit Default Swap (CDS)"
+       ]
+      ],
+      "id": "9-3-3"
+     },
+     {
+      "name": "Modificação de Risco",
+      "start": 53,
+      "end": 56,
+      "slides": [
+       [
+        53,
+        "Introdução"
+       ],
+       [
+        54,
+        "Aceitação de Risco"
+       ],
+       [
+        55,
+        "Instrumentos de Transferência de Riscos"
+       ],
+       [
+        56,
+        "Resumo"
+       ]
+      ],
+      "id": "9-3-4"
+     }
+    ]
+   },
+   {
+    "name": "Construção de Portfolios",
+    "start": 57,
+    "end": 74,
+    "topics": [
+     {
+      "name": "Gestão de Portfolios: Overview",
+      "start": 57,
+      "end": 60,
+      "slides": [
+       [
+        57,
+        "Abertura do capítulo"
+       ],
+       [
+        58,
+        "Diversificação e Redução de Riscos"
+       ],
+       [
+        59,
+        "Passos no Processo de Gestão de Portfolios"
+       ],
+       [
+        60,
+        "Tipos de Investidores"
+       ]
+      ],
+      "id": "9-4-1"
+     },
+     {
+      "name": "Asset Management e Fundos",
+      "start": 61,
+      "end": 64,
+      "slides": [
+       [
+        61,
+        "A Indústria de Asset Management"
+       ],
+       [
+        62,
+        "Mutual Funds"
+       ],
+       [
+        63,
+        "Outros Tipos de Fundos"
+       ],
+       [
+        64,
+        "Introdução"
+       ]
+      ],
+      "id": "9-4-2"
+     },
+     {
+      "name": "IPS: Objetivos e Restrições",
+      "start": 65,
+      "end": 68,
+      "slides": [
+       [
+        65,
+        "Investment Policy Statement (IPS)"
+       ],
+       [
+        66,
+        "Investment Policy Statement (IPS)"
+       ],
+       [
+        67,
+        "Objetivos de Risco e Retorno"
+       ],
+       [
+        68,
+        "Restrições"
+       ]
+      ],
+      "id": "9-4-3"
+     },
+     {
+      "name": "Construção da Carteira e SAA",
+      "start": 69,
+      "end": 72,
+      "slides": [
+       [
+        69,
+        "Coleta de Informações"
+       ],
+       [
+        70,
+        "Construção da Carteira"
+       ],
+       [
+        71,
+        "Strategic Asset Allocation"
+       ],
+       [
+        72,
+        "Strategic Asset Allocation"
+       ]
+      ],
+      "id": "9-4-4"
+     },
+     {
+      "name": "Princípios de Construção e ESG",
+      "start": 73,
+      "end": 74,
+      "slides": [
+       [
+        73,
+        "Princípios de Construção de Portfolios"
+       ],
+       [
+        74,
+        "Considerações ESG"
+       ]
+      ],
+      "id": "9-4-5"
+     }
+    ]
+   },
+   {
+    "name": "Finanças Comportamentais",
+    "start": 75,
+    "end": 87,
+    "topics": [
+     {
+      "name": "Heurísticas e Vieses",
+      "start": 75,
+      "end": 77,
+      "slides": [
+       [
+        75,
+        "Abertura do capítulo"
+       ],
+       [
+        76,
+        "Heurísticas & Vieses Comportamentais"
+       ],
+       [
+        77,
+        "Vieses Comportamentais"
+       ]
+      ],
+      "id": "9-5-1"
+     },
+     {
+      "name": "Vieses Cognitivos",
+      "start": 78,
+      "end": 81,
+      "slides": [
+       [
+        78,
+        "Confirmação"
+       ],
+       [
+        79,
+        "Representatividade"
+       ],
+       [
+        80,
+        "Ancoragem e Ajuste"
+       ],
+       [
+        81,
+        "Disponibilidade"
+       ]
+      ],
+      "id": "9-5-2"
+     },
+     {
+      "name": "Vieses Emocionais",
+      "start": 82,
+      "end": 85,
+      "slides": [
+       [
+        82,
+        "Aversão a Perda"
+       ],
+       [
+        83,
+        "Aversão ao Arrependimento"
+       ],
+       [
+        84,
+        "Dotação"
+       ],
+       [
+        85,
+        "Status Quo"
+       ]
+      ],
+      "id": "9-5-3"
+     },
+     {
+      "name": "Tabelas Resumo",
+      "start": 86,
+      "end": 87,
+      "slides": [
+       [
+        86,
+        "Tabela Resumo"
+       ],
+       [
+        87,
+        "Tabela Resumo"
+       ]
+      ],
+      "id": "9-5-4"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": 10,
+  "en": "Ethical and Professional Standards",
+  "pt": "Ética e Padrões Profissionais",
+  "pdfPages": 42,
+  "chapters": [
+   {
+    "name": "Princípios Éticos do CFA",
+    "start": 4,
+    "end": 12,
+    "topics": [
+     {
+      "name": "Ética e Confiança na Profissão",
+      "start": 4,
+      "end": 8,
+      "slides": [
+       [
+        4,
+        "Abertura do capítulo"
+       ],
+       [
+        5,
+        "Introdução à Ética e ao Profissionalismo"
+       ],
+       [
+        6,
+        "Profissionalismo na Gestão de Investimentos"
+       ],
+       [
+        7,
+        "Estrutura para Tomada de Decisões Éticas"
+       ],
+       [
+        8,
+        "Evolução do Código de Ética e dos Padrões"
+       ]
+      ],
+      "id": "10-1-1"
+     },
+     {
+      "name": "Código de Ética e GIPS",
+      "start": 9,
+      "end": 12,
+      "slides": [
+       [
+        9,
+        "Adoção do Código e dos Padrões"
+       ],
+       [
+        10,
+        "GIPS: Conceito"
+       ],
+       [
+        11,
+        "GIPS: Regras"
+       ],
+       [
+        12,
+        "GIPS: Credibilidade e Transparência"
+       ]
+      ],
+      "id": "10-1-2"
+     }
+    ]
+   },
+   {
+    "name": "Processos Éticos do CFA (Standards)",
+    "start": 13,
+    "end": 42,
+    "topics": [
+     {
+      "name": "Guidance e Programa de Conduta",
+      "start": 13,
+      "end": 15,
+      "slides": [
+       [
+        13,
+        "Abertura do capítulo"
+       ],
+       [
+        14,
+        "Código de Ética"
+       ],
+       [
+        15,
+        "Pilares & Aspectos Cruciais do PCP"
+       ]
+      ],
+      "id": "10-2-1"
+     },
+     {
+      "name": "Tabela dos Padrões",
+      "start": 16,
+      "end": 16,
+      "slides": [
+       [
+        16,
+        "Tabela dos Padrões de Conduta Profissional"
+       ]
+      ],
+      "id": "10-2-2"
+     },
+     {
+      "name": "I – Profissionalismo",
+      "start": 17,
+      "end": 21,
+      "slides": [
+       [
+        17,
+        "Conhecimento da Lei (I-A)"
+       ],
+       [
+        18,
+        "Independência e Objetividade (I-B)"
+       ],
+       [
+        19,
+        "Deturpação ou Declaração Falsa (I-C)"
+       ],
+       [
+        20,
+        "Má Conduta (I-D)"
+       ],
+       [
+        21,
+        "Competência (I-E)"
+       ]
+      ],
+      "id": "10-2-3"
+     },
+     {
+      "name": "II – Integridade dos Mercados",
+      "start": 22,
+      "end": 24,
+      "slides": [
+       [
+        22,
+        "Conceito"
+       ],
+       [
+        23,
+        "Exemplos (II-A)"
+       ],
+       [
+        24,
+        "Exemplos (II-B)"
+       ]
+      ],
+      "id": "10-2-4"
+     },
+     {
+      "name": "III – Deveres com Clientes",
+      "start": 25,
+      "end": 29,
+      "slides": [
+       [
+        25,
+        "Lealdade, Prudência e Cuidado (III-A)"
+       ],
+       [
+        26,
+        "Tratamento Justo ou Negociação Justa (III-B)"
+       ],
+       [
+        27,
+        "Adequação (III-C)"
+       ],
+       [
+        28,
+        "Apresentação de Performance (III-D)"
+       ],
+       [
+        29,
+        "Preservação da Confidencialidade (III-E)"
+       ]
+      ],
+      "id": "10-2-5"
+     },
+     {
+      "name": "IV – Deveres com Empregadores",
+      "start": 30,
+      "end": 33,
+      "slides": [
+       [
+        30,
+        "Conceito"
+       ],
+       [
+        31,
+        "Exemplos (IV-A)"
+       ],
+       [
+        32,
+        "Exemplos (IV-B)"
+       ],
+       [
+        33,
+        "Exemplos (IV-C)"
+       ]
+      ],
+      "id": "10-2-6"
+     },
+     {
+      "name": "V – Análise e Recomendações",
+      "start": 34,
+      "end": 36,
+      "slides": [
+       [
+        34,
+        "Diligência e Base Razoável (V-A)"
+       ],
+       [
+        35,
+        "Comunicação com Clientes e Clientes Potenciais (V-B)"
+       ],
+       [
+        36,
+        "Retenção de Registros (V-C)"
+       ]
+      ],
+      "id": "10-2-7"
+     },
+     {
+      "name": "VI – Conflitos de Interesse",
+      "start": 37,
+      "end": 40,
+      "slides": [
+       [
+        37,
+        "Conceito"
+       ],
+       [
+        38,
+        "Exemplo (VI-A)"
+       ],
+       [
+        39,
+        "Exemplo (VI-B)"
+       ],
+       [
+        40,
+        "Exemplo (VI-C)"
+       ]
+      ],
+      "id": "10-2-8"
+     },
+     {
+      "name": "VII – Responsabilidades como Membro/Candidato",
+      "start": 41,
+      "end": 42,
+      "slides": [
+       [
+        41,
+        "Conduta como Participante dos Programas CFA (VII-A)"
+       ],
+       [
+        42,
+        "Referência ao CFA, Designação CFA e Programa CFA (VII-B)"
+       ]
+      ],
+      "id": "10-2-9"
+     }
+    ]
+   }
+  ]
+ }
+]
